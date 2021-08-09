@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="en">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="blog, guoxiujun, kane" />
 
 
 
@@ -79,12 +79,15 @@
 
 
 
+<meta name="description" content="个人博客小站">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="随笔">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="og:site_name" content="随笔">
+<meta property="og:description" content="个人博客小站">
+<meta property="og:locale">
+<meta property="article:author" content="guoxiujun">
+<meta property="article:tag" content="博客,郭修军">
 <meta name="twitter:card" content="summary">
 
 
@@ -95,13 +98,13 @@
     root: '',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -121,7 +124,7 @@
 
 
 
-  <title>Hexo</title>
+  <title>随笔</title>
   
 
 
@@ -133,14 +136,14 @@
 
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container sidebar-position-left 
+  <div class="container sidebar-position-right 
   page-home">
     <div class="headband"></div>
 
@@ -152,12 +155,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">随笔</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">十七个面包人</p>
       
   </div>
 
@@ -178,21 +181,51 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
-            Home
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
           </a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+          <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -229,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/09/test/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/09/java/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -238,7 +271,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="随笔">
     </span>
 
     
@@ -248,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/08/09/test/" itemprop="url">test</a></h1>
+                <a class="post-title-link" href="/2021/08/09/java/" itemprop="url">JAVA</a></h1>
         
 
         <div class="post-meta">
@@ -258,9 +291,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-09T11:35:28+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-09T11:35:28+08:00">
                 2021-08-09
               </time>
             
@@ -270,6 +303,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">程序设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -300,7 +355,312 @@
       
         
           
+            <h1 id="java体系知识"><a href="#java体系知识" class="headerlink" title="java体系知识"></a>java体系知识</h1><h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><h3 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h3><ol>
+<li>字段类型映射</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>数据库字段</th>
+<th>mybatis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CHAR</td>
+<td>String</td>
+</tr>
+<tr>
+<td>VARCHAR</td>
+<td>String</td>
+</tr>
+<tr>
+<td>LONGVARCHAR</td>
+<td>String</td>
+</tr>
+<tr>
+<td>NUMERIC</td>
+<td>BigDecimal</td>
+</tr>
+<tr>
+<td>DECIMAL</td>
+<td>BigDecimal</td>
+</tr>
+<tr>
+<td>BIT</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>BOOLEAN</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>TINYINT</td>
+<td>byte</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>short</td>
+</tr>
+<tr>
+<td>INTEGER</td>
+<td>int</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>long</td>
+</tr>
+<tr>
+<td>REAL</td>
+<td>float</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>double</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>double</td>
+</tr>
+<tr>
+<td>BINARY</td>
+<td>byte[]</td>
+</tr>
+<tr>
+<td>VARBINARY</td>
+<td>byte[]</td>
+</tr>
+<tr>
+<td>LONGVARBINARY</td>
+<td>byte[]</td>
+</tr>
+<tr>
+<td>DATE</td>
+<td>java.sql.Date</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>java.sql.Time</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>java.sql.Timestamp</td>
+</tr>
+<tr>
+<td>CLOB</td>
+<td>Clob</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>Blob</td>
+</tr>
+<tr>
+<td>ARRAY</td>
+<td>Array</td>
+</tr>
+<tr>
+<td>DISTINCT</td>
+<td>mapping of underlying type</td>
+</tr>
+<tr>
+<td>STRUCT</td>
+<td>Struct</td>
+</tr>
+<tr>
+<td>REF</td>
+<td>Ref</td>
+</tr>
+<tr>
+<td>DATALINK</td>
+<td>java.net.URL</td>
+</tr>
+</tbody></table>
+<h4 id="mybatis有意思的问题"><a href="#mybatis有意思的问题" class="headerlink" title="mybatis有意思的问题"></a>mybatis有意思的问题</h4><blockquote>
+<p>记录一些遇到的有意思的问题</p>
+</blockquote>
+<pre><code class="sql">update tablex set t = 200 and id =1 ## 结果是 tablex.t = 1 or 0
+</code></pre>
+<h2 id="java基础"><a href="#java基础" class="headerlink" title="java基础"></a>java基础</h2><p>int 4个字节float4个字节但是</p>
+<pre><code class="kotlin">Float.MAX_VALUE&gt;Int.MAX_VALUE
+</code></pre>
+<p>因为<code>float</code>精度没有Int高，有数据缺失</p>
+<h2 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h2><p><code>java</code>默认使用<strong>双亲委派机制</strong></p>
+<blockquote>
+<p>类夹在某个.class文件，首先把这个人物委托给他的上级类加载器，递归，如果上级的类加载器没有加载，自己才会去加载这个类。</p>
+</blockquote>
+<h3 id="类加载器类别"><a href="#类加载器类别" class="headerlink" title="类加载器类别"></a>类加载器类别</h3><ul>
+<li><p>BootstrapClassLoader（启动类加载器）负责加载 <code>JAVA_HOME/lib</code>目录中的类库</p>
+</li>
+<li><p>ExtClassLoader（标准扩展类加载器）负责加载<code>JAVA_HOME/lib/ext</code>目录中的类库</p>
+</li>
+<li><p>AppClassLoad （系统类加载器）负责加载用户路径（classpath）上的类库</p>
+</li>
+<li><p>CustomClassLoad（用户自定义类加载器）</p>
+</li>
+</ul>
+<pre class="mermaid">graph LR
+      A(CustomClassloader)
+          A2(CustomClassloader)
+      B(AppClassLoader)
+      C(Extclassloader)
+      D(BootstrapClassloader)
+      A-->B
+      A2-->B
+      B-->C
+      C-->D</pre>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/09/test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/08/09/test/" itemprop="url">test</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
             
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-09T11:35:28+08:00">
+                2021-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/test/" itemprop="url" rel="index">
+                    <span itemprop="name">test</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/test/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这是一个测试页面，用于测试hexo next主题下功能是否正常</p>
+
           
         
       
@@ -357,7 +717,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="随笔">
     </span>
 
     
@@ -377,9 +737,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="1970-01-01T08:00:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="1970-01-01T08:00:00+08:00">
                 1970-01-01
               </time>
             
@@ -419,19 +779,19 @@
       
         
           
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+            <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
           
         
@@ -511,16 +871,34 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives">
               
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
@@ -538,7 +916,6 @@
           
 
         </div>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1439177900&auto=1&height=66"></iframe>
       </section>
 
       
@@ -559,13 +936,13 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">guoxiujun</span>
 
   
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -573,9 +950,17 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
+
+
+  <script src='https://unpkg.com/mermaid@8.11.4/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize([object Object]);
+    }
+  </script>
 
 
         
@@ -740,6 +1125,9 @@
   
 
   
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
 
   
 
