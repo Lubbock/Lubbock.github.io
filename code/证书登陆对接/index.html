@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="证书登陆对接," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="KCSP-ADMIN 证书登陆kcsp-admin 应用系统对接证书登陆,对接流程 [toc] 前置流程第三方应用整合证书前置流程:  安装证书中间件 准备好证书链文件以及证书文件 前端需要导入和中间件通信js,gen-js   对接概述大致可以分为以下三个部分  前端整合gen-js ,和证书中间件进行交互，此时涉及到从后端获取随机数 后端提供登陆接口随机数获取接口 后端整合登陆接口  前端部分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="证书登陆对接.md">
+<meta property="og:url" content="http://guoxiujun.com/code/%E8%AF%81%E4%B9%A6%E7%99%BB%E9%99%86%E5%AF%B9%E6%8E%A5/index.html">
+<meta property="og:site_name" content="随笔">
+<meta property="og:description" content="KCSP-ADMIN 证书登陆kcsp-admin 应用系统对接证书登陆,对接流程 [toc] 前置流程第三方应用整合证书前置流程:  安装证书中间件 准备好证书链文件以及证书文件 前端需要导入和中间件通信js,gen-js   对接概述大致可以分为以下三个部分  前端整合gen-js ,和证书中间件进行交互，此时涉及到从后端获取随机数 后端提供登陆接口随机数获取接口 后端整合登陆接口  前端部分">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-03-05T01:43:48.000Z">
+<meta property="article:modified_time" content="2021-08-10T06:29:44.283Z">
+<meta property="article:author" content="guoxiujun">
+<meta property="article:tag" content="证书登陆对接">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://guoxiujun.com/code/证书登陆对接/"/>
+
+
+
+
+
+  <title>证书登陆对接.md | 随笔</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">随笔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">十七个面包人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-university"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/code/%E8%AF%81%E4%B9%A6%E7%99%BB%E9%99%86%E5%AF%B9%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">证书登陆对接.md</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-05T09:43:48+08:00">
+                2021-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/2021/" itemprop="url" rel="index">
+                    <span itemprop="name">2021</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/secraft2/" itemprop="url" rel="index">
+                    <span itemprop="name">secraft2</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">code</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="KCSP-ADMIN-证书登陆"><a href="#KCSP-ADMIN-证书登陆" class="headerlink" title="KCSP-ADMIN 证书登陆"></a>KCSP-ADMIN 证书登陆</h1><p>kcsp-admin 应用系统对接证书登陆,对接流程</p>
+<p>[toc]</p>
+<h2 id="前置流程"><a href="#前置流程" class="headerlink" title="前置流程"></a>前置流程</h2><p>第三方应用整合证书前置流程:</p>
+<ul>
+<li>安装<a href="http://git.koal.com/cbb-crypto/pki-mw-guide/-/releases">证书中间件</a></li>
+<li>准备好证书链文件以及证书文件</li>
+<li>前端需要导入和中间件通信js,<a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/tree/develop/ant-design-vue-jeecg/public/gen-js">gen-js</a> </li>
+</ul>
+<h2 id="对接概述"><a href="#对接概述" class="headerlink" title="对接概述"></a>对接概述</h2><p>大致可以分为以下三个部分</p>
+<ul>
+<li>前端整合<a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/tree/develop/ant-design-vue-jeecg/public/gen-js">gen-js</a> ,和证书中间件进行交互，此时涉及到从后端获取随机数</li>
+<li>后端提供登陆接口随机数获取接口</li>
+<li>后端整合登陆接口</li>
+</ul>
+<h3 id="前端部分"><a href="#前端部分" class="headerlink" title="前端部分"></a>前端部分</h3><p>kcsp-admin 前端基于antd-design-vue 编写而成，对接流程如下：</p>
+<ul>
+<li><p> 模板页导入gen-js</p>
+</li>
+<li><p>登陆页面证书登陆改造</p>
+<p>1.<code>模板页导入gen-js</code></p>
+</li>
+</ul>
+<pre><code class="html">  &lt;script src=&quot;/gen-js/es5-shim.min.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/gen-js/thrift.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/gen-js/commdef_types.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/gen-js/koalService.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/gen-js/KoalService_types.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/gen-js/devService.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/gen-js/devService_types.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/gen-js/signXService.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/gen-js/signXService_types.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+</code></pre>
+<ol start="2">
+<li>登陆页面证书登陆流程改造</li>
+</ol>
+<pre class="mermaid">graph LR
+    style server fill:#f9f,stroke:#333,stroke-width:4px
+    style midware fill:#bbf,stroke:#333,stroke-width:4px
+    style 前端 fill:#cce,stroke:#333,stroke-width:4px
+    
+    subgraph server
+        F[返回随机数]
+    end
+    subgraph midware
+        B[返回所有证书]
+        K[调用中间件证书签名接口]
+    end
+    subgraph 前端
+        A[登陆按钮点击]
+        C[证书选择]
+        H[调用登陆接口]
+        A-->L[从中间件查询证书]-->C
+        C-->D
+        D{是否有PIN} --> |Yes|E[输入PIN]-->J[调用后台获取随机数]
+        D-->|NO|J
+        J-->H--> I((END))
+    end</pre>
+
+<h4 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h4><pre><code class="js">export default &#123;
+  data() &#123;
+    return &#123;
+      certs: [],
+      certPing: &#39;&#39;,
+      pkiLoginInfo: &#123;&#125;,
+      koalPkiServerInfo: &#123;
+        SERVICE_TYPE: &#39;http://&#39;,
+        SERVER_IP: &#39;127.0.0.1&#39;,
+        SERVER_PORT: &#39;18080&#39;,
+      &#125;,
+      url: &#123;
+        querySeed: &#39;/sys/certrandom&#39;,
+      &#125;,
+ 
+    &#125;
+  &#125;,
+  methods: &#123;
+    loginUseCert() &#123;
+      let cert = this.certs[2]
+      console.log(cert.hasPIN)
+      if (cert.hasPIN === &#39;0&#39;) &#123;
+        //没有 pin
+        this.loginUserNoPinCert(cert)
+      &#125; else &#123;
+        //有pin
+        this.loginWithPin(cert)
+      &#125;
+    &#125;,
+    handleTabClick(key) &#123;
+      this.customActiveKey = key
+      // this.form.resetFields()
+    &#125;,
+    loginWithPin(cert) &#123;
+      if (this.certPing) &#123;
+        this.$message.warning(&#39;请输入ping码&#39;)
+      &#125;
+      // ping 一起传进来
+      KoalService.verifyPIN(
+        this.koalPkiServerInfo,
+        this.pkiLoginInfo,
+        cert,
+        this.certPing,
+        () =&gt; &#123;
+          //cert认证后可以修改
+          this.loginUserNoPinCert(cert)
+        &#125;,
+        (error) =&gt; &#123;
+          this.$message.warning(error)
+        &#125;
+      )
+    &#125;,
+    loginUserNoPinCert(cert) &#123;
+      let cn = cert.subjectName.CN
+      postAction(this.url.querySeed, &#123;
+        cn: cn,
+      &#125;).then((res) =&gt; &#123;
+        if (res.success) &#123;
+          let singnB64 = res.result
+          console.log(singnB64)
+          KoalService.signdata(
+            this.koalPkiServerInfo,
+            this.pkiLoginInfo,
+            cert,
+            singnB64,
+            (singDataStr) =&gt; &#123;
+              this.callLogin(cert, singDataStr)
+            &#125;,
+            (error) =&gt; &#123;
+              this.$message.warning(error)
+            &#125;
+          )
+        &#125; else &#123;
+          this.$message.warning(res.message)
+        &#125;
+      &#125;)
+    &#125;,
+    callLogin(cert, singDataStr) &#123;
+      KoalService.exportCertificate(this.koalPkiServerInfo, this.pkiLoginInfo, cert, (certB64) =&gt; &#123;
+        let params = &#123;
+          signData: singDataStr,
+          certB64: certB64,
+        &#125;
+        this.CertLogin(params)
+          .then((res) =&gt; &#123;
+            this.$refs.loginSelect.show(res.result)
+          &#125;)
+          .catch((err) =&gt; &#123;
+            this.$message.warning(err.message)
+          &#125;)
+      &#125;)
+    &#125;,
+    chooseCert() &#123;
+      KoalService.pkiLogin(
+        this.koalPkiServerInfo,
+        (loginInfo) =&gt; &#123;
+          this.pkiLoginInfo = loginInfo
+          this.showChooseCert()
+        &#125;,
+        (error) =&gt; &#123;
+          this.$message.warning(error.message)
+        &#125;
+      )
+    &#125;,
+    showChooseCert() &#123;
+      KoalService.getAllCert(
+        this.koalPkiServerInfo,
+        (certs) =&gt; &#123;
+          this.certs = certs
+          console.log(this.certs)
+        &#125;,
+        (error) =&gt; &#123;
+          this.$message.warning(error)
+        &#125;,
+        this.pkiLoginInfo
+      )
+    &#125;,
+    loginSelectOk() &#123;
+      this.loginSuccess()
+    &#125;,
+    loginSuccess() &#123;
+      // update-begin- author:sunjianlei --- date:20190812 --- for: 登录成功后不解除禁用按钮，防止多次点击
+      // this.loginBtn = false
+      // update-end- author:sunjianlei --- date:20190812 --- for: 登录成功后不解除禁用按钮，防止多次点击
+      this.$router.push(&#123; path: &#39;/dashboard/analysis&#39; &#125;).catch(() =&gt; &#123;
+        console.log(&#39;登录跳转首页出错,这个错误从哪里来的&#39;)
+      &#125;)
+      this.$notification.success(&#123;
+        message: &#39;欢迎&#39;,
+        description: `$&#123;timeFix()&#125;，欢迎回来`,
+      &#125;)
+    &#125;,
+    cmsFailed(err) &#123;
+      this.$notification[&#39;error&#39;](&#123;
+        message: &#39;登录失败&#39;,
+        description: err,
+        duration: 4,
+      &#125;)
+    &#125;,
+  &#125;,
+&#125;
+</code></pre>
+<h3 id="后端部分"><a href="#后端部分" class="headerlink" title="后端部分"></a>后端部分</h3><p>后端分为三部分</p>
+<ul>
+<li>导入依赖包</li>
+<li>提供随机数获取接口，同时需要记录下来，以便后续做签名验证</li>
+<li>查询用户表匹配CN值</li>
+</ul>
+<ol>
+<li>导入依赖包</li>
+</ol>
+<pre><code class="xml">&lt;!--        //格尔证书相关库--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;kl.security&lt;/groupId&gt;
+            &lt;artifactId&gt;security-klasn&lt;/artifactId&gt;
+            &lt;version&gt;4.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;kl.security&lt;/groupId&gt;
+            &lt;artifactId&gt;security-klcrypto&lt;/artifactId&gt;
+            &lt;version&gt;4.0.1&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;kl.security&lt;/groupId&gt;
+            &lt;artifactId&gt;security-klutils&lt;/artifactId&gt;
+            &lt;version&gt;4.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<ol>
+<li><p>随机数获取</p>
+<pre class="mermaid">   flowchart LR
+    A[生成随机数] --> B[存入redis]-->C((返回))</pre></li>
+<li><p>登陆过程改造</p>
+<pre class="mermaid">   graph LR
+    A[登陆]
+    B{是否有certB64}
+    A-->B-->|Yes|C[证书登陆流程]-->E[转成证书文件]-->F{根据随机数校验证书}-->|Yes|G[获取CN值]-->H{是否找到对应用户}-->|Yes|I[登陆成功]-->J((登陆结束))
+    B-->|No|D[密码登陆]
+    F-->|NO|K((登陆失败))
+    H-->|NO|K</pre></li>
+</ol>
+<h4 id="完整代码-1"><a href="#完整代码-1" class="headerlink" title="完整代码"></a>完整代码</h4><pre><code class="java">package kl.kcsp.modules.syscert.controller;
+
+import com.alibaba.fastjson.JSONObject;
+import kl.kcsp.modules.customer.entity.CustomerApp;
+import kl.kcsp.modules.customer.service.ICustomerAppService;
+import kl.kcsp.modules.syscert.util.CertChains;
+import kl.kcsp.modules.syscert.util.CertUtils;
+import kl.kcsp.modules.syscert.util.JsonCvt;
+import kl.kcsp.modules.syscert.util.SignVerifyUtil;
+import kl.kcsp.modules.system.entity.SysDepart;
+import kl.kcsp.modules.system.entity.SysUser;
+import kl.kcsp.modules.system.model.SysLoginModel;
+import kl.kcsp.modules.system.service.ISysDepartService;
+import kl.kcsp.modules.system.service.ISysDictService;
+import kl.kcsp.modules.system.service.ISysUserService;
+import kl.security.pki.x509.Certificate;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.jeecg.common.api.CommonAPI;
+import org.jeecg.common.api.vo.Result;
+import org.jeecg.common.constant.CommonConstant;
+import org.jeecg.common.system.util.JwtUtil;
+import org.jeecg.common.system.vo.LoginUser;
+import org.jeecg.common.util.RedisKeyConstant;
+import org.jeecg.common.util.RedisUtil;
+import org.jeecg.common.util.SpringContextUtils;
+import org.jeecg.common.util.oConvertUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+
+@Component
+@Slf4j
+public class LoginPkiAdmin &#123;
+
+    @Autowired
+    private RedisUtil cache;
+
+    @Autowired
+    private ICustomerAppService customerAppService;
+
+    @Autowired
+    private ISysUserService sysUserService;
+
+    @Autowired
+    private ISysDepartService sysDepartService;
+
+    @Autowired
+    private ISysDictService sysDictService;
+
+
+    @Value(&quot;$&#123;koal.cert.certLoginIdentifierFromDn&#125;&quot;)
+    private String LOGIN_KEY_OF_DN;
+
+    public Result&lt;JSONObject&gt; login(SysLoginModel sysLoginModel)throws Exception&#123;
+
+        KoalCertB64 param = new KoalCertB64();
+        BeanUtils.copyProperties(sysLoginModel, param);
+        return login(param);
+    &#125;
+
+    public Result&lt;JSONObject&gt; login(KoalCertB64 param) throws Exception &#123;
+        String certB64 = param.certB64;
+        Certificate cert = CertUtils.parseCert(certB64);
+        Function&lt;String,String&gt; plainSignB64Apply = new Function&lt;String, String&gt;() &#123;
+            @Override
+            public String apply(String cn) &#123;
+                String plainBase64 = (String) cache.shget(RedisKeyConstant.KOAL_CERT_LOGINHASH, cn);
+                cache.shdel(RedisKeyConstant.KOAL_CERT_LOGINHASH, cn);
+                return plainBase64;
+            &#125;
+        &#125;;
+
+        // 证书链认证先跳过
+        // 所谓loginkey 其实对应的是用户的username
+//        String loginKey = &quot;admin&quot;;
+        String loginKey = checkCertAndReturnLoginKey(param.signData, cert, plainSignB64Apply);
+
+        SysUser sysuser = sysUserService.getUserByName(loginKey);
+        if (sysuser == null) &#123;
+            sysuser = sysUserService.getUserByCertLogin(loginKey);
+        &#125;
+        Result&lt;JSONObject&gt; result = new Result();
+        result.error500(&quot;未找到用户&quot;);
+        if (sysuser == null) &#123;
+            return result;
+        &#125;else &#123;
+            userInfo(sysuser, result);
+        &#125;
+        return result;
+    &#125;
+
+    /**
+     * 用户信息
+     *
+     * @param sysUser
+     * @param result
+     * @return
+     */
+    private Result&lt;JSONObject&gt; userInfo(SysUser sysUser, Result&lt;JSONObject&gt; result) &#123;
+        String syspassword = sysUser.getPassword();
+        String username = sysUser.getUsername();
+        // 生成token
+        String token = JwtUtil.sign(username, syspassword);
+        // 设置token缓存有效时间
+        cache.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
+        cache.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME*2 / 1000);
+
+        // 获取用户部门信息
+        JSONObject obj = new JSONObject();
+        List&lt;SysDepart&gt; departs = sysDepartService.queryUserDeparts(sysUser.getId());
+        obj.put(&quot;departs&quot;, departs);
+        if (departs == null || departs.size() == 0) &#123;
+            obj.put(&quot;multi_depart&quot;, 0);
+        &#125; else if (departs.size() == 1) &#123;
+            sysUserService.updateUserDepart(username, departs.get(0).getOrgCode());
+            obj.put(&quot;multi_depart&quot;, 1);
+        &#125; else &#123;
+            //查询当前是否有登录部门
+            // update-begin--Author:wangshuai Date:20200805 for：如果用戶为选择部门，数据库为存在上一次登录部门，则取一条存进去
+            SysUser sysUserById = sysUserService.getById(sysUser.getId());
+            if(oConvertUtils.isEmpty(sysUserById.getOrgCode()))&#123;
+                sysUserService.updateUserDepart(username, departs.get(0).getOrgCode());
+            &#125;
+            // update-end--Author:wangshuai Date:20200805 for：如果用戶为选择部门，数据库为存在上一次登录部门，则取一条存进去
+            obj.put(&quot;multi_depart&quot;, 2);
+        &#125;
+        obj.put(&quot;token&quot;, token);
+        obj.put(&quot;userInfo&quot;, sysUser);
+        obj.put(&quot;sysAllDictItems&quot;, sysDictService.queryAllDictItems());
+        result.setResult(obj);
+        result.success(&quot;登录成功&quot;);
+        return result;
+    &#125;
+
+
+    /**
+     * 检查登录有效性以及获取登录证书中的身份标识
+     * @param signDateB64
+     * @param cert
+     * @param plainSignB64Apply
+     * @return
+     * @throws Exception
+     */
+    public  String checkCertAndReturnLoginKey(String signDateB64, Certificate cert, Function&lt;String, String&gt; plainSignB64Apply) throws Exception &#123;
+        verifyCert(cert);
+        String loginKey = getLoginKeyOfCertDn(cert);
+        String loginCn = cert.getSubjectCommonName();
+        String plainSignB64 = plainSignB64Apply.apply(loginCn);
+        if (plainSignB64 == null) &#123;
+            log.error(&quot;error get plainSignB64 &#123;&#125;&quot;,signDateB64);
+            throw new Exception(&quot;系统错误,未获取签名随机数&quot;);
+        &#125;
+        if (!SignVerifyUtil.verifyFixSignAlgoSignature(cert, signDateB64, Base64.decodeBase64(plainSignB64))) &#123;
+            log.error(&quot;error verifySignature signDateB64 &#123;&#125;&quot;,signDateB64);
+            throw new Exception(&quot;验证随机数签名失败&quot;);
+        &#125;
+        return loginKey;
+    &#125;
+
+    /**
+     * 获取用以登录的证书标识
+     * @param cert
+     * @return
+     */
+    private  String getLoginKeyOfCertDn(Certificate cert) throws Exception &#123;
+        Map&lt;String, String&gt; dnMap = CertUtils.getDnMapFromCert(cert);
+        String certLoginKey = dnMap.get(LOGIN_KEY_OF_DN);
+        if (certLoginKey == null) &#123;
+            throw new Exception(String.format(&quot;证书DN中未找到 %s 选项&quot;, LOGIN_KEY_OF_DN));
+        &#125;
+        return certLoginKey;
+    &#125;
+
+    public static void main(String[] args) throws Exception&#123;
+        File file = new File(&quot;h://temp1/pki/KoalCA3.crt&quot;);
+        String certB64 = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+        Certificate scert = CertUtils.parseCert(certB64);
+        File fcert = new File(&quot;h://temp1/pki/1.cer&quot;);
+        String certB642= FileUtils.readFileToString(fcert, StandardCharsets.UTF_8);
+        Certificate tcert = CertUtils.parseCert(certB642);
+        boolean b = CertChains.verifyCerts(scert, tcert);
+        System.out.println(b);
+    &#125;
+
+    public void verifyCert(Certificate cert) throws Exception &#123;
+        if (!isValidate(cert)) &#123;
+            log.error(&quot;InValidate Cert, Cert &#123;&#125;&quot;, cert.getSubject().toString());
+            throw new Exception(&quot;证书不在有效期内&quot;);
+        &#125;
+
+        String trustChainCertB64 = (String) cache.shget(RedisKeyConstant.KOAL_CERT_CHAIN, cert.getIssuer().toString());
+
+        if (trustChainCertB64 == null) &#123;
+            log.error(&quot;has not trust chain&quot;);
+            throw new Exception(&quot;无可用验证客户端证书的证书链&quot;);
+        &#125;
+
+        Certificate trustCert = CertUtils.parseCert(trustChainCertB64);
+        try &#123;
+            if (!CertChains.verifyCerts(trustCert, cert)) &#123;
+                log.error(&quot;cloud not trust client cert Cert &#123;&#125;&quot;, cert.getSubject().toString());
+                throw new Exception(&quot;使用客户端证书链验证登录证书失败,无法信任登录证书&quot;);
+            &#125;
+        &#125; catch (Exception e) &#123;
+            log.error(&quot;unKnow exception when trust client cert Cert &#123;&#125;&quot;,  cert.getSubject().toString());
+            throw new Exception(&quot;使用客户端证书链验证登录证书异常 :&quot; + e.getMessage());
+        &#125;
+
+    &#125;
+    /**
+     * 是否已过有效期
+     * @param cert
+     * @return
+     */
+    public static boolean isValidate(Certificate cert) &#123;
+        Date tStart = cert.getValidFromValue();
+        Date tEnd = cert.getValidToValue();
+        Calendar c = Calendar.getInstance();
+        return c.getTime().compareTo(tStart) &gt;= 0 &amp;&amp; c.getTime().compareTo(tEnd) &lt;= 0;
+    &#125;
+
+
+    public void logout(JSONObject login) throws Exception &#123;
+//        TokenCache.removeLoginInfo(login.token);
+        log.info(&quot;退出登录&quot;);
+    &#125;
+
+    public Class&lt;?&gt; getLoginParamCls() &#123;
+        return KoalCertB64.class;
+    &#125;
+
+    @Data
+    public static class KoalCertB64 &#123;
+        //证书的b64编码
+        public String certB64;
+        //签名数据
+        public String signData;
+    &#125;
+&#125;
+</code></pre>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E8%AF%81%E4%B9%A6%E7%99%BB%E9%99%86%E5%AF%B9%E6%8E%A5/" rel="tag"># 证书登陆对接</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/code/%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%A0%B7%E5%BC%8F/" rel="next" title="流程图样式.md">
+                <i class="fa fa-chevron-left"></i> 流程图样式.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/secraft2/secraft2/" rel="prev" title="secraft2.md">
+                secraft2.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KCSP-ADMIN-%E8%AF%81%E4%B9%A6%E7%99%BB%E9%99%86"><span class="nav-number">1.</span> <span class="nav-text">KCSP-ADMIN 证书登陆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">前置流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%8E%A5%E6%A6%82%E8%BF%B0"><span class="nav-number">1.2.</span> <span class="nav-text">对接概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E9%83%A8%E5%88%86"><span class="nav-number">1.2.1.</span> <span class="nav-text">前端部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">完整代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF%E9%83%A8%E5%88%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">后端部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81-1"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">完整代码</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">guoxiujun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+  <script src='https://unpkg.com/mermaid@8.11.4/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize([object Object]);
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

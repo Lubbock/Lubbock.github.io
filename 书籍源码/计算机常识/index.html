@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机常识," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="计算机常识代理正向代理正向代理类是一个条班级，代理访问外部资源  正向代理 是一个位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。客户端必须要进行一些特别的设置才能使用正向代理。 用途 访问原来无法访问的资源如google 可以做缓存，加速访问资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机常识.md">
+<meta property="og:url" content="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86/index.html">
+<meta property="og:site_name" content="随笔">
+<meta property="og:description" content="计算机常识代理正向代理正向代理类是一个条班级，代理访问外部资源  正向代理 是一个位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。客户端必须要进行一些特别的设置才能使用正向代理。 用途 访问原来无法访问的资源如google 可以做缓存，加速访问资源">
+<meta property="og:locale">
+<meta property="og:image" content="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124853014-1532060796.png">
+<meta property="og:image" content="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124341280-1435223816.png">
+<meta property="og:image" content="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124423530-566240666.png">
+<meta property="article:published_time" content="2021-06-16T02:29:36.000Z">
+<meta property="article:modified_time" content="2021-08-10T06:29:44.313Z">
+<meta property="article:author" content="guoxiujun">
+<meta property="article:tag" content="计算机常识">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124853014-1532060796.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://guoxiujun.com/书籍源码/计算机常识/"/>
+
+
+
+
+
+  <title>计算机常识.md | 随笔</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">随笔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">十七个面包人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-university"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机常识.md</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-16T10:29:36+08:00">
+                2021-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="计算机常识"><a href="#计算机常识" class="headerlink" title="计算机常识"></a>计算机常识</h1><h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>正向代理类是一个条班级，代理访问外部资源</p>
+<p><img src="images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124853014-1532060796.png" alt="img"></p>
+<p>正向代理 是一个位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。客户端必须要进行一些特别的设置才能使用正向代理。</p>
+<h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><ul>
+<li>访问原来无法访问的资源如<code>google</code></li>
+<li>可以做缓存，加速访问资源</li>
+<li>对客户端访问授权，上网进行认证</li>
+<li>代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息</li>
+</ul>
+<p>如<code>ccproxy</code>,<code>ccproxy</code>可以完成两项大功能，代理共享上网和客户端代理权限管理</p>
+<h4 id="golang实现简单的正向代理"><a href="#golang实现简单的正向代理" class="headerlink" title="golang实现简单的正向代理"></a>golang实现简单的正向代理</h4><pre><code class="golang">
+import (
+    &quot;fmt&quot;
+    &quot;io/ioutil&quot;
+    &quot;net&quot;
+    &quot;net/http&quot;
+    &quot;strings&quot;
+)
+
+//正想代理
+
+type Pxy struct &#123;
+&#125;
+
+func (p *Pxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) &#123;
+    fmt.Printf(&quot;Received request %s %s %s\n&quot;, req.Method, req.Host, req.RemoteAddr)
+    transport := http.DefaultTransport
+    outReq := new(http.Request)
+    *outReq = *req
+    if clientIP, _, err := net.SplitHostPort(req.RemoteAddr); err == nil &#123;
+        if prior, ok := outReq.Header[&quot;X-Forwarded-For&quot;]; ok &#123;
+            clientIP = strings.Join(prior, &quot;, &quot;) + &quot;, &quot; + clientIP
+        &#125;
+        outReq.Header.Set(&quot;X-Forwarded-For&quot;, clientIP)
+    &#125;
+    res, err := transport.RoundTrip(outReq)
+    if err != nil &#123;
+        rw.WriteHeader(http.StatusBadGateway)
+        return
+    &#125;
+    for key, value := range res.Header &#123;
+        for _, v := range value &#123;
+            rw.Header().Add(key, v)
+        &#125;
+    &#125;
+    rw.WriteHeader(res.StatusCode)
+    s, _ := ioutil.ReadAll(res.Body)
+    if strings.Contains(req.RequestURI, &quot;html&quot;) &#123;
+        fmt.Println(req.RequestURI)
+    &#125;
+
+    //if req.RequestURI &#123;
+    //
+    //&#125;
+    //fmt.Println(string(s))
+    //io.Copy(rw, res.Body)
+    //x:=[]byte&#123;&#39;1&#39;, &#39;2&#39;,&#39;3&#39;&#125;
+    rw.Write(s)
+    res.Body.Close()
+&#125;
+
+func main() &#123;
+    fmt.Printf(&quot;proxy on :8080&quot;)
+    http.Handle(&quot;/&quot;, &amp;Pxy&#123;&#125;)
+    http.ListenAndServe(&quot;0.0.0.0:8080&quot;, nil)
+&#125;
+</code></pre>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>初次接触方向代理的感觉是，客户端是无感知代理的存在的，反向代理对外都是透明的，访问者者并不知道自己访问的是一个代理。因为客户端不需要任何配置就可以访问。</p>
+<p>　　反向代理（Reverse Proxy）实际运行方式是指以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个服务器。</p>
+<p>反向代理的作用：</p>
+<ul>
+<li>保证内网的安全，可以使用反向代理提供WAF功能，阻止web攻击</li>
+</ul>
+<p>大型网站，通常将反向代理作为公网访问地址，Web服务器是内网。</p>
+<p><img src="images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124341280-1435223816.png" alt="img"></p>
+<ul>
+<li><p>负载均衡，通过反向代理服务器来优化网站的负载</p>
+<p><img src="images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124423530-566240666.png" alt="img"></p>
+</li>
+</ul>
+<h4 id="反向代理例子"><a href="#反向代理例子" class="headerlink" title="反向代理例子"></a>反向代理例子</h4><pre><code class="golang">package main
+
+import (
+    &quot;log&quot;
+    &quot;net/http&quot;
+    &quot;net/http/httputil&quot;
+)
+
+func main() &#123;
+    http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) &#123;
+        director := func(req *http.Request) &#123;
+            req = r
+            req.URL.Scheme = &quot;http&quot;
+            req.URL.Host = r.Host
+        &#125;
+        proxy := &amp;httputil.ReverseProxy&#123;Director: director&#125;
+        proxy.ServeHTTP(w, r)
+    &#125;)
+
+    log.Fatal(http.ListenAndServe(&quot;:8888&quot;, nil))
+&#125;
+</code></pre>
+<h3 id="代理访问HTTPS"><a href="#代理访问HTTPS" class="headerlink" title="代理访问HTTPS"></a>代理访问HTTPS</h3><p>可以在远程服务器上用http.Get 或client.Do获取http或https网页内容。然后用http.ListenAndServe向本地返回获取到的内容。</p>
+<pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;io/ioutil&quot;
+    &quot;net/http&quot;
+)
+
+func main() &#123;
+    resp, _ := http.Get(&quot;https://www.baidu.com&quot;)
+    defer resp.Body.Close()
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+
+&#125;
+</code></pre>
+<p>或</p>
+<pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;io/ioutil&quot;
+    &quot;net/http&quot;
+)
+
+func main() &#123;
+    client := &amp;http.Client&#123;&#125;
+    req, _ := http.NewRequest(&quot;GET&quot;, &quot;https://www.baidu.com&quot;, nil)
+    //req.Header.Set(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;)
+    //req.Header.Set(&quot;Cookie&quot;, &quot;name=any&quot;)
+    resp, err := client.Do(req)
+    defer resp.Body.Close()
+    body, err := ioutil.ReadAll(resp.Body)
+    if err != nil &#123;
+        // handle error
+    &#125;
+    fmt.Println(string(body))
+
+&#125;
+</code></pre>
+<h2 id="机器学习路线"><a href="#机器学习路线" class="headerlink" title="机器学习路线"></a>机器学习路线</h2><p>公开课+书+Kaggle </p>
+<h2 id="PDF"><a href="#PDF" class="headerlink" title="PDF"></a>PDF</h2><p>大部分pdf阅读软件，都是基于<code>poppler</code>改的</p>
+<h2 id="程序部署"><a href="#程序部署" class="headerlink" title="程序部署"></a>程序部署</h2><p><code>Supervisord</code>可以把程序部署成daemon ，<code>Supervisord</code>使用python</p>
+<h2 id="Evosuite配置"><a href="#Evosuite配置" class="headerlink" title="Evosuite配置"></a>Evosuite配置</h2><pre><code class="xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+
+
+    &lt;repositories&gt;
+
+        &lt;repository&gt;
+            &lt;id&gt;EvoSuite&lt;/id&gt;
+            &lt;name&gt;EvoSuite Repository&lt;/name&gt;
+            &lt;url&gt;http://www.evosuite.org/m2&lt;/url&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+
+    &lt;dependencies&gt;
+    
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;!-- https://mvnrepository.com/artifact/org.evosuite/evosuite-client --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.evosuite&lt;/groupId&gt;
+            &lt;artifactId&gt;evosuite-client&lt;/artifactId&gt;
+            &lt;version&gt;1.0.6&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.evosuite&lt;/groupId&gt;
+            &lt;artifactId&gt;evosuite-standalone-runtime&lt;/artifactId&gt;
+            &lt;version&gt;1.0.6&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;pluginManagement&gt;&lt;!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) --&gt;
+            &lt;plugins&gt;
+                &lt;plugin&gt;
+                    &lt;groupId&gt;org.evosuite.plugins&lt;/groupId&gt;
+                    &lt;artifactId&gt;evosuite-maven-plugin&lt;/artifactId&gt;
+                    &lt;version&gt;1.0.6&lt;/version&gt;
+                &lt;/plugin&gt;
+            &lt;/plugins&gt;
+        &lt;/pluginManagement&gt;
+
+        &lt;plugins&gt;
+
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+<pre><code class="sh">mvn compile -DmemoryInMB=4000 -Dcores=2 -DtargetFolder=src/test/java/evosuite evosuite:generate evosuite:export
+</code></pre>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86/" rel="tag"># 计算机常识</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify/" rel="next" title="jnotify.md">
+                <i class="fa fa-chevron-left"></i> jnotify.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E4%B8%8D%E5%AE%89%E4%B9%8B%E4%B9%A6/" rel="prev" title="不安之书.md">
+                不安之书.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">计算机常识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">1.1.1.</span> <span class="nav-text">正向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E9%80%94"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">用途</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#golang%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">golang实现简单的正向代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%BE%8B%E5%AD%90"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">反向代理例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AEHTTPS"><span class="nav-number">1.1.3.</span> <span class="nav-text">代理访问HTTPS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF"><span class="nav-number">1.2.</span> <span class="nav-text">机器学习路线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PDF"><span class="nav-number">1.3.</span> <span class="nav-text">PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E9%83%A8%E7%BD%B2"><span class="nav-number">1.4.</span> <span class="nav-text">程序部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evosuite%E9%85%8D%E7%BD%AE"><span class="nav-number">1.5.</span> <span class="nav-text">Evosuite配置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">guoxiujun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+  <script src='https://unpkg.com/mermaid@8.11.4/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize([object Object]);
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
