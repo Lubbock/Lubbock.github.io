@@ -86,16 +86,16 @@
 <meta property="og:site_name" content="随笔">
 <meta property="og:description" content="深入理解JVM虚拟机内存管理运行时数据区域根据java1.7版本的虚拟机规范，java虚拟机包括一下几个运行时数据区  程序计数器程序计数器是一块较小的内存空间，可以看作房钱县城所执行的字节码的行好只是起。分支，循环，跳转，异常处理，线程回恢复等等都依赖于计数器完成。 每个线程拥有独立的计数器，互相不影响，独立存储。 执行java方法的时候计数器记录的是虚拟机字节码指令的地址，如果执行的是Nati">
 <meta property="og:locale">
-<meta property="og:image" content="http://guoxiujun.com/2021/jvm/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-54cecabcb2335eea4ad22a46e2918169_720w.jpg">
-<meta property="og:image" content="http://guoxiujun.com/2021/jvm/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-901ce255f32521e512f196fa6e6ad096_720w.jpg">
-<meta property="og:image" content="http://guoxiujun.com/2021/jvm/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-e6b117caa9a9c20be42e6113aac5d2c4_720w.jpg">
-<meta property="og:image" content="http://guoxiujun.com/2021/jvm/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-8c5e658539d6d60fa54e5aedbebe1854_720w.jpg">
+<meta property="og:image" content="http://guoxiujun.com/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-54cecabcb2335eea4ad22a46e2918169_720w.jpg">
+<meta property="og:image" content="http://guoxiujun.com/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-901ce255f32521e512f196fa6e6ad096_720w.jpg">
+<meta property="og:image" content="http://guoxiujun.com/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-e6b117caa9a9c20be42e6113aac5d2c4_720w.jpg">
+<meta property="og:image" content="http://guoxiujun.com/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-8c5e658539d6d60fa54e5aedbebe1854_720w.jpg">
 <meta property="article:published_time" content="2021-04-15T05:06:55.000Z">
-<meta property="article:modified_time" content="2021-08-10T06:29:44.275Z">
+<meta property="article:modified_time" content="2021-08-10T06:36:19.343Z">
 <meta property="article:author" content="guoxiujun">
 <meta property="article:tag" content="jvm虚拟机笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://guoxiujun.com/2021/jvm/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-54cecabcb2335eea4ad22a46e2918169_720w.jpg">
+<meta name="twitter:image" content="http://guoxiujun.com/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-54cecabcb2335eea4ad22a46e2918169_720w.jpg">
 
 
 
@@ -369,7 +369,7 @@
 
       
         <h1 id="深入理解JVM虚拟机"><a href="#深入理解JVM虚拟机" class="headerlink" title="深入理解JVM虚拟机"></a>深入理解JVM虚拟机</h1><h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><h3 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h3><p>根据java1.7版本的虚拟机规范，java虚拟机包括一下几个运行时数据区</p>
-<p><img src="images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-54cecabcb2335eea4ad22a46e2918169_720w.jpg" alt="img"></p>
+<p><img src="/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-54cecabcb2335eea4ad22a46e2918169_720w.jpg" alt="img"></p>
 <h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器是一块较小的内存空间，可以看作房钱县城所执行的字节码的行好只是起。分支，循环，跳转，异常处理，线程回恢复等等都依赖于计数器完成。</p>
 <p>每个线程拥有独立的计数器，互相不影响，独立存储。</p>
 <p>执行<code>java</code>方法的时候计数器记录的是虚拟机字节码指令的地址，如果执行的是<code>Native</code>方法，那么计数器则为空（Undefined）。该内存区域是唯一一个在<code>java虚拟机</code>规范中没有规定任何<code>OutOfMemoryError</code>情况的区域。</p>
@@ -426,10 +426,10 @@
 <ul>
 <li>使用句柄访问的话，Java堆中会单独划分一部分区域作为句柄池，reference中存储的就是对象的句柄地址，而句柄中包含了对象实例数据和类型数据各自的具体地址信息。</li>
 </ul>
-<p><img src="images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-901ce255f32521e512f196fa6e6ad096_720w.jpg" alt="img"></p>
+<p><img src="/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-901ce255f32521e512f196fa6e6ad096_720w.jpg" alt="img"></p>
 <ul>
 <li><p>如果使用直接指针访问，那么Java对对象的布局中就必须考虑如何放置访问类型数据的相关信息，而reference中存储的直接就是对象地址。</p>
-<p><img src="images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-e6b117caa9a9c20be42e6113aac5d2c4_720w.jpg" alt="img"></p>
+<p><img src="/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-e6b117caa9a9c20be42e6113aac5d2c4_720w.jpg" alt="img"></p>
 </li>
 </ul>
 <p>这两种方式各有优势，使用句柄的好处是reference中存储的是稳定的句柄地址，在对象被移动时只会改变句柄中的实例数据指针，而reference本身不需要修改。</p>
@@ -477,7 +477,7 @@
 <p>安全区域是指在一段代码中，引用关系不会发生变化，在这个区域中的任何位置进行GC都是安全的。当线程执行到Safe Region中的代码时，会标识自己已经进入了Safe Region，这样发起GC的时候就不用管进入Safe Region状态的线程了。</p>
 <h3 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h3><p>如果说收集算法是内存回收的方法论，那么垃圾收集器就是内存回收的具体实现。</p>
 <p>常见的垃圾收集器有以下几种：</p>
-<p><img src="images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-8c5e658539d6d60fa54e5aedbebe1854_720w.jpg" alt="img"></p>
+<p><img src="/images/jvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0.assets/v2-8c5e658539d6d60fa54e5aedbebe1854_720w.jpg" alt="img"></p>
 <p>他们分别适用于不同分代，连线说明可以配合使用。</p>
 <ul>
 <li><p>jdk1.7 默认垃圾收集器Parallel Scavenge（新生代）+Serial Old（老年代）</p>
