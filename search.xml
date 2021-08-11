@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>临时记录.md</title>
+      <link href="/uncategorized/%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/"/>
+      <url>/uncategorized/%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<h2 id="生成可变配置"><a href="#生成可变配置" class="headerlink" title="生成可变配置"></a>生成可变配置</h2><pre><code class="java">        int start = 23;        int end = 24;        int startIndex = 76;        for (int i = start; i &lt;= end; i++) &#123;            String s = &quot;               (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;网络是否可通&#39;, &#39;C01&#39;, &quot; + (i) + &quot;, &#39;C01&#39;, 400, null),\n&quot; +                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;端口是否开启&#39;, &#39;C02&#39;, &quot; + (i) + &quot;, &#39;C02&#39;, 400, null),\n&quot; +                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;进程是否存在&#39;, &#39;C03&#39;, &quot; + (i) + &quot;, &#39;C03&#39;, 400, null),\n&quot; +                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;服务是否正常&#39;, &#39;C04&#39;, &quot; + (i) + &quot;, &#39;C04&#39;, 400, null),&quot;;            System.out.println(s);            System.out.println();        &#125;</code></pre><pre><code class="java">final String[] lines = s.split(&quot;\n&quot;);        Map&lt;String, String&gt; mp = new HashMap&lt;&gt;();        for (String line : lines) &#123;            if (StringUtils.isEmpty(line)) &#123;                continue;            &#125;            final String cLine = line.trim();            String[] arrays = cLine.split(&quot;,&quot;);            String key = arrays[5];            String value = arrays[6];            if (mp.containsKey(key)) &#123;                if (!value.equals(mp.get(key))) &#123;                    final String newVal = mp.get(key) + &quot;,&quot; + value;                    mp.put(key, newVal);                &#125;            &#125;else &#123;                mp.put(key, value);            &#125;        &#125;s        for (Map.Entry&lt;String, String&gt; entry : mp.entrySet()) &#123;            System.out.println(entry.getKey() + &quot;:\t&quot; + entry.getValue());        &#125;</code></pre><h2 id="微软"><a href="#微软" class="headerlink" title="微软"></a>微软</h2><p>约时间，定好一天或者两天面完</p><ul><li>电话面试 </li></ul><blockquote><p>leetcode 中等难度题 两周后问人</p></blockquote><p>矩阵旋转 </p><ul><li>系统设计 （加分项）</li></ul><blockquote><p>如何设计一个秒杀系统之类的</p></blockquote><ul><li>模板生成增加日志</li><li>密钥列表增加所属密码机组，密码机服务</li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag>  </tag>
+            
+            <tag> admin </tag>
+            
+            <tag> startindex </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java体系知识.md</title>
+      <link href="/uncategorized/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/"/>
+      <url>/uncategorized/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="java体系知识"><a href="#java体系知识" class="headerlink" title="java体系知识"></a>java体系知识</h1><h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><h3 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h3><ol><li>字段类型映射</li></ol><table><thead><tr><th>数据库字段</th><th>mybatis</th></tr></thead><tbody><tr><td>CHAR</td><td>String</td></tr><tr><td>VARCHAR</td><td>String</td></tr><tr><td>LONGVARCHAR</td><td>String</td></tr><tr><td>NUMERIC</td><td>BigDecimal</td></tr><tr><td>DECIMAL</td><td>BigDecimal</td></tr><tr><td>BIT</td><td>boolean</td></tr><tr><td>BOOLEAN</td><td>boolean</td></tr><tr><td>TINYINT</td><td>byte</td></tr><tr><td>SMALLINT</td><td>short</td></tr><tr><td>INTEGER</td><td>int</td></tr><tr><td>BIGINT</td><td>long</td></tr><tr><td>REAL</td><td>float</td></tr><tr><td>FLOAT</td><td>double</td></tr><tr><td>DOUBLE</td><td>double</td></tr><tr><td>BINARY</td><td>byte[]</td></tr><tr><td>VARBINARY</td><td>byte[]</td></tr><tr><td>LONGVARBINARY</td><td>byte[]</td></tr><tr><td>DATE</td><td>java.sql.Date</td></tr><tr><td>TIME</td><td>java.sql.Time</td></tr><tr><td>TIMESTAMP</td><td>java.sql.Timestamp</td></tr><tr><td>CLOB</td><td>Clob</td></tr><tr><td>BLOB</td><td>Blob</td></tr><tr><td>ARRAY</td><td>Array</td></tr><tr><td>DISTINCT</td><td>mapping of underlying type</td></tr><tr><td>STRUCT</td><td>Struct</td></tr><tr><td>REF</td><td>Ref</td></tr><tr><td>DATALINK</td><td>java.net.URL</td></tr></tbody></table><h4 id="mybatis有意思的问题"><a href="#mybatis有意思的问题" class="headerlink" title="mybatis有意思的问题"></a>mybatis有意思的问题</h4><blockquote><p>记录一些遇到的有意思的问题</p></blockquote><pre><code class="sql">update tablex set t = 200 and id =1 ## 结果是 tablex.t = 1 or 0</code></pre><h2 id="java基础"><a href="#java基础" class="headerlink" title="java基础"></a>java基础</h2><p>int 4个字节float4个字节但是</p><pre><code class="kotlin">Float.MAX_VALUE&gt;Int.MAX_VALUE</code></pre><p>因为<code>float</code>精度没有Int高，有数据缺失</p><h2 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h2><p><code>java</code>默认使用<strong>双亲委派机制</strong></p><blockquote><p>类夹在某个.class文件，首先把这个人物委托给他的上级类加载器，递归，如果上级的类加载器没有加载，自己才会去加载这个类。</p></blockquote><h3 id="类加载器类别"><a href="#类加载器类别" class="headerlink" title="类加载器类别"></a>类加载器类别</h3><ul><li><p>BootstrapClassLoader（启动类加载器）负责加载 <code>JAVA_HOME/lib</code>目录中的类库</p></li><li><p>ExtClassLoader（标准扩展类加载器）负责加载<code>JAVA_HOME/lib/ext</code>目录中的类库</p></li><li><p>AppClassLoad （系统类加载器）负责加载用户路径（classpath）上的类库</p></li><li><p>CustomClassLoad（用户自定义类加载器）</p><pre class="mermaid">  graph LR    A(CustomClassloader)        A2(CustomClassloader)    B(AppClassLoader)    C(Extclassloader)    D(BootstrapClassloader)    A-->B    A2-->B    B-->C    C-->D</pre><p>home: / || home<br>about: /about || user<br>tags: /tags || tags<br>categories: /categories || university<br>archives: /archives || trademark</p></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> sql </tag>
+            
+            <tag> string </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>01.md</title>
+      <link href="/1/01/"/>
+      <url>/1/01/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h1><ul><li>clojure <a href="http://cemerick.com/">http://cemerick.com/</a></li></ul><p> <a href="https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/">https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/</a></p><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><pre><code class="sh"> docker stats --no-stream $(docker ps | grep 217a5b187c2812 | awk &#39;&#123;print $1&#125;&#39;)</code></pre><p><code>sed</code></p><p>文字处理</p><pre><code class="sh">sed -i &#39;/百度搜索/d&#39; all.txt </code></pre><h2 id="emacs"><a href="#emacs" class="headerlink" title="emacs"></a>emacs</h2><p>修改<code>init.el</code>不重启emacs</p><pre><code class="sh">Alt+x eval-bufferalt+x load-file</code></pre><h3 id="major-mode"><a href="#major-mode" class="headerlink" title="major mode"></a>major mode</h3><p>emacs编辑器模式</p><ul><li>程序语言 emacs-lisp-mode,python-mode,ruby-mode</li><li>dired (file manager dired)</li><li>image-mode view image file</li><li>eww eww web browser</li><li></li></ul><h2 id="DSL"><a href="#DSL" class="headerlink" title="DSL"></a>DSL</h2><p><code>GPL</code>通用编程语言如 python,java,c等等</p><p><code>DSL</code>领域特定语言 Martin Fowler </p><blockquote><p>DSL通过在表达能力上做的妥协换取在某一领域内的高效</p></blockquote><p>常见<code>DSL</code></p><ul><li>SQL</li><li>REGEX</li><li>HTML &amp; CSS</li></ul><h3 id="feature"><a href="#feature" class="headerlink" title="feature"></a>feature</h3><p>上面的几个?明显的缩小了通用编程语言的概念，但是它们确实在自己领域表现地非常出色，因为这些 DSL 就是根据某一个特定领域的特点塑造的；而通用编程语言相比领域特定语言，在设计时是为了解决更加抽象的问题，而关注点并不只是在某一个领域。</p><p>上面的几个例子有着一些共同的特点：</p><ul><li>没有计算和执行的概念；</li><li>其本身并不需要直接表示计算；</li><li>使用时只需要声明规则、事实以及某些元素之间的层级和关系；</li></ul><h3 id="构建DSL"><a href="#构建DSL" class="headerlink" title="构建DSL"></a>构建DSL</h3><p>DSL 的构建与编程语言其实比较类似，想想我们在重新实现编程语言时，需要做那些事情；实现编程语言的过程可以简化为定义语法与语义，然后实现编译器或者解释器的过程，而 DSL 的实现与它也非常类似，我们也需要对 DSL 进行语法与语义上的设计。</p><p>总结下来，实现 DSL 总共有这么两个需要完成的工作：</p><ol><li>设计语法和语义，定义 DSL 中的元素是什么样的，元素代表什么意思</li><li>实现 parser，对 DSL 解析，最终通过解释器来执行</li></ol><h3 id="设计原则和妥协"><a href="#设计原则和妥协" class="headerlink" title="设计原则和妥协"></a>设计原则和妥协</h3><p>DSL 最大的设计原则就是<strong>简单</strong>，通过简化语言中的元素，降低使用者的负担；无论是 Regex、SQL 还是 HTML 以及 CSS，其说明文档往往只有几页，非常易于学习和掌握。但是，由此带来的问题就是，DSL 中缺乏抽象的概念，比如：模块化、变量以及方法等。</p><blockquote><p>抽象的概念并不是某个领域所关注的问题，就像 Regex 并不需要有模块、变量以及方法等概念。</p></blockquote><p>由于抽象能力的缺乏，在我们的项目规模变得越来越大时，DSL 往往满足不了开发者的需求；我们仍然需要编程语言中的模块化等概念对 DSL 进行补充，以此解决 DSL 并不是真正编程语言的问题。</p><h3 id="DSL分类"><a href="#DSL分类" class="headerlink" title="DSL分类"></a>DSL分类</h3><p>DSL不是什么新鲜的玩意儿，我们平时经常接触的SQL，CSS，正则表达式等等都属于DSL。有的DSL可能更加专注于一个方面，例如Mathematica，LOGO等等。这些语言的目标都是特定的领域，与之相对的则是GPPL(General Purpose Programming Language，通用目的编程语言)。Martin Fowler将DSL分为外部DSL及内部DSL两种。外部DSL有自己的特定语法、解析器和词法分析器等等，它们往往是一种小型的编程语言，甚至不会像GPPL那样需要源文件。与之相对的则是内部DSL。内部DSL其实更像是种别称，它代表一类特别API及使用模式。</p><p>　　XSLT，SQL等等都可以算作是外部DSL。外部DSL一般会直接针对特定的领域设计，而不考虑其他方面。James Gosling曾经说过：每个配置文件最终都会变成一门编程语言。一开始您可能只会用它表示一点点东西，慢慢地您便会想要一些规则，而这些规则则变成了表达式，后来您可能还会定义变量，进行条件判断等等，而最终它就变成了一种奇怪的编程语言，这样的情况屡见不鲜。</p><p>　　而内部DSL，正像之前提到的那样，它往往只是代表了一系列特别的API及使用模式，例如LINQ查询语句及Ruby on Rails中的Active Record声明代码等等。内部DSL可以使用一系列API来“伪装”成一种DSL，它往往会利用一些“流畅化”的技巧，例如像jQuery那样把一些方法通过“点”连接起来，而另一些也会利用元编程的方式。内部DSL还有一些优势，例如可以访问语言中的代码或变量，以及利用代码补全，重构等母语言的所有特性。</p><h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><h3 id="决策树算法"><a href="#决策树算法" class="headerlink" title="决策树算法"></a>决策树算法</h3><ul><li>ID3</li></ul><h4 id="ID3"><a href="#ID3" class="headerlink" title="ID3"></a>ID3</h4><blockquote><p>计算信息謪增益 需要剪枝</p></blockquote><h2 id="树莓派"><a href="#树莓派" class="headerlink" title="树莓派"></a>树莓派</h2><p><img src="/images/01.assets/171439-07c52987d148a108.png" alt="img"></p><ul><li>5V</li><li>3V</li><li>接地</li><li>通用GPIO</li></ul><pre><code class="sh">pinout #获取针脚定义</code></pre><p><code>连接led灯</code></p><p><img src="/images/01.assets/413416-20170423112841319-1486568645.png" alt="img"></p><p>两个树莓派的GPIO</p><p><img src="/images/01.assets/413416-20170423143302335-1742281986.png" alt="img"></p><p>我们可以用GPIO的方式连接两个树莓派。一个树莓派的GPIO输出，将成为另一个树莓派的GPIO输入。连接方式很简单，只需要2根导线。一个导线连接两个树莓派的地线，另一根导线连接树莓派的两个PIN</p><p>我们用左侧的树莓派来输出，右侧树莓派来输入。输出过程和上面控制LED灯的例子相似。在第一个树莓派中的GPIO21准备输出：</p><pre><code class="sh">echo 21 &gt; /sys/class/gpio/exportecho out &gt; /sys/class/gpio/gpio21/direction</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 1 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> sh </tag>
+            
+            <tag> mode </tag>
+            
+            <tag> gpio </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>01_CAP.md</title>
+      <link href="/1/01_CAP/"/>
+      <url>/1/01_CAP/</url>
+      
+        <content type="html"><![CDATA[<h1 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h1><p>在计算机科学中, CAP定理（CAP theorem）, 又被称作 布鲁尔定理（Brewer’s theorem）, 它指出对于一个分布式计算系统来说，不可能同时满足以下三点:</p><ul><li><strong>一致性(Consistency)</strong> (所有节点在同一时间具有相同的数据)</li><li><strong>可用性(Availability)</strong> (保证每个请求不管成功或者失败都有响应)</li><li><strong>分隔容忍(Partition tolerance)</strong> (系统中任意信息的丢失或失败不会影响系统的继续运作)</li></ul><p>CAP理论的核心是：一个分布式系统不可能同时很好的满足一致性，可用性和分区容错性这三个需求，最多只能同时较好的满足两个。</p><p>因此，根据 CAP 原理将 NoSQL 数据库分成了满足 CA 原则、满足 CP 原则和满足 AP 原则三 大类：</p><ul><li>CA - 单点集群，满足一致性，可用性的系统，通常在可扩展性上不太强大。</li><li>CP - 满足一致性，分区容忍性的系统，通常性能不是特别高。</li><li>AP - 满足可用性，分区容忍性的系统，通常可能对一致性要求低一些。</li><li></li></ul><p><img src="/images/01.assets/cap-theoram-image.png" alt="img"></p><h3 id="NOSQL数据库分类"><a href="#NOSQL数据库分类" class="headerlink" title="NOSQL数据库分类"></a>NOSQL数据库分类</h3><table><thead><tr><th>类型</th><th>部分代表</th><th>特点</th></tr></thead><tbody><tr><td>列存储</td><td>HbaseCassandraHypertable</td><td>顾名思义，是按列存储数据的。最大的特点是方便存储结构化和半结构化数据，方便做数据压缩，对针对某一列或者某几列的查询有非常大的IO优势。</td></tr><tr><td>文档存储</td><td>MongoDBCouchDB</td><td>文档存储一般用类似json的格式存储，存储的内容是文档型的。这样也就有机会对某些字段建立索引，实现关系数据库的某些功能。</td></tr><tr><td>key-value存储</td><td>Tokyo Cabinet / TyrantBerkeley DBMemcacheDBRedis</td><td>可以通过key快速查询到其value。一般来说，存储不管value的格式，照单全收。（Redis包含了其他功能）</td></tr><tr><td>图存储</td><td>Neo4JFlockDB</td><td>图形关系的最佳存储。使用传统关系数据库来解决的话性能低下，而且设计使用不方便。</td></tr><tr><td>对象存储</td><td>db4oVersant</td><td>通过类似面向对象语言的语法操作数据库，通过对象的方式存取数据。</td></tr><tr><td>xml数据库</td><td>Berkeley DB XMLBaseX</td><td>高效的存储XML数据，并支持XML的内部查询语法，比如XQuery,Xpath。</td></tr></tbody></table><h2 id="linux离线安装包"><a href="#linux离线安装包" class="headerlink" title="linux离线安装包"></a>linux离线安装包</h2><p><code>apt-get</code>离线安装包，apt-get install安装的软件包都在**/var/cache/apt/archives** 目录下，下载文件位置可以在**/etc/apt/source.list**下指定。</p><p>也有可能在**/usr/share/doc<strong>和</strong>/usr/share/lintian/overides/**</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 1 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 系统 </tag>
+            
+            <tag> xml </tag>
+            
+            <tag> share </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>01_nodejs.md</title>
+      <link href="/1/01_nodejs/"/>
+      <url>/1/01_nodejs/</url>
+      
+        <content type="html"><![CDATA[<h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><h2 id="template"><a href="#template" class="headerlink" title="template"></a>template</h2><p><code>express-art-template语法</code></p><pre><code class="sh">(1).表达式&#123;&#123; 与 &#125;&#125; 符号包裹起来的语句则为模板的逻辑表达式(2).输出表达式2.1对内容编码输出：&#123;&#123;content&#125;&#125;2.2不编码输出：&#123;&#123;#content&#125;&#125;(3).变量&#123;&#123;set temp = data.sub.content&#125;&#125;(4).条件表达式&#123;&#123;if admin&#125;&#125;        &lt;p&gt;admin&lt;/p&gt;&#123;&#123;else if code > 0&#125;&#125;       &lt;p&gt;master&lt;/p&gt;&#123;&#123;else&#125;&#125;        &lt;p&gt;error!&lt;/p&gt;&#123;&#123;/if&#125;&#125;(5).遍历表达式无论数组或者对象都可以用 each 进行遍历。&#123;&#123;each list as value index&#125;&#125;    &lt;li&gt;&#123;&#123;index&#125;&#125; - &#123;&#123;value.user&#125;&#125;&lt;/li&gt;&#123;&#123;/each&#125;&#125;亦可以被简写：&#123;&#123;each list&#125;&#125;     &lt;li&gt;&#123;&#123;$index&#125;&#125; - &#123;&#123;$value.user&#125;&#125;&lt;/li&gt;&#123;&#123;/each&#125;&#125;(6).子模板（模板包含表达式）a.用于嵌入子模板:&#123;&#123;include './header.art'&#125;&#125; </code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 1 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 表达式 </tag>
+            
+            <tag> 模板 </tag>
+            
+            <tag> 编码 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>01_LockFree.md</title>
+      <link href="/1/01_LockFree/"/>
+      <url>/1/01_LockFree/</url>
+      
+        <content type="html"><![CDATA[<h1 id="LockFree"><a href="#LockFree" class="headerlink" title="LockFree"></a>LockFree</h1><p>传统共享数据访问方式采用同步原语（<code>临界区</code>,<code>锁</code>,<code>条件变量</code>)等达到共享数据的安全访问，同步操作很容易成为并行程序中的瓶颈。</p><ul><li>同步原语是操作系统的内核对象，调用该原语会带来上下文切换（用户态换到内核态)</li><li>杜绝并行操作，一个线程在访问共享数据的时候，其他多个线程必须在排队等待</li></ul><p>于是，人们开始研究对共享数据进行并发访问的数据结构和算法</p><ul><li>Transactional memory 事务性内存</li><li>Fine-grained algorithms 细粒度苏阿案发</li><li>Lock-free data structures 无锁数据结构</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 1 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据 </tag>
+            
+            <tag> lockfree </tag>
+            
+            <tag> fine </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>01_docx攻击.md</title>
+      <link href="/1/01_docx%E6%94%BB%E5%87%BB/"/>
+      <url>/1/01_docx%E6%94%BB%E5%87%BB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="docx攻击"><a href="#docx攻击" class="headerlink" title="docx攻击"></a>docx攻击</h1><ol><li>生成一个正常的docx文件，内容根据实际需求进行编造，保存后将后缀改成zip</li><li>将其解压，修改./word/_rels/下的settings.xml.rels文件，没有的话可以自己添加。</li></ol><p><img src="/images/01.assets/20191025172919941.png" alt="在这里插入图片描述"></p><ol><li><p><strong>修改内容如下：</strong></p><pre><code class="txt">&lt;Relationship Id=&quot;rId6&quot; Type=&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate&quot; Target=&quot;fontTable.xml&quot;/&gt;&lt;/Relationships&gt;</code></pre><p>包含带有<strong>attachmentTemplate</strong>的Type的Relationship标记，是告诉Word打开该.docx时从哪里加载模板的设置，我们可以将Target值修改为远程位置。</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 1 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> docx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>koal_部署服务出现的问题.md</title>
+      <link href="/uncategorized/koal_%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/uncategorized/koal_%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="部署服务出现的问题"><a href="#部署服务出现的问题" class="headerlink" title="部署服务出现的问题"></a>部署服务出现的问题</h1><ol><li><p>pod找不到地址</p><blockquote><p>有节点不网络不正常， dns调度在网络不正常节点。使dns调度在正常节点</p></blockquote></li><li><p>密码应用服务500</p><blockquote><p>检查traefit kubecheck 是否有日志，没日志检查配置文件authurl以及middleware kubecheck 两处地址是否正常 </p></blockquote></li><li><p>服务503</p><blockquote><p>  代表服务未启动</p></blockquote></li><li><p>镜像奇怪异常问题</p><blockquote><p> 重新上传镜像</p></blockquote></li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 节点 </tag>
+            
+            <tag> 网络 </tag>
+            
+            <tag> dns </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>koal_网云飞.md</title>
+      <link href="/uncategorized/koal_%E7%BD%91%E4%BA%91%E9%A3%9E/"/>
+      <url>/uncategorized/koal_%E7%BD%91%E4%BA%91%E9%A3%9E/</url>
+      
+        <content type="html"><![CDATA[<h1 id="网云飞"><a href="#网云飞" class="headerlink" title="网云飞"></a>网云飞</h1><h2 id="网云飞安全存储"><a href="#网云飞安全存储" class="headerlink" title="网云飞安全存储"></a>网云飞安全存储</h2><h3 id="网络拓扑"><a href="#网络拓扑" class="headerlink" title="网络拓扑"></a>网络拓扑</h3><p><img src="/images/koal.assets/image-20210727105424628.png" alt="image-20210727105424628"></p><table><thead><tr><th>服务器</th><th>相关信息</th></tr></thead><tbody><tr><td>smdfs01</td><td>10.0.100.123</td></tr><tr><td>smdfs02</td><td>10.0.100.124</td></tr><tr><td>test,oa</td><td>123456</td></tr><tr><td>root</td><td>qwer1234</td></tr><tr><td>NN元数据存储目录</td><td>/home/smdfs/nn(smdfs01)</td></tr><tr><td>DN的数据存储目录</td><td>/diskb/data/dn; /diskc/data/dn; /diskd/data/dn; /diske/data/dn; /diskf/data/dn;(smdfs01和smdfs02)</td></tr><tr><td>Smdfs01</td><td>操作系统，centos8，root/123123</td></tr><tr><td>smdfs02</td><td>操作系统，centos8，root/123123</td></tr></tbody></table><p>普通用户可以使用存储系统，而管理员用户只能对普通用户进行管理，不能使用存储系统</p><p>对文件数与容量都<strong>没有限制</strong></p><p>问题：</p><ol><li>普通用户和管理员用户区别，管理员用户能访问接口吗？</li><li>容量 CapacityUsedNonDFS 非集群使用容量是什么？</li></ol><p>接口</p><ol><li><p>修改管理员密码接口</p></li><li><p>修改普通用户密码接口</p></li><li><p>提供直接登陆存储系统的调用方案，比如登陆接口，传用户名密码，返回token,平台可以直接拿token登陆这种</p></li></ol><p>服务详情页面要提供修改管理员密码这个功能，分配的租户下用户，给创建一个普通用户不能登陆，但是</p><p>tip:</p><p>租户管理员和租户下成员，只能看到存储服务</p><p>在服务详情查看容量使用量，最大文件数</p><p>租户管理员能看到自己和下面所以的</p><p>租户内成员看到自己的</p><p>解除授权时，不删除对应存储用户</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>koal_SVS.md</title>
+      <link href="/uncategorized/koal_SVS/"/>
+      <url>/uncategorized/koal_SVS/</url>
+      
+        <content type="html"><![CDATA[<h1 id="SVS"><a href="#SVS" class="headerlink" title="SVS"></a>SVS</h1><p>性能看<strong>bss</strong>和svsd<strong>两块</strong>，bss接收http请求，查询证书数据，<strong>svsd</strong>负责计算</p><p> <strong>crl</strong>就是个黑名单下载工具</p><table><thead><tr><th>服务</th><th>配置最小</th><th>最大limit</th><th>测试limit</th></tr></thead><tbody><tr><td>svs</td><td></td><td>8000m 18G</td><td></td></tr><tr><td>svs-svsd</td><td>cpu: 300m memory: 500Mi</td><td>cpu: 4000m memory: 8000Mi</td><td></td></tr><tr><td>svs-admin</td><td>cpu: 300m memory: 500Mi</td><td>cpu: 1000m memory: 2500Mi</td><td></td></tr><tr><td>svs-bss</td><td>cpu: 300m memory: 500Mi</td><td>cpu: 1000m memory: 2500Mi</td><td></td></tr><tr><td>svs-mongo</td><td>cpu: 300m memory: 500Mi</td><td>cpu: 1000m memory: 2500Mi</td><td></td></tr><tr><td>svs-crl</td><td>cpu: 300m memory: 500Mi</td><td>cpu: 1000m memory: 2500Mi</td><td></td></tr><tr><td>tsa</td><td></td><td></td><td></td></tr><tr><td>svs-svsd</td><td>cpu: 300m memory: 500Mi</td><td>cpu: 4000m memory: 8000Mi</td><td></td></tr><tr><td>svs-crl</td><td>cpu: 300m memory: 500Mi</td><td>cpu: 1000m memory: 2500Mi</td><td></td></tr><tr><td>tsa-tss</td><td>cpu: 300m memory: 500Mi</td><td>cpu: 1000m memory: 2500Mi</td><td></td></tr><tr><td>tsa-admin</td><td>cpu: 300m memory: 500Mi</td><td>cpu: 1000m memory: 2500Mi</td><td></td></tr><tr><td>svs-mongo</td><td>cpu: 300m memory: 500Mi</td><td>cpu: 1000m memory: 2500Mi</td><td></td></tr></tbody></table><h2 id="svsapi"><a href="#svsapi" class="headerlink" title="svsapi"></a>svsapi</h2><table><thead><tr><th>接口</th><th>URL</th><th>备注</th></tr></thead><tbody><tr><td>数字签名</td><td>/api/svs/bss/signData</td><td></td></tr><tr><td>验证签名</td><td>/api/svs/bss/verifySignedData</td><td></td></tr><tr><td>加密数据</td><td>/api/svs/bss/encryptData</td><td></td></tr><tr><td>解密数据</td><td>/api/svs/bss/decryptData</td><td></td></tr><tr><td>消息签名</td><td>/api/svs/bss/signMessage</td><td></td></tr><tr><td>验证消息签名</td><td>/api/svs/bss/verifySignedMessage</td><td></td></tr><tr><td>不带原文的消息签名</td><td>/api/svs/bss/signMessageDetach</td><td></td></tr><tr><td>验证不带原文的消息签名</td><td>/api/svs/bss/verifySignedMessageDetach</td><td></td></tr><tr><td>PKCS1加密数据</td><td>/api/svs/bss/rawEncrypt</td><td></td></tr><tr><td>PKCS1解密数据</td><td>/api/svs/bss/rawDecrypt</td><td></td></tr><tr><td>导出白名单证书</td><td>/api/svs/bss/exportAllowListCert</td><td></td></tr><tr><td>导出我的证书</td><td>/api/svs/bss/exportMyCert</td><td></td></tr></tbody></table><h3 id="消息签名"><a href="#消息签名" class="headerlink" title="消息签名"></a>消息签名</h3><h4 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/signMessage?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \--header &#39;Content-Type: application/json&#39; \--header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \--data-raw &#39;&#123;  &quot;b64OriginData&quot;: &quot;MTIz&quot;,  &quot;certAlias&quot;: &quot;RABizOper&quot;&#125;&#39;</code></pre><h4 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;    &quot;errorCode&quot;: 0,    &quot;message&quot;: null,    &quot;b64SignedMessage&quot;: &quot;MIIFPQYJKoZIhvcNAQcCoIIFLjCCBSoCAQExDzANBglghkgBZQMEAgEFADASBgkqhkiG9w0BBwGgBQQDMTIzoIIDmTCCA5UwggJ9oAMCAQICDBsTAAAAAAAL5rDPaTANBgkqhkiG9w0BAQsFADAmMQswCQYDVQQGEwJDTjEXMBUGA1UEAwwOU3ViQ0FBZG1pblJvb3QwHhcNMTkwNzA5MTYwMDAwWhcNMjkwNzA3MTU1OTU5WjBiMQswCQYDVQQGEwJDTjENMAsGA1UECgwEa29hbDENMAsGA1UECwwEa29hbDEhMB8GCSqGSIb3DQEJARYSUkFCaXpPcGVyQGtvYWwuY29tMRIwEAYDVQQDDAlSQUJpek9wZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCIfV+LTlAVo0YE6EZsQP+tuiAblkTZT9oi29ospxoHJ12uFzP2RuGBEVxQtwJ1JbuRG9/4GqQG76G7wumv65iDlYG8XUZg5hLfZ8KFSU9p81POR9NqQoFmwIlQeXst2lHkaG9GlcEX9cQy/+17Pz8gIKTOqb0tEIsegKNkrE1CE7HRLCbFmPKTJRD19eU6GvzHd8huJ1htD3zUMvj0iHC/K+swz/YnJ5Rho/5UZhxkw/dXUoLTfTD8ORYCEwQt48qK5jFIpvjkL7XuCa1DvPMPga/b0bLbsYJmsU9WW2rlRcyfKoCXBwhp7L5rOhr/p7ReMsFloFuvmmUs6ZRid4QvAgMBAAGjgYYwgYMwDAYDVR0TBAUwAwEBADATBgNVHSUEDDAKBggrBgEFBQcDAjALBgNVHQ8EBAMCAMAwEQYJYIZIAYb4QgEBBAQDAgCAMB8GA1UdIwQYMBaAFMYFXCwPa9Arn0oHHCcuSPdqGupOMB0GA1UdDgQWBBQT0+5jHqs9XAFhJ7X8OdfdXfM5vzANBgkqhkiG9w0BAQsFAAOCAQEALOWDegXorC8CXpe0EXqAGJ+kqRo8dyn2tHeDC7eed76g8g2EYu4gf8Z9ECtnEbOLdp1PxDY2BzAuQ/DKaAsnIn7nhL79O51LBexuwfvF4MnoKHHEbWRTQ72ADgT3yHp882QlQg/sNt6xVSBViQ50bMUsSPSh2kmqs6+svyJ7lvuk4RAybXTqH+EEefIZ5cRdezuzcEDUtdOCBJNi55eGsinSANkl5NrdbJoGAaa3Z3b7RIbzSQUTiF3ZJOrGJfeZppekNS3b2O5KGlYHeI8xZtqhmlqsCqH/LQUHJFcW8HQBRC8BF36hf70YWPUA2MqpcOpOYQvy2I2WI41DwAqFBTGCAWEwggFdAgEBMDYwJjELMAkGA1UEBhMCQ04xFzAVBgNVBAMMDlN1YkNBQWRtaW5Sb290AgwbEwAAAAAAC+awz2kwDQYJYIZIAWUDBAIBBQAwDQYJKoZIhvcNAQEBBQAEggEADpGvyUaD5bPucK9jD4FmvGXQ3FguiSeCJFPqSd4/ySpK+sD/zrFfspWLRD0oyxz7QztKww2++ZKR0qgMJAMq7rnb8LZOnwl2YRkrzUtac3QfiphhUO6INQag4MLAB8WBXgEd17ET1CRafytw6yrEacpqgCmJOmi7PWUgVxoPR6cQhxJlA7Ijt2uE38+tL5vuKm1c/J1mk6IdzupOXV2vQV8cxRQE6h53E5qRA16arzXOB5g+ZT0AzqNSzBBSRa9Li8hzIoGDDWRIoCVOYua3QOrIKi9m4vxdxEpYYyAdKEA9I3O9Qo5/dzhdTbgsvpZ1T7/v+y/v41ecZc7OHgv2kA==&quot;&#125;</code></pre><h3 id="验证消息签名"><a href="#验证消息签名" class="headerlink" title="验证消息签名"></a>验证消息签名</h3><h4 id="请求-1"><a href="#请求-1" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/verifySignedMessage?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \--header &#39;Content-Type: application/json&#39; \--header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \--data-raw
