@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>01.md</title>
-    <url>/1/01/</url>
-    <content><![CDATA[<h1 id="clojure"><a href="#clojure" class="headerlink" title="clojure"></a>clojure</h1><ul>
-<li>clojure <a href="http://cemerick.com/">http://cemerick.com/</a></li>
+    <title>01_CAP.md</title>
+    <url>/1/01_CAP/</url>
+    <content><![CDATA[<h1 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h1><p>在计算机科学中, CAP定理（CAP theorem）, 又被称作 布鲁尔定理（Brewer’s theorem）, 它指出对于一个分布式计算系统来说，不可能同时满足以下三点:</p>
+<ul>
+<li><strong>一致性(Consistency)</strong> (所有节点在同一时间具有相同的数据)</li>
+<li><strong>可用性(Availability)</strong> (保证每个请求不管成功或者失败都有响应)</li>
+<li><strong>分隔容忍(Partition tolerance)</strong> (系统中任意信息的丢失或失败不会影响系统的继续运作)</li>
 </ul>
-<p> <a href="https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/">https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/</a></p>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><pre><code class="sh"> docker stats --no-stream $(docker ps | grep 217a5b187c2812 | awk &#39;&#123;print $1&#125;&#39;)
-</code></pre>
-<p><code>sed</code></p>
-<p>文字处理</p>
-<pre><code class="sh">sed -i &#39;/百度搜索/d&#39; all.txt 
-</code></pre>
+<p>CAP理论的核心是：一个分布式系统不可能同时很好的满足一致性，可用性和分区容错性这三个需求，最多只能同时较好的满足两个。</p>
+<p>因此，根据 CAP 原理将 NoSQL 数据库分成了满足 CA 原则、满足 CP 原则和满足 AP 原则三 大类：</p>
+<ul>
+<li>CA - 单点集群，满足一致性，可用性的系统，通常在可扩展性上不太强大。</li>
+<li>CP - 满足一致性，分区容忍性的系统，通常性能不是特别高。</li>
+<li>AP - 满足可用性，分区容忍性的系统，通常可能对一致性要求低一些。</li>
+<li></li>
+</ul>
+<p><img src="/images/01.assets/cap-theoram-image.png" alt="img"></p>
 ]]></content>
       <categories>
         <category>1</category>
       </categories>
       <tags>
-        <tag>clojure</tag>
-        <tag>sed</tag>
-        <tag>文字处理</tag>
+        <tag>系统</tag>
+        <tag>一致性</tag>
+        <tag>可用性</tag>
       </tags>
   </entry>
   <entry>
@@ -69,55 +74,49 @@
       </tags>
   </entry>
   <entry>
-    <title>01_LockFree.md</title>
-    <url>/1/01_LockFree/</url>
-    <content><![CDATA[<h1 id="LockFree"><a href="#LockFree" class="headerlink" title="LockFree"></a>LockFree</h1><p>传统共享数据访问方式采用同步原语（<code>临界区</code>,<code>锁</code>,<code>条件变量</code>)等达到共享数据的安全访问，同步操作很容易成为并行程序中的瓶颈。</p>
-<ul>
-<li>同步原语是操作系统的内核对象，调用该原语会带来上下文切换（用户态换到内核态)</li>
-<li>杜绝并行操作，一个线程在访问共享数据的时候，其他多个线程必须在排队等待</li>
-</ul>
-<p>于是，人们开始研究对共享数据进行并发访问的数据结构和算法</p>
-<ul>
-<li>Transactional memory 事务性内存</li>
-<li>Fine-grained algorithms 细粒度苏阿案发</li>
-<li>Lock-free data structures 无锁数据结构</li>
-</ul>
+    <title>01_docx攻击.md</title>
+    <url>/1/01_docx%E6%94%BB%E5%87%BB/</url>
+    <content><![CDATA[<h1 id="docx攻击"><a href="#docx攻击" class="headerlink" title="docx攻击"></a>docx攻击</h1><ol>
+<li>生成一个正常的docx文件，内容根据实际需求进行编造，保存后将后缀改成zip</li>
+<li>将其解压，修改./word/_rels/下的settings.xml.rels文件，没有的话可以自己添加。</li>
+</ol>
+<p><img src="/images/01.assets/20191025172919941.png" alt="在这里插入图片描述"></p>
+<ol>
+<li><p><strong>修改内容如下：</strong></p>
+<pre><code class="txt">&lt;Relationship Id=&quot;rId6&quot; Type=&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate&quot; Target=&quot;fontTable.xml&quot;/&gt;&lt;/Relationships&gt;
+</code></pre>
+<p>包含带有<strong>attachmentTemplate</strong>的Type的Relationship标记，是告诉Word打开该.docx时从哪里加载模板的设置，我们可以将Target值修改为远程位置。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>1</category>
       </categories>
       <tags>
-        <tag>数据</tag>
-        <tag>lockfree</tag>
-        <tag>fine</tag>
+        <tag>docx</tag>
       </tags>
   </entry>
   <entry>
-    <title>01_CAP.md</title>
-    <url>/1/01_CAP/</url>
-    <content><![CDATA[<h1 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h1><p>在计算机科学中, CAP定理（CAP theorem）, 又被称作 布鲁尔定理（Brewer’s theorem）, 它指出对于一个分布式计算系统来说，不可能同时满足以下三点:</p>
-<ul>
-<li><strong>一致性(Consistency)</strong> (所有节点在同一时间具有相同的数据)</li>
-<li><strong>可用性(Availability)</strong> (保证每个请求不管成功或者失败都有响应)</li>
-<li><strong>分隔容忍(Partition tolerance)</strong> (系统中任意信息的丢失或失败不会影响系统的继续运作)</li>
+    <title>01.md</title>
+    <url>/1/01/</url>
+    <content><![CDATA[<h1 id="clojure"><a href="#clojure" class="headerlink" title="clojure"></a>clojure</h1><ul>
+<li>clojure <a href="http://cemerick.com/">http://cemerick.com/</a></li>
 </ul>
-<p>CAP理论的核心是：一个分布式系统不可能同时很好的满足一致性，可用性和分区容错性这三个需求，最多只能同时较好的满足两个。</p>
-<p>因此，根据 CAP 原理将 NoSQL 数据库分成了满足 CA 原则、满足 CP 原则和满足 AP 原则三 大类：</p>
-<ul>
-<li>CA - 单点集群，满足一致性，可用性的系统，通常在可扩展性上不太强大。</li>
-<li>CP - 满足一致性，分区容忍性的系统，通常性能不是特别高。</li>
-<li>AP - 满足可用性，分区容忍性的系统，通常可能对一致性要求低一些。</li>
-<li></li>
-</ul>
-<p><img src="/images/01.assets/cap-theoram-image.png" alt="img"></p>
+<p> <a href="https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/">https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/</a></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><pre><code class="sh"> docker stats --no-stream $(docker ps | grep 217a5b187c2812 | awk &#39;&#123;print $1&#125;&#39;)
+</code></pre>
+<p><code>sed</code></p>
+<p>文字处理</p>
+<pre><code class="sh">sed -i &#39;/百度搜索/d&#39; all.txt 
+</code></pre>
 ]]></content>
       <categories>
         <category>1</category>
       </categories>
       <tags>
-        <tag>系统</tag>
-        <tag>一致性</tag>
-        <tag>可用性</tag>
+        <tag>clojure</tag>
+        <tag>sed</tag>
+        <tag>文字处理</tag>
       </tags>
   </entry>
   <entry>
@@ -143,44 +142,6 @@ alt+x load-file
         <tag>emacs</tag>
         <tag>mode</tag>
         <tag>dired</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01_docx攻击.md</title>
-    <url>/1/01_docx%E6%94%BB%E5%87%BB/</url>
-    <content><![CDATA[<h1 id="docx攻击"><a href="#docx攻击" class="headerlink" title="docx攻击"></a>docx攻击</h1><ol>
-<li>生成一个正常的docx文件，内容根据实际需求进行编造，保存后将后缀改成zip</li>
-<li>将其解压，修改./word/_rels/下的settings.xml.rels文件，没有的话可以自己添加。</li>
-</ol>
-<p><img src="/images/01.assets/20191025172919941.png" alt="在这里插入图片描述"></p>
-<ol>
-<li><p><strong>修改内容如下：</strong></p>
-<pre><code class="txt">&lt;Relationship Id=&quot;rId6&quot; Type=&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate&quot; Target=&quot;fontTable.xml&quot;/&gt;&lt;/Relationships&gt;
-</code></pre>
-<p>包含带有<strong>attachmentTemplate</strong>的Type的Relationship标记，是告诉Word打开该.docx时从哪里加载模板的设置，我们可以将Target值修改为远程位置。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>docx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01_linux离线安装包.md</title>
-    <url>/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/</url>
-    <content><![CDATA[<h1 id="linux离线安装包"><a href="#linux离线安装包" class="headerlink" title="linux离线安装包"></a>linux离线安装包</h1><p><code>apt-get</code>离线安装包，apt-get install安装的软件包都在**/var/cache/apt/archives** 目录下，下载文件位置可以在**/etc/apt/source.list**下指定。</p>
-<p>也有可能在**/usr/share/doc<strong>和</strong>/usr/share/lintian/overides/**</p>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>usr</tag>
-        <tag>share</tag>
-        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -229,6 +190,82 @@ a.用于嵌入子模板:
         <tag>nodejs</tag>
         <tag>express</tag>
         <tag>art</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01_LockFree.md</title>
+    <url>/1/01_LockFree/</url>
+    <content><![CDATA[<h1 id="LockFree"><a href="#LockFree" class="headerlink" title="LockFree"></a>LockFree</h1><p>传统共享数据访问方式采用同步原语（<code>临界区</code>,<code>锁</code>,<code>条件变量</code>)等达到共享数据的安全访问，同步操作很容易成为并行程序中的瓶颈。</p>
+<ul>
+<li>同步原语是操作系统的内核对象，调用该原语会带来上下文切换（用户态换到内核态)</li>
+<li>杜绝并行操作，一个线程在访问共享数据的时候，其他多个线程必须在排队等待</li>
+</ul>
+<p>于是，人们开始研究对共享数据进行并发访问的数据结构和算法</p>
+<ul>
+<li>Transactional memory 事务性内存</li>
+<li>Fine-grained algorithms 细粒度苏阿案发</li>
+<li>Lock-free data structures 无锁数据结构</li>
+</ul>
+]]></content>
+      <categories>
+        <category>1</category>
+      </categories>
+      <tags>
+        <tag>数据</tag>
+        <tag>lockfree</tag>
+        <tag>fine</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01_NOSQL数据库分类.md</title>
+    <url>/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/</url>
+    <content><![CDATA[<h1 id="NOSQL数据库分类"><a href="#NOSQL数据库分类" class="headerlink" title="NOSQL数据库分类"></a>NOSQL数据库分类</h1><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>部分代表</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>列存储</td>
+<td>HbaseCassandraHypertable</td>
+<td>顾名思义，是按列存储数据的。最大的特点是方便存储结构化和半结构化数据，方便做数据压缩，对针对某一列或者某几列的查询有非常大的IO优势。</td>
+</tr>
+<tr>
+<td>文档存储</td>
+<td>MongoDBCouchDB</td>
+<td>文档存储一般用类似json的格式存储，存储的内容是文档型的。这样也就有机会对某些字段建立索引，实现关系数据库的某些功能。</td>
+</tr>
+<tr>
+<td>key-value存储</td>
+<td>Tokyo Cabinet / TyrantBerkeley DBMemcacheDBRedis</td>
+<td>可以通过key快速查询到其value。一般来说，存储不管value的格式，照单全收。（Redis包含了其他功能）</td>
+</tr>
+<tr>
+<td>图存储</td>
+<td>Neo4JFlockDB</td>
+<td>图形关系的最佳存储。使用传统关系数据库来解决的话性能低下，而且设计使用不方便。</td>
+</tr>
+<tr>
+<td>对象存储</td>
+<td>db4oVersant</td>
+<td>通过类似面向对象语言的语法操作数据库，通过对象的方式存取数据。</td>
+</tr>
+<tr>
+<td>xml数据库</td>
+<td>Berkeley DB XMLBaseX</td>
+<td>高效的存储XML数据，并支持XML的内部查询语法，比如XQuery,Xpath。</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>1</category>
+      </categories>
+      <tags>
+        <tag>xml</tag>
+        <tag>数据库</tag>
+        <tag>nosql</tag>
       </tags>
   </entry>
   <entry>
@@ -299,141 +336,6 @@ echo out &gt; /sys/class/gpio/gpio21/direction
       </tags>
   </entry>
   <entry>
-    <title>02_k8s.md</title>
-    <url>/1/02_k8s/</url>
-    <content><![CDATA[<h1 id="k8s"><a href="#k8s" class="headerlink" title="k8s"></a>k8s</h1><h2 id="k8s容器内域名解析失败学习k8s的DNS策略"><a href="#k8s容器内域名解析失败学习k8s的DNS策略" class="headerlink" title="k8s容器内域名解析失败学习k8s的DNS策略"></a>k8s容器内域名解析失败学习k8s的DNS策略</h2><h3 id="一、k8s默认的DNS策略"><a href="#一、k8s默认的DNS策略" class="headerlink" title="一、k8s默认的DNS策略"></a>一、k8s默认的DNS策略</h3><p>k8s提供了5种DNS策略，如下：</p>
-<ul>
-<li><code>Default</code>: Pod 从运行所在的节点继承名称解析配置。</li>
-<li><code>ClusterFirst</code>: 与配置的集群域后缀不匹配的任何 DNS 查询（例如 “<a href="https://links.jianshu.com/go?to=http://www.kubernetes.io">www.kubernetes.io</a>”） 都将转发到从节点继承的上游名称服务器。集群管理员可能配置了额外的存根域和上游 DNS 服务器。</li>
-<li><code>ClusterFirstWithHostNet</code>：对于以 hostNetwork 方式运行的 Pod，应显式设置其 DNS 策略 <code>ClusterFirstWithHostNet</code>。</li>
-<li><code>None</code>: 此设置允许 Pod 忽略 Kubernetes 环境中的 DNS 设置。Pod 会使用其 <code>dnsConfig</code> 字段 所提供的 DNS 设置。</li>
-</ul>
-<p>k8s默认使用的DNS策略是<code>ClusterFirst</code>，这点需要注意，也就是说域名解析会优先使用集群的DNS（<code>kube-DNS</code>）进行查询，如果k8s的DNS解析失败，会转发到宿主机的DNS进行解析。</p>
-<h3 id="二、k8s容器的resolv-conf"><a href="#二、k8s容器的resolv-conf" class="headerlink" title="二、k8s容器的resolv.conf"></a>二、k8s容器的<code>resolv.conf</code></h3><p>k8s上运行的容器，其域名解析和一般的Linux一样，都是根据 <code>/etc/resolv.conf</code> 文件进行解析，下面看一个开发环境某一个pod的<code>resolv.conf</code>内容：</p>
-<pre><code class="css">nameserver 10.96.0.10
-search jplat.svc.cluster.local svc.cluster.local cluster.local localhost
-options ndots:5
-</code></pre>
-<p>上面内容中<code>nameserver</code>即为k8s集群中<code>kube-dns</code>的<code>Service</code>的<code>CLUSTER-IP</code>，该集群中容器的<code>nameserver</code>均为<code>kube-dns</code>的ip。</p>
-<p><code>search</code>和<code>options ndots</code>我们一起来讲。首先我们需要了解一个概念<code>FQDN(Fully qualified domain name)</code>即完整域名。一般来说如果一个域名以<code>.</code>结束，就表示一个完整域名。比如<code>www.abc.xyz.</code>就是一个<code>FQDN</code>，而<code>www.abc.xyz</code>则不是<code>FQDN</code>。了解了这个概念之后我们就来看<code>search</code>和<code>options ndots</code>。</p>
-<p>如果我们的pod使用的是默认的DNS策略，即<code>ClusterFirst</code>，那么如果一个域名是<code>FQDN</code>，那么这个域名会被转发给DNS服务器进行解析。如果域名不是<code>FQDN</code>，那么这个域名会到<code>search</code>搜索解析，还是通过一个例子说明，比如访问<code>abc.xyz</code>这个域名，因为它并不是一个<code>FQDN</code>，所以它会和<code>search</code>域中的值进行组合而变成一个<code>FQDN</code>，以上文的<code>resolv.conf</code>为例，这域名会这样组合：</p>
-<pre><code class="css">abx.xyz.jplat.svc.cluster.local.
-abc.xyz.svc.cluster.local.
-abc.xyz.cluster.local.
-...
-</code></pre>
-<p>然后这些域名先被<code>kube-DNS</code>解析，如果没有解析成功再由宿主机的<code>DNS</code>服务器进行解析。</p>
-<p>而<code>ndots</code>是用来表示一个域名中<code>.</code>的个数在不小于该值的情况下会被认为是一个<code>FQDN</code>。简单说这个属性用来判断一个不是以<code>.</code>结束的域名在什么条件下会被认定为是一个<code>FQDN</code>。还是通过我们另一个pod的<code>resolv.conf</code>为例，如下：</p>
-<pre><code class="css">nameserver 10.96.0.10
-search oms-dev.svc.cluster.local svc.cluster.local cluster.local localhost
-options ndots:2 edns0
-</code></pre>
-<p>在这个<code>resolv.conf</code>中<code>ndots</code>为2，也就是说如果一个域名中<code>.</code>的数量大于等于2，即使域名不是以<code>.</code>结尾，也会被认定为是一个<code>FQDN</code>。比如：域名是<code>abc.xyz.xxx</code>这个域名就是<code>FQDN</code>，而<code>abc.xyz</code>则不是<code>FQDN</code>。</p>
-<p>之所以会有<code>search</code>域主要还是为了方便k8s内部服务之间的访问。比如：k8s在同一个<code>namespace</code>下是可以直接通过服务名称进行访问的，其原理就是会在<code>search</code>域查找，比如上面的<code>resolv.conf</code>中<code>jplat、oms-dev</code>着两个其实都是这两个pod所在的<code>namespace</code>的名称。所以通过服务名称访问的时候，会和<code>search</code>域进行组合，这样最终域名会组合成<code>servicename.namespace.svc.cluster.local</code>。而如果是跨<code>namespace</code>访问，则可以通过<code>servicename.namespace</code>这样的形式，在通过和<code>search</code>域组合，依然可以得到<code>servicename.namespace.svc.cluster.local</code>。</p>
-<hr>
-<h3 id="三、解决问题"><a href="#三、解决问题" class="headerlink" title="三、解决问题"></a>三、解决问题</h3><p>在了解k8s的DNS相关知识之后，回到我们项目组在开发中遇到一个问题：一个应用的pod内调用外部接口失败，报错的原因就是<code>unknown host</code>，最开始我以为是外部应用没在一个网段的问题，但是直接通过服务器却可以访问的。当时pod使用的是默认的DNS策略，即<code>ClusterFirst</code>，<code>ndots</code>也是默认值，即5。问题出现了。我请求的域名是<code>www.abc.com/api</code>，域名只有2个点，所以会和<code>search</code>域的域名进行组合，结果当然无法解析。考虑到我们的pod访问都是在同一<code>namespace</code>下，即使跨<code>namespace</code>，我们也是通过<code>servicename.namespace</code>进行访问的，所以最终选择将<code>ndots</code>改为2。修改应用的<code>Deployment yaml</code>文件，修改如下：</p>
-<pre><code class="csharp">      dnsConfig:
-        options:
-          - name: ndots
-            value: &quot;2&quot;
-</code></pre>
-<p>修改完成之后重新部署项目，测试解决。</p>
-<h2 id="kubedns"><a href="#kubedns" class="headerlink" title="kubedns"></a>kubedns</h2><p>查看kubedns</p>
-<pre><code class="sh">kubectl get pods --namespace=kube-system -o wide |grep dns 
-</code></pre>
-<p>查看日志</p>
-<pre><code class="sh">kubectl logs  kube-dns-6698b7748d-fd5g7 kubedns --namespace=kube-system
-</code></pre>
-<p>查看dns解析</p>
-<pre><code class="sh">kubectl get pod |grep &quot;test&quot;
-
-kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
-</code></pre>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>pod</tag>
-        <tag>dns</tag>
-        <tag>k8s</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2021.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/2021/</url>
-    <content><![CDATA[<h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><ul>
-<li><input disabled="" type="checkbox"> 预测算法 具身智能如何应对不确定性</li>
-<li><input checked="" disabled="" type="checkbox"> 应用密码安全性评估</li>
-<li><input checked="" disabled="" type="checkbox"> CISAW</li>
-</ul>
-<hr>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
-<li><input disabled="" type="checkbox"> spring</li>
-</ul>
-]]></content>
-      <categories>
-        <category>书籍源码</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>智能</tag>
-        <tag>不确定性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01_NOSQL数据库分类.md</title>
-    <url>/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/</url>
-    <content><![CDATA[<h1 id="NOSQL数据库分类"><a href="#NOSQL数据库分类" class="headerlink" title="NOSQL数据库分类"></a>NOSQL数据库分类</h1><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>部分代表</th>
-<th>特点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>列存储</td>
-<td>HbaseCassandraHypertable</td>
-<td>顾名思义，是按列存储数据的。最大的特点是方便存储结构化和半结构化数据，方便做数据压缩，对针对某一列或者某几列的查询有非常大的IO优势。</td>
-</tr>
-<tr>
-<td>文档存储</td>
-<td>MongoDBCouchDB</td>
-<td>文档存储一般用类似json的格式存储，存储的内容是文档型的。这样也就有机会对某些字段建立索引，实现关系数据库的某些功能。</td>
-</tr>
-<tr>
-<td>key-value存储</td>
-<td>Tokyo Cabinet / TyrantBerkeley DBMemcacheDBRedis</td>
-<td>可以通过key快速查询到其value。一般来说，存储不管value的格式，照单全收。（Redis包含了其他功能）</td>
-</tr>
-<tr>
-<td>图存储</td>
-<td>Neo4JFlockDB</td>
-<td>图形关系的最佳存储。使用传统关系数据库来解决的话性能低下，而且设计使用不方便。</td>
-</tr>
-<tr>
-<td>对象存储</td>
-<td>db4oVersant</td>
-<td>通过类似面向对象语言的语法操作数据库，通过对象的方式存取数据。</td>
-</tr>
-<tr>
-<td>xml数据库</td>
-<td>Berkeley DB XMLBaseX</td>
-<td>高效的存储XML数据，并支持XML的内部查询语法，比如XQuery,Xpath。</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>xml</tag>
-        <tag>数据库</tag>
-        <tag>nosql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>AK验证.md</title>
     <url>/2021/secraft2/AK%E9%AA%8C%E8%AF%81/</url>
     <content><![CDATA[<h1 id="AK生成策略"><a href="#AK生成策略" class="headerlink" title="AK生成策略"></a>AK生成策略</h1><p>[toc]</p>
@@ -448,6 +350,21 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
         <tag>系统</tag>
         <tag>ak</tag>
         <tag>策略</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01_linux离线安装包.md</title>
+    <url>/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/</url>
+    <content><![CDATA[<h1 id="linux离线安装包"><a href="#linux离线安装包" class="headerlink" title="linux离线安装包"></a>linux离线安装包</h1><p><code>apt-get</code>离线安装包，apt-get install安装的软件包都在**/var/cache/apt/archives** 目录下，下载文件位置可以在**/etc/apt/source.list**下指定。</p>
+<p>也有可能在**/usr/share/doc<strong>和</strong>/usr/share/lintian/overides/**</p>
+]]></content>
+      <categories>
+        <category>1</category>
+      </categories>
+      <tags>
+        <tag>usr</tag>
+        <tag>share</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -476,36 +393,6 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
         <tag>数据</tag>
         <tag>antlr</tag>
         <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Attach.md</title>
-    <url>/2021/jvm/Attach/</url>
-    <content><![CDATA[<h1 id="Java-Attach机制"><a href="#Java-Attach机制" class="headerlink" title="Java Attach机制"></a>Java Attach机制</h1><p>jdk工具提供了jvm进程通信的能力，能让一个进程传命令给另一个进程。</p>
-<pre class="mermaid">sequenceDiagram
-    participant 外部进程（JStack)
-    participant 目标jvm进程
-    外部进程（JStack)->>目标jvm进程:下发命令
-    目标jvm进程->>外部进程（JStack):返回信息</pre>
-
-<p>Attach机制可以对目标收集许多信息，如<code>内存dump</code>,<code>线程dump</code>,类信息统计（加载类和大小以及实例个数），动态加载agent,动态设置vm flag</p>
-<h2 id="方法小结"><a href="#方法小结" class="headerlink" title="方法小结"></a>方法小结</h2><ol>
-<li><p>继承<code>Tool/HotSpotAgent.attach</code></p>
-</li>
-<li><p>VirtualMachine.attach</p>
-</li>
-<li><p>Perf.getPerf().attach(通过PerfData文件获取信息)</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>2021</category>
-        <category>jvm</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>attach</tag>
-        <tag>进程</tag>
       </tags>
   </entry>
   <entry>
@@ -631,6 +518,89 @@ ghci&gt; replicate 3 10
         <tag>网络管理</tag>
         <tag>协议</tag>
         <tag>snmp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>02_k8s.md</title>
+    <url>/1/02_k8s/</url>
+    <content><![CDATA[<h1 id="k8s"><a href="#k8s" class="headerlink" title="k8s"></a>k8s</h1><h2 id="k8s容器内域名解析失败学习k8s的DNS策略"><a href="#k8s容器内域名解析失败学习k8s的DNS策略" class="headerlink" title="k8s容器内域名解析失败学习k8s的DNS策略"></a>k8s容器内域名解析失败学习k8s的DNS策略</h2><h3 id="一、k8s默认的DNS策略"><a href="#一、k8s默认的DNS策略" class="headerlink" title="一、k8s默认的DNS策略"></a>一、k8s默认的DNS策略</h3><p>k8s提供了5种DNS策略，如下：</p>
+<ul>
+<li><code>Default</code>: Pod 从运行所在的节点继承名称解析配置。</li>
+<li><code>ClusterFirst</code>: 与配置的集群域后缀不匹配的任何 DNS 查询（例如 “<a href="https://links.jianshu.com/go?to=http://www.kubernetes.io">www.kubernetes.io</a>”） 都将转发到从节点继承的上游名称服务器。集群管理员可能配置了额外的存根域和上游 DNS 服务器。</li>
+<li><code>ClusterFirstWithHostNet</code>：对于以 hostNetwork 方式运行的 Pod，应显式设置其 DNS 策略 <code>ClusterFirstWithHostNet</code>。</li>
+<li><code>None</code>: 此设置允许 Pod 忽略 Kubernetes 环境中的 DNS 设置。Pod 会使用其 <code>dnsConfig</code> 字段 所提供的 DNS 设置。</li>
+</ul>
+<p>k8s默认使用的DNS策略是<code>ClusterFirst</code>，这点需要注意，也就是说域名解析会优先使用集群的DNS（<code>kube-DNS</code>）进行查询，如果k8s的DNS解析失败，会转发到宿主机的DNS进行解析。</p>
+<h3 id="二、k8s容器的resolv-conf"><a href="#二、k8s容器的resolv-conf" class="headerlink" title="二、k8s容器的resolv.conf"></a>二、k8s容器的<code>resolv.conf</code></h3><p>k8s上运行的容器，其域名解析和一般的Linux一样，都是根据 <code>/etc/resolv.conf</code> 文件进行解析，下面看一个开发环境某一个pod的<code>resolv.conf</code>内容：</p>
+<pre><code class="css">nameserver 10.96.0.10
+search jplat.svc.cluster.local svc.cluster.local cluster.local localhost
+options ndots:5
+</code></pre>
+<p>上面内容中<code>nameserver</code>即为k8s集群中<code>kube-dns</code>的<code>Service</code>的<code>CLUSTER-IP</code>，该集群中容器的<code>nameserver</code>均为<code>kube-dns</code>的ip。</p>
+<p><code>search</code>和<code>options ndots</code>我们一起来讲。首先我们需要了解一个概念<code>FQDN(Fully qualified domain name)</code>即完整域名。一般来说如果一个域名以<code>.</code>结束，就表示一个完整域名。比如<code>www.abc.xyz.</code>就是一个<code>FQDN</code>，而<code>www.abc.xyz</code>则不是<code>FQDN</code>。了解了这个概念之后我们就来看<code>search</code>和<code>options ndots</code>。</p>
+<p>如果我们的pod使用的是默认的DNS策略，即<code>ClusterFirst</code>，那么如果一个域名是<code>FQDN</code>，那么这个域名会被转发给DNS服务器进行解析。如果域名不是<code>FQDN</code>，那么这个域名会到<code>search</code>搜索解析，还是通过一个例子说明，比如访问<code>abc.xyz</code>这个域名，因为它并不是一个<code>FQDN</code>，所以它会和<code>search</code>域中的值进行组合而变成一个<code>FQDN</code>，以上文的<code>resolv.conf</code>为例，这域名会这样组合：</p>
+<pre><code class="css">abx.xyz.jplat.svc.cluster.local.
+abc.xyz.svc.cluster.local.
+abc.xyz.cluster.local.
+...
+</code></pre>
+<p>然后这些域名先被<code>kube-DNS</code>解析，如果没有解析成功再由宿主机的<code>DNS</code>服务器进行解析。</p>
+<p>而<code>ndots</code>是用来表示一个域名中<code>.</code>的个数在不小于该值的情况下会被认为是一个<code>FQDN</code>。简单说这个属性用来判断一个不是以<code>.</code>结束的域名在什么条件下会被认定为是一个<code>FQDN</code>。还是通过我们另一个pod的<code>resolv.conf</code>为例，如下：</p>
+<pre><code class="css">nameserver 10.96.0.10
+search oms-dev.svc.cluster.local svc.cluster.local cluster.local localhost
+options ndots:2 edns0
+</code></pre>
+<p>在这个<code>resolv.conf</code>中<code>ndots</code>为2，也就是说如果一个域名中<code>.</code>的数量大于等于2，即使域名不是以<code>.</code>结尾，也会被认定为是一个<code>FQDN</code>。比如：域名是<code>abc.xyz.xxx</code>这个域名就是<code>FQDN</code>，而<code>abc.xyz</code>则不是<code>FQDN</code>。</p>
+<p>之所以会有<code>search</code>域主要还是为了方便k8s内部服务之间的访问。比如：k8s在同一个<code>namespace</code>下是可以直接通过服务名称进行访问的，其原理就是会在<code>search</code>域查找，比如上面的<code>resolv.conf</code>中<code>jplat、oms-dev</code>着两个其实都是这两个pod所在的<code>namespace</code>的名称。所以通过服务名称访问的时候，会和<code>search</code>域进行组合，这样最终域名会组合成<code>servicename.namespace.svc.cluster.local</code>。而如果是跨<code>namespace</code>访问，则可以通过<code>servicename.namespace</code>这样的形式，在通过和<code>search</code>域组合，依然可以得到<code>servicename.namespace.svc.cluster.local</code>。</p>
+<hr>
+<h3 id="三、解决问题"><a href="#三、解决问题" class="headerlink" title="三、解决问题"></a>三、解决问题</h3><p>在了解k8s的DNS相关知识之后，回到我们项目组在开发中遇到一个问题：一个应用的pod内调用外部接口失败，报错的原因就是<code>unknown host</code>，最开始我以为是外部应用没在一个网段的问题，但是直接通过服务器却可以访问的。当时pod使用的是默认的DNS策略，即<code>ClusterFirst</code>，<code>ndots</code>也是默认值，即5。问题出现了。我请求的域名是<code>www.abc.com/api</code>，域名只有2个点，所以会和<code>search</code>域的域名进行组合，结果当然无法解析。考虑到我们的pod访问都是在同一<code>namespace</code>下，即使跨<code>namespace</code>，我们也是通过<code>servicename.namespace</code>进行访问的，所以最终选择将<code>ndots</code>改为2。修改应用的<code>Deployment yaml</code>文件，修改如下：</p>
+<pre><code class="csharp">      dnsConfig:
+        options:
+          - name: ndots
+            value: &quot;2&quot;
+</code></pre>
+<p>修改完成之后重新部署项目，测试解决。</p>
+<h2 id="kubedns"><a href="#kubedns" class="headerlink" title="kubedns"></a>kubedns</h2><p>查看kubedns</p>
+<pre><code class="sh">kubectl get pods --namespace=kube-system -o wide |grep dns 
+</code></pre>
+<p>查看日志</p>
+<pre><code class="sh">kubectl logs  kube-dns-6698b7748d-fd5g7 kubedns --namespace=kube-system
+</code></pre>
+<p>查看dns解析</p>
+<pre><code class="sh">kubectl get pod |grep &quot;test&quot;
+
+kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
+</code></pre>
+]]></content>
+      <categories>
+        <category>1</category>
+      </categories>
+      <tags>
+        <tag>pod</tag>
+        <tag>dns</tag>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2021.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/2021/</url>
+    <content><![CDATA[<h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><ul>
+<li><input disabled="" type="checkbox"> 预测算法 具身智能如何应对不确定性</li>
+<li><input checked="" disabled="" type="checkbox"> 应用密码安全性评估</li>
+<li><input checked="" disabled="" type="checkbox"> CISAW</li>
+</ul>
+<hr>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
+<li><input disabled="" type="checkbox"> spring</li>
+</ul>
+]]></content>
+      <categories>
+        <category>书籍源码</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>智能</tag>
+        <tag>不确定性</tag>
       </tags>
   </entry>
   <entry>
@@ -837,38 +807,6 @@ fmt.Println(err)
       </tags>
   </entry>
   <entry>
-    <title>index.md</title>
-    <url>/arthas/index/</url>
-    <content><![CDATA[<h1 id="Arthas"><a href="#Arthas" class="headerlink" title="Arthas"></a>Arthas</h1><p><code>Arthas</code>是Alibaba开源的Java诊断工具</p>
-<table>
-<thead>
-<tr>
-<th>章节结构</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="./chapter/org.md">工程结构</a></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>2021</category>
-        <category>源码解析</category>
-        <category>arthas</category>
-      </categories>
-      <tags>
-        <tag>arthas</tag>
-        <tag>alibaba</tag>
-        <tag>开源</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hubot.md</title>
     <url>/hubot/hubot/</url>
     <content><![CDATA[<h1 id="Hubot"><a href="#Hubot" class="headerlink" title="Hubot"></a>Hubot</h1><blockquote>
@@ -898,6 +836,68 @@ fmt.Println(err)
         <tag>nodejs</tag>
         <tag>聊天</tag>
         <tag>hubot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Attach.md</title>
+    <url>/2021/jvm/Attach/</url>
+    <content><![CDATA[<h1 id="Java-Attach机制"><a href="#Java-Attach机制" class="headerlink" title="Java Attach机制"></a>Java Attach机制</h1><p>jdk工具提供了jvm进程通信的能力，能让一个进程传命令给另一个进程。</p>
+<pre class="mermaid">sequenceDiagram
+    participant 外部进程（JStack)
+    participant 目标jvm进程
+    外部进程（JStack)->>目标jvm进程:下发命令
+    目标jvm进程->>外部进程（JStack):返回信息</pre>
+
+<p>Attach机制可以对目标收集许多信息，如<code>内存dump</code>,<code>线程dump</code>,类信息统计（加载类和大小以及实例个数），动态加载agent,动态设置vm flag</p>
+<h2 id="方法小结"><a href="#方法小结" class="headerlink" title="方法小结"></a>方法小结</h2><ol>
+<li><p>继承<code>Tool/HotSpotAgent.attach</code></p>
+</li>
+<li><p>VirtualMachine.attach</p>
+</li>
+<li><p>Perf.getPerf().attach(通过PerfData文件获取信息)</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>2021</category>
+        <category>jvm</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>attach</tag>
+        <tag>进程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>index.md</title>
+    <url>/arthas/index/</url>
+    <content><![CDATA[<h1 id="Arthas"><a href="#Arthas" class="headerlink" title="Arthas"></a>Arthas</h1><p><code>Arthas</code>是Alibaba开源的Java诊断工具</p>
+<table>
+<thead>
+<tr>
+<th>章节结构</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="./chapter/org.md">工程结构</a></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>2021</category>
+        <category>源码解析</category>
+        <category>arthas</category>
+      </categories>
+      <tags>
+        <tag>arthas</tag>
+        <tag>alibaba</tag>
+        <tag>开源</tag>
       </tags>
   </entry>
   <entry>
@@ -1160,46 +1160,6 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
       </tags>
   </entry>
   <entry>
-    <title>jnotify.md</title>
-    <url>/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify/</url>
-    <content><![CDATA[<h1 id="Jnotify-1-0"><a href="#Jnotify-1-0" class="headerlink" title="Jnotify-1.0"></a>Jnotify-1.0</h1><p>最近一直在致力于搭建个人的文档笔记系统。最后选中了<code>typora</code>,<code>typora</code>本身是一个优秀的markdown工具，同时支持三平台的书写。但是不支持云端同步，为了解决这个问题，我写出了<code>jnotify</code></p>
-<blockquote>
-<p><code>Jnotify</code>一个基于<code>git</code>的文档同步系统</p>
-</blockquote>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
-<li><code>jnotify</code> 基于git技术，将文档自动同步到云端，同时提供手动从云端同步功能。</li>
-<li><code>jnotify</code>选用<code>java</code>作为开发语言，方便修改</li>
-<li>免费</li>
-</ol>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
-<li>不支持大文件，视频，大的压缩包，所以目前场景定位在文档同步</li>
-<li>文档的安全性基于远端的私仓</li>
-</ol>
-<h2 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h2><blockquote>
-<p>目前在linux 环境测试通过</p>
-</blockquote>
-<ol>
-<li><p>下载发布包，解压</p>
-<p><img src="/images/jnotify.assets/image-20210309103151127.png" alt="image-20210309103151127"></p>
-</li>
-</ol>
-<p>其中<code>jnotify.properties</code>描述了，项目云端的配置，包括云端同步地址，用户名密码</p>
-<p>,仓库在本地的存储地址等等.</p>
-<p><code>project</code>配置了需要同步到云端的地址,书写格式为<span style="color:#f50"> 存储地址</span>，<span style="color:#f50">待同步文档地址</span></p>
-<pre><code class="sh">~/.jnotify/pkg/workmd,/home/lame/workmd
-</code></pre>
-<p>配置文件修改完成后，执行install.sh,程序安装完成，执行start.sh 开始运行</p>
-]]></content>
-      <categories>
-        <category>工程记录</category>
-      </categories>
-      <tags>
-        <tag>jnotify</tag>
-        <tag>sh</tag>
-        <tag>云端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>jnotify_Jnotify-2.0.md</title>
     <url>/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify_Jnotify-2.0/</url>
     <content><![CDATA[<h1 id="Jnotify-2-0"><a href="#Jnotify-2-0" class="headerlink" title="Jnotify-2.0"></a>Jnotify-2.0</h1><h2 id="改造需求"><a href="#改造需求" class="headerlink" title="改造需求"></a>改造需求</h2><ol>
@@ -1353,8 +1313,8 @@ end
         <category>工程记录</category>
       </categories>
       <tags>
-        <tag>进程</tag>
         <tag>文件</tag>
+        <tag>进程</tag>
         <tag>方案</tag>
       </tags>
   </entry>
@@ -1607,6 +1567,46 @@ end
         <tag>tss</tag>
         <tag>post</tag>
         <tag>时间</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jnotify.md</title>
+    <url>/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify/</url>
+    <content><![CDATA[<h1 id="Jnotify-1-0"><a href="#Jnotify-1-0" class="headerlink" title="Jnotify-1.0"></a>Jnotify-1.0</h1><p>最近一直在致力于搭建个人的文档笔记系统。最后选中了<code>typora</code>,<code>typora</code>本身是一个优秀的markdown工具，同时支持三平台的书写。但是不支持云端同步，为了解决这个问题，我写出了<code>jnotify</code></p>
+<blockquote>
+<p><code>Jnotify</code>一个基于<code>git</code>的文档同步系统</p>
+</blockquote>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li><code>jnotify</code> 基于git技术，将文档自动同步到云端，同时提供手动从云端同步功能。</li>
+<li><code>jnotify</code>选用<code>java</code>作为开发语言，方便修改</li>
+<li>免费</li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
+<li>不支持大文件，视频，大的压缩包，所以目前场景定位在文档同步</li>
+<li>文档的安全性基于远端的私仓</li>
+</ol>
+<h2 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h2><blockquote>
+<p>目前在linux 环境测试通过</p>
+</blockquote>
+<ol>
+<li><p>下载发布包，解压</p>
+<p><img src="/images/jnotify.assets/image-20210309103151127.png" alt="image-20210309103151127"></p>
+</li>
+</ol>
+<p>其中<code>jnotify.properties</code>描述了，项目云端的配置，包括云端同步地址，用户名密码</p>
+<p>,仓库在本地的存储地址等等.</p>
+<p><code>project</code>配置了需要同步到云端的地址,书写格式为<span style="color:#f50"> 存储地址</span>，<span style="color:#f50">待同步文档地址</span></p>
+<pre><code class="sh">~/.jnotify/pkg/workmd,/home/lame/workmd
+</code></pre>
+<p>配置文件修改完成后，执行install.sh,程序安装完成，执行start.sh 开始运行</p>
+]]></content>
+      <categories>
+        <category>工程记录</category>
+      </categories>
+      <tags>
+        <tag>jnotify</tag>
+        <tag>sh</tag>
+        <tag>云端</tag>
       </tags>
   </entry>
   <entry>
@@ -2845,15 +2845,6 @@ java -jar arthas-boot.jar
       </tags>
   </entry>
   <entry>
-    <title>py基础库_py框架.md</title>
-    <url>/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/py%E5%9F%BA%E7%A1%80%E5%BA%93_py%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<h1 id="py框架"><a href="#py框架" class="headerlink" title="py框架"></a>py框架</h1>]]></content>
-      <categories>
-        <category>2021</category>
-        <category>常用框架</category>
-      </categories>
-  </entry>
-  <entry>
     <title>py基础库.md</title>
     <url>/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/py%E5%9F%BA%E7%A1%80%E5%BA%93/</url>
     <content><![CDATA[<h1 id="py基础库"><a href="#py基础库" class="headerlink" title="py基础库"></a>py基础库</h1><h2 id="终端编程"><a href="#终端编程" class="headerlink" title="终端编程"></a>终端编程</h2><h3 id="pty"><a href="#pty" class="headerlink" title="pty"></a>pty</h3><p><a href="https://docs.python.org/zh-cn/3.7/library/pty.html">pty</a>定义了伪终端概念，启动另一个进程，并且以程序方式控制终端进行读写</p>
@@ -3075,6 +3066,15 @@ if __name__ == &#39;__main__&#39;:
       </categories>
   </entry>
   <entry>
+    <title>py基础库_py框架.md</title>
+    <url>/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/py%E5%9F%BA%E7%A1%80%E5%BA%93_py%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h1 id="py框架"><a href="#py框架" class="headerlink" title="py框架"></a>py框架</h1>]]></content>
+      <categories>
+        <category>2021</category>
+        <category>常用框架</category>
+      </categories>
+  </entry>
+  <entry>
     <title>secraft2.md</title>
     <url>/2021/secraft2/secraft2/</url>
     <content><![CDATA[<table>
@@ -3205,64 +3205,6 @@ Dependencies=python;
       </tags>
   </entry>
   <entry>
-    <title>关联分析.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%85%B3%E8%81%94%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h1 id="关联分析"><a href="#关联分析" class="headerlink" title="关联分析"></a>关联分析</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
-<li>关联分析： 在大规模数据集中寻找有趣的关系</li>
-<li>频繁项集：经常在一起出现的物品集合</li>
-<li>支持度：数据集中包含该项集的记录所占的比例</li>
-<li>置信度（Confidence）：出现某些物品时，另外一些物品必定出现的概率，针对规则而言。</li>
-<li>关联规则（Association Rules）：暗示两个物品之间可能存在很强的关系。形如A-&gt;B的表达式，规则A-&gt;B的度量包括支持度和置信度</li>
-<li>项集支持度：一个项集出现的次数与数据集所有事物数的百分比称为项集的支持度</li>
-<li>项集置信度：包含A的数据集中包含B的百分比</li>
-</ul>
-<h2 id="关联分析步骤"><a href="#关联分析步骤" class="headerlink" title="关联分析步骤"></a>关联分析步骤</h2><ol>
-<li>发现频繁项集，即计算所有可能组合数的支持度，找出不少于人为设定的最小支持度的集合。</li>
-<li>发现关联规则，即计算不小于人为设定的最小支持度的集合的置信度，找到不小于认为设定的最小置信度规则。</li>
-</ol>
-<h3 id="简单关联关系"><a href="#简单关联关系" class="headerlink" title="简单关联关系"></a>简单关联关系</h3><p>​        简单关联关系可以从经典的购物中进行分析，购买面包的顾客80%都会购买牛奶，由于面包和牛奶是早餐搭配的必需品，二者搭配构成了早餐的组成部分，这就是一种简单的关联关系。</p>
-<h3 id="序列关联关系"><a href="#序列关联关系" class="headerlink" title="序列关联关系"></a>序列关联关系</h3><p>​        当购买一款新手机后，就会考虑去购买手机膜等手机配件，这就是一种序列关系，不会先买手机膜再买手机的，先后关系是非常明显的，这种关系是一种顺序性的关系，也就是一种序列关联关系。</p>
-<blockquote>
-<p>关联规则：规则就是一种衡量事物的标准，也就是一个算法。</p>
-</blockquote>
-<h2 id="简单关联规则算法"><a href="#简单关联规则算法" class="headerlink" title="简单关联规则算法"></a>简单关联规则算法</h2><h3 id="算法思想基础"><a href="#算法思想基础" class="headerlink" title="算法思想基础"></a>算法思想基础</h3><blockquote>
-<p>如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
-</blockquote>
-<p>​        简单关联规则是无指导的学习方法，着重探索内部结构。简单关联规则也是使用最多的技术，主要算法包括：Apriori、GRI、Carma，其中Apriori和Carma主要是如何提高关联规则的分析效率，而GRI注重如何将单一概念层次的关联推广到更多概念层次的关联，进而揭示事物内在结构。</p>
-<p>简单关联规则的数据存储形式：一种是交易数据格式，一种是表格数据格式。</p>
-<h2 id="序列关联规则算法"><a href="#序列关联规则算法" class="headerlink" title="序列关联规则算法"></a>序列关联规则算法</h2><p>​        序列关联规则的核心就是找到事物发展的前后关联性，研究序列关联可以来推测事物未来的发展情况，并根据预测的发展情况进行事物的分配和安排。</p>
-<h2 id="如何设定合理的支持度和置信度？"><a href="#如何设定合理的支持度和置信度？" class="headerlink" title="如何设定合理的支持度和置信度？"></a>如何设定合理的支持度和置信度？</h2><p>对于某条规则：（A=a）−&gt;（B=b）</p>
-<p>（support=30%,confident=60%）；其中support=30%表示在所有的数据记录中，同时出现A=a和B=b的概率为30%；confident=60%表示在所有的数据记录中，在出现A=a的情况下出现B=b的概率为60%，也就是条件概率。支持度揭示了A=a和B=b同时出现的概率，置信度揭示了当A=a出现时，B=b是否会一定出现的概率。</p>
-<p>（1）如果支持度和置信度闭值设置的过高，虽然可以减少挖掘时间，但是容易造成一些隐含在数据中非频繁特征项被忽略掉，难以发现足够有用的规则；</p>
-<p>（2）如果支持度和置信度闭值设置的过低，又有可能产生过多的规则，甚至产生大量冗余和无效的规则，同时由于算法存在的固有问题，会导致高负荷的计算量，大大增加挖掘时间。</p>
-<h2 id="关联分析的应用"><a href="#关联分析的应用" class="headerlink" title="关联分析的应用"></a>关联分析的应用</h2><p>(1)：购物篮分析，通过查看那些商品经常在一起出售，可以帮助商店了解用户的购物行为，这种从数据的海洋中抽取只是可以用于商品定价、市场促销、存货管理等环节</p>
-<p>(2)：在Twitter源中发现一些公共词。对于给定的搜索词，发现推文中频繁出现的单词集合</p>
-<p>(3)：从新闻网站点击流中挖掘新闻流行趋势，挖掘哪些新闻广泛被用户浏览到</p>
-<p>(4)：搜索引擎推荐，在用户输入查询时推荐同时相关的查询词项</p>
-<p>(5)：发现毒蘑菇的相似特征。这里只对包含某个特征元素（有毒素）的项集感兴趣，从中寻找毒蘑菇中的一些公共特征，利用这些特征来避免迟到哪些有毒的蘑菇</p>
-<p>(6)：图书馆信息的书籍推荐，对于学生的借书信息，不同专业学生的借书情况，来挖掘不同学生的借书情况，进行数目的推荐。</p>
-<p>(7)：校园网新闻通知信息的推荐，在对校园网新闻通知信息进行挖掘的过程中，分析不同部门，不同学院的新闻信息的不同，在进行新闻信息浏览的过程中进行新闻的推荐。</p>
-<h2 id="Apriori算法"><a href="#Apriori算法" class="headerlink" title="Apriori算法"></a>Apriori算法</h2><p>假设我们有一家经营着4种商品（商品0，商品1，商品2和商品3）的杂货店，2图显示了所有商品之间所有的可能组合：</p>
-<p>对于单个项集的支持度，我们可以通过遍历每条记录并检查该记录是否包含该项集来计算。对于包含N中物品的数据集共有2N−1种项集组合，重复上述计算过程是不现实的。</p>
-<p>研究人员发现一种所谓的Apriori原理，可以帮助我们减少计算量。Apriori原理是说如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
-<p>注意：这里的子集不是传统数学中的子集，而是子项的项集。例如一个频繁项集包含3个项，则这三个项的子集组成的项集一定是频繁项集。</p>
-<p>在图3中，已知阴影项集{2,3}是非频繁的。利用这个知识，我们就知道项集{0,2,3}，{1,2,3}以及{0,1,2,3}也是非频繁的。也就是说，一旦计算出了{2,3}的支持度，知道它是非频繁的后，就可以紧接着排除{0,2,3}、{1,2,3}和{0,1,2,3}。</p>
-<p>Apriori算法是发现频繁项集的一种方法。</p>
-<p>Apriori算法的两个输入参数分别是最小支持度和数据集。该算法首先会生成所有单个元素的项集列表。接着扫描数据集来查看哪些项集满足最小支持度要求，那些不满足最小支持度的集合会被去掉。然后，对剩下来的集合进行组合以生成包含两个元素的项集。接下来，再重新扫描交易记录，去掉不满足最小支持度的项集。该过程重复进行直到所有项集都被去掉。</p>
-<p>该算法需要不断寻找候选集，然后剪枝即去掉非频繁子集的候选集，时间复杂度由暴力枚举所有子集的指数级别O（n2）将为多项式级别，多项式具体系数是底层实现情况而定的。<br>Ariori算法有两个主要步骤：</p>
-<p>1、连接：（将项集进行两两连接形成新的候选集）利用已经找到的k个项的频繁项集Lk，通过两两连接得出候选集Ck+1，注意进行连接的Lk[i]，Lk[j]，必须有k-1个属性值相同，然后另外两个不同的分别分布Lk[i]，Lk[j]，这样的求出的Ck+1为Lk+1的候选集。</p>
-<p>2、<strong>剪枝</strong>：（去掉非频繁项集）候选集 Ck+1中的并不都是频繁项集，必须剪枝去掉，越早越好以防止所处理的数据无效项越来越多。只有当子集都是频繁集的候选集才是频繁集，这是剪枝的依据。</p>
-]]></content>
-      <categories>
-        <category>书籍源码</category>
-      </categories>
-      <tags>
-        <tag>新闻</tag>
-        <tag>规则</tag>
-        <tag>关联</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>临时记录.md</title>
     <url>/uncategorized/%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h2 id="生成可变配置"><a href="#生成可变配置" class="headerlink" title="生成可变配置"></a>生成可变配置</h2><pre><code class="java">        int start = 23;
@@ -3325,6 +3267,64 @@ Dependencies=python;
         <tag>系统</tag>
         <tag>电话</tag>
         <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关联分析.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%85%B3%E8%81%94%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h1 id="关联分析"><a href="#关联分析" class="headerlink" title="关联分析"></a>关联分析</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>关联分析： 在大规模数据集中寻找有趣的关系</li>
+<li>频繁项集：经常在一起出现的物品集合</li>
+<li>支持度：数据集中包含该项集的记录所占的比例</li>
+<li>置信度（Confidence）：出现某些物品时，另外一些物品必定出现的概率，针对规则而言。</li>
+<li>关联规则（Association Rules）：暗示两个物品之间可能存在很强的关系。形如A-&gt;B的表达式，规则A-&gt;B的度量包括支持度和置信度</li>
+<li>项集支持度：一个项集出现的次数与数据集所有事物数的百分比称为项集的支持度</li>
+<li>项集置信度：包含A的数据集中包含B的百分比</li>
+</ul>
+<h2 id="关联分析步骤"><a href="#关联分析步骤" class="headerlink" title="关联分析步骤"></a>关联分析步骤</h2><ol>
+<li>发现频繁项集，即计算所有可能组合数的支持度，找出不少于人为设定的最小支持度的集合。</li>
+<li>发现关联规则，即计算不小于人为设定的最小支持度的集合的置信度，找到不小于认为设定的最小置信度规则。</li>
+</ol>
+<h3 id="简单关联关系"><a href="#简单关联关系" class="headerlink" title="简单关联关系"></a>简单关联关系</h3><p>​        简单关联关系可以从经典的购物中进行分析，购买面包的顾客80%都会购买牛奶，由于面包和牛奶是早餐搭配的必需品，二者搭配构成了早餐的组成部分，这就是一种简单的关联关系。</p>
+<h3 id="序列关联关系"><a href="#序列关联关系" class="headerlink" title="序列关联关系"></a>序列关联关系</h3><p>​        当购买一款新手机后，就会考虑去购买手机膜等手机配件，这就是一种序列关系，不会先买手机膜再买手机的，先后关系是非常明显的，这种关系是一种顺序性的关系，也就是一种序列关联关系。</p>
+<blockquote>
+<p>关联规则：规则就是一种衡量事物的标准，也就是一个算法。</p>
+</blockquote>
+<h2 id="简单关联规则算法"><a href="#简单关联规则算法" class="headerlink" title="简单关联规则算法"></a>简单关联规则算法</h2><h3 id="算法思想基础"><a href="#算法思想基础" class="headerlink" title="算法思想基础"></a>算法思想基础</h3><blockquote>
+<p>如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
+</blockquote>
+<p>​        简单关联规则是无指导的学习方法，着重探索内部结构。简单关联规则也是使用最多的技术，主要算法包括：Apriori、GRI、Carma，其中Apriori和Carma主要是如何提高关联规则的分析效率，而GRI注重如何将单一概念层次的关联推广到更多概念层次的关联，进而揭示事物内在结构。</p>
+<p>简单关联规则的数据存储形式：一种是交易数据格式，一种是表格数据格式。</p>
+<h2 id="序列关联规则算法"><a href="#序列关联规则算法" class="headerlink" title="序列关联规则算法"></a>序列关联规则算法</h2><p>​        序列关联规则的核心就是找到事物发展的前后关联性，研究序列关联可以来推测事物未来的发展情况，并根据预测的发展情况进行事物的分配和安排。</p>
+<h2 id="如何设定合理的支持度和置信度？"><a href="#如何设定合理的支持度和置信度？" class="headerlink" title="如何设定合理的支持度和置信度？"></a>如何设定合理的支持度和置信度？</h2><p>对于某条规则：（A=a）−&gt;（B=b）</p>
+<p>（support=30%,confident=60%）；其中support=30%表示在所有的数据记录中，同时出现A=a和B=b的概率为30%；confident=60%表示在所有的数据记录中，在出现A=a的情况下出现B=b的概率为60%，也就是条件概率。支持度揭示了A=a和B=b同时出现的概率，置信度揭示了当A=a出现时，B=b是否会一定出现的概率。</p>
+<p>（1）如果支持度和置信度闭值设置的过高，虽然可以减少挖掘时间，但是容易造成一些隐含在数据中非频繁特征项被忽略掉，难以发现足够有用的规则；</p>
+<p>（2）如果支持度和置信度闭值设置的过低，又有可能产生过多的规则，甚至产生大量冗余和无效的规则，同时由于算法存在的固有问题，会导致高负荷的计算量，大大增加挖掘时间。</p>
+<h2 id="关联分析的应用"><a href="#关联分析的应用" class="headerlink" title="关联分析的应用"></a>关联分析的应用</h2><p>(1)：购物篮分析，通过查看那些商品经常在一起出售，可以帮助商店了解用户的购物行为，这种从数据的海洋中抽取只是可以用于商品定价、市场促销、存货管理等环节</p>
+<p>(2)：在Twitter源中发现一些公共词。对于给定的搜索词，发现推文中频繁出现的单词集合</p>
+<p>(3)：从新闻网站点击流中挖掘新闻流行趋势，挖掘哪些新闻广泛被用户浏览到</p>
+<p>(4)：搜索引擎推荐，在用户输入查询时推荐同时相关的查询词项</p>
+<p>(5)：发现毒蘑菇的相似特征。这里只对包含某个特征元素（有毒素）的项集感兴趣，从中寻找毒蘑菇中的一些公共特征，利用这些特征来避免迟到哪些有毒的蘑菇</p>
+<p>(6)：图书馆信息的书籍推荐，对于学生的借书信息，不同专业学生的借书情况，来挖掘不同学生的借书情况，进行数目的推荐。</p>
+<p>(7)：校园网新闻通知信息的推荐，在对校园网新闻通知信息进行挖掘的过程中，分析不同部门，不同学院的新闻信息的不同，在进行新闻信息浏览的过程中进行新闻的推荐。</p>
+<h2 id="Apriori算法"><a href="#Apriori算法" class="headerlink" title="Apriori算法"></a>Apriori算法</h2><p>假设我们有一家经营着4种商品（商品0，商品1，商品2和商品3）的杂货店，2图显示了所有商品之间所有的可能组合：</p>
+<p>对于单个项集的支持度，我们可以通过遍历每条记录并检查该记录是否包含该项集来计算。对于包含N中物品的数据集共有2N−1种项集组合，重复上述计算过程是不现实的。</p>
+<p>研究人员发现一种所谓的Apriori原理，可以帮助我们减少计算量。Apriori原理是说如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
+<p>注意：这里的子集不是传统数学中的子集，而是子项的项集。例如一个频繁项集包含3个项，则这三个项的子集组成的项集一定是频繁项集。</p>
+<p>在图3中，已知阴影项集{2,3}是非频繁的。利用这个知识，我们就知道项集{0,2,3}，{1,2,3}以及{0,1,2,3}也是非频繁的。也就是说，一旦计算出了{2,3}的支持度，知道它是非频繁的后，就可以紧接着排除{0,2,3}、{1,2,3}和{0,1,2,3}。</p>
+<p>Apriori算法是发现频繁项集的一种方法。</p>
+<p>Apriori算法的两个输入参数分别是最小支持度和数据集。该算法首先会生成所有单个元素的项集列表。接着扫描数据集来查看哪些项集满足最小支持度要求，那些不满足最小支持度的集合会被去掉。然后，对剩下来的集合进行组合以生成包含两个元素的项集。接下来，再重新扫描交易记录，去掉不满足最小支持度的项集。该过程重复进行直到所有项集都被去掉。</p>
+<p>该算法需要不断寻找候选集，然后剪枝即去掉非频繁子集的候选集，时间复杂度由暴力枚举所有子集的指数级别O（n2）将为多项式级别，多项式具体系数是底层实现情况而定的。<br>Ariori算法有两个主要步骤：</p>
+<p>1、连接：（将项集进行两两连接形成新的候选集）利用已经找到的k个项的频繁项集Lk，通过两两连接得出候选集Ck+1，注意进行连接的Lk[i]，Lk[j]，必须有k-1个属性值相同，然后另外两个不同的分别分布Lk[i]，Lk[j]，这样的求出的Ck+1为Lk+1的候选集。</p>
+<p>2、<strong>剪枝</strong>：（去掉非频繁项集）候选集 Ck+1中的并不都是频繁项集，必须剪枝去掉，越早越好以防止所处理的数据无效项越来越多。只有当子集都是频繁集的候选集才是频繁集，这是剪枝的依据。</p>
+]]></content>
+      <categories>
+        <category>书籍源码</category>
+      </categories>
+      <tags>
+        <tag>新闻</tag>
+        <tag>规则</tag>
+        <tag>关联</tag>
       </tags>
   </entry>
   <entry>

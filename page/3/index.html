@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -96,9 +96,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '',
-    scheme: 'Gemini',
+    scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -143,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-right 
+  <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -160,7 +160,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">十七个面包人</p>
+        <h1 class="site-subtitle" itemprop="description">十七个面包人</h1>
       
   </div>
 
@@ -312,9 +312,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_DSL/" itemprop="url">01_DSL.md</a></h1>
+                <a class="post-title-link" href="/1/01_DSL/" itemprop="url">01_DSL.md</a></h2>
         
 
         <div class="post-meta">
@@ -468,7 +468,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_CAP/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -485,9 +485,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_CAP/" itemprop="url">01_CAP.md</a></h1>
+                <a class="post-title-link" href="/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/" itemprop="url">01_linux离线安装包.md</a></h2>
         
 
         <div class="post-meta">
@@ -561,21 +561,8 @@
       
         
           
-            <h1 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h1><p>在计算机科学中, CAP定理（CAP theorem）, 又被称作 布鲁尔定理（Brewer’s theorem）, 它指出对于一个分布式计算系统来说，不可能同时满足以下三点:</p>
-<ul>
-<li><strong>一致性(Consistency)</strong> (所有节点在同一时间具有相同的数据)</li>
-<li><strong>可用性(Availability)</strong> (保证每个请求不管成功或者失败都有响应)</li>
-<li><strong>分隔容忍(Partition tolerance)</strong> (系统中任意信息的丢失或失败不会影响系统的继续运作)</li>
-</ul>
-<p>CAP理论的核心是：一个分布式系统不可能同时很好的满足一致性，可用性和分区容错性这三个需求，最多只能同时较好的满足两个。</p>
-<p>因此，根据 CAP 原理将 NoSQL 数据库分成了满足 CA 原则、满足 CP 原则和满足 AP 原则三 大类：</p>
-<ul>
-<li>CA - 单点集群，满足一致性，可用性的系统，通常在可扩展性上不太强大。</li>
-<li>CP - 满足一致性，分区容忍性的系统，通常性能不是特别高。</li>
-<li>AP - 满足可用性，分区容忍性的系统，通常可能对一致性要求低一些。</li>
-<li></li>
-</ul>
-<p><img src="/images/01.assets/cap-theoram-image.png" alt="img"></p>
+            <h1 id="linux离线安装包"><a href="#linux离线安装包" class="headerlink" title="linux离线安装包"></a>linux离线安装包</h1><p><code>apt-get</code>离线安装包，apt-get install安装的软件包都在**/var/cache/apt/archives** 目录下，下载文件位置可以在**/etc/apt/source.list**下指定。</p>
+<p>也有可能在**/usr/share/doc<strong>和</strong>/usr/share/lintian/overides/**</p>
 
           
         
@@ -624,7 +611,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -641,9 +628,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/" itemprop="url">01_NOSQL数据库分类.md</a></h1>
+                <a class="post-title-link" href="/1/01/" itemprop="url">01.md</a></h2>
         
 
         <div class="post-meta">
@@ -717,45 +704,16 @@
       
         
           
-            <h1 id="NOSQL数据库分类"><a href="#NOSQL数据库分类" class="headerlink" title="NOSQL数据库分类"></a>NOSQL数据库分类</h1><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>部分代表</th>
-<th>特点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>列存储</td>
-<td>HbaseCassandraHypertable</td>
-<td>顾名思义，是按列存储数据的。最大的特点是方便存储结构化和半结构化数据，方便做数据压缩，对针对某一列或者某几列的查询有非常大的IO优势。</td>
-</tr>
-<tr>
-<td>文档存储</td>
-<td>MongoDBCouchDB</td>
-<td>文档存储一般用类似json的格式存储，存储的内容是文档型的。这样也就有机会对某些字段建立索引，实现关系数据库的某些功能。</td>
-</tr>
-<tr>
-<td>key-value存储</td>
-<td>Tokyo Cabinet / TyrantBerkeley DBMemcacheDBRedis</td>
-<td>可以通过key快速查询到其value。一般来说，存储不管value的格式，照单全收。（Redis包含了其他功能）</td>
-</tr>
-<tr>
-<td>图存储</td>
-<td>Neo4JFlockDB</td>
-<td>图形关系的最佳存储。使用传统关系数据库来解决的话性能低下，而且设计使用不方便。</td>
-</tr>
-<tr>
-<td>对象存储</td>
-<td>db4oVersant</td>
-<td>通过类似面向对象语言的语法操作数据库，通过对象的方式存取数据。</td>
-</tr>
-<tr>
-<td>xml数据库</td>
-<td>Berkeley DB XMLBaseX</td>
-<td>高效的存储XML数据，并支持XML的内部查询语法，比如XQuery,Xpath。</td>
-</tr>
-</tbody></table>
+            <h1 id="clojure"><a href="#clojure" class="headerlink" title="clojure"></a>clojure</h1><ul>
+<li>clojure <a href="http://cemerick.com/">http://cemerick.com/</a></li>
+</ul>
+<p> <a href="https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/">https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/</a></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><pre><code class="sh"> docker stats --no-stream $(docker ps | grep 217a5b187c2812 | awk &#39;&#123;print $1&#125;&#39;)
+</code></pre>
+<p><code>sed</code></p>
+<p>文字处理</p>
+<pre><code class="sh">sed -i &#39;/百度搜索/d&#39; all.txt 
+</code></pre>
 
           
         
@@ -821,9 +779,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_emacs/" itemprop="url">01_emacs.md</a></h1>
+                <a class="post-title-link" href="/1/01_emacs/" itemprop="url">01_emacs.md</a></h2>
         
 
         <div class="post-meta">
@@ -957,7 +915,7 @@ alt+x load-file
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_docx%E6%94%BB%E5%87%BB/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_nodejs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -974,9 +932,9 @@ alt+x load-file
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_docx%E6%94%BB%E5%87%BB/" itemprop="url">01_docx攻击.md</a></h1>
+                <a class="post-title-link" href="/1/01_nodejs/" itemprop="url">01_nodejs.md</a></h2>
         
 
         <div class="post-meta">
@@ -1050,18 +1008,41 @@ alt+x load-file
       
         
           
-            <h1 id="docx攻击"><a href="#docx攻击" class="headerlink" title="docx攻击"></a>docx攻击</h1><ol>
-<li>生成一个正常的docx文件，内容根据实际需求进行编造，保存后将后缀改成zip</li>
-<li>将其解压，修改./word/_rels/下的settings.xml.rels文件，没有的话可以自己添加。</li>
-</ol>
-<p><img src="/images/01.assets/20191025172919941.png" alt="在这里插入图片描述"></p>
-<ol>
-<li><p><strong>修改内容如下：</strong></p>
-<pre><code class="txt">&lt;Relationship Id=&quot;rId6&quot; Type=&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate&quot; Target=&quot;fontTable.xml&quot;/&gt;&lt;/Relationships&gt;
+            <h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><h2 id="template"><a href="#template" class="headerlink" title="template"></a>template</h2><p><code>express-art-template语法</code></p>
+<pre><code class="sh">(1).表达式
+&#123;&#123; 与 &#125;&#125; 符号包裹起来的语句则为模板的逻辑表达式
+
+(2).输出表达式
+2.1对内容编码输出：&#123;&#123;content&#125;&#125;
+2.2不编码输出：&#123;&#123;#content&#125;&#125;
+
+(3).变量
+
+&#123;&#123;set temp = data.sub.content&#125;&#125;
+
+(4).条件表达式
+&#123;&#123;if admin&#125;&#125;
+        &lt;p&gt;admin&lt;/p&gt;
+&#123;&#123;else if code > 0&#125;&#125;
+       &lt;p&gt;master&lt;/p&gt;
+&#123;&#123;else&#125;&#125;
+        &lt;p&gt;error!&lt;/p&gt;
+&#123;&#123;/if&#125;&#125;
+
+(5).遍历表达式
+无论数组或者对象都可以用 each 进行遍历。
+&#123;&#123;each list as value index&#125;&#125;
+    &lt;li&gt;&#123;&#123;index&#125;&#125; - &#123;&#123;value.user&#125;&#125;&lt;/li&gt;
+&#123;&#123;/each&#125;&#125;
+亦可以被简写：
+&#123;&#123;each list&#125;&#125;
+     &lt;li&gt;&#123;&#123;$index&#125;&#125; - &#123;&#123;$value.user&#125;&#125;&lt;/li&gt;
+&#123;&#123;/each&#125;&#125;
+
+(6).子模板（模板包含表达式）
+a.用于嵌入子模板:
+&#123;&#123;include './header.art'&#125;&#125; 
 </code></pre>
-<p>包含带有<strong>attachmentTemplate</strong>的Type的Relationship标记，是告诉Word打开该.docx时从哪里加载模板的设置，我们可以将Target值修改为远程位置。</p>
-</li>
-</ol>
 
           
         
@@ -1110,7 +1091,7 @@ alt+x load-file
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_LockFree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1127,9 +1108,9 @@ alt+x load-file
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/" itemprop="url">01_linux离线安装包.md</a></h1>
+                <a class="post-title-link" href="/1/01_LockFree/" itemprop="url">01_LockFree.md</a></h2>
         
 
         <div class="post-meta">
@@ -1203,8 +1184,17 @@ alt+x load-file
       
         
           
-            <h1 id="linux离线安装包"><a href="#linux离线安装包" class="headerlink" title="linux离线安装包"></a>linux离线安装包</h1><p><code>apt-get</code>离线安装包，apt-get install安装的软件包都在**/var/cache/apt/archives** 目录下，下载文件位置可以在**/etc/apt/source.list**下指定。</p>
-<p>也有可能在**/usr/share/doc<strong>和</strong>/usr/share/lintian/overides/**</p>
+            <h1 id="LockFree"><a href="#LockFree" class="headerlink" title="LockFree"></a>LockFree</h1><p>传统共享数据访问方式采用同步原语（<code>临界区</code>,<code>锁</code>,<code>条件变量</code>)等达到共享数据的安全访问，同步操作很容易成为并行程序中的瓶颈。</p>
+<ul>
+<li>同步原语是操作系统的内核对象，调用该原语会带来上下文切换（用户态换到内核态)</li>
+<li>杜绝并行操作，一个线程在访问共享数据的时候，其他多个线程必须在排队等待</li>
+</ul>
+<p>于是，人们开始研究对共享数据进行并发访问的数据结构和算法</p>
+<ul>
+<li>Transactional memory 事务性内存</li>
+<li>Fine-grained algorithms 细粒度苏阿案发</li>
+<li>Lock-free data structures 无锁数据结构</li>
+</ul>
 
           
         
@@ -1270,9 +1260,9 @@ alt+x load-file
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/uncategorized/%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/" itemprop="url">临时记录.md</a></h1>
+                <a class="post-title-link" href="/uncategorized/%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/" itemprop="url">临时记录.md</a></h2>
         
 
         <div class="post-meta">
@@ -1444,9 +1434,9 @@ alt+x load-file
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/uncategorized/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/" itemprop="url">java体系知识.md</a></h1>
+                <a class="post-title-link" href="/uncategorized/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/" itemprop="url">java体系知识.md</a></h2>
         
 
         <div class="post-meta">
@@ -1717,9 +1707,9 @@ alt+x load-file
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/02/" itemprop="url">02.md</a></h1>
+                <a class="post-title-link" href="/1/02/" itemprop="url">02.md</a></h2>
         
 
         <div class="post-meta">
@@ -1875,9 +1865,9 @@ alt+x load-file
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/02_k8s/" itemprop="url">02_k8s.md</a></h1>
+                <a class="post-title-link" href="/1/02_k8s/" itemprop="url">02_k8s.md</a></h2>
         
 
         <div class="post-meta">
@@ -2108,7 +2098,7 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
     <h3 class="widget-title">不知所云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
       <canvas width="250" height="250" id="resCanvas" style="width:100%">
-        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E7%AB%AF/" rel="tag">云端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usr/" rel="tag">usr</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/share/" rel="tag">share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crl/" rel="tag">crl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpio/" rel="tag">gpio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/id3/" rel="tag">id3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%A8%E6%88%B7/" rel="tag">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC/" rel="tag">文本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dna/" rel="tag">dna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/" rel="tag">pod</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svs/" rel="tag">svs</a><span class="tag-list-count">1</span></li></ul>
+        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1/" rel="tag">应用服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE/" rel="tag">垃圾</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/" rel="tag">sed</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpio/" rel="tag">gpio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/id3/" rel="tag">id3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%A8%E6%88%B7/" rel="tag">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC/" rel="tag">文本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dna/" rel="tag">dna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AD%96%E7%95%A5/" rel="tag">策略</a><span class="tag-list-count">1</span></li></ul>
       </canvas>
     </div>
   </div>
@@ -2118,6 +2108,28 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lubbock" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/sevenclear" target="_blank" title="GitEee">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitEee</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="2913408047@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -2176,7 +2188,7 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
@@ -2212,7 +2224,7 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
 
   </div>
    <script id="ribbon" size="300" alpha='0.5' zIndex="-3" src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
-  <script type="text/javascript" color="85,85,85" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"> </script>
+   <!-- <script type="text/javascript" color="85,85,85" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"> </script> -->
   
 
 <script type="text/javascript">
@@ -2327,6 +2339,19 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
 
 
 
