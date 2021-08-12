@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/%E7%8E%8B%E6%A0%8B-%E6%8C%89%E9%92%AE%E7%9B%91%E5%90%AC/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_DSL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -314,7 +314,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/%E7%8E%8B%E6%A0%8B-%E6%8C%89%E9%92%AE%E7%9B%91%E5%90%AC/" itemprop="url">王栋-按钮监听.md</a></h1>
+                <a class="post-title-link" href="/1/01_DSL/" itemprop="url">01_DSL.md</a></h1>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-29T13:10:28+08:00">
-                2021-07-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
+                2021-08-12
               </time>
             
 
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index">
-                    <span itemprop="name">工程记录</span>
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
                   </a>
                 </span>
 
@@ -388,8 +388,1270 @@
       
         
           
-            <p>w -s 比较idle 时间</p>
-<p>linux监听事件文件， 对比 idle 时间</p>
+            <h1 id="DSL"><a href="#DSL" class="headerlink" title="DSL"></a>DSL</h1><p><code>GPL</code>通用编程语言如 python,java,c等等</p>
+<p><code>DSL</code>领域特定语言 Martin Fowler </p>
+<blockquote>
+<p>DSL通过在表达能力上做的妥协换取在某一领域内的高效</p>
+</blockquote>
+<p>常见<code>DSL</code></p>
+<ul>
+<li>SQL</li>
+<li>REGEX</li>
+<li>HTML &amp; CSS</li>
+</ul>
+<h3 id="feature"><a href="#feature" class="headerlink" title="feature"></a>feature</h3><p>上面的几个?明显的缩小了通用编程语言的概念，但是它们确实在自己领域表现地非常出色，因为这些 DSL 就是根据某一个特定领域的特点塑造的；而通用编程语言相比领域特定语言，在设计时是为了解决更加抽象的问题，而关注点并不只是在某一个领域。</p>
+<p>上面的几个例子有着一些共同的特点：</p>
+<ul>
+<li>没有计算和执行的概念；</li>
+<li>其本身并不需要直接表示计算；</li>
+<li>使用时只需要声明规则、事实以及某些元素之间的层级和关系；</li>
+</ul>
+<h3 id="构建DSL"><a href="#构建DSL" class="headerlink" title="构建DSL"></a>构建DSL</h3><p>DSL 的构建与编程语言其实比较类似，想想我们在重新实现编程语言时，需要做那些事情；实现编程语言的过程可以简化为定义语法与语义，然后实现编译器或者解释器的过程，而 DSL 的实现与它也非常类似，我们也需要对 DSL 进行语法与语义上的设计。</p>
+<p>总结下来，实现 DSL 总共有这么两个需要完成的工作：</p>
+<ol>
+<li>设计语法和语义，定义 DSL 中的元素是什么样的，元素代表什么意思</li>
+<li>实现 parser，对 DSL 解析，最终通过解释器来执行</li>
+</ol>
+<h3 id="设计原则和妥协"><a href="#设计原则和妥协" class="headerlink" title="设计原则和妥协"></a>设计原则和妥协</h3><p>DSL 最大的设计原则就是<strong>简单</strong>，通过简化语言中的元素，降低使用者的负担；无论是 Regex、SQL 还是 HTML 以及 CSS，其说明文档往往只有几页，非常易于学习和掌握。但是，由此带来的问题就是，DSL 中缺乏抽象的概念，比如：模块化、变量以及方法等。</p>
+<blockquote>
+<p>抽象的概念并不是某个领域所关注的问题，就像 Regex 并不需要有模块、变量以及方法等概念。</p>
+</blockquote>
+<p>由于抽象能力的缺乏，在我们的项目规模变得越来越大时，DSL 往往满足不了开发者的需求；我们仍然需要编程语言中的模块化等概念对 DSL 进行补充，以此解决 DSL 并不是真正编程语言的问题。</p>
+<h3 id="DSL分类"><a href="#DSL分类" class="headerlink" title="DSL分类"></a>DSL分类</h3><p>DSL不是什么新鲜的玩意儿，我们平时经常接触的SQL，CSS，正则表达式等等都属于DSL。有的DSL可能更加专注于一个方面，例如Mathematica，LOGO等等。这些语言的目标都是特定的领域，与之相对的则是GPPL(General Purpose Programming Language，通用目的编程语言)。Martin Fowler将DSL分为外部DSL及内部DSL两种。外部DSL有自己的特定语法、解析器和词法分析器等等，它们往往是一种小型的编程语言，甚至不会像GPPL那样需要源文件。与之相对的则是内部DSL。内部DSL其实更像是种别称，它代表一类特别API及使用模式。</p>
+<p>　　XSLT，SQL等等都可以算作是外部DSL。外部DSL一般会直接针对特定的领域设计，而不考虑其他方面。James Gosling曾经说过：每个配置文件最终都会变成一门编程语言。一开始您可能只会用它表示一点点东西，慢慢地您便会想要一些规则，而这些规则则变成了表达式，后来您可能还会定义变量，进行条件判断等等，而最终它就变成了一种奇怪的编程语言，这样的情况屡见不鲜。</p>
+<p>　　而内部DSL，正像之前提到的那样，它往往只是代表了一系列特别的API及使用模式，例如LINQ查询语句及Ruby on Rails中的Active Record声明代码等等。内部DSL可以使用一系列API来“伪装”成一种DSL，它往往会利用一些“流畅化”的技巧，例如像jQuery那样把一些方法通过“点”连接起来，而另一些也会利用元编程的方式。内部DSL还有一些优势，例如可以访问语言中的代码或变量，以及利用代码补全，重构等母语言的所有特性。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_CAP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_CAP/" itemprop="url">01_CAP.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
+                2021-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h1><p>在计算机科学中, CAP定理（CAP theorem）, 又被称作 布鲁尔定理（Brewer’s theorem）, 它指出对于一个分布式计算系统来说，不可能同时满足以下三点:</p>
+<ul>
+<li><strong>一致性(Consistency)</strong> (所有节点在同一时间具有相同的数据)</li>
+<li><strong>可用性(Availability)</strong> (保证每个请求不管成功或者失败都有响应)</li>
+<li><strong>分隔容忍(Partition tolerance)</strong> (系统中任意信息的丢失或失败不会影响系统的继续运作)</li>
+</ul>
+<p>CAP理论的核心是：一个分布式系统不可能同时很好的满足一致性，可用性和分区容错性这三个需求，最多只能同时较好的满足两个。</p>
+<p>因此，根据 CAP 原理将 NoSQL 数据库分成了满足 CA 原则、满足 CP 原则和满足 AP 原则三 大类：</p>
+<ul>
+<li>CA - 单点集群，满足一致性，可用性的系统，通常在可扩展性上不太强大。</li>
+<li>CP - 满足一致性，分区容忍性的系统，通常性能不是特别高。</li>
+<li>AP - 满足可用性，分区容忍性的系统，通常可能对一致性要求低一些。</li>
+<li></li>
+</ul>
+<p><img src="/images/01.assets/cap-theoram-image.png" alt="img"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/" itemprop="url">01_NOSQL数据库分类.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
+                2021-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="NOSQL数据库分类"><a href="#NOSQL数据库分类" class="headerlink" title="NOSQL数据库分类"></a>NOSQL数据库分类</h1><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>部分代表</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>列存储</td>
+<td>HbaseCassandraHypertable</td>
+<td>顾名思义，是按列存储数据的。最大的特点是方便存储结构化和半结构化数据，方便做数据压缩，对针对某一列或者某几列的查询有非常大的IO优势。</td>
+</tr>
+<tr>
+<td>文档存储</td>
+<td>MongoDBCouchDB</td>
+<td>文档存储一般用类似json的格式存储，存储的内容是文档型的。这样也就有机会对某些字段建立索引，实现关系数据库的某些功能。</td>
+</tr>
+<tr>
+<td>key-value存储</td>
+<td>Tokyo Cabinet / TyrantBerkeley DBMemcacheDBRedis</td>
+<td>可以通过key快速查询到其value。一般来说，存储不管value的格式，照单全收。（Redis包含了其他功能）</td>
+</tr>
+<tr>
+<td>图存储</td>
+<td>Neo4JFlockDB</td>
+<td>图形关系的最佳存储。使用传统关系数据库来解决的话性能低下，而且设计使用不方便。</td>
+</tr>
+<tr>
+<td>对象存储</td>
+<td>db4oVersant</td>
+<td>通过类似面向对象语言的语法操作数据库，通过对象的方式存取数据。</td>
+</tr>
+<tr>
+<td>xml数据库</td>
+<td>Berkeley DB XMLBaseX</td>
+<td>高效的存储XML数据，并支持XML的内部查询语法，比如XQuery,Xpath。</td>
+</tr>
+</tbody></table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_emacs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_emacs/" itemprop="url">01_emacs.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
+                2021-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="emacs"><a href="#emacs" class="headerlink" title="emacs"></a>emacs</h1><p>修改<code>init.el</code>不重启emacs</p>
+<pre><code class="sh">Alt+x eval-buffer
+alt+x load-file
+</code></pre>
+<h3 id="major-mode"><a href="#major-mode" class="headerlink" title="major mode"></a>major mode</h3><p>emacs编辑器模式</p>
+<ul>
+<li>程序语言 emacs-lisp-mode,python-mode,ruby-mode</li>
+<li>dired (file manager dired)</li>
+<li>image-mode view image file</li>
+<li>eww eww web browser</li>
+<li></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_docx%E6%94%BB%E5%87%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_docx%E6%94%BB%E5%87%BB/" itemprop="url">01_docx攻击.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
+                2021-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="docx攻击"><a href="#docx攻击" class="headerlink" title="docx攻击"></a>docx攻击</h1><ol>
+<li>生成一个正常的docx文件，内容根据实际需求进行编造，保存后将后缀改成zip</li>
+<li>将其解压，修改./word/_rels/下的settings.xml.rels文件，没有的话可以自己添加。</li>
+</ol>
+<p><img src="/images/01.assets/20191025172919941.png" alt="在这里插入图片描述"></p>
+<ol>
+<li><p><strong>修改内容如下：</strong></p>
+<pre><code class="txt">&lt;Relationship Id=&quot;rId6&quot; Type=&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate&quot; Target=&quot;fontTable.xml&quot;/&gt;&lt;/Relationships&gt;
+</code></pre>
+<p>包含带有<strong>attachmentTemplate</strong>的Type的Relationship标记，是告诉Word打开该.docx时从哪里加载模板的设置，我们可以将Target值修改为远程位置。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/" itemprop="url">01_linux离线安装包.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
+                2021-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="linux离线安装包"><a href="#linux离线安装包" class="headerlink" title="linux离线安装包"></a>linux离线安装包</h1><p><code>apt-get</code>离线安装包，apt-get install安装的软件包都在**/var/cache/apt/archives** 目录下，下载文件位置可以在**/etc/apt/source.list**下指定。</p>
+<p>也有可能在**/usr/share/doc<strong>和</strong>/usr/share/lintian/overides/**</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/uncategorized/%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/" itemprop="url">临时记录.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-11T14:48:02+08:00">
+                2021-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="生成可变配置"><a href="#生成可变配置" class="headerlink" title="生成可变配置"></a>生成可变配置</h2><pre><code class="java">        int start = 23;
+        int end = 24;
+        int startIndex = 76;
+        for (int i = start; i &lt;= end; i++) &#123;
+            String s = &quot;               (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;网络是否可通&#39;, &#39;C01&#39;, &quot; + (i) + &quot;, &#39;C01&#39;, 400, null),\n&quot; +
+                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;端口是否开启&#39;, &#39;C02&#39;, &quot; + (i) + &quot;, &#39;C02&#39;, 400, null),\n&quot; +
+                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;进程是否存在&#39;, &#39;C03&#39;, &quot; + (i) + &quot;, &#39;C03&#39;, 400, null),\n&quot; +
+                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;服务是否正常&#39;, &#39;C04&#39;, &quot; + (i) + &quot;, &#39;C04&#39;, 400, null),&quot;;
+
+            System.out.println(s);
+            System.out.println();
+        &#125;
+</code></pre>
+<pre><code class="java">final String[] lines = s.split(&quot;\n&quot;);
+        Map&lt;String, String&gt; mp = new HashMap&lt;&gt;();
+        for (String line : lines) &#123;
+
+            if (StringUtils.isEmpty(line)) &#123;
+                continue;
+            &#125;
+            final String cLine = line.trim();
+            String[] arrays = cLine.split(&quot;,&quot;);
+            String key = arrays[5];
+            String value = arrays[6];
+            if (mp.containsKey(key)) &#123;
+                if (!value.equals(mp.get(key))) &#123;
+                    final String newVal = mp.get(key) + &quot;,&quot; + value;
+                    mp.put(key, newVal);
+                &#125;
+            &#125;else &#123;
+                mp.put(key, value);
+            &#125;
+        &#125;s
+        for (Map.Entry&lt;String, String&gt; entry : mp.entrySet()) &#123;
+            System.out.println(entry.getKey() + &quot;:\t&quot; + entry.getValue());
+        &#125;
+</code></pre>
+<h2 id="微软"><a href="#微软" class="headerlink" title="微软"></a>微软</h2><p>约时间，定好一天或者两天面完</p>
+<ul>
+<li>电话面试 </li>
+</ul>
+<blockquote>
+<p>leetcode 中等难度题 两周后问人</p>
+</blockquote>
+<p>矩阵旋转 </p>
+<ul>
+<li>系统设计 （加分项）</li>
+</ul>
+<blockquote>
+<p>如何设计一个秒杀系统之类的</p>
+</blockquote>
+<ul>
+<li>模板生成增加日志</li>
+<li>密钥列表增加所属密码机组，密码机服务</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/uncategorized/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/" itemprop="url">java体系知识.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-10T10:46:52+08:00">
+                2021-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="java体系知识"><a href="#java体系知识" class="headerlink" title="java体系知识"></a>java体系知识</h1><h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><h3 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h3><ol>
+<li>字段类型映射</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>数据库字段</th>
+<th>mybatis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CHAR</td>
+<td>String</td>
+</tr>
+<tr>
+<td>VARCHAR</td>
+<td>String</td>
+</tr>
+<tr>
+<td>LONGVARCHAR</td>
+<td>String</td>
+</tr>
+<tr>
+<td>NUMERIC</td>
+<td>BigDecimal</td>
+</tr>
+<tr>
+<td>DECIMAL</td>
+<td>BigDecimal</td>
+</tr>
+<tr>
+<td>BIT</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>BOOLEAN</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>TINYINT</td>
+<td>byte</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>short</td>
+</tr>
+<tr>
+<td>INTEGER</td>
+<td>int</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>long</td>
+</tr>
+<tr>
+<td>REAL</td>
+<td>float</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>double</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>double</td>
+</tr>
+<tr>
+<td>BINARY</td>
+<td>byte[]</td>
+</tr>
+<tr>
+<td>VARBINARY</td>
+<td>byte[]</td>
+</tr>
+<tr>
+<td>LONGVARBINARY</td>
+<td>byte[]</td>
+</tr>
+<tr>
+<td>DATE</td>
+<td>java.sql.Date</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>java.sql.Time</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>java.sql.Timestamp</td>
+</tr>
+<tr>
+<td>CLOB</td>
+<td>Clob</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>Blob</td>
+</tr>
+<tr>
+<td>ARRAY</td>
+<td>Array</td>
+</tr>
+<tr>
+<td>DISTINCT</td>
+<td>mapping of underlying type</td>
+</tr>
+<tr>
+<td>STRUCT</td>
+<td>Struct</td>
+</tr>
+<tr>
+<td>REF</td>
+<td>Ref</td>
+</tr>
+<tr>
+<td>DATALINK</td>
+<td>java.net.URL</td>
+</tr>
+</tbody></table>
+<h4 id="mybatis有意思的问题"><a href="#mybatis有意思的问题" class="headerlink" title="mybatis有意思的问题"></a>mybatis有意思的问题</h4><blockquote>
+<p>记录一些遇到的有意思的问题</p>
+</blockquote>
+<pre><code class="sql">update tablex set t = 200 and id =1 ## 结果是 tablex.t = 1 or 0
+</code></pre>
+<h2 id="java基础"><a href="#java基础" class="headerlink" title="java基础"></a>java基础</h2><p>int 4个字节float4个字节但是</p>
+<pre><code class="kotlin">Float.MAX_VALUE&gt;Int.MAX_VALUE
+</code></pre>
+<p>因为<code>float</code>精度没有Int高，有数据缺失</p>
+<h2 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h2><p><code>java</code>默认使用<strong>双亲委派机制</strong></p>
+<blockquote>
+<p>类夹在某个.class文件，首先把这个人物委托给他的上级类加载器，递归，如果上级的类加载器没有加载，自己才会去加载这个类。</p>
+</blockquote>
+<h3 id="类加载器类别"><a href="#类加载器类别" class="headerlink" title="类加载器类别"></a>类加载器类别</h3><ul>
+<li><p>BootstrapClassLoader（启动类加载器）负责加载 <code>JAVA_HOME/lib</code>目录中的类库</p>
+</li>
+<li><p>ExtClassLoader（标准扩展类加载器）负责加载<code>JAVA_HOME/lib/ext</code>目录中的类库</p>
+</li>
+<li><p>AppClassLoad （系统类加载器）负责加载用户路径（classpath）上的类库</p>
+</li>
+<li><p>CustomClassLoad（用户自定义类加载器）</p>
+<pre class="mermaid">  graph LR
+    A(CustomClassloader)
+        A2(CustomClassloader)
+    B(AppClassLoader)
+    C(Extclassloader)
+    D(BootstrapClassloader)
+    A-->B
+    A2-->B
+    B-->C
+    C-->D</pre>
+
+<p>home: / || home<br>about: /about || user<br>tags: /tags || tags<br>categories: /categories || university<br>archives: /archives || trademark</p>
+</li>
+</ul>
 
           
         
@@ -772,1259 +2034,6 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/" itemprop="url">工程记录.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-23T16:39:27+08:00">
-                2021-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index">
-                    <span itemprop="name">工程记录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code class="js">// ==UserScript==
-// @name         WorkStation
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
-// @author       You
-// @match        http://localhost:7778/
-// @grant        none
-// @match      http://*/*
-// @require http://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js
-// ==/UserScript==
-
-(function() &#123;
-    &#39;use strict&#39;;
-    $(&quot;body&quot;).append(&#39;&lt;div style=&quot;top:20%;position:fixed; right:0px;width:423px;height:600px;background:#f6305105;&quot; class=&quot;gtz&quot;&gt;&lt;div style=&quot;writing-mode:tb-rl;background:rgb(250 128 114);;color: #fff;font-size:20px;border-radius: 5px;&quot; class=&quot;gtzbtn&quot;&gt;工作站 &lt;/div&gt;&lt;/div&gt;&#39;)
-
-
-    var style = document.createElement(&quot;style&quot;);
-    style.type = &quot;text/css&quot;;
-      var text = document.createTextNode(&quot;\t\t\t/*rectangle list*/\n&quot; +
-                &quot;\t\t.rectangle-list a &#123;\n&quot; +
-                &quot;\t\t\tposition: relative;\n&quot; +
-                &quot;\t\t\tdisplay: block;\n&quot; +
-                &quot;\t\t\tpadding: 0.4em 0.4em 0.4em 0.8em;\n&quot; +
-                &quot;\t\t\t*padding: 0.4em;\n&quot; +
-                &quot;\t\t\tmargin: 0.5em 0 0.5em 2em;\n&quot; +
-                &quot;\t\t\tbackground: #ddd;\n&quot; +
-                &quot;\t\t\tcolor: #444;\n&quot; +
-                &quot;\t\t\ttext-decoration: none;\n&quot; +
-                &quot;\t\t\t/*transition动画效果*/\n&quot; +
-                &quot;\t\t\t-webkit-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\t-moz-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\t-ms-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\t-o-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\ttransition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t&#125;\n&quot; +
-                &quot;\t\t.rectangle-list a:hover &#123;\n&quot; +
-                &quot;\t\t\tbackground: #eee;\n&quot; +
-                &quot;\t\t&#125;\n&quot; +
-                &quot;\t\t\n&quot; +
-                &quot;\t\t.rectangle-list a::before &#123;\n&quot; +
-                &quot;\t\t\t\n&quot; +
-                &quot;\t\t\tcontent: counter(li);\n&quot; +
-                &quot;\t\t\tcounter-increment: li;\n&quot; +
-                &quot;\t\t\t\n&quot; +
-                &quot;\t\t\tposition: absolute;\n&quot; +
-                &quot;\t\t\tleft: -2.5em;\n&quot; +
-                &quot;\t\t\ttop: 50%;\n&quot; +
-                &quot;\t\t\tmargin-top: -1em;\n&quot; +
-                &quot;\t\t\tbackground: #fa8072;\n&quot; +
-                &quot;\t\t\twidth: 2em;\n&quot; +
-                &quot;\t\t\theight: 2em;\n&quot; +
-                &quot;\t\t\tline-height: 2em;\n&quot; +
-                &quot;\t\t\ttext-align: center;\n&quot; +
-                &quot;\t\t\t-webkit-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\t-moz-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\t-o-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\t-ms-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\ttransition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t&#125;\n&quot; +
-                &quot;\t\t.rectangle-list a::after &#123;\n&quot; +
-                &quot;\t\t\tposition: absolute;\n&quot; +
-                &quot;\t\t\tcontent:\&quot;\&quot;;\n&quot; +
-                &quot;\t\t\tborder: 0.5em solid transparent;\n&quot; +
-                &quot;\t\t\tleft: -1em;\n&quot; +
-                &quot;\t\t\ttop: 50%;\n&quot; +
-                &quot;\t\t\tmargin-top: -0.5em;\n&quot; +
-                &quot;\t\t\t-webkit-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\t-moz-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\t-o-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\t-ms-transition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t\ttransition: all 0.3s ease-out;\n&quot; +
-                &quot;\t\t&#125;\n&quot; +
-                &quot;\t\t.rectangle-list a:hover::after &#123;\n&quot; +
-                &quot;\t\t\tleft: -0.5em;\n&quot; +
-                &quot;\t\t\tborder-left-color: #fa8072;\n&quot; +
-                &quot;\t\t&#125;\n&quot; +
-                &quot;\t\t\n&quot;);
-    style.appendChild(text);
-    var head = document.getElementsByTagName(&quot;head&quot;)[0];
-    head.appendChild(style);
-
-  var notions=[&#123;
-        &quot;href&quot;:&quot;http://10.0.130.232:3005&quot;,
-        &quot;txt&quot;:&quot;开发环境&quot;
-    &#125;,&#123;
-        &quot;href&quot;:&quot;https://10.0.130.232:32000/&quot;,
-        &quot;txt&quot;:&quot;k8s地址&quot;
-    &#125;,&#123;
-        &quot;href&quot;:&quot;http://10.0.130.209:7778/&quot;,
-        &quot;txt&quot;:&quot;文件服务器&quot;
-    &#125;,&#123;
-        &quot;href&quot;:&quot; http://10.0.130.232:32733/dashboard/#/&quot;,
-        &quot;txt&quot;:&quot;trafit 地址&quot;
-    &#125;,&#123;
-        &quot;href&quot;:&quot;http://10.0.130.234/&quot;,
-        &quot;txt&quot;:&quot;harbor地址&quot;
-    &#125;]
-
-    var s=&quot;&quot;
-    for (var k in notions)&#123;
-        var item = notions[k]
-        s+=&#39;&lt;li&gt;&lt;a href=&quot;&#39;+item[&quot;href&quot;]+&#39;&quot;&gt;&#39;+item[&quot;txt&quot;]+&quot;:&quot;+item[&quot;href&quot;]+&#39;&lt;/a&gt;&lt;/li&gt;&#39;
-    &#125;
-    $(&quot;.gtz&quot;).append(&#39;&lt;div class=&quot;gtzlist&quot;&gt;&lt;ul class=&quot;rectangle-list&quot;&gt;&#39;+s+&#39;&lt;/ul&gt; &lt;/div&gt;&#39;)
-    $(&quot;.gtzbtn&quot;).css(&#123;&quot;position&quot;:&quot;absolute&quot;,&quot;left&quot;:&quot;66px&quot;,&quot;width&quot;:&quot;28px&quot;,&quot;height&quot;:&quot;66px&quot;,&quot;margin-top&quot;:&quot;200px&quot;&#125;)
-    $(&quot;.gtzlist&quot;).css(&#123;&quot;position&quot;:&quot;absolute&quot;,&quot;right&quot;:&quot;20px&quot;,&quot;marigin-top&quot;:&quot;20px&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;height&quot;:&quot;600px&quot;&#125;)
-    $(&quot;.gtzlist&quot;).hide()
-     $(&quot;.gtz&quot;).css(&#123;&quot;width&quot;:&quot;100px&quot;&#125;)
-    var open=false
-    $(&quot;.gtzbtn&quot;).click(function()&#123;
-        console.log(&quot;asda&quot;)
-        if(open)&#123;
-            $(&quot;.gtz&quot;).css(&#123;&quot;width&quot;:&quot;100px&quot;&#125;)
-             $(&quot;.gtzlist&quot;).hide(100)
-            open=false
-        &#125;else&#123;
-          $(&quot;.gtz&quot;).css(&#123;&quot;width&quot;:&quot;423px&quot;&#125;)
-
-              $(&quot;.gtzlist&quot;).show(100)
-            open=true
-        &#125;
-
-    &#125;)
-    // Your code here...
-&#125;)();
-</code></pre>
-<p>全匹配  https://<em>/</em></p>
-<p>因此，在运行调试之前，稚晖君借助 Unity 引擎工具实现了一个虚拟的物理环境，在赋给自行车正式的质量、重力后，将控制算法的计算结果可视化显示出来。</p>
-<p>其次，通过 Sim2Real，将仿真结果迁移到现实环境中。当然在被诸多不定性因素包裹的现实世界中，其调试过程也并非想象中那么容易，正如稚晖君在视频中细数的点滴，如：</p>
-<p><code>数字孪生</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E8%8C%83%E7%95%B4%E8%AE%BA/%E8%8C%83%E7%95%B4%E8%AE%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E8%8C%83%E7%95%B4%E8%AE%BA/%E8%8C%83%E7%95%B4%E8%AE%BA/" itemprop="url">范畴论.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-22T16:17:12+08:00">
-                2021-07-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8C%83%E7%95%B4%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">范畴论</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p><strong>一个数学对象完全由它与所有其他对象的关系决定</strong>。换句话说，当且仅当两个对象以同样方式与范畴中的每个对象相关时，两个对象本质上是不可区分的。</p>
-</blockquote>
-<h2 id="Yoneda-lemma-米田引理"><a href="#Yoneda-lemma-米田引理" class="headerlink" title="Yoneda lemma 米田引理"></a>Yoneda lemma 米田引理</h2><p>你可以通过观察人们的关系来了解他们，比如他们在 Facebook 上的朋友，他们在 Twitter 上关注的人，他们周五晚上和谁出去玩。如果你遇到两个人，他们有<strong>完全相同</strong>的朋友，他们在社交媒体上的互动也<strong>完全相同</strong>，他们在周五晚上和<strong>相同</strong>的人在一起，那么你可能会开玩笑地说，“你甚至分不清他们。”撇开所有玩笑不谈，范畴论告诉我们，这其实是真正的数学！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%85%B3%E8%81%94%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%85%B3%E8%81%94%E5%88%86%E6%9E%90/" itemprop="url">关联分析.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-19T15:09:42+08:00">
-                2021-07-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="关联分析"><a href="#关联分析" class="headerlink" title="关联分析"></a>关联分析</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
-<li>关联分析： 在大规模数据集中寻找有趣的关系</li>
-<li>频繁项集：经常在一起出现的物品集合</li>
-<li>支持度：数据集中包含该项集的记录所占的比例</li>
-<li>置信度（Confidence）：出现某些物品时，另外一些物品必定出现的概率，针对规则而言。</li>
-<li>关联规则（Association Rules）：暗示两个物品之间可能存在很强的关系。形如A-&gt;B的表达式，规则A-&gt;B的度量包括支持度和置信度</li>
-<li>项集支持度：一个项集出现的次数与数据集所有事物数的百分比称为项集的支持度</li>
-<li>项集置信度：包含A的数据集中包含B的百分比</li>
-</ul>
-<h2 id="关联分析步骤"><a href="#关联分析步骤" class="headerlink" title="关联分析步骤"></a>关联分析步骤</h2><ol>
-<li>发现频繁项集，即计算所有可能组合数的支持度，找出不少于人为设定的最小支持度的集合。</li>
-<li>发现关联规则，即计算不小于人为设定的最小支持度的集合的置信度，找到不小于认为设定的最小置信度规则。</li>
-</ol>
-<h3 id="简单关联关系"><a href="#简单关联关系" class="headerlink" title="简单关联关系"></a>简单关联关系</h3><p>​        简单关联关系可以从经典的购物中进行分析，购买面包的顾客80%都会购买牛奶，由于面包和牛奶是早餐搭配的必需品，二者搭配构成了早餐的组成部分，这就是一种简单的关联关系。</p>
-<h3 id="序列关联关系"><a href="#序列关联关系" class="headerlink" title="序列关联关系"></a>序列关联关系</h3><p>​        当购买一款新手机后，就会考虑去购买手机膜等手机配件，这就是一种序列关系，不会先买手机膜再买手机的，先后关系是非常明显的，这种关系是一种顺序性的关系，也就是一种序列关联关系。</p>
-<blockquote>
-<p>关联规则：规则就是一种衡量事物的标准，也就是一个算法。</p>
-</blockquote>
-<h2 id="简单关联规则算法"><a href="#简单关联规则算法" class="headerlink" title="简单关联规则算法"></a>简单关联规则算法</h2><h3 id="算法思想基础"><a href="#算法思想基础" class="headerlink" title="算法思想基础"></a>算法思想基础</h3><blockquote>
-<p>如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
-</blockquote>
-<p>​        简单关联规则是无指导的学习方法，着重探索内部结构。简单关联规则也是使用最多的技术，主要算法包括：Apriori、GRI、Carma，其中Apriori和Carma主要是如何提高关联规则的分析效率，而GRI注重如何将单一概念层次的关联推广到更多概念层次的关联，进而揭示事物内在结构。</p>
-<p>简单关联规则的数据存储形式：一种是交易数据格式，一种是表格数据格式。</p>
-<h2 id="序列关联规则算法"><a href="#序列关联规则算法" class="headerlink" title="序列关联规则算法"></a>序列关联规则算法</h2><p>​        序列关联规则的核心就是找到事物发展的前后关联性，研究序列关联可以来推测事物未来的发展情况，并根据预测的发展情况进行事物的分配和安排。</p>
-<h2 id="如何设定合理的支持度和置信度？"><a href="#如何设定合理的支持度和置信度？" class="headerlink" title="如何设定合理的支持度和置信度？"></a>如何设定合理的支持度和置信度？</h2><p>对于某条规则：（A=a）−&gt;（B=b）</p>
-<p>（support=30%,confident=60%）；其中support=30%表示在所有的数据记录中，同时出现A=a和B=b的概率为30%；confident=60%表示在所有的数据记录中，在出现A=a的情况下出现B=b的概率为60%，也就是条件概率。支持度揭示了A=a和B=b同时出现的概率，置信度揭示了当A=a出现时，B=b是否会一定出现的概率。</p>
-<p>（1）如果支持度和置信度闭值设置的过高，虽然可以减少挖掘时间，但是容易造成一些隐含在数据中非频繁特征项被忽略掉，难以发现足够有用的规则；</p>
-<p>（2）如果支持度和置信度闭值设置的过低，又有可能产生过多的规则，甚至产生大量冗余和无效的规则，同时由于算法存在的固有问题，会导致高负荷的计算量，大大增加挖掘时间。</p>
-<h2 id="关联分析的应用"><a href="#关联分析的应用" class="headerlink" title="关联分析的应用"></a>关联分析的应用</h2><p>(1)：购物篮分析，通过查看那些商品经常在一起出售，可以帮助商店了解用户的购物行为，这种从数据的海洋中抽取只是可以用于商品定价、市场促销、存货管理等环节</p>
-<p>(2)：在Twitter源中发现一些公共词。对于给定的搜索词，发现推文中频繁出现的单词集合</p>
-<p>(3)：从新闻网站点击流中挖掘新闻流行趋势，挖掘哪些新闻广泛被用户浏览到</p>
-<p>(4)：搜索引擎推荐，在用户输入查询时推荐同时相关的查询词项</p>
-<p>(5)：发现毒蘑菇的相似特征。这里只对包含某个特征元素（有毒素）的项集感兴趣，从中寻找毒蘑菇中的一些公共特征，利用这些特征来避免迟到哪些有毒的蘑菇</p>
-<p>(6)：图书馆信息的书籍推荐，对于学生的借书信息，不同专业学生的借书情况，来挖掘不同学生的借书情况，进行数目的推荐。</p>
-<p>(7)：校园网新闻通知信息的推荐，在对校园网新闻通知信息进行挖掘的过程中，分析不同部门，不同学院的新闻信息的不同，在进行新闻信息浏览的过程中进行新闻的推荐。</p>
-<h2 id="Apriori算法"><a href="#Apriori算法" class="headerlink" title="Apriori算法"></a>Apriori算法</h2><p>假设我们有一家经营着4种商品（商品0，商品1，商品2和商品3）的杂货店，2图显示了所有商品之间所有的可能组合：</p>
-<p>对于单个项集的支持度，我们可以通过遍历每条记录并检查该记录是否包含该项集来计算。对于包含N中物品的数据集共有2N−1种项集组合，重复上述计算过程是不现实的。</p>
-<p>研究人员发现一种所谓的Apriori原理，可以帮助我们减少计算量。Apriori原理是说如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
-<p>注意：这里的子集不是传统数学中的子集，而是子项的项集。例如一个频繁项集包含3个项，则这三个项的子集组成的项集一定是频繁项集。</p>
-<p>在图3中，已知阴影项集{2,3}是非频繁的。利用这个知识，我们就知道项集{0,2,3}，{1,2,3}以及{0,1,2,3}也是非频繁的。也就是说，一旦计算出了{2,3}的支持度，知道它是非频繁的后，就可以紧接着排除{0,2,3}、{1,2,3}和{0,1,2,3}。</p>
-<p>Apriori算法是发现频繁项集的一种方法。</p>
-<p>Apriori算法的两个输入参数分别是最小支持度和数据集。该算法首先会生成所有单个元素的项集列表。接着扫描数据集来查看哪些项集满足最小支持度要求，那些不满足最小支持度的集合会被去掉。然后，对剩下来的集合进行组合以生成包含两个元素的项集。接下来，再重新扫描交易记录，去掉不满足最小支持度的项集。该过程重复进行直到所有项集都被去掉。</p>
-<p>该算法需要不断寻找候选集，然后剪枝即去掉非频繁子集的候选集，时间复杂度由暴力枚举所有子集的指数级别O（n2）将为多项式级别，多项式具体系数是底层实现情况而定的。<br>Ariori算法有两个主要步骤：</p>
-<p>1、连接：（将项集进行两两连接形成新的候选集）利用已经找到的k个项的频繁项集Lk，通过两两连接得出候选集Ck+1，注意进行连接的Lk[i]，Lk[j]，必须有k-1个属性值相同，然后另外两个不同的分别分布Lk[i]，Lk[j]，这样的求出的Ck+1为Lk+1的候选集。</p>
-<p>2、<strong>剪枝</strong>：（去掉非频繁项集）候选集 Ck+1中的并不都是频繁项集，必须剪枝去掉，越早越好以防止所处理的数据无效项越来越多。只有当子集都是频繁集的候选集才是频繁集，这是剪枝的依据。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/2021/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/2021/" itemprop="url">2021.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-19T15:08:49+08:00">
-                2021-07-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><ul>
-<li><input disabled="" type="checkbox"> 预测算法 具身智能如何应对不确定性</li>
-<li><input checked="" disabled="" type="checkbox"> 应用密码安全性评估</li>
-<li><input checked="" disabled="" type="checkbox"> CISAW</li>
-</ul>
-<hr>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
-<li><input disabled="" type="checkbox"> spring</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/docker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/docker/" itemprop="url">docker.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-29T11:08:12+08:00">
-                2021-06-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="docker源码阅读"><a href="#docker源码阅读" class="headerlink" title="docker源码阅读"></a>docker源码阅读</h1><ul>
-<li>DockerClient</li>
-<li>DockerDaemon</li>
-<li>Docker Registry</li>
-<li>Graph</li>
-<li>Driver</li>
-<li>libcontainer</li>
-<li>Docker Container</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/shell/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/shell/" itemprop="url">shell.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-29T09:47:12+08:00">
-                2021-06-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="linux相关"><a href="#linux相关" class="headerlink" title="linux相关"></a>linux相关</h1><h2 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h2><p><a href="../2021/linux/common.md">linux常用命令</a></p>
-<h2 id="Shell编程"><a href="#Shell编程" class="headerlink" title="Shell编程"></a>Shell编程</h2><h3 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h3><pre><code class="shell">crontab -e
-00 18 * * * export DISPLAY=:0.0 &amp;&amp; /usr/bin/python3 /home/lame/workmd/looklikeweb.py ##执行的时候不显示黑框
-</code></pre>
-<h3 id="过滤按行插入"><a href="#过滤按行插入" class="headerlink" title="过滤按行插入"></a>过滤按行插入</h3><pre><code class="sh">kubectl get deployments.apps  -n tenant-1 | grep tsa | awk &#39;&#123;print $1&#125;&#39; | awk -F [&#39;-&#39;] &#39;&#123;print $2&#125;&#39;| xargs -l ./rmpvc.sh 
-</code></pre>
-<h2 id="使用chroot和supermin5创建安全隔离的环境"><a href="#使用chroot和supermin5创建安全隔离的环境" class="headerlink" title="使用chroot和supermin5创建安全隔离的环境"></a>使用chroot和supermin5创建安全隔离的环境</h2><h2 id="chroot"><a href="#chroot" class="headerlink" title="chroot"></a>chroot</h2><p>chroot 顾名思义就是 change root directory。在 linux 系统中，系统默认的根路径是 “/“。而在使用 chroot 之后，系统的目录结构将以指定的目录作为 “/“。</p>
-<p>使用chroot后可以创建一个完全隔离的环境，方便用户在完全隔离的环境下的开发运行。</p>
-<p>在运行 chroot 之后，用户就进入了新的根目录下，并且所有的操作都是基于新的根目录来操作，用户根本访问不到原来的系统根目录。</p>
-<p>因此，我们可以设置用户登录前使用chroot，这样就可以限制用户只能在一定的目录下操作，避免用户访问一些系统的文件。</p>
-<h2 id="supermin5"><a href="#supermin5" class="headerlink" title="supermin5"></a>supermin5</h2><p>Supermin 是一个用来创建迷你虚拟环境的工具，有点类似创建的迷你虚拟机环境。</p>
-<p>如果机器上没有 supermin5 命令，可以使用下面的命令安装</p>
-<pre><code class="sh">sudo yum install -y supermin*
-</code></pre>
-<h2 id="用supermin5创建虚拟环境"><a href="#用supermin5创建虚拟环境" class="headerlink" title="用supermin5创建虚拟环境"></a>用supermin5创建虚拟环境</h2><p>注：以下命令需要使用root用户来执行</p>
-<pre><code class="javascript"># mkdir myenv
-# cd myenv
-
-# 下面命令是准备要安装的软件包并保存在supermin.d目录下
-# supermin5 -v --prepare bash coreutils iputils tar wget git vim yum python python2-pip -o supermin.d
-
-# 下面命令是根据上一步准备的安装包目录制作隔离的环境，并保存在appliance.d目录下
-# supermin5 -v --build --format chroot supermin.d -o appliance.d
-
-# 如果要上网执行下面命令
-# cp /etc/resolv.conf appliance.d/etc/
-
-# 如果要使用yum安装软件包
-# echo 7 &gt; appliance.d/etc/yum/vars/releasever
-</code></pre>
-<h2 id="使用chroot切换根目录"><a href="#使用chroot切换根目录" class="headerlink" title="使用chroot切换根目录"></a>使用chroot切换根目录</h2><p>注：以下命令需要使用root用户来执行</p>
-<pre><code class="javascript"># cd appliance.d/
-# chroot .      &lt;&lt;&lt; 切换根目录
-
-# 以下操作均是在新的根目录下执行了
-
-bash-4.2# ls    &lt;&lt;&lt;
-bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
-boot  etc  lib   media  opt  root  sbin  sys  usr
-bash-4.2# python
-Python 2.7.5 (default, Apr 11 2018, 07:36:10)
-[GCC 4.8.5 20150623 (Red Hat 4.8.5-28)] on linux2
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt;
-...
-</code></pre>
-<h2 id="丢失网卡"><a href="#丢失网卡" class="headerlink" title="丢失网卡"></a>丢失网卡</h2><pre><code class="sh">sudo lshw -C network
-</code></pre>
-<h2 id="linux右键菜单"><a href="#linux右键菜单" class="headerlink" title="linux右键菜单"></a>linux右键菜单</h2><p>linux mint 使用<code>nemo</code>·<a href="https://github.com/smurphos/nemo_actions_and_cinnamon_scripts">demo</a></p>
-<pre><code class="nemo_action">/home/lame/.local/share/nemo/actions
-
-[Nemo Action]
-Name=_Tardis_upload
-Comment=Rename #F elevating privileges if necessary
-Exec=/usr/bin/python3 /media/lame/新加卷/code/tardis/pkg/tardis/hero.py pub -d %F
-Icon-Name=face-smile-big-symbolic
-Selection=s
-Extensions=any;
-Quote=double
-Dependencies=python;
-</code></pre>
-<h2 id="eCryptFS"><a href="#eCryptFS" class="headerlink" title="eCryptFS"></a>eCryptFS</h2><p>堆叠加密文件系统</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url">机器学习.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-28T16:33:07+08:00">
-                2021-06-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="二元分类"><a href="#二元分类" class="headerlink" title="二元分类"></a>二元分类</h2><p>线性回归，做二元分类，通常效果不好，因为会受极值影响较大</p>
-<p>决策边界</p>
-<p>决策边界是假设函数的属性</p>
-<p>使用数据集推测O</p>
-<h2 id="算法选择"><a href="#算法选择" class="headerlink" title="算法选择"></a>算法选择</h2><p><img src="/images/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.assets/v2-7f81a81d5d05bab99dff24b67c34a072_720w.jpg" alt="img"></p>
-<p><img src="/images/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.assets/v2-e2f9eabbce380282f2b242a93651d879_720w.jpg" alt="img"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2075,7 +2084,7 @@ Dependencies=python;
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2092,16 +2101,18 @@ Dependencies=python;
               </div>
             
 
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">146</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
+
+  <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+  <div class="widget-wrap">
+    <h3 class="widget-title">不知所云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+      <canvas width="250" height="250" id="resCanvas" style="width:100%">
+        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E7%AB%AF/" rel="tag">云端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usr/" rel="tag">usr</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/share/" rel="tag">share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crl/" rel="tag">crl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpio/" rel="tag">gpio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/id3/" rel="tag">id3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%A8%E6%88%B7/" rel="tag">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC/" rel="tag">文本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dna/" rel="tag">dna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/" rel="tag">pod</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svs/" rel="tag">svs</a><span class="tag-list-count">1</span></li></ul>
+      </canvas>
+    </div>
+  </div>
+
 
           </nav>
 
@@ -2200,8 +2211,8 @@ Dependencies=python;
     
 
   </div>
-
-  <script type="text/javascript" color="255,20,147" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"> </script>
+   <script id="ribbon" size="300" alpha='0.5' zIndex="-3" src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script type="text/javascript" color="85,85,85" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"> </script>
   
 
 <script type="text/javascript">
