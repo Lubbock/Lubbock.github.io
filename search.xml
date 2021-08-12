@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>01.md</title>
+    <url>/1/01/</url>
+    <content><![CDATA[<h1 id="clojure"><a href="#clojure" class="headerlink" title="clojure"></a>clojure</h1><ul>
+<li>clojure <a href="http://cemerick.com/">http://cemerick.com/</a></li>
+</ul>
+<p> <a href="https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/">https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/</a></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><pre><code class="sh"> docker stats --no-stream $(docker ps | grep 217a5b187c2812 | awk &#39;&#123;print $1&#125;&#39;)
+</code></pre>
+<p><code>sed</code></p>
+<p>文字处理</p>
+<pre><code class="sh">sed -i &#39;/百度搜索/d&#39; all.txt 
+</code></pre>
+]]></content>
+      <categories>
+        <category>1</category>
+      </categories>
+      <tags>
+        <tag>clojure</tag>
+        <tag>sed</tag>
+        <tag>文字处理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>01_CAP.md</title>
     <url>/1/01_CAP/</url>
     <content><![CDATA[<h1 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h1><p>在计算机科学中, CAP定理（CAP theorem）, 又被称作 布鲁尔定理（Brewer’s theorem）, 它指出对于一个分布式计算系统来说，不可能同时满足以下三点:</p>
@@ -71,125 +94,6 @@
         <tag>dsl</tag>
         <tag>gpl</tag>
         <tag>编程语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01_docx攻击.md</title>
-    <url>/1/01_docx%E6%94%BB%E5%87%BB/</url>
-    <content><![CDATA[<h1 id="docx攻击"><a href="#docx攻击" class="headerlink" title="docx攻击"></a>docx攻击</h1><ol>
-<li>生成一个正常的docx文件，内容根据实际需求进行编造，保存后将后缀改成zip</li>
-<li>将其解压，修改./word/_rels/下的settings.xml.rels文件，没有的话可以自己添加。</li>
-</ol>
-<p><img src="/images/01.assets/20191025172919941.png" alt="在这里插入图片描述"></p>
-<ol>
-<li><p><strong>修改内容如下：</strong></p>
-<pre><code class="txt">&lt;Relationship Id=&quot;rId6&quot; Type=&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate&quot; Target=&quot;fontTable.xml&quot;/&gt;&lt;/Relationships&gt;
-</code></pre>
-<p>包含带有<strong>attachmentTemplate</strong>的Type的Relationship标记，是告诉Word打开该.docx时从哪里加载模板的设置，我们可以将Target值修改为远程位置。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>docx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01.md</title>
-    <url>/1/01/</url>
-    <content><![CDATA[<h1 id="clojure"><a href="#clojure" class="headerlink" title="clojure"></a>clojure</h1><ul>
-<li>clojure <a href="http://cemerick.com/">http://cemerick.com/</a></li>
-</ul>
-<p> <a href="https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/">https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/</a></p>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><pre><code class="sh"> docker stats --no-stream $(docker ps | grep 217a5b187c2812 | awk &#39;&#123;print $1&#125;&#39;)
-</code></pre>
-<p><code>sed</code></p>
-<p>文字处理</p>
-<pre><code class="sh">sed -i &#39;/百度搜索/d&#39; all.txt 
-</code></pre>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>clojure</tag>
-        <tag>sed</tag>
-        <tag>文字处理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01_emacs.md</title>
-    <url>/1/01_emacs/</url>
-    <content><![CDATA[<h1 id="emacs"><a href="#emacs" class="headerlink" title="emacs"></a>emacs</h1><p>修改<code>init.el</code>不重启emacs</p>
-<pre><code class="sh">Alt+x eval-buffer
-alt+x load-file
-</code></pre>
-<h3 id="major-mode"><a href="#major-mode" class="headerlink" title="major mode"></a>major mode</h3><p>emacs编辑器模式</p>
-<ul>
-<li>程序语言 emacs-lisp-mode,python-mode,ruby-mode</li>
-<li>dired (file manager dired)</li>
-<li>image-mode view image file</li>
-<li>eww eww web browser</li>
-<li></li>
-</ul>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>emacs</tag>
-        <tag>mode</tag>
-        <tag>dired</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01_nodejs.md</title>
-    <url>/1/01_nodejs/</url>
-    <content><![CDATA[<h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><h2 id="template"><a href="#template" class="headerlink" title="template"></a>template</h2><p><code>express-art-template语法</code></p>
-<pre><code class="sh">(1).表达式
-&#123;&#123; 与 &#125;&#125; 符号包裹起来的语句则为模板的逻辑表达式
-
-(2).输出表达式
-2.1对内容编码输出：&#123;&#123;content&#125;&#125;
-2.2不编码输出：&#123;&#123;#content&#125;&#125;
-
-(3).变量
-
-&#123;&#123;set temp = data.sub.content&#125;&#125;
-
-(4).条件表达式
-&#123;&#123;if admin&#125;&#125;
-        &lt;p&gt;admin&lt;/p&gt;
-&#123;&#123;else if code > 0&#125;&#125;
-       &lt;p&gt;master&lt;/p&gt;
-&#123;&#123;else&#125;&#125;
-        &lt;p&gt;error!&lt;/p&gt;
-&#123;&#123;/if&#125;&#125;
-
-(5).遍历表达式
-无论数组或者对象都可以用 each 进行遍历。
-&#123;&#123;each list as value index&#125;&#125;
-    &lt;li&gt;&#123;&#123;index&#125;&#125; - &#123;&#123;value.user&#125;&#125;&lt;/li&gt;
-&#123;&#123;/each&#125;&#125;
-亦可以被简写：
-&#123;&#123;each list&#125;&#125;
-     &lt;li&gt;&#123;&#123;$index&#125;&#125; - &#123;&#123;$value.user&#125;&#125;&lt;/li&gt;
-&#123;&#123;/each&#125;&#125;
-
-(6).子模板（模板包含表达式）
-a.用于嵌入子模板:
-&#123;&#123;include './header.art'&#125;&#125; 
-</code></pre>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>nodejs</tag>
-        <tag>express</tag>
-        <tag>art</tag>
       </tags>
   </entry>
   <entry>
@@ -269,6 +173,117 @@ a.用于嵌入子模板:
       </tags>
   </entry>
   <entry>
+    <title>01_docx攻击.md</title>
+    <url>/1/01_docx%E6%94%BB%E5%87%BB/</url>
+    <content><![CDATA[<h1 id="docx攻击"><a href="#docx攻击" class="headerlink" title="docx攻击"></a>docx攻击</h1><ol>
+<li>生成一个正常的docx文件，内容根据实际需求进行编造，保存后将后缀改成zip</li>
+<li>将其解压，修改./word/_rels/下的settings.xml.rels文件，没有的话可以自己添加。</li>
+</ol>
+<p><img src="/images/01.assets/20191025172919941.png" alt="在这里插入图片描述"></p>
+<ol>
+<li><p><strong>修改内容如下：</strong></p>
+<pre><code class="txt">&lt;Relationship Id=&quot;rId6&quot; Type=&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate&quot; Target=&quot;fontTable.xml&quot;/&gt;&lt;/Relationships&gt;
+</code></pre>
+<p>包含带有<strong>attachmentTemplate</strong>的Type的Relationship标记，是告诉Word打开该.docx时从哪里加载模板的设置，我们可以将Target值修改为远程位置。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>1</category>
+      </categories>
+      <tags>
+        <tag>docx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01_emacs.md</title>
+    <url>/1/01_emacs/</url>
+    <content><![CDATA[<h1 id="emacs"><a href="#emacs" class="headerlink" title="emacs"></a>emacs</h1><p>修改<code>init.el</code>不重启emacs</p>
+<pre><code class="sh">Alt+x eval-buffer
+alt+x load-file
+</code></pre>
+<h3 id="major-mode"><a href="#major-mode" class="headerlink" title="major mode"></a>major mode</h3><p>emacs编辑器模式</p>
+<ul>
+<li>程序语言 emacs-lisp-mode,python-mode,ruby-mode</li>
+<li>dired (file manager dired)</li>
+<li>image-mode view image file</li>
+<li>eww eww web browser</li>
+<li></li>
+</ul>
+]]></content>
+      <categories>
+        <category>1</category>
+      </categories>
+      <tags>
+        <tag>emacs</tag>
+        <tag>mode</tag>
+        <tag>dired</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01_linux离线安装包.md</title>
+    <url>/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/</url>
+    <content><![CDATA[<h1 id="linux离线安装包"><a href="#linux离线安装包" class="headerlink" title="linux离线安装包"></a>linux离线安装包</h1><p><code>apt-get</code>离线安装包，apt-get install安装的软件包都在**/var/cache/apt/archives** 目录下，下载文件位置可以在**/etc/apt/source.list**下指定。</p>
+<p>也有可能在**/usr/share/doc<strong>和</strong>/usr/share/lintian/overides/**</p>
+]]></content>
+      <categories>
+        <category>1</category>
+      </categories>
+      <tags>
+        <tag>usr</tag>
+        <tag>share</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01_nodejs.md</title>
+    <url>/1/01_nodejs/</url>
+    <content><![CDATA[<h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><h2 id="template"><a href="#template" class="headerlink" title="template"></a>template</h2><p><code>express-art-template语法</code></p>
+<pre><code class="sh">(1).表达式
+&#123;&#123; 与 &#125;&#125; 符号包裹起来的语句则为模板的逻辑表达式
+
+(2).输出表达式
+2.1对内容编码输出：&#123;&#123;content&#125;&#125;
+2.2不编码输出：&#123;&#123;#content&#125;&#125;
+
+(3).变量
+
+&#123;&#123;set temp = data.sub.content&#125;&#125;
+
+(4).条件表达式
+&#123;&#123;if admin&#125;&#125;
+        &lt;p&gt;admin&lt;/p&gt;
+&#123;&#123;else if code > 0&#125;&#125;
+       &lt;p&gt;master&lt;/p&gt;
+&#123;&#123;else&#125;&#125;
+        &lt;p&gt;error!&lt;/p&gt;
+&#123;&#123;/if&#125;&#125;
+
+(5).遍历表达式
+无论数组或者对象都可以用 each 进行遍历。
+&#123;&#123;each list as value index&#125;&#125;
+    &lt;li&gt;&#123;&#123;index&#125;&#125; - &#123;&#123;value.user&#125;&#125;&lt;/li&gt;
+&#123;&#123;/each&#125;&#125;
+亦可以被简写：
+&#123;&#123;each list&#125;&#125;
+     &lt;li&gt;&#123;&#123;$index&#125;&#125; - &#123;&#123;$value.user&#125;&#125;&lt;/li&gt;
+&#123;&#123;/each&#125;&#125;
+
+(6).子模板（模板包含表达式）
+a.用于嵌入子模板:
+&#123;&#123;include './header.art'&#125;&#125; 
+</code></pre>
+]]></content>
+      <categories>
+        <category>1</category>
+      </categories>
+      <tags>
+        <tag>nodejs</tag>
+        <tag>express</tag>
+        <tag>art</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>01_决策树.md</title>
     <url>/1/01_%E5%86%B3%E7%AD%96%E6%A0%91/</url>
     <content><![CDATA[<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h3 id="决策树算法"><a href="#决策树算法" class="headerlink" title="决策树算法"></a>决策树算法</h3><ul>
@@ -336,6 +351,89 @@ echo out &gt; /sys/class/gpio/gpio21/direction
       </tags>
   </entry>
   <entry>
+    <title>02_k8s.md</title>
+    <url>/1/02_k8s/</url>
+    <content><![CDATA[<h1 id="k8s"><a href="#k8s" class="headerlink" title="k8s"></a>k8s</h1><h2 id="k8s容器内域名解析失败学习k8s的DNS策略"><a href="#k8s容器内域名解析失败学习k8s的DNS策略" class="headerlink" title="k8s容器内域名解析失败学习k8s的DNS策略"></a>k8s容器内域名解析失败学习k8s的DNS策略</h2><h3 id="一、k8s默认的DNS策略"><a href="#一、k8s默认的DNS策略" class="headerlink" title="一、k8s默认的DNS策略"></a>一、k8s默认的DNS策略</h3><p>k8s提供了5种DNS策略，如下：</p>
+<ul>
+<li><code>Default</code>: Pod 从运行所在的节点继承名称解析配置。</li>
+<li><code>ClusterFirst</code>: 与配置的集群域后缀不匹配的任何 DNS 查询（例如 “<a href="https://links.jianshu.com/go?to=http://www.kubernetes.io">www.kubernetes.io</a>”） 都将转发到从节点继承的上游名称服务器。集群管理员可能配置了额外的存根域和上游 DNS 服务器。</li>
+<li><code>ClusterFirstWithHostNet</code>：对于以 hostNetwork 方式运行的 Pod，应显式设置其 DNS 策略 <code>ClusterFirstWithHostNet</code>。</li>
+<li><code>None</code>: 此设置允许 Pod 忽略 Kubernetes 环境中的 DNS 设置。Pod 会使用其 <code>dnsConfig</code> 字段 所提供的 DNS 设置。</li>
+</ul>
+<p>k8s默认使用的DNS策略是<code>ClusterFirst</code>，这点需要注意，也就是说域名解析会优先使用集群的DNS（<code>kube-DNS</code>）进行查询，如果k8s的DNS解析失败，会转发到宿主机的DNS进行解析。</p>
+<h3 id="二、k8s容器的resolv-conf"><a href="#二、k8s容器的resolv-conf" class="headerlink" title="二、k8s容器的resolv.conf"></a>二、k8s容器的<code>resolv.conf</code></h3><p>k8s上运行的容器，其域名解析和一般的Linux一样，都是根据 <code>/etc/resolv.conf</code> 文件进行解析，下面看一个开发环境某一个pod的<code>resolv.conf</code>内容：</p>
+<pre><code class="css">nameserver 10.96.0.10
+search jplat.svc.cluster.local svc.cluster.local cluster.local localhost
+options ndots:5
+</code></pre>
+<p>上面内容中<code>nameserver</code>即为k8s集群中<code>kube-dns</code>的<code>Service</code>的<code>CLUSTER-IP</code>，该集群中容器的<code>nameserver</code>均为<code>kube-dns</code>的ip。</p>
+<p><code>search</code>和<code>options ndots</code>我们一起来讲。首先我们需要了解一个概念<code>FQDN(Fully qualified domain name)</code>即完整域名。一般来说如果一个域名以<code>.</code>结束，就表示一个完整域名。比如<code>www.abc.xyz.</code>就是一个<code>FQDN</code>，而<code>www.abc.xyz</code>则不是<code>FQDN</code>。了解了这个概念之后我们就来看<code>search</code>和<code>options ndots</code>。</p>
+<p>如果我们的pod使用的是默认的DNS策略，即<code>ClusterFirst</code>，那么如果一个域名是<code>FQDN</code>，那么这个域名会被转发给DNS服务器进行解析。如果域名不是<code>FQDN</code>，那么这个域名会到<code>search</code>搜索解析，还是通过一个例子说明，比如访问<code>abc.xyz</code>这个域名，因为它并不是一个<code>FQDN</code>，所以它会和<code>search</code>域中的值进行组合而变成一个<code>FQDN</code>，以上文的<code>resolv.conf</code>为例，这域名会这样组合：</p>
+<pre><code class="css">abx.xyz.jplat.svc.cluster.local.
+abc.xyz.svc.cluster.local.
+abc.xyz.cluster.local.
+...
+</code></pre>
+<p>然后这些域名先被<code>kube-DNS</code>解析，如果没有解析成功再由宿主机的<code>DNS</code>服务器进行解析。</p>
+<p>而<code>ndots</code>是用来表示一个域名中<code>.</code>的个数在不小于该值的情况下会被认为是一个<code>FQDN</code>。简单说这个属性用来判断一个不是以<code>.</code>结束的域名在什么条件下会被认定为是一个<code>FQDN</code>。还是通过我们另一个pod的<code>resolv.conf</code>为例，如下：</p>
+<pre><code class="css">nameserver 10.96.0.10
+search oms-dev.svc.cluster.local svc.cluster.local cluster.local localhost
+options ndots:2 edns0
+</code></pre>
+<p>在这个<code>resolv.conf</code>中<code>ndots</code>为2，也就是说如果一个域名中<code>.</code>的数量大于等于2，即使域名不是以<code>.</code>结尾，也会被认定为是一个<code>FQDN</code>。比如：域名是<code>abc.xyz.xxx</code>这个域名就是<code>FQDN</code>，而<code>abc.xyz</code>则不是<code>FQDN</code>。</p>
+<p>之所以会有<code>search</code>域主要还是为了方便k8s内部服务之间的访问。比如：k8s在同一个<code>namespace</code>下是可以直接通过服务名称进行访问的，其原理就是会在<code>search</code>域查找，比如上面的<code>resolv.conf</code>中<code>jplat、oms-dev</code>着两个其实都是这两个pod所在的<code>namespace</code>的名称。所以通过服务名称访问的时候，会和<code>search</code>域进行组合，这样最终域名会组合成<code>servicename.namespace.svc.cluster.local</code>。而如果是跨<code>namespace</code>访问，则可以通过<code>servicename.namespace</code>这样的形式，在通过和<code>search</code>域组合，依然可以得到<code>servicename.namespace.svc.cluster.local</code>。</p>
+<hr>
+<h3 id="三、解决问题"><a href="#三、解决问题" class="headerlink" title="三、解决问题"></a>三、解决问题</h3><p>在了解k8s的DNS相关知识之后，回到我们项目组在开发中遇到一个问题：一个应用的pod内调用外部接口失败，报错的原因就是<code>unknown host</code>，最开始我以为是外部应用没在一个网段的问题，但是直接通过服务器却可以访问的。当时pod使用的是默认的DNS策略，即<code>ClusterFirst</code>，<code>ndots</code>也是默认值，即5。问题出现了。我请求的域名是<code>www.abc.com/api</code>，域名只有2个点，所以会和<code>search</code>域的域名进行组合，结果当然无法解析。考虑到我们的pod访问都是在同一<code>namespace</code>下，即使跨<code>namespace</code>，我们也是通过<code>servicename.namespace</code>进行访问的，所以最终选择将<code>ndots</code>改为2。修改应用的<code>Deployment yaml</code>文件，修改如下：</p>
+<pre><code class="csharp">      dnsConfig:
+        options:
+          - name: ndots
+            value: &quot;2&quot;
+</code></pre>
+<p>修改完成之后重新部署项目，测试解决。</p>
+<h2 id="kubedns"><a href="#kubedns" class="headerlink" title="kubedns"></a>kubedns</h2><p>查看kubedns</p>
+<pre><code class="sh">kubectl get pods --namespace=kube-system -o wide |grep dns 
+</code></pre>
+<p>查看日志</p>
+<pre><code class="sh">kubectl logs  kube-dns-6698b7748d-fd5g7 kubedns --namespace=kube-system
+</code></pre>
+<p>查看dns解析</p>
+<pre><code class="sh">kubectl get pod |grep &quot;test&quot;
+
+kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
+</code></pre>
+]]></content>
+      <categories>
+        <category>1</category>
+      </categories>
+      <tags>
+        <tag>pod</tag>
+        <tag>dns</tag>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2021.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/2021/</url>
+    <content><![CDATA[<h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><ul>
+<li><input disabled="" type="checkbox"> 预测算法 具身智能如何应对不确定性</li>
+<li><input checked="" disabled="" type="checkbox"> 应用密码安全性评估</li>
+<li><input checked="" disabled="" type="checkbox"> CISAW</li>
+</ul>
+<hr>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
+<li><input disabled="" type="checkbox"> spring</li>
+</ul>
+]]></content>
+      <categories>
+        <category>书籍源码</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>智能</tag>
+        <tag>不确定性</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AK验证.md</title>
     <url>/2021/secraft2/AK%E9%AA%8C%E8%AF%81/</url>
     <content><![CDATA[<h1 id="AK生成策略"><a href="#AK生成策略" class="headerlink" title="AK生成策略"></a>AK生成策略</h1><p>[toc]</p>
@@ -350,21 +448,6 @@ echo out &gt; /sys/class/gpio/gpio21/direction
         <tag>系统</tag>
         <tag>ak</tag>
         <tag>策略</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01_linux离线安装包.md</title>
-    <url>/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/</url>
-    <content><![CDATA[<h1 id="linux离线安装包"><a href="#linux离线安装包" class="headerlink" title="linux离线安装包"></a>linux离线安装包</h1><p><code>apt-get</code>离线安装包，apt-get install安装的软件包都在**/var/cache/apt/archives** 目录下，下载文件位置可以在**/etc/apt/source.list**下指定。</p>
-<p>也有可能在**/usr/share/doc<strong>和</strong>/usr/share/lintian/overides/**</p>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>usr</tag>
-        <tag>share</tag>
-        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -393,6 +476,36 @@ echo out &gt; /sys/class/gpio/gpio21/direction
         <tag>数据</tag>
         <tag>antlr</tag>
         <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Attach.md</title>
+    <url>/2021/jvm/Attach/</url>
+    <content><![CDATA[<h1 id="Java-Attach机制"><a href="#Java-Attach机制" class="headerlink" title="Java Attach机制"></a>Java Attach机制</h1><p>jdk工具提供了jvm进程通信的能力，能让一个进程传命令给另一个进程。</p>
+<pre class="mermaid">sequenceDiagram
+    participant 外部进程（JStack)
+    participant 目标jvm进程
+    外部进程（JStack)->>目标jvm进程:下发命令
+    目标jvm进程->>外部进程（JStack):返回信息</pre>
+
+<p>Attach机制可以对目标收集许多信息，如<code>内存dump</code>,<code>线程dump</code>,类信息统计（加载类和大小以及实例个数），动态加载agent,动态设置vm flag</p>
+<h2 id="方法小结"><a href="#方法小结" class="headerlink" title="方法小结"></a>方法小结</h2><ol>
+<li><p>继承<code>Tool/HotSpotAgent.attach</code></p>
+</li>
+<li><p>VirtualMachine.attach</p>
+</li>
+<li><p>Perf.getPerf().attach(通过PerfData文件获取信息)</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>2021</category>
+        <category>jvm</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>attach</tag>
+        <tag>进程</tag>
       </tags>
   </entry>
   <entry>
@@ -518,89 +631,6 @@ ghci&gt; replicate 3 10
         <tag>网络管理</tag>
         <tag>协议</tag>
         <tag>snmp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>02_k8s.md</title>
-    <url>/1/02_k8s/</url>
-    <content><![CDATA[<h1 id="k8s"><a href="#k8s" class="headerlink" title="k8s"></a>k8s</h1><h2 id="k8s容器内域名解析失败学习k8s的DNS策略"><a href="#k8s容器内域名解析失败学习k8s的DNS策略" class="headerlink" title="k8s容器内域名解析失败学习k8s的DNS策略"></a>k8s容器内域名解析失败学习k8s的DNS策略</h2><h3 id="一、k8s默认的DNS策略"><a href="#一、k8s默认的DNS策略" class="headerlink" title="一、k8s默认的DNS策略"></a>一、k8s默认的DNS策略</h3><p>k8s提供了5种DNS策略，如下：</p>
-<ul>
-<li><code>Default</code>: Pod 从运行所在的节点继承名称解析配置。</li>
-<li><code>ClusterFirst</code>: 与配置的集群域后缀不匹配的任何 DNS 查询（例如 “<a href="https://links.jianshu.com/go?to=http://www.kubernetes.io">www.kubernetes.io</a>”） 都将转发到从节点继承的上游名称服务器。集群管理员可能配置了额外的存根域和上游 DNS 服务器。</li>
-<li><code>ClusterFirstWithHostNet</code>：对于以 hostNetwork 方式运行的 Pod，应显式设置其 DNS 策略 <code>ClusterFirstWithHostNet</code>。</li>
-<li><code>None</code>: 此设置允许 Pod 忽略 Kubernetes 环境中的 DNS 设置。Pod 会使用其 <code>dnsConfig</code> 字段 所提供的 DNS 设置。</li>
-</ul>
-<p>k8s默认使用的DNS策略是<code>ClusterFirst</code>，这点需要注意，也就是说域名解析会优先使用集群的DNS（<code>kube-DNS</code>）进行查询，如果k8s的DNS解析失败，会转发到宿主机的DNS进行解析。</p>
-<h3 id="二、k8s容器的resolv-conf"><a href="#二、k8s容器的resolv-conf" class="headerlink" title="二、k8s容器的resolv.conf"></a>二、k8s容器的<code>resolv.conf</code></h3><p>k8s上运行的容器，其域名解析和一般的Linux一样，都是根据 <code>/etc/resolv.conf</code> 文件进行解析，下面看一个开发环境某一个pod的<code>resolv.conf</code>内容：</p>
-<pre><code class="css">nameserver 10.96.0.10
-search jplat.svc.cluster.local svc.cluster.local cluster.local localhost
-options ndots:5
-</code></pre>
-<p>上面内容中<code>nameserver</code>即为k8s集群中<code>kube-dns</code>的<code>Service</code>的<code>CLUSTER-IP</code>，该集群中容器的<code>nameserver</code>均为<code>kube-dns</code>的ip。</p>
-<p><code>search</code>和<code>options ndots</code>我们一起来讲。首先我们需要了解一个概念<code>FQDN(Fully qualified domain name)</code>即完整域名。一般来说如果一个域名以<code>.</code>结束，就表示一个完整域名。比如<code>www.abc.xyz.</code>就是一个<code>FQDN</code>，而<code>www.abc.xyz</code>则不是<code>FQDN</code>。了解了这个概念之后我们就来看<code>search</code>和<code>options ndots</code>。</p>
-<p>如果我们的pod使用的是默认的DNS策略，即<code>ClusterFirst</code>，那么如果一个域名是<code>FQDN</code>，那么这个域名会被转发给DNS服务器进行解析。如果域名不是<code>FQDN</code>，那么这个域名会到<code>search</code>搜索解析，还是通过一个例子说明，比如访问<code>abc.xyz</code>这个域名，因为它并不是一个<code>FQDN</code>，所以它会和<code>search</code>域中的值进行组合而变成一个<code>FQDN</code>，以上文的<code>resolv.conf</code>为例，这域名会这样组合：</p>
-<pre><code class="css">abx.xyz.jplat.svc.cluster.local.
-abc.xyz.svc.cluster.local.
-abc.xyz.cluster.local.
-...
-</code></pre>
-<p>然后这些域名先被<code>kube-DNS</code>解析，如果没有解析成功再由宿主机的<code>DNS</code>服务器进行解析。</p>
-<p>而<code>ndots</code>是用来表示一个域名中<code>.</code>的个数在不小于该值的情况下会被认为是一个<code>FQDN</code>。简单说这个属性用来判断一个不是以<code>.</code>结束的域名在什么条件下会被认定为是一个<code>FQDN</code>。还是通过我们另一个pod的<code>resolv.conf</code>为例，如下：</p>
-<pre><code class="css">nameserver 10.96.0.10
-search oms-dev.svc.cluster.local svc.cluster.local cluster.local localhost
-options ndots:2 edns0
-</code></pre>
-<p>在这个<code>resolv.conf</code>中<code>ndots</code>为2，也就是说如果一个域名中<code>.</code>的数量大于等于2，即使域名不是以<code>.</code>结尾，也会被认定为是一个<code>FQDN</code>。比如：域名是<code>abc.xyz.xxx</code>这个域名就是<code>FQDN</code>，而<code>abc.xyz</code>则不是<code>FQDN</code>。</p>
-<p>之所以会有<code>search</code>域主要还是为了方便k8s内部服务之间的访问。比如：k8s在同一个<code>namespace</code>下是可以直接通过服务名称进行访问的，其原理就是会在<code>search</code>域查找，比如上面的<code>resolv.conf</code>中<code>jplat、oms-dev</code>着两个其实都是这两个pod所在的<code>namespace</code>的名称。所以通过服务名称访问的时候，会和<code>search</code>域进行组合，这样最终域名会组合成<code>servicename.namespace.svc.cluster.local</code>。而如果是跨<code>namespace</code>访问，则可以通过<code>servicename.namespace</code>这样的形式，在通过和<code>search</code>域组合，依然可以得到<code>servicename.namespace.svc.cluster.local</code>。</p>
-<hr>
-<h3 id="三、解决问题"><a href="#三、解决问题" class="headerlink" title="三、解决问题"></a>三、解决问题</h3><p>在了解k8s的DNS相关知识之后，回到我们项目组在开发中遇到一个问题：一个应用的pod内调用外部接口失败，报错的原因就是<code>unknown host</code>，最开始我以为是外部应用没在一个网段的问题，但是直接通过服务器却可以访问的。当时pod使用的是默认的DNS策略，即<code>ClusterFirst</code>，<code>ndots</code>也是默认值，即5。问题出现了。我请求的域名是<code>www.abc.com/api</code>，域名只有2个点，所以会和<code>search</code>域的域名进行组合，结果当然无法解析。考虑到我们的pod访问都是在同一<code>namespace</code>下，即使跨<code>namespace</code>，我们也是通过<code>servicename.namespace</code>进行访问的，所以最终选择将<code>ndots</code>改为2。修改应用的<code>Deployment yaml</code>文件，修改如下：</p>
-<pre><code class="csharp">      dnsConfig:
-        options:
-          - name: ndots
-            value: &quot;2&quot;
-</code></pre>
-<p>修改完成之后重新部署项目，测试解决。</p>
-<h2 id="kubedns"><a href="#kubedns" class="headerlink" title="kubedns"></a>kubedns</h2><p>查看kubedns</p>
-<pre><code class="sh">kubectl get pods --namespace=kube-system -o wide |grep dns 
-</code></pre>
-<p>查看日志</p>
-<pre><code class="sh">kubectl logs  kube-dns-6698b7748d-fd5g7 kubedns --namespace=kube-system
-</code></pre>
-<p>查看dns解析</p>
-<pre><code class="sh">kubectl get pod |grep &quot;test&quot;
-
-kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
-</code></pre>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>pod</tag>
-        <tag>dns</tag>
-        <tag>k8s</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2021.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/2021/</url>
-    <content><![CDATA[<h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><ul>
-<li><input disabled="" type="checkbox"> 预测算法 具身智能如何应对不确定性</li>
-<li><input checked="" disabled="" type="checkbox"> 应用密码安全性评估</li>
-<li><input checked="" disabled="" type="checkbox"> CISAW</li>
-</ul>
-<hr>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
-<li><input disabled="" type="checkbox"> spring</li>
-</ul>
-]]></content>
-      <categories>
-        <category>书籍源码</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>智能</tag>
-        <tag>不确定性</tag>
       </tags>
   </entry>
   <entry>
@@ -836,36 +866,6 @@ fmt.Println(err)
         <tag>nodejs</tag>
         <tag>聊天</tag>
         <tag>hubot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Attach.md</title>
-    <url>/2021/jvm/Attach/</url>
-    <content><![CDATA[<h1 id="Java-Attach机制"><a href="#Java-Attach机制" class="headerlink" title="Java Attach机制"></a>Java Attach机制</h1><p>jdk工具提供了jvm进程通信的能力，能让一个进程传命令给另一个进程。</p>
-<pre class="mermaid">sequenceDiagram
-    participant 外部进程（JStack)
-    participant 目标jvm进程
-    外部进程（JStack)->>目标jvm进程:下发命令
-    目标jvm进程->>外部进程（JStack):返回信息</pre>
-
-<p>Attach机制可以对目标收集许多信息，如<code>内存dump</code>,<code>线程dump</code>,类信息统计（加载类和大小以及实例个数），动态加载agent,动态设置vm flag</p>
-<h2 id="方法小结"><a href="#方法小结" class="headerlink" title="方法小结"></a>方法小结</h2><ol>
-<li><p>继承<code>Tool/HotSpotAgent.attach</code></p>
-</li>
-<li><p>VirtualMachine.attach</p>
-</li>
-<li><p>Perf.getPerf().attach(通过PerfData文件获取信息)</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>2021</category>
-        <category>jvm</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>attach</tag>
-        <tag>进程</tag>
       </tags>
   </entry>
   <entry>
@@ -1160,6 +1160,46 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
       </tags>
   </entry>
   <entry>
+    <title>jnotify.md</title>
+    <url>/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify/</url>
+    <content><![CDATA[<h1 id="Jnotify-1-0"><a href="#Jnotify-1-0" class="headerlink" title="Jnotify-1.0"></a>Jnotify-1.0</h1><p>最近一直在致力于搭建个人的文档笔记系统。最后选中了<code>typora</code>,<code>typora</code>本身是一个优秀的markdown工具，同时支持三平台的书写。但是不支持云端同步，为了解决这个问题，我写出了<code>jnotify</code></p>
+<blockquote>
+<p><code>Jnotify</code>一个基于<code>git</code>的文档同步系统</p>
+</blockquote>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li><code>jnotify</code> 基于git技术，将文档自动同步到云端，同时提供手动从云端同步功能。</li>
+<li><code>jnotify</code>选用<code>java</code>作为开发语言，方便修改</li>
+<li>免费</li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
+<li>不支持大文件，视频，大的压缩包，所以目前场景定位在文档同步</li>
+<li>文档的安全性基于远端的私仓</li>
+</ol>
+<h2 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h2><blockquote>
+<p>目前在linux 环境测试通过</p>
+</blockquote>
+<ol>
+<li><p>下载发布包，解压</p>
+<p><img src="/images/jnotify.assets/image-20210309103151127.png" alt="image-20210309103151127"></p>
+</li>
+</ol>
+<p>其中<code>jnotify.properties</code>描述了，项目云端的配置，包括云端同步地址，用户名密码</p>
+<p>,仓库在本地的存储地址等等.</p>
+<p><code>project</code>配置了需要同步到云端的地址,书写格式为<span style="color:#f50"> 存储地址</span>，<span style="color:#f50">待同步文档地址</span></p>
+<pre><code class="sh">~/.jnotify/pkg/workmd,/home/lame/workmd
+</code></pre>
+<p>配置文件修改完成后，执行install.sh,程序安装完成，执行start.sh 开始运行</p>
+]]></content>
+      <categories>
+        <category>工程记录</category>
+      </categories>
+      <tags>
+        <tag>jnotify</tag>
+        <tag>sh</tag>
+        <tag>云端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>jnotify_Jnotify-2.0.md</title>
     <url>/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify_Jnotify-2.0/</url>
     <content><![CDATA[<h1 id="Jnotify-2-0"><a href="#Jnotify-2-0" class="headerlink" title="Jnotify-2.0"></a>Jnotify-2.0</h1><h2 id="改造需求"><a href="#改造需求" class="headerlink" title="改造需求"></a>改造需求</h2><ol>
@@ -1313,8 +1353,8 @@ end
         <category>工程记录</category>
       </categories>
       <tags>
-        <tag>文件</tag>
         <tag>进程</tag>
+        <tag>文件</tag>
         <tag>方案</tag>
       </tags>
   </entry>
@@ -1570,56 +1610,6 @@ end
       </tags>
   </entry>
   <entry>
-    <title>jnotify.md</title>
-    <url>/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify/</url>
-    <content><![CDATA[<h1 id="Jnotify-1-0"><a href="#Jnotify-1-0" class="headerlink" title="Jnotify-1.0"></a>Jnotify-1.0</h1><p>最近一直在致力于搭建个人的文档笔记系统。最后选中了<code>typora</code>,<code>typora</code>本身是一个优秀的markdown工具，同时支持三平台的书写。但是不支持云端同步，为了解决这个问题，我写出了<code>jnotify</code></p>
-<blockquote>
-<p><code>Jnotify</code>一个基于<code>git</code>的文档同步系统</p>
-</blockquote>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
-<li><code>jnotify</code> 基于git技术，将文档自动同步到云端，同时提供手动从云端同步功能。</li>
-<li><code>jnotify</code>选用<code>java</code>作为开发语言，方便修改</li>
-<li>免费</li>
-</ol>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
-<li>不支持大文件，视频，大的压缩包，所以目前场景定位在文档同步</li>
-<li>文档的安全性基于远端的私仓</li>
-</ol>
-<h2 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h2><blockquote>
-<p>目前在linux 环境测试通过</p>
-</blockquote>
-<ol>
-<li><p>下载发布包，解压</p>
-<p><img src="/images/jnotify.assets/image-20210309103151127.png" alt="image-20210309103151127"></p>
-</li>
-</ol>
-<p>其中<code>jnotify.properties</code>描述了，项目云端的配置，包括云端同步地址，用户名密码</p>
-<p>,仓库在本地的存储地址等等.</p>
-<p><code>project</code>配置了需要同步到云端的地址,书写格式为<span style="color:#f50"> 存储地址</span>，<span style="color:#f50">待同步文档地址</span></p>
-<pre><code class="sh">~/.jnotify/pkg/workmd,/home/lame/workmd
-</code></pre>
-<p>配置文件修改完成后，执行install.sh,程序安装完成，执行start.sh 开始运行</p>
-]]></content>
-      <categories>
-        <category>工程记录</category>
-      </categories>
-      <tags>
-        <tag>jnotify</tag>
-        <tag>sh</tag>
-        <tag>云端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>koal_trafit测试，动态添加路由 .md</title>
-    <url>/uncategorized/koal_trafit%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1%20/</url>
-    <content><![CDATA[<h1 id="trafit测试，动态添加路由"><a href="#trafit测试，动态添加路由" class="headerlink" title="trafit测试，动态添加路由"></a>trafit测试，动态添加路由</h1>]]></content>
-      <tags>
-        <tag>trafit</tag>
-        <tag>动态</tag>
-        <tag>路由</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>koal_临时记录.md</title>
     <url>/uncategorized/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="临时记录"><a href="#临时记录" class="headerlink" title="临时记录"></a>临时记录</h1><pre><code>roleKind（string类型） 角色类型/区分是否为管理员  1 是，0 否
@@ -1691,126 +1681,13 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
       </tags>
   </entry>
   <entry>
-    <title>koal_服务发布.md</title>
-    <url>/uncategorized/koal_%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83/</url>
-    <content><![CDATA[<h1 id="服务发布"><a href="#服务发布" class="headerlink" title="服务发布"></a>服务发布</h1><h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><table>
-<thead>
-<tr>
-<th>定时任务</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>kl.kcsp.modules.monitor.utils.SaveChsmMonitorInfo</td>
-<td>收集云密码机的数据</td>
-</tr>
-<tr>
-<td>kl.kcsp.modules.operationAudit.utils.InseLogSignJob</td>
-<td>日志添加签名</td>
-</tr>
-<tr>
-<td>kl.kcsp.modules.monitor.utils.SaveMonitorInfoJob</td>
-<td>收集k8s集群监控信息</td>
-</tr>
-<tr>
-<td>kl.kcsp.modules.srvinse.job.SrvKeySyncJob</td>
-<td>密钥自动同步</td>
-</tr>
-<tr>
-<td>kl.kcsp.modules.srvinse.job.InseMonitorJob</td>
-<td>服务健康检查</td>
-</tr>
-<tr>
-<td>kl.kcsp.modules.message.job.SendMsgJob</td>
-<td>消息发送</td>
-</tr>
-</tbody></table>
-<h2 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h2><h3 id="kcsp-yaml"><a href="#kcsp-yaml" class="headerlink" title="kcsp-yaml"></a>kcsp-yaml</h3><ul>
-<li><p>文件上传目录</p>
-</li>
-<li><p>k8s集群服务地址</p>
-<pre><code>kube:
-  # api server接口地址
-  url: 10.0.130.232:8080
-  ingressUrl: 10.0.130.232:32733
-  nfs: 10.0.130.232
-  # service资源暴露地址
-  serviceIp: 10.0.130.234
-</code></pre>
-</li>
-<li><p>后端服务的url 前端地址 授权地址 日志地址</p>
-</li>
-<li><pre><code>platform:
-  frontUrl: 10.0.130.209:3000
-  url: 10.0.130.209:9080
-  authUrl: http://10.0.130.232:9085/kcsp-kubecheck/thirdLogin/checkAkKubeSrv
-  logUrl: http://10.0.130.232:9084/kcsp-log/pushAccessLog
-</code></pre>
-</li>
-<li><p>密码机管理平台地址 </p>
-</li>
-</ul>
-<pre><code>mmj:
-  managepage: http://10.0.130.232:8070/SecCloudClient/jsp/login/login.jsp
-# 密码机组同步信息
-vsmgroup:
-  ip: 10.0.130.232
-  port: 8070
-  salt: 77945920c03f5931
-
-#系统登录类型，0代表密码登录，1代表证书登录，默认为0，先暂时存在配置文件中
-systemLogin:
-  type: 0
-#harbor地址
-harbor:
-  ip: 10.0.130.234
-</code></pre>
-<ul>
-<li>申请单修改</li>
-</ul>
-<p>ServiceApplication  ServiceApplyOrder</p>
-<pre><code>SrvExpansionApply  VsmServiceExpansion
-SrvExpansionKubeConfig VsmServiceExpansionKubeConfig
-PwdMachineApplicationDetail VsmApplyDetail
-PwdSrvApplicationDetail VsmSrvApplyDetail
-PwdMachineExpansionApply VsmExpansionApply
-PwdMachineApplicationDetailCopy VsmApplyDetailCopy
-</code></pre>
-<p>// 归属于 BlockStatement</p>
-<ul>
-<li>​      int i = 1;  localVariableDeclarationStatement</li>
-</ul>
-<p>方法调用</p>
-<pre><code>methodInvocation
-</code></pre>
-<p><strong>方法内部</strong></p>
-<ul>
-<li>赋值语句</li>
-<li>方法调用语句</li>
-</ul>
-<p><strong>赋值</strong></p>
-<ul>
-<li>变量赋值</li>
-</ul>
-<p><strong>方法调用</strong></p>
-<ul>
-<li>日志</li>
-<li>异常信息</li>
-<li>变量</li>
-<li>警告信息</li>
-</ul>
-<blockquote>
-<p>异常信息，警告信息，日志，不抽取</p>
-</blockquote>
-<p>只抽取变量赋值和方法调用的变量</p>
-<ul>
-<li>密码机分为加密/非加密，目前sdk是加密的，但是kms那边支持非加密的，系统只提供了非加密的，没法测试</li>
-</ul>
-]]></content>
+    <title>koal_trafit测试，动态添加路由 .md</title>
+    <url>/uncategorized/koal_trafit%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1%20/</url>
+    <content><![CDATA[<h1 id="trafit测试，动态添加路由"><a href="#trafit测试，动态添加路由" class="headerlink" title="trafit测试，动态添加路由"></a>trafit测试，动态添加路由</h1>]]></content>
       <tags>
-        <tag>地址</tag>
-        <tag>信息</tag>
-        <tag>赋值</tag>
+        <tag>trafit</tag>
+        <tag>动态</tag>
+        <tag>路由</tag>
       </tags>
   </entry>
   <entry>
@@ -2822,26 +2699,330 @@ java -jar arthas-boot.jar
       </tags>
   </entry>
   <entry>
-    <title>python.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/python/</url>
-    <content><![CDATA[<h1 id="prompt-toolkit"><a href="#prompt-toolkit" class="headerlink" title="prompt_toolkit"></a>prompt_toolkit</h1><p><code> prompt_toolkit</code>用于在<strong>Python</strong>中构建功能强大的交互式命令行和终端应用程序的库，它可以是<strong>GNU readline</strong>的高级替代品.</p>
-<ul>
-<li>键入时语法高亮显示输入。（例如，使用Pygments词法分析器。）</li>
-<li>多行输入编辑。</li>
-<li>高级代码自动完成。</li>
-<li>选择要复制/粘贴的文本。（Emacs和Vi风格。）</li>
-<li>鼠标支持光标定位和滚动。</li>
-<li>自动建议。（像<a href="http://fishshell.com/">fish shell</a>。）</li>
-<li>没有global状态。</li>
+    <title>koal_服务发布.md</title>
+    <url>/uncategorized/koal_%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83/</url>
+    <content><![CDATA[<h1 id="服务发布"><a href="#服务发布" class="headerlink" title="服务发布"></a>服务发布</h1><h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><table>
+<thead>
+<tr>
+<th>定时任务</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>kl.kcsp.modules.monitor.utils.SaveChsmMonitorInfo</td>
+<td>收集云密码机的数据</td>
+</tr>
+<tr>
+<td>kl.kcsp.modules.operationAudit.utils.InseLogSignJob</td>
+<td>日志添加签名</td>
+</tr>
+<tr>
+<td>kl.kcsp.modules.monitor.utils.SaveMonitorInfoJob</td>
+<td>收集k8s集群监控信息</td>
+</tr>
+<tr>
+<td>kl.kcsp.modules.srvinse.job.SrvKeySyncJob</td>
+<td>密钥自动同步</td>
+</tr>
+<tr>
+<td>kl.kcsp.modules.srvinse.job.InseMonitorJob</td>
+<td>服务健康检查</td>
+</tr>
+<tr>
+<td>kl.kcsp.modules.message.job.SendMsgJob</td>
+<td>消息发送</td>
+</tr>
+</tbody></table>
+<h2 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h2><h3 id="kcsp-yaml"><a href="#kcsp-yaml" class="headerlink" title="kcsp-yaml"></a>kcsp-yaml</h3><ul>
+<li><p>文件上传目录</p>
+</li>
+<li><p>k8s集群服务地址</p>
+<pre><code>kube:
+  # api server接口地址
+  url: 10.0.130.232:8080
+  ingressUrl: 10.0.130.232:32733
+  nfs: 10.0.130.232
+  # service资源暴露地址
+  serviceIp: 10.0.130.234
+</code></pre>
+</li>
+<li><p>后端服务的url 前端地址 授权地址 日志地址</p>
+</li>
+<li><pre><code>platform:
+  frontUrl: 10.0.130.209:3000
+  url: 10.0.130.209:9080
+  authUrl: http://10.0.130.232:9085/kcsp-kubecheck/thirdLogin/checkAkKubeSrv
+  logUrl: http://10.0.130.232:9084/kcsp-log/pushAccessLog
+</code></pre>
+</li>
+<li><p>密码机管理平台地址 </p>
+</li>
 </ul>
+<pre><code>mmj:
+  managepage: http://10.0.130.232:8070/SecCloudClient/jsp/login/login.jsp
+# 密码机组同步信息
+vsmgroup:
+  ip: 10.0.130.232
+  port: 8070
+  salt: 77945920c03f5931
+
+#系统登录类型，0代表密码登录，1代表证书登录，默认为0，先暂时存在配置文件中
+systemLogin:
+  type: 0
+#harbor地址
+harbor:
+  ip: 10.0.130.234
+</code></pre>
+<ul>
+<li>申请单修改</li>
+</ul>
+<p>ServiceApplication  ServiceApplyOrder</p>
+<pre><code>SrvExpansionApply  VsmServiceExpansion
+SrvExpansionKubeConfig VsmServiceExpansionKubeConfig
+PwdMachineApplicationDetail VsmApplyDetail
+PwdSrvApplicationDetail VsmSrvApplyDetail
+PwdMachineExpansionApply VsmExpansionApply
+PwdMachineApplicationDetailCopy VsmApplyDetailCopy
+</code></pre>
+<p>// 归属于 BlockStatement</p>
+<ul>
+<li>​      int i = 1;  localVariableDeclarationStatement</li>
+</ul>
+<p>方法调用</p>
+<pre><code>methodInvocation
+</code></pre>
+<p><strong>方法内部</strong></p>
+<ul>
+<li>赋值语句</li>
+<li>方法调用语句</li>
+</ul>
+<p><strong>赋值</strong></p>
+<ul>
+<li>变量赋值</li>
+</ul>
+<p><strong>方法调用</strong></p>
+<ul>
+<li>日志</li>
+<li>异常信息</li>
+<li>变量</li>
+<li>警告信息</li>
+</ul>
+<blockquote>
+<p>异常信息，警告信息，日志，不抽取</p>
+</blockquote>
+<p>只抽取变量赋值和方法调用的变量</p>
+<ul>
+<li>密码机分为加密/非加密，目前sdk是加密的，但是kms那边支持非加密的，系统只提供了非加密的，没法测试</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>地址</tag>
+        <tag>信息</tag>
+        <tag>赋值</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>py基础库_py框架.md</title>
+    <url>/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/py%E5%9F%BA%E7%A1%80%E5%BA%93_py%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h1 id="py框架"><a href="#py框架" class="headerlink" title="py框架"></a>py框架</h1>]]></content>
+      <categories>
+        <category>2021</category>
+        <category>常用框架</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>secraft2.md</title>
+    <url>/2021/secraft2/secraft2/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th>文档列表</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="AK%E9%AA%8C%E8%AF%81.md">Ak验证</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="%E7%B3%BB%E7%BB%9F%E5%B8%B8%E7%94%A8%E5%AE%9E%E4%BD%93%E5%85%B3%E7%B3%BB.md">常用实体关系</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="./code/%E8%AF%81%E4%B9%A6%E7%99%BB%E9%99%86.md">证书登陆对接</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>密码应用管理员</p>
+<ol>
+<li>去掉第三方应用管理</li>
+<li>根据是否有对应服务角色判断是否显示</li>
+</ol>
+<p>创建用户唯一性校验</p>
+]]></content>
+      <categories>
+        <category>2021</category>
+        <category>secraft2</category>
+      </categories>
+      <tags>
+        <tag>ak</tag>
+        <tag>md</tag>
+        <tag>常用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>shell.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/shell/</url>
+    <content><![CDATA[<h1 id="linux相关"><a href="#linux相关" class="headerlink" title="linux相关"></a>linux相关</h1><h2 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h2><p><a href="../2021/linux/common.md">linux常用命令</a></p>
+<h2 id="Shell编程"><a href="#Shell编程" class="headerlink" title="Shell编程"></a>Shell编程</h2><h3 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h3><pre><code class="shell">crontab -e
+00 18 * * * export DISPLAY=:0.0 &amp;&amp; /usr/bin/python3 /home/lame/workmd/looklikeweb.py ##执行的时候不显示黑框
+</code></pre>
+<h3 id="过滤按行插入"><a href="#过滤按行插入" class="headerlink" title="过滤按行插入"></a>过滤按行插入</h3><pre><code class="sh">kubectl get deployments.apps  -n tenant-1 | grep tsa | awk &#39;&#123;print $1&#125;&#39; | awk -F [&#39;-&#39;] &#39;&#123;print $2&#125;&#39;| xargs -l ./rmpvc.sh 
+</code></pre>
+<h2 id="使用chroot和supermin5创建安全隔离的环境"><a href="#使用chroot和supermin5创建安全隔离的环境" class="headerlink" title="使用chroot和supermin5创建安全隔离的环境"></a>使用chroot和supermin5创建安全隔离的环境</h2><h2 id="chroot"><a href="#chroot" class="headerlink" title="chroot"></a>chroot</h2><p>chroot 顾名思义就是 change root directory。在 linux 系统中，系统默认的根路径是 “/“。而在使用 chroot 之后，系统的目录结构将以指定的目录作为 “/“。</p>
+<p>使用chroot后可以创建一个完全隔离的环境，方便用户在完全隔离的环境下的开发运行。</p>
+<p>在运行 chroot 之后，用户就进入了新的根目录下，并且所有的操作都是基于新的根目录来操作，用户根本访问不到原来的系统根目录。</p>
+<p>因此，我们可以设置用户登录前使用chroot，这样就可以限制用户只能在一定的目录下操作，避免用户访问一些系统的文件。</p>
+<h2 id="supermin5"><a href="#supermin5" class="headerlink" title="supermin5"></a>supermin5</h2><p>Supermin 是一个用来创建迷你虚拟环境的工具，有点类似创建的迷你虚拟机环境。</p>
+<p>如果机器上没有 supermin5 命令，可以使用下面的命令安装</p>
+<pre><code class="sh">sudo yum install -y supermin*
+</code></pre>
+<h2 id="用supermin5创建虚拟环境"><a href="#用supermin5创建虚拟环境" class="headerlink" title="用supermin5创建虚拟环境"></a>用supermin5创建虚拟环境</h2><p>注：以下命令需要使用root用户来执行</p>
+<pre><code class="javascript"># mkdir myenv
+# cd myenv
+
+# 下面命令是准备要安装的软件包并保存在supermin.d目录下
+# supermin5 -v --prepare bash coreutils iputils tar wget git vim yum python python2-pip -o supermin.d
+
+# 下面命令是根据上一步准备的安装包目录制作隔离的环境，并保存在appliance.d目录下
+# supermin5 -v --build --format chroot supermin.d -o appliance.d
+
+# 如果要上网执行下面命令
+# cp /etc/resolv.conf appliance.d/etc/
+
+# 如果要使用yum安装软件包
+# echo 7 &gt; appliance.d/etc/yum/vars/releasever
+</code></pre>
+<h2 id="使用chroot切换根目录"><a href="#使用chroot切换根目录" class="headerlink" title="使用chroot切换根目录"></a>使用chroot切换根目录</h2><p>注：以下命令需要使用root用户来执行</p>
+<pre><code class="javascript"># cd appliance.d/
+# chroot .      &lt;&lt;&lt; 切换根目录
+
+# 以下操作均是在新的根目录下执行了
+
+bash-4.2# ls    &lt;&lt;&lt;
+bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
+boot  etc  lib   media  opt  root  sbin  sys  usr
+bash-4.2# python
+Python 2.7.5 (default, Apr 11 2018, 07:36:10)
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-28)] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;
+...
+</code></pre>
+<h2 id="丢失网卡"><a href="#丢失网卡" class="headerlink" title="丢失网卡"></a>丢失网卡</h2><pre><code class="sh">sudo lshw -C network
+</code></pre>
+<h2 id="linux右键菜单"><a href="#linux右键菜单" class="headerlink" title="linux右键菜单"></a>linux右键菜单</h2><p>linux mint 使用<code>nemo</code>·<a href="https://github.com/smurphos/nemo_actions_and_cinnamon_scripts">demo</a></p>
+<pre><code class="nemo_action">/home/lame/.local/share/nemo/actions
+
+[Nemo Action]
+Name=_Tardis_upload
+Comment=Rename #F elevating privileges if necessary
+Exec=/usr/bin/python3 /media/lame/新加卷/code/tardis/pkg/tardis/hero.py pub -d %F
+Icon-Name=face-smile-big-symbolic
+Selection=s
+Extensions=any;
+Quote=double
+Dependencies=python;
+</code></pre>
+<h2 id="eCryptFS"><a href="#eCryptFS" class="headerlink" title="eCryptFS"></a>eCryptFS</h2><p>堆叠加密文件系统</p>
 ]]></content>
       <categories>
         <category>书籍源码</category>
       </categories>
       <tags>
-        <tag>prompt</tag>
-        <tag>粘贴</tag>
-        <tag>global</tag>
+        <tag>linux</tag>
+        <tag>常用命令</tag>
+        <tag>common</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>不安之书.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E4%B8%8D%E5%AE%89%E4%B9%8B%E4%B9%A6/</url>
+    <content><![CDATA[<h2 id="不安之书"><a href="#不安之书" class="headerlink" title="不安之书"></a>不安之书</h2><p>认识到自己可以产生的破坏，是自我尊重的开始。</p>
+<p>认识到世界的脆弱性呢，越往前走，越瞧见伟大的事业，伟大的人。越发感觉到人的渺小。越发感到人的脆弱。</p>
+]]></content>
+      <categories>
+        <category>书籍源码</category>
+      </categories>
+      <tags>
+        <tag>世界</tag>
+        <tag>脆弱性</tag>
+        <tag>事业</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>临时记录.md</title>
+    <url>/uncategorized/%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="生成可变配置"><a href="#生成可变配置" class="headerlink" title="生成可变配置"></a>生成可变配置</h2><pre><code class="java">        int start = 23;
+        int end = 24;
+        int startIndex = 76;
+        for (int i = start; i &lt;= end; i++) &#123;
+            String s = &quot;               (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;网络是否可通&#39;, &#39;C01&#39;, &quot; + (i) + &quot;, &#39;C01&#39;, 400, null),\n&quot; +
+                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;端口是否开启&#39;, &#39;C02&#39;, &quot; + (i) + &quot;, &#39;C02&#39;, 400, null),\n&quot; +
+                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;进程是否存在&#39;, &#39;C03&#39;, &quot; + (i) + &quot;, &#39;C03&#39;, 400, null),\n&quot; +
+                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;服务是否正常&#39;, &#39;C04&#39;, &quot; + (i) + &quot;, &#39;C04&#39;, 400, null),&quot;;
+
+            System.out.println(s);
+            System.out.println();
+        &#125;
+</code></pre>
+<pre><code class="java">final String[] lines = s.split(&quot;\n&quot;);
+        Map&lt;String, String&gt; mp = new HashMap&lt;&gt;();
+        for (String line : lines) &#123;
+
+            if (StringUtils.isEmpty(line)) &#123;
+                continue;
+            &#125;
+            final String cLine = line.trim();
+            String[] arrays = cLine.split(&quot;,&quot;);
+            String key = arrays[5];
+            String value = arrays[6];
+            if (mp.containsKey(key)) &#123;
+                if (!value.equals(mp.get(key))) &#123;
+                    final String newVal = mp.get(key) + &quot;,&quot; + value;
+                    mp.put(key, newVal);
+                &#125;
+            &#125;else &#123;
+                mp.put(key, value);
+            &#125;
+        &#125;s
+        for (Map.Entry&lt;String, String&gt; entry : mp.entrySet()) &#123;
+            System.out.println(entry.getKey() + &quot;:\t&quot; + entry.getValue());
+        &#125;
+</code></pre>
+<h2 id="微软"><a href="#微软" class="headerlink" title="微软"></a>微软</h2><p>约时间，定好一天或者两天面完</p>
+<ul>
+<li>电话面试 </li>
+</ul>
+<blockquote>
+<p>leetcode 中等难度题 两周后问人</p>
+</blockquote>
+<p>矩阵旋转 </p>
+<ul>
+<li>系统设计 （加分项）</li>
+</ul>
+<blockquote>
+<p>如何设计一个秒杀系统之类的</p>
+</blockquote>
+<ul>
+<li>模板生成增加日志</li>
+<li>密钥列表增加所属密码机组，密码机服务</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>系统</tag>
+        <tag>电话</tag>
+        <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
@@ -3066,210 +3247,6 @@ if __name__ == &#39;__main__&#39;:
       </categories>
   </entry>
   <entry>
-    <title>py基础库_py框架.md</title>
-    <url>/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/py%E5%9F%BA%E7%A1%80%E5%BA%93_py%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<h1 id="py框架"><a href="#py框架" class="headerlink" title="py框架"></a>py框架</h1>]]></content>
-      <categories>
-        <category>2021</category>
-        <category>常用框架</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>secraft2.md</title>
-    <url>/2021/secraft2/secraft2/</url>
-    <content><![CDATA[<table>
-<thead>
-<tr>
-<th>文档列表</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="AK%E9%AA%8C%E8%AF%81.md">Ak验证</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="%E7%B3%BB%E7%BB%9F%E5%B8%B8%E7%94%A8%E5%AE%9E%E4%BD%93%E5%85%B3%E7%B3%BB.md">常用实体关系</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="./code/%E8%AF%81%E4%B9%A6%E7%99%BB%E9%99%86.md">证书登陆对接</a></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>密码应用管理员</p>
-<ol>
-<li>去掉第三方应用管理</li>
-<li>根据是否有对应服务角色判断是否显示</li>
-</ol>
-<p>创建用户唯一性校验</p>
-]]></content>
-      <categories>
-        <category>2021</category>
-        <category>secraft2</category>
-      </categories>
-      <tags>
-        <tag>ak</tag>
-        <tag>md</tag>
-        <tag>常用</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>shell.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/shell/</url>
-    <content><![CDATA[<h1 id="linux相关"><a href="#linux相关" class="headerlink" title="linux相关"></a>linux相关</h1><h2 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h2><p><a href="../2021/linux/common.md">linux常用命令</a></p>
-<h2 id="Shell编程"><a href="#Shell编程" class="headerlink" title="Shell编程"></a>Shell编程</h2><h3 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h3><pre><code class="shell">crontab -e
-00 18 * * * export DISPLAY=:0.0 &amp;&amp; /usr/bin/python3 /home/lame/workmd/looklikeweb.py ##执行的时候不显示黑框
-</code></pre>
-<h3 id="过滤按行插入"><a href="#过滤按行插入" class="headerlink" title="过滤按行插入"></a>过滤按行插入</h3><pre><code class="sh">kubectl get deployments.apps  -n tenant-1 | grep tsa | awk &#39;&#123;print $1&#125;&#39; | awk -F [&#39;-&#39;] &#39;&#123;print $2&#125;&#39;| xargs -l ./rmpvc.sh 
-</code></pre>
-<h2 id="使用chroot和supermin5创建安全隔离的环境"><a href="#使用chroot和supermin5创建安全隔离的环境" class="headerlink" title="使用chroot和supermin5创建安全隔离的环境"></a>使用chroot和supermin5创建安全隔离的环境</h2><h2 id="chroot"><a href="#chroot" class="headerlink" title="chroot"></a>chroot</h2><p>chroot 顾名思义就是 change root directory。在 linux 系统中，系统默认的根路径是 “/“。而在使用 chroot 之后，系统的目录结构将以指定的目录作为 “/“。</p>
-<p>使用chroot后可以创建一个完全隔离的环境，方便用户在完全隔离的环境下的开发运行。</p>
-<p>在运行 chroot 之后，用户就进入了新的根目录下，并且所有的操作都是基于新的根目录来操作，用户根本访问不到原来的系统根目录。</p>
-<p>因此，我们可以设置用户登录前使用chroot，这样就可以限制用户只能在一定的目录下操作，避免用户访问一些系统的文件。</p>
-<h2 id="supermin5"><a href="#supermin5" class="headerlink" title="supermin5"></a>supermin5</h2><p>Supermin 是一个用来创建迷你虚拟环境的工具，有点类似创建的迷你虚拟机环境。</p>
-<p>如果机器上没有 supermin5 命令，可以使用下面的命令安装</p>
-<pre><code class="sh">sudo yum install -y supermin*
-</code></pre>
-<h2 id="用supermin5创建虚拟环境"><a href="#用supermin5创建虚拟环境" class="headerlink" title="用supermin5创建虚拟环境"></a>用supermin5创建虚拟环境</h2><p>注：以下命令需要使用root用户来执行</p>
-<pre><code class="javascript"># mkdir myenv
-# cd myenv
-
-# 下面命令是准备要安装的软件包并保存在supermin.d目录下
-# supermin5 -v --prepare bash coreutils iputils tar wget git vim yum python python2-pip -o supermin.d
-
-# 下面命令是根据上一步准备的安装包目录制作隔离的环境，并保存在appliance.d目录下
-# supermin5 -v --build --format chroot supermin.d -o appliance.d
-
-# 如果要上网执行下面命令
-# cp /etc/resolv.conf appliance.d/etc/
-
-# 如果要使用yum安装软件包
-# echo 7 &gt; appliance.d/etc/yum/vars/releasever
-</code></pre>
-<h2 id="使用chroot切换根目录"><a href="#使用chroot切换根目录" class="headerlink" title="使用chroot切换根目录"></a>使用chroot切换根目录</h2><p>注：以下命令需要使用root用户来执行</p>
-<pre><code class="javascript"># cd appliance.d/
-# chroot .      &lt;&lt;&lt; 切换根目录
-
-# 以下操作均是在新的根目录下执行了
-
-bash-4.2# ls    &lt;&lt;&lt;
-bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
-boot  etc  lib   media  opt  root  sbin  sys  usr
-bash-4.2# python
-Python 2.7.5 (default, Apr 11 2018, 07:36:10)
-[GCC 4.8.5 20150623 (Red Hat 4.8.5-28)] on linux2
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt;
-...
-</code></pre>
-<h2 id="丢失网卡"><a href="#丢失网卡" class="headerlink" title="丢失网卡"></a>丢失网卡</h2><pre><code class="sh">sudo lshw -C network
-</code></pre>
-<h2 id="linux右键菜单"><a href="#linux右键菜单" class="headerlink" title="linux右键菜单"></a>linux右键菜单</h2><p>linux mint 使用<code>nemo</code>·<a href="https://github.com/smurphos/nemo_actions_and_cinnamon_scripts">demo</a></p>
-<pre><code class="nemo_action">/home/lame/.local/share/nemo/actions
-
-[Nemo Action]
-Name=_Tardis_upload
-Comment=Rename #F elevating privileges if necessary
-Exec=/usr/bin/python3 /media/lame/新加卷/code/tardis/pkg/tardis/hero.py pub -d %F
-Icon-Name=face-smile-big-symbolic
-Selection=s
-Extensions=any;
-Quote=double
-Dependencies=python;
-</code></pre>
-<h2 id="eCryptFS"><a href="#eCryptFS" class="headerlink" title="eCryptFS"></a>eCryptFS</h2><p>堆叠加密文件系统</p>
-]]></content>
-      <categories>
-        <category>书籍源码</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>常用命令</tag>
-        <tag>common</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>不安之书.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E4%B8%8D%E5%AE%89%E4%B9%8B%E4%B9%A6/</url>
-    <content><![CDATA[<h2 id="不安之书"><a href="#不安之书" class="headerlink" title="不安之书"></a>不安之书</h2><p>认识到自己可以产生的破坏，是自我尊重的开始。</p>
-<p>认识到世界的脆弱性呢，越往前走，越瞧见伟大的事业，伟大的人。越发感觉到人的渺小。越发感到人的脆弱。</p>
-]]></content>
-      <categories>
-        <category>书籍源码</category>
-      </categories>
-      <tags>
-        <tag>世界</tag>
-        <tag>脆弱性</tag>
-        <tag>事业</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>临时记录.md</title>
-    <url>/uncategorized/%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h2 id="生成可变配置"><a href="#生成可变配置" class="headerlink" title="生成可变配置"></a>生成可变配置</h2><pre><code class="java">        int start = 23;
-        int end = 24;
-        int startIndex = 76;
-        for (int i = start; i &lt;= end; i++) &#123;
-            String s = &quot;               (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;网络是否可通&#39;, &#39;C01&#39;, &quot; + (i) + &quot;, &#39;C01&#39;, 400, null),\n&quot; +
-                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;端口是否开启&#39;, &#39;C02&#39;, &quot; + (i) + &quot;, &#39;C02&#39;, 400, null),\n&quot; +
-                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;进程是否存在&#39;, &#39;C03&#39;, &quot; + (i) + &quot;, &#39;C03&#39;, 400, null),\n&quot; +
-                    &quot;           (&#39;&quot; + (startIndex++) + &quot;&#39;, &#39;admin&#39;, null, &#39;admin&#39;, null, &#39;服务是否正常&#39;, &#39;C04&#39;, &quot; + (i) + &quot;, &#39;C04&#39;, 400, null),&quot;;
-
-            System.out.println(s);
-            System.out.println();
-        &#125;
-</code></pre>
-<pre><code class="java">final String[] lines = s.split(&quot;\n&quot;);
-        Map&lt;String, String&gt; mp = new HashMap&lt;&gt;();
-        for (String line : lines) &#123;
-
-            if (StringUtils.isEmpty(line)) &#123;
-                continue;
-            &#125;
-            final String cLine = line.trim();
-            String[] arrays = cLine.split(&quot;,&quot;);
-            String key = arrays[5];
-            String value = arrays[6];
-            if (mp.containsKey(key)) &#123;
-                if (!value.equals(mp.get(key))) &#123;
-                    final String newVal = mp.get(key) + &quot;,&quot; + value;
-                    mp.put(key, newVal);
-                &#125;
-            &#125;else &#123;
-                mp.put(key, value);
-            &#125;
-        &#125;s
-        for (Map.Entry&lt;String, String&gt; entry : mp.entrySet()) &#123;
-            System.out.println(entry.getKey() + &quot;:\t&quot; + entry.getValue());
-        &#125;
-</code></pre>
-<h2 id="微软"><a href="#微软" class="headerlink" title="微软"></a>微软</h2><p>约时间，定好一天或者两天面完</p>
-<ul>
-<li>电话面试 </li>
-</ul>
-<blockquote>
-<p>leetcode 中等难度题 两周后问人</p>
-</blockquote>
-<p>矩阵旋转 </p>
-<ul>
-<li>系统设计 （加分项）</li>
-</ul>
-<blockquote>
-<p>如何设计一个秒杀系统之类的</p>
-</blockquote>
-<ul>
-<li>模板生成增加日志</li>
-<li>密钥列表增加所属密码机组，密码机服务</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>系统</tag>
-        <tag>电话</tag>
-        <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>关联分析.md</title>
     <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%85%B3%E8%81%94%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<h1 id="关联分析"><a href="#关联分析" class="headerlink" title="关联分析"></a>关联分析</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
@@ -3325,6 +3302,29 @@ Dependencies=python;
         <tag>新闻</tag>
         <tag>规则</tag>
         <tag>关联</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/python/</url>
+    <content><![CDATA[<h1 id="prompt-toolkit"><a href="#prompt-toolkit" class="headerlink" title="prompt_toolkit"></a>prompt_toolkit</h1><p><code> prompt_toolkit</code>用于在<strong>Python</strong>中构建功能强大的交互式命令行和终端应用程序的库，它可以是<strong>GNU readline</strong>的高级替代品.</p>
+<ul>
+<li>键入时语法高亮显示输入。（例如，使用Pygments词法分析器。）</li>
+<li>多行输入编辑。</li>
+<li>高级代码自动完成。</li>
+<li>选择要复制/粘贴的文本。（Emacs和Vi风格。）</li>
+<li>鼠标支持光标定位和滚动。</li>
+<li>自动建议。（像<a href="http://fishshell.com/">fish shell</a>。）</li>
+<li>没有global状态。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>书籍源码</category>
+      </categories>
+      <tags>
+        <tag>prompt</tag>
+        <tag>粘贴</tag>
+        <tag>global</tag>
       </tags>
   </entry>
   <entry>
@@ -3890,26 +3890,6 @@ Note right of 菡妹妹:&quot;hhhh&quot;
       </tags>
   </entry>
   <entry>
-    <title>算法研究.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/</url>
-    <content><![CDATA[<h1 id="算法研究"><a href="#算法研究" class="headerlink" title="算法研究"></a>算法研究</h1><p>这个章节，会用来解决一些算法相关的问题，目前列出算法如下，预期会提供<code>算法描述</code>，<code>代码实现</code>，<code>动态图-有就会给</code>，<code>算法相关扩展</code></p>
-<ul>
-<li>动态规划算法</li>
-<li>概率算法</li>
-<li>排序算法</li>
-<li>加密算法</li>
-</ul>
-<h2 id="概率算法"><a href="#概率算法" class="headerlink" title="概率算法"></a>概率算法</h2><h3 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h3><h4 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h4><h4 id="动态图"><a href="#动态图" class="headerlink" title="动态图"></a>动态图</h4><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h2 id="排序算法-1"><a href="#排序算法-1" class="headerlink" title="排序算法"></a>排序算法</h2><h2 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h2>]]></content>
-      <categories>
-        <category>书籍源码</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>动态</tag>
-        <tag>规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>算法研究_算法相关扩展.md</title>
     <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6_%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3%E6%89%A9%E5%B1%95/</url>
     <content><![CDATA[<h1 id="算法相关扩展"><a href="#算法相关扩展" class="headerlink" title="算法相关扩展"></a>算法相关扩展</h1><h2 id="似然与极大似然估计"><a href="#似然与极大似然估计" class="headerlink" title="似然与极大似然估计"></a>似然与极大似然估计</h2><p><code>Likelihood</code>&amp;<code>Maximum likelihood</code>似然与概率，在非正式场合似然和概率（Probability）几乎是一对同义词，但是在统计学中似然和概率却是两个不同的概念.<span style="color:#0ae">概率是在特定环境下某件事情发生的可能性，也就是结果没有产生之前依据环境所对应的参数来预测某件事情发生的可能性</span>，比如抛硬币，抛之前我们不知道最后是哪一面朝上，但是根据硬币的性质我们可以推测任何一面朝上的可能性均为50%，这个概率只有在抛硬币之前才是有意义的，抛完硬币后的结果便是确定的；<span style="color:#0ae">而似然刚好相反，是在确定的结果下去推测产生这个结果的可能环境（参数）</span>，还是抛硬币的例子，假设我们随机抛掷一枚硬币1,000次，结果500次人头朝上，500次数字朝上（实际情况一般不会这么理想，这里只是举个例子），我们很容易判断这是一枚标准的硬币，两面朝上的概率均为50%，这个过程就是我们运用出现的结果来判断这个事情本身的性质（参数），也就是似然。</p>
@@ -3944,6 +3924,220 @@ Note right of 菡妹妹:&quot;hhhh&quot;
         <tag>常用</tag>
         <tag>实体</tag>
         <tag>关系</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机常识.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86/</url>
+    <content><![CDATA[<h1 id="计算机常识"><a href="#计算机常识" class="headerlink" title="计算机常识"></a>计算机常识</h1><h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>正向代理类是一个条班级，代理访问外部资源</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124853014-1532060796.png" alt="img"></p>
+<p>正向代理 是一个位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。客户端必须要进行一些特别的设置才能使用正向代理。</p>
+<h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><ul>
+<li>访问原来无法访问的资源如<code>google</code></li>
+<li>可以做缓存，加速访问资源</li>
+<li>对客户端访问授权，上网进行认证</li>
+<li>代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息</li>
+</ul>
+<p>如<code>ccproxy</code>,<code>ccproxy</code>可以完成两项大功能，代理共享上网和客户端代理权限管理</p>
+<h4 id="golang实现简单的正向代理"><a href="#golang实现简单的正向代理" class="headerlink" title="golang实现简单的正向代理"></a>golang实现简单的正向代理</h4><pre><code class="golang">
+import (
+    &quot;fmt&quot;
+    &quot;io/ioutil&quot;
+    &quot;net&quot;
+    &quot;net/http&quot;
+    &quot;strings&quot;
+)
+
+//正想代理
+
+type Pxy struct &#123;
+&#125;
+
+func (p *Pxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) &#123;
+    fmt.Printf(&quot;Received request %s %s %s\n&quot;, req.Method, req.Host, req.RemoteAddr)
+    transport := http.DefaultTransport
+    outReq := new(http.Request)
+    *outReq = *req
+    if clientIP, _, err := net.SplitHostPort(req.RemoteAddr); err == nil &#123;
+        if prior, ok := outReq.Header[&quot;X-Forwarded-For&quot;]; ok &#123;
+            clientIP = strings.Join(prior, &quot;, &quot;) + &quot;, &quot; + clientIP
+        &#125;
+        outReq.Header.Set(&quot;X-Forwarded-For&quot;, clientIP)
+    &#125;
+    res, err := transport.RoundTrip(outReq)
+    if err != nil &#123;
+        rw.WriteHeader(http.StatusBadGateway)
+        return
+    &#125;
+    for key, value := range res.Header &#123;
+        for _, v := range value &#123;
+            rw.Header().Add(key, v)
+        &#125;
+    &#125;
+    rw.WriteHeader(res.StatusCode)
+    s, _ := ioutil.ReadAll(res.Body)
+    if strings.Contains(req.RequestURI, &quot;html&quot;) &#123;
+        fmt.Println(req.RequestURI)
+    &#125;
+
+    //if req.RequestURI &#123;
+    //
+    //&#125;
+    //fmt.Println(string(s))
+    //io.Copy(rw, res.Body)
+    //x:=[]byte&#123;&#39;1&#39;, &#39;2&#39;,&#39;3&#39;&#125;
+    rw.Write(s)
+    res.Body.Close()
+&#125;
+
+func main() &#123;
+    fmt.Printf(&quot;proxy on :8080&quot;)
+    http.Handle(&quot;/&quot;, &amp;Pxy&#123;&#125;)
+    http.ListenAndServe(&quot;0.0.0.0:8080&quot;, nil)
+&#125;
+</code></pre>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>初次接触方向代理的感觉是，客户端是无感知代理的存在的，反向代理对外都是透明的，访问者者并不知道自己访问的是一个代理。因为客户端不需要任何配置就可以访问。</p>
+<p>　　反向代理（Reverse Proxy）实际运行方式是指以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个服务器。</p>
+<p>反向代理的作用：</p>
+<ul>
+<li>保证内网的安全，可以使用反向代理提供WAF功能，阻止web攻击</li>
+</ul>
+<p>大型网站，通常将反向代理作为公网访问地址，Web服务器是内网。</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124341280-1435223816.png" alt="img"></p>
+<ul>
+<li><p>负载均衡，通过反向代理服务器来优化网站的负载</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124423530-566240666.png" alt="img"></p>
+</li>
+</ul>
+<h4 id="反向代理例子"><a href="#反向代理例子" class="headerlink" title="反向代理例子"></a>反向代理例子</h4><pre><code class="golang">package main
+
+import (
+    &quot;log&quot;
+    &quot;net/http&quot;
+    &quot;net/http/httputil&quot;
+)
+
+func main() &#123;
+    http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) &#123;
+        director := func(req *http.Request) &#123;
+            req = r
+            req.URL.Scheme = &quot;http&quot;
+            req.URL.Host = r.Host
+        &#125;
+        proxy := &amp;httputil.ReverseProxy&#123;Director: director&#125;
+        proxy.ServeHTTP(w, r)
+    &#125;)
+
+    log.Fatal(http.ListenAndServe(&quot;:8888&quot;, nil))
+&#125;
+</code></pre>
+<h3 id="代理访问HTTPS"><a href="#代理访问HTTPS" class="headerlink" title="代理访问HTTPS"></a>代理访问HTTPS</h3><p>可以在远程服务器上用http.Get 或client.Do获取http或https网页内容。然后用http.ListenAndServe向本地返回获取到的内容。</p>
+<pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;io/ioutil&quot;
+    &quot;net/http&quot;
+)
+
+func main() &#123;
+    resp, _ := http.Get(&quot;https://www.baidu.com&quot;)
+    defer resp.Body.Close()
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+
+&#125;
+</code></pre>
+<p>或</p>
+<pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;io/ioutil&quot;
+    &quot;net/http&quot;
+)
+
+func main() &#123;
+    client := &amp;http.Client&#123;&#125;
+    req, _ := http.NewRequest(&quot;GET&quot;, &quot;https://www.baidu.com&quot;, nil)
+    //req.Header.Set(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;)
+    //req.Header.Set(&quot;Cookie&quot;, &quot;name=any&quot;)
+    resp, err := client.Do(req)
+    defer resp.Body.Close()
+    body, err := ioutil.ReadAll(resp.Body)
+    if err != nil &#123;
+        // handle error
+    &#125;
+    fmt.Println(string(body))
+
+&#125;
+</code></pre>
+<h2 id="机器学习路线"><a href="#机器学习路线" class="headerlink" title="机器学习路线"></a>机器学习路线</h2><p>公开课+书+Kaggle </p>
+<h2 id="PDF"><a href="#PDF" class="headerlink" title="PDF"></a>PDF</h2><p>大部分pdf阅读软件，都是基于<code>poppler</code>改的</p>
+<h2 id="程序部署"><a href="#程序部署" class="headerlink" title="程序部署"></a>程序部署</h2><p><code>Supervisord</code>可以把程序部署成daemon ，<code>Supervisord</code>使用python</p>
+<h2 id="Evosuite配置"><a href="#Evosuite配置" class="headerlink" title="Evosuite配置"></a>Evosuite配置</h2><pre><code class="xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+
+
+    &lt;repositories&gt;
+
+        &lt;repository&gt;
+            &lt;id&gt;EvoSuite&lt;/id&gt;
+            &lt;name&gt;EvoSuite Repository&lt;/name&gt;
+            &lt;url&gt;http://www.evosuite.org/m2&lt;/url&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+
+    &lt;dependencies&gt;
+    
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;!-- https://mvnrepository.com/artifact/org.evosuite/evosuite-client --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.evosuite&lt;/groupId&gt;
+            &lt;artifactId&gt;evosuite-client&lt;/artifactId&gt;
+            &lt;version&gt;1.0.6&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.evosuite&lt;/groupId&gt;
+            &lt;artifactId&gt;evosuite-standalone-runtime&lt;/artifactId&gt;
+            &lt;version&gt;1.0.6&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;pluginManagement&gt;&lt;!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) --&gt;
+            &lt;plugins&gt;
+                &lt;plugin&gt;
+                    &lt;groupId&gt;org.evosuite.plugins&lt;/groupId&gt;
+                    &lt;artifactId&gt;evosuite-maven-plugin&lt;/artifactId&gt;
+                    &lt;version&gt;1.0.6&lt;/version&gt;
+                &lt;/plugin&gt;
+            &lt;/plugins&gt;
+        &lt;/pluginManagement&gt;
+
+        &lt;plugins&gt;
+
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+<pre><code class="sh">mvn compile -DmemoryInMB=4000 -Dcores=2 -DtargetFolder=src/test/java/evosuite evosuite:generate evosuite:export
+</code></pre>
+]]></content>
+      <categories>
+        <category>书籍源码</category>
+      </categories>
+      <tags>
+        <tag>代理</tag>
+        <tag>资源</tag>
+        <tag>计算机</tag>
       </tags>
   </entry>
   <entry>
@@ -4169,217 +4363,23 @@ spec:
       </tags>
   </entry>
   <entry>
-    <title>计算机常识.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86/</url>
-    <content><![CDATA[<h1 id="计算机常识"><a href="#计算机常识" class="headerlink" title="计算机常识"></a>计算机常识</h1><h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>正向代理类是一个条班级，代理访问外部资源</p>
-<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124853014-1532060796.png" alt="img"></p>
-<p>正向代理 是一个位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。客户端必须要进行一些特别的设置才能使用正向代理。</p>
-<h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><ul>
-<li>访问原来无法访问的资源如<code>google</code></li>
-<li>可以做缓存，加速访问资源</li>
-<li>对客户端访问授权，上网进行认证</li>
-<li>代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息</li>
-</ul>
-<p>如<code>ccproxy</code>,<code>ccproxy</code>可以完成两项大功能，代理共享上网和客户端代理权限管理</p>
-<h4 id="golang实现简单的正向代理"><a href="#golang实现简单的正向代理" class="headerlink" title="golang实现简单的正向代理"></a>golang实现简单的正向代理</h4><pre><code class="golang">
-import (
-    &quot;fmt&quot;
-    &quot;io/ioutil&quot;
-    &quot;net&quot;
-    &quot;net/http&quot;
-    &quot;strings&quot;
-)
-
-//正想代理
-
-type Pxy struct &#123;
-&#125;
-
-func (p *Pxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) &#123;
-    fmt.Printf(&quot;Received request %s %s %s\n&quot;, req.Method, req.Host, req.RemoteAddr)
-    transport := http.DefaultTransport
-    outReq := new(http.Request)
-    *outReq = *req
-    if clientIP, _, err := net.SplitHostPort(req.RemoteAddr); err == nil &#123;
-        if prior, ok := outReq.Header[&quot;X-Forwarded-For&quot;]; ok &#123;
-            clientIP = strings.Join(prior, &quot;, &quot;) + &quot;, &quot; + clientIP
-        &#125;
-        outReq.Header.Set(&quot;X-Forwarded-For&quot;, clientIP)
-    &#125;
-    res, err := transport.RoundTrip(outReq)
-    if err != nil &#123;
-        rw.WriteHeader(http.StatusBadGateway)
-        return
-    &#125;
-    for key, value := range res.Header &#123;
-        for _, v := range value &#123;
-            rw.Header().Add(key, v)
-        &#125;
-    &#125;
-    rw.WriteHeader(res.StatusCode)
-    s, _ := ioutil.ReadAll(res.Body)
-    if strings.Contains(req.RequestURI, &quot;html&quot;) &#123;
-        fmt.Println(req.RequestURI)
-    &#125;
-
-    //if req.RequestURI &#123;
-    //
-    //&#125;
-    //fmt.Println(string(s))
-    //io.Copy(rw, res.Body)
-    //x:=[]byte&#123;&#39;1&#39;, &#39;2&#39;,&#39;3&#39;&#125;
-    rw.Write(s)
-    res.Body.Close()
-&#125;
-
-func main() &#123;
-    fmt.Printf(&quot;proxy on :8080&quot;)
-    http.Handle(&quot;/&quot;, &amp;Pxy&#123;&#125;)
-    http.ListenAndServe(&quot;0.0.0.0:8080&quot;, nil)
-&#125;
-</code></pre>
-<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>初次接触方向代理的感觉是，客户端是无感知代理的存在的，反向代理对外都是透明的，访问者者并不知道自己访问的是一个代理。因为客户端不需要任何配置就可以访问。</p>
-<p>　　反向代理（Reverse Proxy）实际运行方式是指以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个服务器。</p>
-<p>反向代理的作用：</p>
+    <title>算法研究.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/</url>
+    <content><![CDATA[<h1 id="算法研究"><a href="#算法研究" class="headerlink" title="算法研究"></a>算法研究</h1><p>这个章节，会用来解决一些算法相关的问题，目前列出算法如下，预期会提供<code>算法描述</code>，<code>代码实现</code>，<code>动态图-有就会给</code>，<code>算法相关扩展</code></p>
 <ul>
-<li>保证内网的安全，可以使用反向代理提供WAF功能，阻止web攻击</li>
+<li>动态规划算法</li>
+<li>概率算法</li>
+<li>排序算法</li>
+<li>加密算法</li>
 </ul>
-<p>大型网站，通常将反向代理作为公网访问地址，Web服务器是内网。</p>
-<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124341280-1435223816.png" alt="img"></p>
-<ul>
-<li><p>负载均衡，通过反向代理服务器来优化网站的负载</p>
-<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86.assets/305504-20161112124423530-566240666.png" alt="img"></p>
-</li>
-</ul>
-<h4 id="反向代理例子"><a href="#反向代理例子" class="headerlink" title="反向代理例子"></a>反向代理例子</h4><pre><code class="golang">package main
-
-import (
-    &quot;log&quot;
-    &quot;net/http&quot;
-    &quot;net/http/httputil&quot;
-)
-
-func main() &#123;
-    http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) &#123;
-        director := func(req *http.Request) &#123;
-            req = r
-            req.URL.Scheme = &quot;http&quot;
-            req.URL.Host = r.Host
-        &#125;
-        proxy := &amp;httputil.ReverseProxy&#123;Director: director&#125;
-        proxy.ServeHTTP(w, r)
-    &#125;)
-
-    log.Fatal(http.ListenAndServe(&quot;:8888&quot;, nil))
-&#125;
-</code></pre>
-<h3 id="代理访问HTTPS"><a href="#代理访问HTTPS" class="headerlink" title="代理访问HTTPS"></a>代理访问HTTPS</h3><p>可以在远程服务器上用http.Get 或client.Do获取http或https网页内容。然后用http.ListenAndServe向本地返回获取到的内容。</p>
-<pre><code class="go">package main
-
-import (
-    &quot;fmt&quot;
-    &quot;io/ioutil&quot;
-    &quot;net/http&quot;
-)
-
-func main() &#123;
-    resp, _ := http.Get(&quot;https://www.baidu.com&quot;)
-    defer resp.Body.Close()
-    body, _ := ioutil.ReadAll(resp.Body)
-    fmt.Println(string(body))
-
-&#125;
-</code></pre>
-<p>或</p>
-<pre><code class="go">package main
-
-import (
-    &quot;fmt&quot;
-    &quot;io/ioutil&quot;
-    &quot;net/http&quot;
-)
-
-func main() &#123;
-    client := &amp;http.Client&#123;&#125;
-    req, _ := http.NewRequest(&quot;GET&quot;, &quot;https://www.baidu.com&quot;, nil)
-    //req.Header.Set(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;)
-    //req.Header.Set(&quot;Cookie&quot;, &quot;name=any&quot;)
-    resp, err := client.Do(req)
-    defer resp.Body.Close()
-    body, err := ioutil.ReadAll(resp.Body)
-    if err != nil &#123;
-        // handle error
-    &#125;
-    fmt.Println(string(body))
-
-&#125;
-</code></pre>
-<h2 id="机器学习路线"><a href="#机器学习路线" class="headerlink" title="机器学习路线"></a>机器学习路线</h2><p>公开课+书+Kaggle </p>
-<h2 id="PDF"><a href="#PDF" class="headerlink" title="PDF"></a>PDF</h2><p>大部分pdf阅读软件，都是基于<code>poppler</code>改的</p>
-<h2 id="程序部署"><a href="#程序部署" class="headerlink" title="程序部署"></a>程序部署</h2><p><code>Supervisord</code>可以把程序部署成daemon ，<code>Supervisord</code>使用python</p>
-<h2 id="Evosuite配置"><a href="#Evosuite配置" class="headerlink" title="Evosuite配置"></a>Evosuite配置</h2><pre><code class="xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-
-
-    &lt;repositories&gt;
-
-        &lt;repository&gt;
-            &lt;id&gt;EvoSuite&lt;/id&gt;
-            &lt;name&gt;EvoSuite Repository&lt;/name&gt;
-            &lt;url&gt;http://www.evosuite.org/m2&lt;/url&gt;
-        &lt;/repository&gt;
-    &lt;/repositories&gt;
-
-    &lt;dependencies&gt;
-    
-        &lt;dependency&gt;
-            &lt;groupId&gt;junit&lt;/groupId&gt;
-            &lt;artifactId&gt;junit&lt;/artifactId&gt;
-            &lt;version&gt;4.12&lt;/version&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-        &lt;/dependency&gt;
-        &lt;!-- https://mvnrepository.com/artifact/org.evosuite/evosuite-client --&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.evosuite&lt;/groupId&gt;
-            &lt;artifactId&gt;evosuite-client&lt;/artifactId&gt;
-            &lt;version&gt;1.0.6&lt;/version&gt;
-        &lt;/dependency&gt;
-
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.evosuite&lt;/groupId&gt;
-            &lt;artifactId&gt;evosuite-standalone-runtime&lt;/artifactId&gt;
-            &lt;version&gt;1.0.6&lt;/version&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-    &lt;build&gt;
-        &lt;pluginManagement&gt;&lt;!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) --&gt;
-            &lt;plugins&gt;
-                &lt;plugin&gt;
-                    &lt;groupId&gt;org.evosuite.plugins&lt;/groupId&gt;
-                    &lt;artifactId&gt;evosuite-maven-plugin&lt;/artifactId&gt;
-                    &lt;version&gt;1.0.6&lt;/version&gt;
-                &lt;/plugin&gt;
-            &lt;/plugins&gt;
-        &lt;/pluginManagement&gt;
-
-        &lt;plugins&gt;
-
-        &lt;/plugins&gt;
-    &lt;/build&gt;
-&lt;/project&gt;
-</code></pre>
-<pre><code class="sh">mvn compile -DmemoryInMB=4000 -Dcores=2 -DtargetFolder=src/test/java/evosuite evosuite:generate evosuite:export
-</code></pre>
-]]></content>
+<h2 id="概率算法"><a href="#概率算法" class="headerlink" title="概率算法"></a>概率算法</h2><h3 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h3><h4 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h4><h4 id="动态图"><a href="#动态图" class="headerlink" title="动态图"></a>动态图</h4><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h2 id="排序算法-1"><a href="#排序算法-1" class="headerlink" title="排序算法"></a>排序算法</h2><h2 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h2>]]></content>
       <categories>
         <category>书籍源码</category>
       </categories>
       <tags>
-        <tag>代理</tag>
-        <tag>资源</tag>
-        <tag>计算机</tag>
+        <tag>算法</tag>
+        <tag>动态</tag>
+        <tag>规划</tag>
       </tags>
   </entry>
   <entry>

@@ -295,186 +295,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/uncategorized/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/" itemprop="url">koal_临时记录.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:20:49+08:00">
-                2021-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="临时记录"><a href="#临时记录" class="headerlink" title="临时记录"></a>临时记录</h1><pre><code>roleKind（string类型） 角色类型/区分是否为管理员  1 是，0 否
-rule (角色排斥规则 string) 没有就不传
-http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda647732746559bb235cc5e590eea1786d0d076939&amp;token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY3NDQzODIsInVzZXJuYW1lIjoiemhhZG1pbiJ9.aBo6YzXqG0bfUgO2S-a0ro3cU0yGIRUG7TtG_B2gzLE
-1336203398069878785  
-</code></pre>
-<h2 id="工作任务"><a href="#工作任务" class="headerlink" title="工作任务"></a>工作任务</h2><ul>
-<li><p>密钥同一个租户能分配几次</p>
-<ul>
-<li><input disabled="" type="checkbox"> <table>
-<thead>
-<tr>
-<th><em><strong>*编号*</strong></em></th>
-<th><em><strong>*功能点*</strong></em></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>系统配置识别密钥隔离还是密码机隔离 1</td>
-</tr>
-<tr>
-<td>2</td>
-<td>系统启动初始化功能命令空间  \1**. 如果是密钥级别隔离，则调度服务放在公共命名空间中，在系统初始化时，初始化该公共命名空间。**</td>
-</tr>
-<tr>
-<td>3</td>
-<td>租户申请单中增加密钥列表</td>
-</tr>
-<tr>
-<td>4</td>
-<td>运营、运维申请单中展示密钥详情</td>
-</tr>
-<tr>
-<td>5</td>
-<td>运维管理员交付密码机服务，包含填写密钥</td>
-</tr>
-<tr>
-<td>6</td>
-<td>增加密钥主管角色，密钥管理等</td>
-</tr>
-<tr>
-<td>7</td>
-<td>调用SDF接口时，应检查该应用是否有权限使用该密码机服务和密钥索引 <strong>怎么检查</strong></td>
-</tr>
-<tr>
-<td>8</td>
-<td>是密钥形式隔离，则新建密码机组时，不需要选择租户 <strong>不需要选择租户</strong></td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-</li>
-<li><p>增加额外数据库SYSGBA 123456789 （密钥隔离）</p>
-</li>
-<li></li>
-</ul>
-<h2 id="代码review"><a href="#代码review" class="headerlink" title="代码review"></a>代码review</h2><p>review commit</p>
-<ul>
-<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/00b75bfc535d35ff6a5b91929e4b21c238dacb85"> 00b75bfc</a> 使用通用工具累判断  <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
-<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/8f82d5255d0bf4524d14c373317d013b5220cfab"> 8f82d525</a> 存在npe问题，需要修正    <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
-</ul>
-<h2 id="24f56f35-小问题，常量命名，对象复用"><a href="#24f56f35-小问题，常量命名，对象复用" class="headerlink" title="24f56f35 小问题，常量命名，对象复用"></a><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/24f56f356f818f34e42e84bc444998f518428505">24f56f35</a> 小问题，常量命名，对象复用</h2><p>kcsp-kubecheck</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/koal_trafit%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1%20/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1172,7 +992,7 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/koal_%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1191,7 +1011,7 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/uncategorized/koal_%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF/" itemprop="url">koal_相关信息.md</a></h2>
+                <a class="post-title-link" href="/uncategorized/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/" itemprop="url">koal_临时记录.md</a></h2>
         
 
         <div class="post-meta">
@@ -1243,775 +1063,67 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
       
         
           
-            <h1 id="相关信息"><a href="#相关信息" class="headerlink" title="相关信息"></a>相关信息</h1><table>
+            <h1 id="临时记录"><a href="#临时记录" class="headerlink" title="临时记录"></a>临时记录</h1><pre><code>roleKind（string类型） 角色类型/区分是否为管理员  1 是，0 否
+rule (角色排斥规则 string) 没有就不传
+http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda647732746559bb235cc5e590eea1786d0d076939&amp;token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY3NDQzODIsInVzZXJuYW1lIjoiemhhZG1pbiJ9.aBo6YzXqG0bfUgO2S-a0ro3cU0yGIRUG7TtG_B2gzLE
+1336203398069878785  
+</code></pre>
+<h2 id="工作任务"><a href="#工作任务" class="headerlink" title="工作任务"></a>工作任务</h2><ul>
+<li><p>密钥同一个租户能分配几次</p>
+<ul>
+<li><input disabled="" type="checkbox"> <table>
 <thead>
 <tr>
-<th>信息</th>
-<th>内容</th>
+<th><em><strong>*编号*</strong></em></th>
+<th><em><strong>*功能点*</strong></em></th>
 </tr>
 </thead>
 <tbody><tr>
-<td>10.0.130.230:2999  k0a1root123</td>
-<td></td>
+<td>1</td>
+<td>系统配置识别密钥隔离还是密码机隔离 1</td>
 </tr>
 <tr>
-<td>Lb@xg123</td>
-<td></td>
+<td>2</td>
+<td>系统启动初始化功能命令空间  \1**. 如果是密钥级别隔离，则调度服务放在公共命名空间中，在系统初始化时，初始化该公共命名空间。**</td>
 </tr>
 <tr>
-<td>/v1/health</td>
-<td></td>
+<td>3</td>
+<td>租户申请单中增加密钥列表</td>
 </tr>
 <tr>
-<td>/v1/backups</td>
-<td></td>
+<td>4</td>
+<td>运营、运维申请单中展示密钥详情</td>
 </tr>
 <tr>
-<td>/v1/recovery</td>
-<td></td>
+<td>5</td>
+<td>运维管理员交付密码机服务，包含填写密钥</td>
 </tr>
 <tr>
-<td>/v1/roles</td>
-<td></td>
+<td>6</td>
+<td>增加密钥主管角色，密钥管理等</td>
 </tr>
 <tr>
-<td>eyJhbGciOiJSUzI1NiIsImtpZCI6ImtMWm1NMmwyeVBRSjIxZjd6b1QzalViMGxKVWo2SXI1NUV6YUw0ajNRTjAifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZC10b2tlbi13eHdjOSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjA2NjNjMWM0LWIzMDUtNGFkZS1hNGY2LWM2MzVmNWM4MGQ5MyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDprdWJlcm5ldGVzLWRhc2hib2FyZCJ9.qcAdyE91v9YaiK5-pnJHHqSKd_NLgC3Zr6b-EpKz5BZqFHDPL0u2N48GWENx52z9u5-ttjnddzKVA1nQ36fZJrsxCf-HmFDnBs7kfc-Fy3faViskLx_YwSFHJrvs1vZcY_wIEBIinGnfg3NMtQKcsdxe1XOGuABJ3i4_KjIER7KgZqHfD20YH7rCbTNHKODBcmJvGXP-Dq-tL5tBiczRrJz4g79jkgMx-NB0mPhKRd1Mz0vkj16O6DC41JytXhizOOWgCJlTz8M2g53J69KWfAih6FzgwzqxD1Wa2SGtMe8h8rtN0yIiTkraSO0SLMroHbcYOJ4_umlszhByb4ox-A</td>
-<td></td>
+<td>7</td>
+<td>调用SDF接口时，应检查该应用是否有权限使用该密码机服务和密钥索引 <strong>怎么检查</strong></td>
 </tr>
 <tr>
-<td><a href="http://10.0.1.8/mantis2/my_view_page.php?refresh=true">http://10.0.1.8/mantis2/my_view_page.php?refresh=true</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="http://10.0.130.232:8888/user/login?redirect=/">http://10.0.130.232:8888/user/login?redirect=%2F</a>   测试环境地址</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="http://10.0.130.234/">http://10.0.130.234/</a> admin Koal123456 harbor地址</td>
-<td></td>
-</tr>
-<tr>
-<td>开发环境<a href="http://10.0.130.232:3005/">http://10.0.130.232:3005</a></td>
-<td></td>
-</tr>
-<tr>
-<td>k8s地址 <a href="https://10.0.130.232:32000/">https://10.0.130.232:32000/</a></td>
-<td></td>
-</tr>
-<tr>
-<td>trafit 地址 <a href="http://10.0.130.232:32733/dashboard/#/">http://10.0.130.232:32733/dashboard/#/</a></td>
-<td></td>
-</tr>
-<tr>
-<td>\debian.koal.com\ubuntu\iso 公司软件共享存储服务器</td>
-<td></td>
-</tr>
-<tr>
-<td>相关yaml配置地址 <a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/k8s-deploy-test/-/tree/develop/src/main/resources/secapp">http://git.koal.com/hs/kcsp/kcsp-temp-research/k8s-deploy-test/-/tree/develop/src/main/resources/secapp</a></td>
-<td></td>
-</tr>
-<tr>
-<td>A Graduate Course in Applied Cryptography</td>
-<td></td>
-</tr>
-<tr>
-<td>10.0.130.64 123123</td>
-<td></td>
+<td>8</td>
+<td>是密钥形式隔离，则新建密码机组时，不需要选择租户 <strong>不需要选择租户</strong></td>
 </tr>
 </tbody></table>
-<h4 id="测试地址"><a href="#测试地址" class="headerlink" title="测试地址"></a>测试地址</h4><p><a href="http://10.0.1.8/mantis/view.php?id=56766">http://10.0.1.8/mantis/view.php?id=56766</a></p>
-<table>
-<thead>
-<tr>
-<th>备注A</th>
-<th>备注B</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>hubot token</td>
-<td>xoxb-1644982196691-1782627901201-K9COM3aX9teYlJRjfIx8dwu2</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>/home/lame/.jnotify/start_jnotify.sh</td>
-<td><a href="file:///home/lame/.jnotify/">文件同步</a></td>
-</tr>
-<tr>
-<td>/home/lame/disk/ftp</td>
-<td><a href="file:///home/lame/disk/ftp">文件上传服务</a></td>
-</tr>
-<tr>
-<td>/media/lame/0DD80F300DD80F30/koal/kcsp-admin</td>
-<td><a href="file:///media/lame/0DD80F300DD80F30/koal/kcsp-admin">kcsp 工作目录</a>|<a href="file:///media/lame/0DD80F300DD80F30/koal/kcsp-admin/kcsp-boot/kcsp-boot-module-system/src/main/resources/k8s_res">k8s_res</a></td>
-</tr>
-<tr>
-<td>/media/lame/0DD80F300DD80F30/code/jnotify</td>
-<td><a href="file:///media/lame/0DD80F300DD80F30/code/jnotify">文件同步工程</a></td>
-</tr>
-<tr>
-<td>/media/lame/0DD80F300DD80F30/document</td>
-<td><a href="file:///media/lame/0DD80F300DD80F30/document">文档本地存储目录</a></td>
-</tr>
-<tr>
-<td></td>
-<td>bpftop</td>
-</tr>
-<tr>
-<td>/media/lame/新加卷/code/script</td>
-<td><a href="file:///media/lame/新加卷/code/script">脚本</a></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>角色</th>
-<th>编码</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>系统管理员</td>
-<td></td>
-</tr>
-<tr>
-<td>运维管理员</td>
-<td>implementer-manager</td>
-</tr>
-<tr>
-<td>运营管理员</td>
-<td>operate-admin</td>
-</tr>
-<tr>
-<td>租户管理员</td>
-<td>tenant-manager</td>
-</tr>
-<tr>
-<td>审计员</td>
-<td>auditor</td>
-</tr>
-<tr>
-<td>安全管理员</td>
-<td>security-manager</td>
-</tr>
-<tr>
-<td>密钥管理员</td>
-<td>secretKey-manager</td>
-</tr>
-</tbody></table>
-<p>运维管理员  implementer-manager<br>运营管理员  operate-admin<br>租户管理员  tenant-manager<br>审计员    auditor<br>安全管理员  security-manager<br>密钥管理员  secretKey-manager</p>
-<h2 id="工作备忘"><a href="#工作备忘" class="headerlink" title="工作备忘"></a>工作备忘</h2><h5 id=""><a href="#" class="headerlink" title=""></a></h5><h2 id="KOAL-日计划"><a href="#KOAL-日计划" class="headerlink" title="KOAL-日计划"></a>KOAL-日计划</h2><p>20210119</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[ x ]密钥查询接口</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>[ x ]申请单密码机组过滤</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>[ x ]第二个服务无法打开</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>[ x ]密码应用ak修改</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210120</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>租户管理员添加租户</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210121</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>kms健康检查修改 /v1/health</td>
-<td>目前不具备开发条件，先定义好了开发位置和接口</td>
-</tr>
-<tr>
-<td>平台访问kms接口修改 +/v1</td>
-<td>目前不具备开发条件，先定义好了开发位置和接口</td>
-</tr>
-<tr>
-<td>模板设置管理页面和api地址修改</td>
-<td>增加api服务标识，完成</td>
-</tr>
-<tr>
-<td>登录返回信息加上roleInfo</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>kms服务开通增加额外参数查询kcspvsmip,scspport,kcspak</td>
-<td>完成（yaml正确替换）230挂了，服务不能部署其他未测试</td>
-</tr>
-<tr>
-<td>周启文接口问题了解</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>模板服务发布类型bug</td>
-<td>(增加相同字典表)完成</td>
-</tr>
-</tbody></table>
-<p>20210122</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>kms yaml学习</td>
-<td></td>
-</tr>
-<tr>
-<td>服务参数替换测试</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>下午保密培训</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>调试KMS，可在系统中部署，并看到管理界面</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>租户管理员添加用户（改成从表形似）</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>删除用户时候，要删掉这个从表对应的数据</td>
-<td></td>
-</tr>
-<tr>
-<td>kms token查询返回的rolecode 要从这里替换掉，增加额外判断</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>服务申请增加监控状态</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210125</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>kms 健康检查状态</td>
-<td>目前有token,暂时根据invalde 判读是否健康</td>
-</tr>
-<tr>
-<td>kcsp bug修改</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>kms用户对接</td>
-<td>完成，KMSv5缺少字段rolecode 与周启文沟通了</td>
-</tr>
-</tbody></table>
-<p>20210126</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CISAW培训</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>角色要分租户内角色和平台角色</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>同一个应用的同一个用户，统一角色智能分配一次</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>帮助中心和系统公告的界面</td>
-<td>系统公告有帮助中心没有</td>
-</tr>
-</tbody></table>
-<p>20210127</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CISAW培训</td>
-<td>未完成 没时间听</td>
-</tr>
-<tr>
-<td>服务扩容</td>
-<td>未完成 模板处基本完成，申请单的地方修改还没开始</td>
-</tr>
-<tr>
-<td>服务日志对接（目前详情接口日志错误）</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>aka去掉(服务)</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>aka家回来</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>扩容 admin path，kms模板 修改</td>
-<td>完成未测试</td>
-</tr>
-</tbody></table>
-<p>20210128</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CISAW培训</td>
-<td></td>
-</tr>
-<tr>
-<td>服务扩容</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>PV/PVC 修改</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>服务扩充adminpath,api path kms模板修改 测试</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210129</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>服务定义/服务商店</td>
-<td>接口完成，未定义</td>
-</tr>
-<tr>
-<td>释放流程开发</td>
-<td>完成待验证</td>
-</tr>
-<tr>
-<td>服务详情修改</td>
-<td>未完成，密钥列表有问题</td>
-</tr>
-<tr>
-<td>CISAW</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210130</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>服务详情修改</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>服务定义/服务商店</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>年会</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210201</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>系统访问记录</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>系统自测，bug修改</td>
-<td>未完成</td>
-</tr>
-<tr>
-<td>KMS日志和小huo对接</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>周启文，沟通接口镜像问题</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>租户内用户去掉部门选择</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>模板问题修改</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210202</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>扩容，释放增加按钮权限</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>kms服务实施，健康检查会被调用两次，触发时机排查</td>
-<td></td>
-</tr>
-<tr>
-<td>系统访问记录(增加批量推送接口)</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>业务窗口展示控制</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>系统自测，bug修改</td>
-<td></td>
-</tr>
-<tr>
-<td>租户内用户管理部门分配隐藏</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>帮助中心做成树形菜单</td>
-<td></td>
-</tr>
-<tr>
-<td>平台用户管理中工号，部门，工作量引擎去掉</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>登陆页面callback</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210203</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>登陆页面callback</td>
-<td></td>
-</tr>
-<tr>
-<td>帮助中心做成树形菜单</td>
-<td></td>
-</tr>
-<tr>
-<td>kms服务实施，健康检查会被调用两次，触发时机排查</td>
-<td></td>
-</tr>
-<tr>
-<td>系统自测，bug修改</td>
-<td></td>
-</tr>
-<tr>
-<td>服务定义接口地址管理地址匹配</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210204</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>登陆页面callback</td>
-<td>由前端配置跳转</td>
-</tr>
-<tr>
-<td>帮助中心做成树形菜单</td>
-<td></td>
-</tr>
-<tr>
-<td>kms服务实施，健康检查会被调用两次，触发时机排查</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>系统自测，bug修改</td>
-<td></td>
-</tr>
-<tr>
-<td>服务定义接口地址管理地址匹配</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210205</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>租户内用户，菜单权限整理修改 1. 我的服务 2.密钥管理 3.我的应用</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>bug修改</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>帮助中心后续对接还需要前端</td>
-</tr>
-<tr>
-<td></td>
-<td>系统登陆callback需要前端</td>
-</tr>
-</tbody></table>
-<p>20210206</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>密码服务平台接入网关</td>
-<td></td>
-</tr>
-<tr>
-<td>密码服务平台证书认证</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210219</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>密码服务平台证书认证 （用户字段，证书管理）</td>
-<td>完成</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>帮助中心接口调整</td>
-<td>50%</td>
-</tr>
-</tbody></table>
-<p>20210220</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>表备注</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>成员管理菜单</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>帮助中心</td>
-<td>初步100%</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210222</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>帮助中心问题修复</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>kms流程联调</td>
-<td>,管理页面陈li,请求参数加入header ，目前木有方案可以加入request header</td>
-</tr>
-<tr>
-<td>kms推送日志</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>我的服务健康检查问题-服务创建默认运行健康检查结果为准备就绪</td>
-<td>100% 但是实际上，服务这时候可能有模块还没有被拉起来，这个设置是不是有问题</td>
-</tr>
-<tr>
-<td>我的服务一些问题修正</td>
-<td>100%</td>
-</tr>
-</tbody></table>
-<p>20210223</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>运营人员查看服务详情，密钥列表显示问题</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>运维人员实施也没密钥列表问题重构</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>租户选择安全员审计员</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>我的服务密码机密码应用拆分</td>
-<td>100%</td>
-</tr>
-</tbody></table>
-<p>20210224</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>bug交叉检查</td>
-<td>30%</td>
-</tr>
-<tr>
-<td>租户内用户编辑角色</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>密码机健康检查问题调整</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>密码应用健康检查问题调整</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>下线后面改成上线</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>应用授权，脏数据，异常情况抛出</td>
-<td>100%</td>
-</tr>
-</tbody></table>
-<p>20210225</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>新用户登陆，部门校验去掉</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>申请单，驳回之类的修改</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>通告单模糊查询</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>服务模板定义相关问题</td>
-<td>100%</td>
-</tr>
-</tbody></table>
-<h2 id="日计划结束标识"><a href="#日计划结束标识" class="headerlink" title="日计划结束标识"></a>日计划结束标识</h2><p>flag</p>
+</li>
+</ul>
+</li>
+<li><p>增加额外数据库SYSGBA 123456789 （密钥隔离）</p>
+</li>
+<li></li>
+</ul>
+<h2 id="代码review"><a href="#代码review" class="headerlink" title="代码review"></a>代码review</h2><p>review commit</p>
+<ul>
+<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/00b75bfc535d35ff6a5b91929e4b21c238dacb85"> 00b75bfc</a> 使用通用工具累判断  <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
+<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/8f82d5255d0bf4524d14c373317d013b5220cfab"> 8f82d525</a> 存在npe问题，需要修正    <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
+</ul>
+<h2 id="24f56f35-小问题，常量命名，对象复用"><a href="#24f56f35-小问题，常量命名，对象复用" class="headerlink" title="24f56f35 小问题，常量命名，对象复用"></a><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/24f56f356f818f34e42e84bc444998f518428505">24f56f35</a> 小问题，常量命名，对象复用</h2><p>kcsp-kubecheck</p>
 
           
         
@@ -2060,7 +1172,7 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/koal_%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%99%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -2079,7 +1191,141 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/" itemprop="url">01_NOSQL数据库分类.md</a></h2>
+                <a class="post-title-link" href="/uncategorized/koal_%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%99%E6%B3%95/" itemprop="url">koal_简单的写法.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:20:49+08:00">
+                2021-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简单的写法"><a href="#简单的写法" class="headerlink" title="简单的写法"></a>简单的写法</h1><h2 id="监控项描述DSL"><a href="#监控项描述DSL" class="headerlink" title="监控项描述DSL"></a>监控项描述DSL</h2><p>为了应对监控的动态可配置，开发了一个小的dsl。虽然可以基于现有的jvm方言或者自定义解析器搞，但是时间不够，担心改不动bug目前简单解析了一下。</p>
+<h3 id="methodName"><a href="#methodName" class="headerlink" title="methodName"></a>methodName</h3><blockquote>
+<p>目前定义了，两种</p>
+</blockquote>
+<ul>
+<li>yaml@:: 从配置文件中获取参数的方式</li>
+<li>form@:: 配置在监控面板的展示</li>
+<li>-&gt; 定义了配置对应的key</li>
+</ul>
+<p>语句之间用<code>;</code>分开</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>那我来给大家举个例子，</p>
+<p><code>yaml@::</code> 定义了从配置文件的kube.nfs 捞取配置，监控使用的传输参数为ip,</p>
+<p><code>form@::</code> 定义了，在表单展示的名字为，NFSIP，不可编辑，传输到后端存的fieldName是nfsIp</p>
+<pre><code class="sh">yaml@::kube.nfs-&gt;ip;form@::NFSIP,false,nfsIp
+</code></pre>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/" itemprop="url">01_linux离线安装包.md</a></h2>
         
 
         <div class="post-meta">
@@ -2153,45 +1399,184 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
       
         
           
-            <h1 id="NOSQL数据库分类"><a href="#NOSQL数据库分类" class="headerlink" title="NOSQL数据库分类"></a>NOSQL数据库分类</h1><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>部分代表</th>
-<th>特点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>列存储</td>
-<td>HbaseCassandraHypertable</td>
-<td>顾名思义，是按列存储数据的。最大的特点是方便存储结构化和半结构化数据，方便做数据压缩，对针对某一列或者某几列的查询有非常大的IO优势。</td>
-</tr>
-<tr>
-<td>文档存储</td>
-<td>MongoDBCouchDB</td>
-<td>文档存储一般用类似json的格式存储，存储的内容是文档型的。这样也就有机会对某些字段建立索引，实现关系数据库的某些功能。</td>
-</tr>
-<tr>
-<td>key-value存储</td>
-<td>Tokyo Cabinet / TyrantBerkeley DBMemcacheDBRedis</td>
-<td>可以通过key快速查询到其value。一般来说，存储不管value的格式，照单全收。（Redis包含了其他功能）</td>
-</tr>
-<tr>
-<td>图存储</td>
-<td>Neo4JFlockDB</td>
-<td>图形关系的最佳存储。使用传统关系数据库来解决的话性能低下，而且设计使用不方便。</td>
-</tr>
-<tr>
-<td>对象存储</td>
-<td>db4oVersant</td>
-<td>通过类似面向对象语言的语法操作数据库，通过对象的方式存取数据。</td>
-</tr>
-<tr>
-<td>xml数据库</td>
-<td>Berkeley DB XMLBaseX</td>
-<td>高效的存储XML数据，并支持XML的内部查询语法，比如XQuery,Xpath。</td>
-</tr>
-</tbody></table>
+            <h1 id="linux离线安装包"><a href="#linux离线安装包" class="headerlink" title="linux离线安装包"></a>linux离线安装包</h1><p><code>apt-get</code>离线安装包，apt-get install安装的软件包都在**/var/cache/apt/archives** 目录下，下载文件位置可以在**/etc/apt/source.list**下指定。</p>
+<p>也有可能在**/usr/share/doc<strong>和</strong>/usr/share/lintian/overides/**</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_nodejs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_nodejs/" itemprop="url">01_nodejs.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
+                2021-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><h2 id="template"><a href="#template" class="headerlink" title="template"></a>template</h2><p><code>express-art-template语法</code></p>
+<pre><code class="sh">(1).表达式
+&#123;&#123; 与 &#125;&#125; 符号包裹起来的语句则为模板的逻辑表达式
+
+(2).输出表达式
+2.1对内容编码输出：&#123;&#123;content&#125;&#125;
+2.2不编码输出：&#123;&#123;#content&#125;&#125;
+
+(3).变量
+
+&#123;&#123;set temp = data.sub.content&#125;&#125;
+
+(4).条件表达式
+&#123;&#123;if admin&#125;&#125;
+        &lt;p&gt;admin&lt;/p&gt;
+&#123;&#123;else if code > 0&#125;&#125;
+       &lt;p&gt;master&lt;/p&gt;
+&#123;&#123;else&#125;&#125;
+        &lt;p&gt;error!&lt;/p&gt;
+&#123;&#123;/if&#125;&#125;
+
+(5).遍历表达式
+无论数组或者对象都可以用 each 进行遍历。
+&#123;&#123;each list as value index&#125;&#125;
+    &lt;li&gt;&#123;&#123;index&#125;&#125; - &#123;&#123;value.user&#125;&#125;&lt;/li&gt;
+&#123;&#123;/each&#125;&#125;
+亦可以被简写：
+&#123;&#123;each list&#125;&#125;
+     &lt;li&gt;&#123;&#123;$index&#125;&#125; - &#123;&#123;$value.user&#125;&#125;&lt;/li&gt;
+&#123;&#123;/each&#125;&#125;
+
+(6).子模板（模板包含表达式）
+a.用于嵌入子模板:
+&#123;&#123;include './header.art'&#125;&#125; 
+</code></pre>
 
           
         
@@ -2405,7 +1790,7 @@ echo out &gt; /sys/class/gpio/gpio21/direction
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_CAP/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -2424,7 +1809,7 @@ echo out &gt; /sys/class/gpio/gpio21/direction
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_CAP/" itemprop="url">01_CAP.md</a></h2>
+                <a class="post-title-link" href="/1/01/" itemprop="url">01.md</a></h2>
         
 
         <div class="post-meta">
@@ -2498,174 +1883,16 @@ echo out &gt; /sys/class/gpio/gpio21/direction
       
         
           
-            <h1 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h1><p>在计算机科学中, CAP定理（CAP theorem）, 又被称作 布鲁尔定理（Brewer’s theorem）, 它指出对于一个分布式计算系统来说，不可能同时满足以下三点:</p>
-<ul>
-<li><strong>一致性(Consistency)</strong> (所有节点在同一时间具有相同的数据)</li>
-<li><strong>可用性(Availability)</strong> (保证每个请求不管成功或者失败都有响应)</li>
-<li><strong>分隔容忍(Partition tolerance)</strong> (系统中任意信息的丢失或失败不会影响系统的继续运作)</li>
+            <h1 id="clojure"><a href="#clojure" class="headerlink" title="clojure"></a>clojure</h1><ul>
+<li>clojure <a href="http://cemerick.com/">http://cemerick.com/</a></li>
 </ul>
-<p>CAP理论的核心是：一个分布式系统不可能同时很好的满足一致性，可用性和分区容错性这三个需求，最多只能同时较好的满足两个。</p>
-<p>因此，根据 CAP 原理将 NoSQL 数据库分成了满足 CA 原则、满足 CP 原则和满足 AP 原则三 大类：</p>
-<ul>
-<li>CA - 单点集群，满足一致性，可用性的系统，通常在可扩展性上不太强大。</li>
-<li>CP - 满足一致性，分区容忍性的系统，通常性能不是特别高。</li>
-<li>AP - 满足可用性，分区容忍性的系统，通常可能对一致性要求低一些。</li>
-<li></li>
-</ul>
-<p><img src="/images/01.assets/cap-theoram-image.png" alt="img"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_docx%E6%94%BB%E5%87%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/1/01_docx%E6%94%BB%E5%87%BB/" itemprop="url">01_docx攻击.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
-                2021-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/1/" itemprop="url" rel="index">
-                    <span itemprop="name">1</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="docx攻击"><a href="#docx攻击" class="headerlink" title="docx攻击"></a>docx攻击</h1><ol>
-<li>生成一个正常的docx文件，内容根据实际需求进行编造，保存后将后缀改成zip</li>
-<li>将其解压，修改./word/_rels/下的settings.xml.rels文件，没有的话可以自己添加。</li>
-</ol>
-<p><img src="/images/01.assets/20191025172919941.png" alt="在这里插入图片描述"></p>
-<ol>
-<li><p><strong>修改内容如下：</strong></p>
-<pre><code class="txt">&lt;Relationship Id=&quot;rId6&quot; Type=&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate&quot; Target=&quot;fontTable.xml&quot;/&gt;&lt;/Relationships&gt;
+<p> <a href="https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/">https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/</a></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><pre><code class="sh"> docker stats --no-stream $(docker ps | grep 217a5b187c2812 | awk &#39;&#123;print $1&#125;&#39;)
 </code></pre>
-<p>包含带有<strong>attachmentTemplate</strong>的Type的Relationship标记，是告诉Word打开该.docx时从哪里加载模板的设置，我们可以将Target值修改为远程位置。</p>
-</li>
-</ol>
+<p><code>sed</code></p>
+<p>文字处理</p>
+<pre><code class="sh">sed -i &#39;/百度搜索/d&#39; all.txt 
+</code></pre>
 
           
         
@@ -2775,7 +2002,7 @@ echo out &gt; /sys/class/gpio/gpio21/direction
     <h3 class="widget-title">不知所云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
       <canvas width="250" height="250" id="resCanvas" style="width:100%">
-        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1/" rel="tag">应用服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE/" rel="tag">垃圾</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/" rel="tag">sed</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpio/" rel="tag">gpio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/id3/" rel="tag">id3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%A8%E6%88%B7/" rel="tag">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC/" rel="tag">文本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dna/" rel="tag">dna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AD%96%E7%95%A5/" rel="tag">策略</a><span class="tag-list-count">1</span></li></ul>
+        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E7%AB%AF/" rel="tag">云端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usr/" rel="tag">usr</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/share/" rel="tag">share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crl/" rel="tag">crl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpio/" rel="tag">gpio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/id3/" rel="tag">id3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%A8%E6%88%B7/" rel="tag">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC/" rel="tag">文本</a><span class="tag-list-count">1</span></li></ul>
       </canvas>
     </div>
   </div>
@@ -3016,19 +2243,6 @@ echo out &gt; /sys/class/gpio/gpio21/direction
 
 
 
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-
-    
 
 
 
@@ -3369,6 +2583,28 @@ echo out &gt; /sys/class/gpio/gpio21/direction
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
   <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
