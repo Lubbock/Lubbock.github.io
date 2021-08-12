@@ -76,51 +76,6 @@
       </tags>
   </entry>
   <entry>
-    <title>01_DSL.md</title>
-    <url>/1/01_DSL/</url>
-    <content><![CDATA[<h1 id="DSL"><a href="#DSL" class="headerlink" title="DSL"></a>DSL</h1><p><code>GPL</code>通用编程语言如 python,java,c等等</p>
-<p><code>DSL</code>领域特定语言 Martin Fowler </p>
-<blockquote>
-<p>DSL通过在表达能力上做的妥协换取在某一领域内的高效</p>
-</blockquote>
-<p>常见<code>DSL</code></p>
-<ul>
-<li>SQL</li>
-<li>REGEX</li>
-<li>HTML &amp; CSS</li>
-</ul>
-<h3 id="feature"><a href="#feature" class="headerlink" title="feature"></a>feature</h3><p>上面的几个?明显的缩小了通用编程语言的概念，但是它们确实在自己领域表现地非常出色，因为这些 DSL 就是根据某一个特定领域的特点塑造的；而通用编程语言相比领域特定语言，在设计时是为了解决更加抽象的问题，而关注点并不只是在某一个领域。</p>
-<p>上面的几个例子有着一些共同的特点：</p>
-<ul>
-<li>没有计算和执行的概念；</li>
-<li>其本身并不需要直接表示计算；</li>
-<li>使用时只需要声明规则、事实以及某些元素之间的层级和关系；</li>
-</ul>
-<h3 id="构建DSL"><a href="#构建DSL" class="headerlink" title="构建DSL"></a>构建DSL</h3><p>DSL 的构建与编程语言其实比较类似，想想我们在重新实现编程语言时，需要做那些事情；实现编程语言的过程可以简化为定义语法与语义，然后实现编译器或者解释器的过程，而 DSL 的实现与它也非常类似，我们也需要对 DSL 进行语法与语义上的设计。</p>
-<p>总结下来，实现 DSL 总共有这么两个需要完成的工作：</p>
-<ol>
-<li>设计语法和语义，定义 DSL 中的元素是什么样的，元素代表什么意思</li>
-<li>实现 parser，对 DSL 解析，最终通过解释器来执行</li>
-</ol>
-<h3 id="设计原则和妥协"><a href="#设计原则和妥协" class="headerlink" title="设计原则和妥协"></a>设计原则和妥协</h3><p>DSL 最大的设计原则就是<strong>简单</strong>，通过简化语言中的元素，降低使用者的负担；无论是 Regex、SQL 还是 HTML 以及 CSS，其说明文档往往只有几页，非常易于学习和掌握。但是，由此带来的问题就是，DSL 中缺乏抽象的概念，比如：模块化、变量以及方法等。</p>
-<blockquote>
-<p>抽象的概念并不是某个领域所关注的问题，就像 Regex 并不需要有模块、变量以及方法等概念。</p>
-</blockquote>
-<p>由于抽象能力的缺乏，在我们的项目规模变得越来越大时，DSL 往往满足不了开发者的需求；我们仍然需要编程语言中的模块化等概念对 DSL 进行补充，以此解决 DSL 并不是真正编程语言的问题。</p>
-<h3 id="DSL分类"><a href="#DSL分类" class="headerlink" title="DSL分类"></a>DSL分类</h3><p>DSL不是什么新鲜的玩意儿，我们平时经常接触的SQL，CSS，正则表达式等等都属于DSL。有的DSL可能更加专注于一个方面，例如Mathematica，LOGO等等。这些语言的目标都是特定的领域，与之相对的则是GPPL(General Purpose Programming Language，通用目的编程语言)。Martin Fowler将DSL分为外部DSL及内部DSL两种。外部DSL有自己的特定语法、解析器和词法分析器等等，它们往往是一种小型的编程语言，甚至不会像GPPL那样需要源文件。与之相对的则是内部DSL。内部DSL其实更像是种别称，它代表一类特别API及使用模式。</p>
-<p>　　XSLT，SQL等等都可以算作是外部DSL。外部DSL一般会直接针对特定的领域设计，而不考虑其他方面。James Gosling曾经说过：每个配置文件最终都会变成一门编程语言。一开始您可能只会用它表示一点点东西，慢慢地您便会想要一些规则，而这些规则则变成了表达式，后来您可能还会定义变量，进行条件判断等等，而最终它就变成了一种奇怪的编程语言，这样的情况屡见不鲜。</p>
-<p>　　而内部DSL，正像之前提到的那样，它往往只是代表了一系列特别的API及使用模式，例如LINQ查询语句及Ruby on Rails中的Active Record声明代码等等。内部DSL可以使用一系列API来“伪装”成一种DSL，它往往会利用一些“流畅化”的技巧，例如像jQuery那样把一些方法通过“点”连接起来，而另一些也会利用元编程的方式。内部DSL还有一些优势，例如可以访问语言中的代码或变量，以及利用代码补全，重构等母语言的所有特性。</p>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>dsl</tag>
-        <tag>gpl</tag>
-        <tag>编程语言</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>01_NOSQL数据库分类.md</title>
     <url>/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/</url>
     <content><![CDATA[<h1 id="NOSQL数据库分类"><a href="#NOSQL数据库分类" class="headerlink" title="NOSQL数据库分类"></a>NOSQL数据库分类</h1><table>
@@ -196,6 +151,51 @@
       </tags>
   </entry>
   <entry>
+    <title>01_DSL.md</title>
+    <url>/1/01_DSL/</url>
+    <content><![CDATA[<h1 id="DSL"><a href="#DSL" class="headerlink" title="DSL"></a>DSL</h1><p><code>GPL</code>通用编程语言如 python,java,c等等</p>
+<p><code>DSL</code>领域特定语言 Martin Fowler </p>
+<blockquote>
+<p>DSL通过在表达能力上做的妥协换取在某一领域内的高效</p>
+</blockquote>
+<p>常见<code>DSL</code></p>
+<ul>
+<li>SQL</li>
+<li>REGEX</li>
+<li>HTML &amp; CSS</li>
+</ul>
+<h3 id="feature"><a href="#feature" class="headerlink" title="feature"></a>feature</h3><p>上面的几个?明显的缩小了通用编程语言的概念，但是它们确实在自己领域表现地非常出色，因为这些 DSL 就是根据某一个特定领域的特点塑造的；而通用编程语言相比领域特定语言，在设计时是为了解决更加抽象的问题，而关注点并不只是在某一个领域。</p>
+<p>上面的几个例子有着一些共同的特点：</p>
+<ul>
+<li>没有计算和执行的概念；</li>
+<li>其本身并不需要直接表示计算；</li>
+<li>使用时只需要声明规则、事实以及某些元素之间的层级和关系；</li>
+</ul>
+<h3 id="构建DSL"><a href="#构建DSL" class="headerlink" title="构建DSL"></a>构建DSL</h3><p>DSL 的构建与编程语言其实比较类似，想想我们在重新实现编程语言时，需要做那些事情；实现编程语言的过程可以简化为定义语法与语义，然后实现编译器或者解释器的过程，而 DSL 的实现与它也非常类似，我们也需要对 DSL 进行语法与语义上的设计。</p>
+<p>总结下来，实现 DSL 总共有这么两个需要完成的工作：</p>
+<ol>
+<li>设计语法和语义，定义 DSL 中的元素是什么样的，元素代表什么意思</li>
+<li>实现 parser，对 DSL 解析，最终通过解释器来执行</li>
+</ol>
+<h3 id="设计原则和妥协"><a href="#设计原则和妥协" class="headerlink" title="设计原则和妥协"></a>设计原则和妥协</h3><p>DSL 最大的设计原则就是<strong>简单</strong>，通过简化语言中的元素，降低使用者的负担；无论是 Regex、SQL 还是 HTML 以及 CSS，其说明文档往往只有几页，非常易于学习和掌握。但是，由此带来的问题就是，DSL 中缺乏抽象的概念，比如：模块化、变量以及方法等。</p>
+<blockquote>
+<p>抽象的概念并不是某个领域所关注的问题，就像 Regex 并不需要有模块、变量以及方法等概念。</p>
+</blockquote>
+<p>由于抽象能力的缺乏，在我们的项目规模变得越来越大时，DSL 往往满足不了开发者的需求；我们仍然需要编程语言中的模块化等概念对 DSL 进行补充，以此解决 DSL 并不是真正编程语言的问题。</p>
+<h3 id="DSL分类"><a href="#DSL分类" class="headerlink" title="DSL分类"></a>DSL分类</h3><p>DSL不是什么新鲜的玩意儿，我们平时经常接触的SQL，CSS，正则表达式等等都属于DSL。有的DSL可能更加专注于一个方面，例如Mathematica，LOGO等等。这些语言的目标都是特定的领域，与之相对的则是GPPL(General Purpose Programming Language，通用目的编程语言)。Martin Fowler将DSL分为外部DSL及内部DSL两种。外部DSL有自己的特定语法、解析器和词法分析器等等，它们往往是一种小型的编程语言，甚至不会像GPPL那样需要源文件。与之相对的则是内部DSL。内部DSL其实更像是种别称，它代表一类特别API及使用模式。</p>
+<p>　　XSLT，SQL等等都可以算作是外部DSL。外部DSL一般会直接针对特定的领域设计，而不考虑其他方面。James Gosling曾经说过：每个配置文件最终都会变成一门编程语言。一开始您可能只会用它表示一点点东西，慢慢地您便会想要一些规则，而这些规则则变成了表达式，后来您可能还会定义变量，进行条件判断等等，而最终它就变成了一种奇怪的编程语言，这样的情况屡见不鲜。</p>
+<p>　　而内部DSL，正像之前提到的那样，它往往只是代表了一系列特别的API及使用模式，例如LINQ查询语句及Ruby on Rails中的Active Record声明代码等等。内部DSL可以使用一系列API来“伪装”成一种DSL，它往往会利用一些“流畅化”的技巧，例如像jQuery那样把一些方法通过“点”连接起来，而另一些也会利用元编程的方式。内部DSL还有一些优势，例如可以访问语言中的代码或变量，以及利用代码补全，重构等母语言的所有特性。</p>
+]]></content>
+      <categories>
+        <category>1</category>
+      </categories>
+      <tags>
+        <tag>dsl</tag>
+        <tag>gpl</tag>
+        <tag>编程语言</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>01_linux离线安装包.md</title>
     <url>/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/</url>
     <content><![CDATA[<h1 id="linux离线安装包"><a href="#linux离线安装包" class="headerlink" title="linux离线安装包"></a>linux离线安装包</h1><p><code>apt-get</code>离线安装包，apt-get install安装的软件包都在**/var/cache/apt/archives** 目录下，下载文件位置可以在**/etc/apt/source.list**下指定。</p>
@@ -208,31 +208,6 @@
         <tag>usr</tag>
         <tag>share</tag>
         <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01_emacs.md</title>
-    <url>/1/01_emacs/</url>
-    <content><![CDATA[<h1 id="emacs"><a href="#emacs" class="headerlink" title="emacs"></a>emacs</h1><p>修改<code>init.el</code>不重启emacs</p>
-<pre><code class="sh">Alt+x eval-buffer
-alt+x load-file
-</code></pre>
-<h3 id="major-mode"><a href="#major-mode" class="headerlink" title="major mode"></a>major mode</h3><p>emacs编辑器模式</p>
-<ul>
-<li>程序语言 emacs-lisp-mode,python-mode,ruby-mode</li>
-<li>dired (file manager dired)</li>
-<li>image-mode view image file</li>
-<li>eww eww web browser</li>
-<li></li>
-</ul>
-]]></content>
-      <categories>
-        <category>1</category>
-      </categories>
-      <tags>
-        <tag>emacs</tag>
-        <tag>mode</tag>
-        <tag>dired</tag>
       </tags>
   </entry>
   <entry>
@@ -284,40 +259,28 @@ a.用于嵌入子模板:
       </tags>
   </entry>
   <entry>
-    <title>01_决策树.md</title>
-    <url>/1/01_%E5%86%B3%E7%AD%96%E6%A0%91/</url>
-    <content><![CDATA[<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h3 id="决策树算法"><a href="#决策树算法" class="headerlink" title="决策树算法"></a>决策树算法</h3><ul>
-<li>ID3</li>
-</ul>
-<h4 id="ID3"><a href="#ID3" class="headerlink" title="ID3"></a>ID3</h4><blockquote>
-<p>计算信息謪增益 需要剪枝</p>
-</blockquote>
-<h2 id="树莓派"><a href="#树莓派" class="headerlink" title="树莓派"></a>树莓派</h2><p><img src="/images/01.assets/171439-07c52987d148a108.png" alt="img"></p>
+    <title>01_emacs.md</title>
+    <url>/1/01_emacs/</url>
+    <content><![CDATA[<h1 id="emacs"><a href="#emacs" class="headerlink" title="emacs"></a>emacs</h1><p>修改<code>init.el</code>不重启emacs</p>
+<pre><code class="sh">Alt+x eval-buffer
+alt+x load-file
+</code></pre>
+<h3 id="major-mode"><a href="#major-mode" class="headerlink" title="major mode"></a>major mode</h3><p>emacs编辑器模式</p>
 <ul>
-<li>5V</li>
-<li>3V</li>
-<li>接地</li>
-<li>通用GPIO</li>
+<li>程序语言 emacs-lisp-mode,python-mode,ruby-mode</li>
+<li>dired (file manager dired)</li>
+<li>image-mode view image file</li>
+<li>eww eww web browser</li>
+<li></li>
 </ul>
-<pre><code class="sh">pinout #获取针脚定义
-</code></pre>
-<p><code>连接led灯</code></p>
-<p><img src="/images/01.assets/413416-20170423112841319-1486568645.png" alt="img"></p>
-<p>两个树莓派的GPIO</p>
-<p><img src="/images/01.assets/413416-20170423143302335-1742281986.png" alt="img"></p>
-<p>我们可以用GPIO的方式连接两个树莓派。一个树莓派的GPIO输出，将成为另一个树莓派的GPIO输入。连接方式很简单，只需要2根导线。一个导线连接两个树莓派的地线，另一根导线连接树莓派的两个PIN</p>
-<p>我们用左侧的树莓派来输出，右侧树莓派来输入。输出过程和上面控制LED灯的例子相似。在第一个树莓派中的GPIO21准备输出：</p>
-<pre><code class="sh">echo 21 &gt; /sys/class/gpio/export
-echo out &gt; /sys/class/gpio/gpio21/direction
-</code></pre>
 ]]></content>
       <categories>
         <category>1</category>
       </categories>
       <tags>
-        <tag>gpio</tag>
-        <tag>决策树</tag>
-        <tag>id3</tag>
+        <tag>emacs</tag>
+        <tag>mode</tag>
+        <tag>dired</tag>
       </tags>
   </entry>
   <entry>
@@ -412,25 +375,40 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
       </tags>
   </entry>
   <entry>
-    <title>2021.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/2021/</url>
-    <content><![CDATA[<h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><ul>
-<li><input disabled="" type="checkbox"> 预测算法 具身智能如何应对不确定性</li>
-<li><input checked="" disabled="" type="checkbox"> 应用密码安全性评估</li>
-<li><input checked="" disabled="" type="checkbox"> CISAW</li>
+    <title>01_决策树.md</title>
+    <url>/1/01_%E5%86%B3%E7%AD%96%E6%A0%91/</url>
+    <content><![CDATA[<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h3 id="决策树算法"><a href="#决策树算法" class="headerlink" title="决策树算法"></a>决策树算法</h3><ul>
+<li>ID3</li>
 </ul>
-<hr>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
-<li><input disabled="" type="checkbox"> spring</li>
+<h4 id="ID3"><a href="#ID3" class="headerlink" title="ID3"></a>ID3</h4><blockquote>
+<p>计算信息謪增益 需要剪枝</p>
+</blockquote>
+<h2 id="树莓派"><a href="#树莓派" class="headerlink" title="树莓派"></a>树莓派</h2><p><img src="/images/01.assets/171439-07c52987d148a108.png" alt="img"></p>
+<ul>
+<li>5V</li>
+<li>3V</li>
+<li>接地</li>
+<li>通用GPIO</li>
 </ul>
+<pre><code class="sh">pinout #获取针脚定义
+</code></pre>
+<p><code>连接led灯</code></p>
+<p><img src="/images/01.assets/413416-20170423112841319-1486568645.png" alt="img"></p>
+<p>两个树莓派的GPIO</p>
+<p><img src="/images/01.assets/413416-20170423143302335-1742281986.png" alt="img"></p>
+<p>我们可以用GPIO的方式连接两个树莓派。一个树莓派的GPIO输出，将成为另一个树莓派的GPIO输入。连接方式很简单，只需要2根导线。一个导线连接两个树莓派的地线，另一根导线连接树莓派的两个PIN</p>
+<p>我们用左侧的树莓派来输出，右侧树莓派来输入。输出过程和上面控制LED灯的例子相似。在第一个树莓派中的GPIO21准备输出：</p>
+<pre><code class="sh">echo 21 &gt; /sys/class/gpio/export
+echo out &gt; /sys/class/gpio/gpio21/direction
+</code></pre>
 ]]></content>
       <categories>
-        <category>书籍源码</category>
+        <category>1</category>
       </categories>
       <tags>
-        <tag>算法</tag>
-        <tag>智能</tag>
-        <tag>不确定性</tag>
+        <tag>gpio</tag>
+        <tag>决策树</tag>
+        <tag>id3</tag>
       </tags>
   </entry>
   <entry>
@@ -506,6 +484,55 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
         <tag>java</tag>
         <tag>attach</tag>
         <tag>进程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2021.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/2021/</url>
+    <content><![CDATA[<h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><ul>
+<li><input disabled="" type="checkbox"> 预测算法 具身智能如何应对不确定性</li>
+<li><input checked="" disabled="" type="checkbox"> 应用密码安全性评估</li>
+<li><input checked="" disabled="" type="checkbox"> CISAW</li>
+</ul>
+<hr>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
+<li><input disabled="" type="checkbox"> spring</li>
+</ul>
+]]></content>
+      <categories>
+        <category>书籍源码</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>智能</tag>
+        <tag>不确定性</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SNMP.md</title>
+    <url>/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/SNMP/</url>
+    <content><![CDATA[<h1 id="简单网络管理协议-SNMP"><a href="#简单网络管理协议-SNMP" class="headerlink" title="简单网络管理协议(SNMP)"></a>简单网络管理协议(SNMP)</h1><blockquote>
+<p>用于监控主机状态</p>
+</blockquote>
+<p><strong>SNMP</strong>是英文”<strong>Simple Network Management Protocol</strong>“的缩写，中文意思是”<strong>简单网络管理协议</strong>“。<strong>SNMP是一种简单网络管理协议，它属于TCP/IP五层协议中的应用层协议，用于网络管理的协议。SNMP主要用于网络设备的管理。由于SNMP协议简单可靠 ，受到了众多厂商的欢迎，成为了目前最为广泛的网管协议。</strong></p>
+<p>　　SNMP协议主要由两大部分构成：SNMP管理站和SNMP代理。SNMP管理站是一个中心节点，负责收集维护各个SNMP元素的信息，并对这些信息进行处理，最后反馈给网络管理员；而SNMP代理是运行在各个被管理的网络节点之上，负责统计该节点的各项信息，并且负责与SNMP管理站交互，接收并执行管理站的命令，上传各种本地的网络信息。</p>
+<p>　　SNMP管理站和SNMP代理之间是松散耦合。他们之间的通信是通过UDP协议完成的。一般情况下，SNMP管理站通过UDP协议向SNMP代理发送各种命令，当SNMP代理收到命令后，返回SNMP管理站需要的参数。但是当SNMP代理检测到网络元素异常的时候，也可以主动向SNMP管理站发送消息，通告当前异常状况</p>
+<p>SNMP的基本思想：为不同种类的设备、不同厂家生产的设备、不同型号的设备，定义为一个统一的接口和协议，使得管理员可以是使用统一的外观面对这些需要管理的网络设备进行管理。通过网络，管理员可以管理位于不同物理空间的设备，从而大大提高网络管理的效率，简化网络管理员的工作。</p>
+<h2 id="SNMP操作命令"><a href="#SNMP操作命令" class="headerlink" title="SNMP操作命令"></a>SNMP操作命令</h2><p>　SNMP协议之所以易于使用，这是因为它对外提供了<strong>三种用于控制MIB对象的基本操作命令</strong>。它们是：<strong>Get、Set 和 Trap</strong>。</p>
+<ol>
+<li><strong>Get</strong>：管理站读取代理者处对象的值。它是SNMP协议中使用率最高的一个命令，因为该命令是从网络设备中获得管理信息的基本方式。</li>
+<li><strong>Set</strong>：管理站设置代理者处对象的值。它是一个特权命令，因为可以通过它来改动设备的配置或控制设备的运转状态。它可以设置设备的名称，关掉一个端口或清除一个地址解析表中的项等。</li>
+<li><strong>Trap</strong>： 代理者主动向管理站通报重要事件。它的功能就是在网络管理系统没有明确要求的前提下，由管理代理通知网络管理系统有一些特别的情况或问题 发生了。如果发生意外情况，客户会向服务器的162端口发送一个消息，告知服务器指定的变量值发生了变化。通常由服务器请求而获得的数据由服务器的161 端口接收。Trap 消息可以用来通知管理站线路的故障、连接的终端和恢复、认证失败等消息。管理站可相应的作出处理。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>2021</category>
+        <category>常用框架</category>
+      </categories>
+      <tags>
+        <tag>网络管理</tag>
+        <tag>协议</tag>
+        <tag>snmp</tag>
       </tags>
   </entry>
   <entry>
@@ -607,33 +634,6 @@ ghci&gt; replicate 3 10
       </tags>
   </entry>
   <entry>
-    <title>SNMP.md</title>
-    <url>/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/SNMP/</url>
-    <content><![CDATA[<h1 id="简单网络管理协议-SNMP"><a href="#简单网络管理协议-SNMP" class="headerlink" title="简单网络管理协议(SNMP)"></a>简单网络管理协议(SNMP)</h1><blockquote>
-<p>用于监控主机状态</p>
-</blockquote>
-<p><strong>SNMP</strong>是英文”<strong>Simple Network Management Protocol</strong>“的缩写，中文意思是”<strong>简单网络管理协议</strong>“。<strong>SNMP是一种简单网络管理协议，它属于TCP/IP五层协议中的应用层协议，用于网络管理的协议。SNMP主要用于网络设备的管理。由于SNMP协议简单可靠 ，受到了众多厂商的欢迎，成为了目前最为广泛的网管协议。</strong></p>
-<p>　　SNMP协议主要由两大部分构成：SNMP管理站和SNMP代理。SNMP管理站是一个中心节点，负责收集维护各个SNMP元素的信息，并对这些信息进行处理，最后反馈给网络管理员；而SNMP代理是运行在各个被管理的网络节点之上，负责统计该节点的各项信息，并且负责与SNMP管理站交互，接收并执行管理站的命令，上传各种本地的网络信息。</p>
-<p>　　SNMP管理站和SNMP代理之间是松散耦合。他们之间的通信是通过UDP协议完成的。一般情况下，SNMP管理站通过UDP协议向SNMP代理发送各种命令，当SNMP代理收到命令后，返回SNMP管理站需要的参数。但是当SNMP代理检测到网络元素异常的时候，也可以主动向SNMP管理站发送消息，通告当前异常状况</p>
-<p>SNMP的基本思想：为不同种类的设备、不同厂家生产的设备、不同型号的设备，定义为一个统一的接口和协议，使得管理员可以是使用统一的外观面对这些需要管理的网络设备进行管理。通过网络，管理员可以管理位于不同物理空间的设备，从而大大提高网络管理的效率，简化网络管理员的工作。</p>
-<h2 id="SNMP操作命令"><a href="#SNMP操作命令" class="headerlink" title="SNMP操作命令"></a>SNMP操作命令</h2><p>　SNMP协议之所以易于使用，这是因为它对外提供了<strong>三种用于控制MIB对象的基本操作命令</strong>。它们是：<strong>Get、Set 和 Trap</strong>。</p>
-<ol>
-<li><strong>Get</strong>：管理站读取代理者处对象的值。它是SNMP协议中使用率最高的一个命令，因为该命令是从网络设备中获得管理信息的基本方式。</li>
-<li><strong>Set</strong>：管理站设置代理者处对象的值。它是一个特权命令，因为可以通过它来改动设备的配置或控制设备的运转状态。它可以设置设备的名称，关掉一个端口或清除一个地址解析表中的项等。</li>
-<li><strong>Trap</strong>： 代理者主动向管理站通报重要事件。它的功能就是在网络管理系统没有明确要求的前提下，由管理代理通知网络管理系统有一些特别的情况或问题 发生了。如果发生意外情况，客户会向服务器的162端口发送一个消息，告知服务器指定的变量值发生了变化。通常由服务器请求而获得的数据由服务器的161 端口接收。Trap 消息可以用来通知管理站线路的故障、连接的终端和恢复、认证失败等消息。管理站可相应的作出处理。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>2021</category>
-        <category>常用框架</category>
-      </categories>
-      <tags>
-        <tag>网络管理</tag>
-        <tag>协议</tag>
-        <tag>snmp</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>common.md</title>
     <url>/2021/linux/common/</url>
     <content><![CDATA[<hr>
@@ -678,92 +678,6 @@ ghci&gt; replicate 3 10
         <tag>linux</tag>
         <tag>常用命令</tag>
         <tag>top</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/docker/</url>
-    <content><![CDATA[<h1 id="docker源码阅读"><a href="#docker源码阅读" class="headerlink" title="docker源码阅读"></a>docker源码阅读</h1><ul>
-<li>DockerClient</li>
-<li>DockerDaemon</li>
-<li>Docker Registry</li>
-<li>Graph</li>
-<li>Driver</li>
-<li>libcontainer</li>
-<li>Docker Container</li>
-</ul>
-]]></content>
-      <categories>
-        <category>书籍源码</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>源码</tag>
-        <tag>dockerclient</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hubot.md</title>
-    <url>/hubot/hubot/</url>
-    <content><![CDATA[<h1 id="Hubot"><a href="#Hubot" class="headerlink" title="Hubot"></a>Hubot</h1><blockquote>
-<p>nodejs聊天机器人，提供了多种聊天工具的结合</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>常用命令</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>robot.hear</td>
-<td>聊天中匹配到任何信息，触发回调函数</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>hubot</category>
-      </categories>
-      <tags>
-        <tag>nodejs</tag>
-        <tag>聊天</tag>
-        <tag>hubot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>index.md</title>
-    <url>/arthas/index/</url>
-    <content><![CDATA[<h1 id="Arthas"><a href="#Arthas" class="headerlink" title="Arthas"></a>Arthas</h1><p><code>Arthas</code>是Alibaba开源的Java诊断工具</p>
-<table>
-<thead>
-<tr>
-<th>章节结构</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="./chapter/org.md">工程结构</a></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>2021</category>
-        <category>源码解析</category>
-        <category>arthas</category>
-      </categories>
-      <tags>
-        <tag>arthas</tag>
-        <tag>alibaba</tag>
-        <tag>开源</tag>
       </tags>
   </entry>
   <entry>
@@ -901,6 +815,92 @@ fmt.Println(err)
       </tags>
   </entry>
   <entry>
+    <title>hubot.md</title>
+    <url>/hubot/hubot/</url>
+    <content><![CDATA[<h1 id="Hubot"><a href="#Hubot" class="headerlink" title="Hubot"></a>Hubot</h1><blockquote>
+<p>nodejs聊天机器人，提供了多种聊天工具的结合</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>robot.hear</td>
+<td>聊天中匹配到任何信息，触发回调函数</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>hubot</category>
+      </categories>
+      <tags>
+        <tag>nodejs</tag>
+        <tag>聊天</tag>
+        <tag>hubot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>index.md</title>
+    <url>/arthas/index/</url>
+    <content><![CDATA[<h1 id="Arthas"><a href="#Arthas" class="headerlink" title="Arthas"></a>Arthas</h1><p><code>Arthas</code>是Alibaba开源的Java诊断工具</p>
+<table>
+<thead>
+<tr>
+<th>章节结构</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="./chapter/org.md">工程结构</a></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>2021</category>
+        <category>源码解析</category>
+        <category>arthas</category>
+      </categories>
+      <tags>
+        <tag>arthas</tag>
+        <tag>alibaba</tag>
+        <tag>开源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/docker/</url>
+    <content><![CDATA[<h1 id="docker源码阅读"><a href="#docker源码阅读" class="headerlink" title="docker源码阅读"></a>docker源码阅读</h1><ul>
+<li>DockerClient</li>
+<li>DockerDaemon</li>
+<li>Docker Registry</li>
+<li>Graph</li>
+<li>Driver</li>
+<li>libcontainer</li>
+<li>Docker Container</li>
+</ul>
+]]></content>
+      <categories>
+        <category>书籍源码</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>源码</tag>
+        <tag>dockerclient</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java.md</title>
     <url>/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/java/</url>
     <content><![CDATA[<h1 id="代码片段收集"><a href="#代码片段收集" class="headerlink" title="代码片段收集"></a>代码片段收集</h1><blockquote>
@@ -993,6 +993,46 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
         <tag>代码</tag>
         <tag>区间</tag>
         <tag>索引</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jnotify.md</title>
+    <url>/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify/</url>
+    <content><![CDATA[<h1 id="Jnotify-1-0"><a href="#Jnotify-1-0" class="headerlink" title="Jnotify-1.0"></a>Jnotify-1.0</h1><p>最近一直在致力于搭建个人的文档笔记系统。最后选中了<code>typora</code>,<code>typora</code>本身是一个优秀的markdown工具，同时支持三平台的书写。但是不支持云端同步，为了解决这个问题，我写出了<code>jnotify</code></p>
+<blockquote>
+<p><code>Jnotify</code>一个基于<code>git</code>的文档同步系统</p>
+</blockquote>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li><code>jnotify</code> 基于git技术，将文档自动同步到云端，同时提供手动从云端同步功能。</li>
+<li><code>jnotify</code>选用<code>java</code>作为开发语言，方便修改</li>
+<li>免费</li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
+<li>不支持大文件，视频，大的压缩包，所以目前场景定位在文档同步</li>
+<li>文档的安全性基于远端的私仓</li>
+</ol>
+<h2 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h2><blockquote>
+<p>目前在linux 环境测试通过</p>
+</blockquote>
+<ol>
+<li><p>下载发布包，解压</p>
+<p><img src="/images/jnotify.assets/image-20210309103151127.png" alt="image-20210309103151127"></p>
+</li>
+</ol>
+<p>其中<code>jnotify.properties</code>描述了，项目云端的配置，包括云端同步地址，用户名密码</p>
+<p>,仓库在本地的存储地址等等.</p>
+<p><code>project</code>配置了需要同步到云端的地址,书写格式为<span style="color:#f50"> 存储地址</span>，<span style="color:#f50">待同步文档地址</span></p>
+<pre><code class="sh">~/.jnotify/pkg/workmd,/home/lame/workmd
+</code></pre>
+<p>配置文件修改完成后，执行install.sh,程序安装完成，执行start.sh 开始运行</p>
+]]></content>
+      <categories>
+        <category>工程记录</category>
+      </categories>
+      <tags>
+        <tag>jnotify</tag>
+        <tag>sh</tag>
+        <tag>云端</tag>
       </tags>
   </entry>
   <entry>
@@ -1157,46 +1197,6 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
         <tag>java</tag>
         <tag>string</tag>
         <tag>sql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>jnotify.md</title>
-    <url>/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify/</url>
-    <content><![CDATA[<h1 id="Jnotify-1-0"><a href="#Jnotify-1-0" class="headerlink" title="Jnotify-1.0"></a>Jnotify-1.0</h1><p>最近一直在致力于搭建个人的文档笔记系统。最后选中了<code>typora</code>,<code>typora</code>本身是一个优秀的markdown工具，同时支持三平台的书写。但是不支持云端同步，为了解决这个问题，我写出了<code>jnotify</code></p>
-<blockquote>
-<p><code>Jnotify</code>一个基于<code>git</code>的文档同步系统</p>
-</blockquote>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
-<li><code>jnotify</code> 基于git技术，将文档自动同步到云端，同时提供手动从云端同步功能。</li>
-<li><code>jnotify</code>选用<code>java</code>作为开发语言，方便修改</li>
-<li>免费</li>
-</ol>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
-<li>不支持大文件，视频，大的压缩包，所以目前场景定位在文档同步</li>
-<li>文档的安全性基于远端的私仓</li>
-</ol>
-<h2 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h2><blockquote>
-<p>目前在linux 环境测试通过</p>
-</blockquote>
-<ol>
-<li><p>下载发布包，解压</p>
-<p><img src="/images/jnotify.assets/image-20210309103151127.png" alt="image-20210309103151127"></p>
-</li>
-</ol>
-<p>其中<code>jnotify.properties</code>描述了，项目云端的配置，包括云端同步地址，用户名密码</p>
-<p>,仓库在本地的存储地址等等.</p>
-<p><code>project</code>配置了需要同步到云端的地址,书写格式为<span style="color:#f50"> 存储地址</span>，<span style="color:#f50">待同步文档地址</span></p>
-<pre><code class="sh">~/.jnotify/pkg/workmd,/home/lame/workmd
-</code></pre>
-<p>配置文件修改完成后，执行install.sh,程序安装完成，执行start.sh 开始运行</p>
-]]></content>
-      <categories>
-        <category>工程记录</category>
-      </categories>
-      <tags>
-        <tag>jnotify</tag>
-        <tag>sh</tag>
-        <tag>云端</tag>
       </tags>
   </entry>
   <entry>
@@ -1610,13 +1610,74 @@ end
       </tags>
   </entry>
   <entry>
-    <title>koal_trafit测试，动态添加路由 .md</title>
-    <url>/uncategorized/koal_trafit%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1%20/</url>
-    <content><![CDATA[<h1 id="trafit测试，动态添加路由"><a href="#trafit测试，动态添加路由" class="headerlink" title="trafit测试，动态添加路由"></a>trafit测试，动态添加路由</h1>]]></content>
+    <title>koal_临时记录.md</title>
+    <url>/uncategorized/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="临时记录"><a href="#临时记录" class="headerlink" title="临时记录"></a>临时记录</h1><pre><code>roleKind（string类型） 角色类型/区分是否为管理员  1 是，0 否
+rule (角色排斥规则 string) 没有就不传
+http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda647732746559bb235cc5e590eea1786d0d076939&amp;token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY3NDQzODIsInVzZXJuYW1lIjoiemhhZG1pbiJ9.aBo6YzXqG0bfUgO2S-a0ro3cU0yGIRUG7TtG_B2gzLE
+1336203398069878785  
+</code></pre>
+<h2 id="工作任务"><a href="#工作任务" class="headerlink" title="工作任务"></a>工作任务</h2><ul>
+<li><p>密钥同一个租户能分配几次</p>
+<ul>
+<li><input disabled="" type="checkbox"> <table>
+<thead>
+<tr>
+<th><em><strong>*编号*</strong></em></th>
+<th><em><strong>*功能点*</strong></em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>系统配置识别密钥隔离还是密码机隔离 1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>系统启动初始化功能命令空间  \1**. 如果是密钥级别隔离，则调度服务放在公共命名空间中，在系统初始化时，初始化该公共命名空间。**</td>
+</tr>
+<tr>
+<td>3</td>
+<td>租户申请单中增加密钥列表</td>
+</tr>
+<tr>
+<td>4</td>
+<td>运营、运维申请单中展示密钥详情</td>
+</tr>
+<tr>
+<td>5</td>
+<td>运维管理员交付密码机服务，包含填写密钥</td>
+</tr>
+<tr>
+<td>6</td>
+<td>增加密钥主管角色，密钥管理等</td>
+</tr>
+<tr>
+<td>7</td>
+<td>调用SDF接口时，应检查该应用是否有权限使用该密码机服务和密钥索引 <strong>怎么检查</strong></td>
+</tr>
+<tr>
+<td>8</td>
+<td>是密钥形式隔离，则新建密码机组时，不需要选择租户 <strong>不需要选择租户</strong></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p>增加额外数据库SYSGBA 123456789 （密钥隔离）</p>
+</li>
+<li></li>
+</ul>
+<h2 id="代码review"><a href="#代码review" class="headerlink" title="代码review"></a>代码review</h2><p>review commit</p>
+<ul>
+<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/00b75bfc535d35ff6a5b91929e4b21c238dacb85"> 00b75bfc</a> 使用通用工具累判断  <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
+<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/8f82d5255d0bf4524d14c373317d013b5220cfab"> 8f82d525</a> 存在npe问题，需要修正    <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
+</ul>
+<h2 id="24f56f35-小问题，常量命名，对象复用"><a href="#24f56f35-小问题，常量命名，对象复用" class="headerlink" title="24f56f35 小问题，常量命名，对象复用"></a><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/24f56f356f818f34e42e84bc444998f518428505">24f56f35</a> 小问题，常量命名，对象复用</h2><p>kcsp-kubecheck</p>
+]]></content>
       <tags>
-        <tag>trafit</tag>
-        <tag>动态</tag>
-        <tag>路由</tag>
+        <tag>密钥</tag>
+        <tag>租户</tag>
+        <tag>申请单</tag>
       </tags>
   </entry>
   <entry>
@@ -1740,77 +1801,6 @@ PwdMachineApplicationDetailCopy VsmApplyDetailCopy
         <tag>地址</tag>
         <tag>信息</tag>
         <tag>赋值</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>koal_临时记录.md</title>
-    <url>/uncategorized/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="临时记录"><a href="#临时记录" class="headerlink" title="临时记录"></a>临时记录</h1><pre><code>roleKind（string类型） 角色类型/区分是否为管理员  1 是，0 否
-rule (角色排斥规则 string) 没有就不传
-http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda647732746559bb235cc5e590eea1786d0d076939&amp;token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY3NDQzODIsInVzZXJuYW1lIjoiemhhZG1pbiJ9.aBo6YzXqG0bfUgO2S-a0ro3cU0yGIRUG7TtG_B2gzLE
-1336203398069878785  
-</code></pre>
-<h2 id="工作任务"><a href="#工作任务" class="headerlink" title="工作任务"></a>工作任务</h2><ul>
-<li><p>密钥同一个租户能分配几次</p>
-<ul>
-<li><input disabled="" type="checkbox"> <table>
-<thead>
-<tr>
-<th><em><strong>*编号*</strong></em></th>
-<th><em><strong>*功能点*</strong></em></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>系统配置识别密钥隔离还是密码机隔离 1</td>
-</tr>
-<tr>
-<td>2</td>
-<td>系统启动初始化功能命令空间  \1**. 如果是密钥级别隔离，则调度服务放在公共命名空间中，在系统初始化时，初始化该公共命名空间。**</td>
-</tr>
-<tr>
-<td>3</td>
-<td>租户申请单中增加密钥列表</td>
-</tr>
-<tr>
-<td>4</td>
-<td>运营、运维申请单中展示密钥详情</td>
-</tr>
-<tr>
-<td>5</td>
-<td>运维管理员交付密码机服务，包含填写密钥</td>
-</tr>
-<tr>
-<td>6</td>
-<td>增加密钥主管角色，密钥管理等</td>
-</tr>
-<tr>
-<td>7</td>
-<td>调用SDF接口时，应检查该应用是否有权限使用该密码机服务和密钥索引 <strong>怎么检查</strong></td>
-</tr>
-<tr>
-<td>8</td>
-<td>是密钥形式隔离，则新建密码机组时，不需要选择租户 <strong>不需要选择租户</strong></td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-</li>
-<li><p>增加额外数据库SYSGBA 123456789 （密钥隔离）</p>
-</li>
-<li></li>
-</ul>
-<h2 id="代码review"><a href="#代码review" class="headerlink" title="代码review"></a>代码review</h2><p>review commit</p>
-<ul>
-<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/00b75bfc535d35ff6a5b91929e4b21c238dacb85"> 00b75bfc</a> 使用通用工具累判断  <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
-<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/8f82d5255d0bf4524d14c373317d013b5220cfab"> 8f82d525</a> 存在npe问题，需要修正    <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
-</ul>
-<h2 id="24f56f35-小问题，常量命名，对象复用"><a href="#24f56f35-小问题，常量命名，对象复用" class="headerlink" title="24f56f35 小问题，常量命名，对象复用"></a><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/24f56f356f818f34e42e84bc444998f518428505">24f56f35</a> 小问题，常量命名，对象复用</h2><p>kcsp-kubecheck</p>
-]]></content>
-      <tags>
-        <tag>密钥</tag>
-        <tag>租户</tag>
-        <tag>申请单</tag>
       </tags>
   </entry>
   <entry>
@@ -2593,6 +2583,16 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
       </tags>
   </entry>
   <entry>
+    <title>koal_trafit测试，动态添加路由 .md</title>
+    <url>/uncategorized/koal_trafit%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1%20/</url>
+    <content><![CDATA[<h1 id="trafit测试，动态添加路由"><a href="#trafit测试，动态添加路由" class="headerlink" title="trafit测试，动态添加路由"></a>trafit测试，动态添加路由</h1>]]></content>
+      <tags>
+        <tag>trafit</tag>
+        <tag>动态</tag>
+        <tag>路由</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>koal_简单的写法.md</title>
     <url>/uncategorized/koal_%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%99%E6%B3%95/</url>
     <content><![CDATA[<h1 id="简单的写法"><a href="#简单的写法" class="headerlink" title="简单的写法"></a>简单的写法</h1><h2 id="监控项描述DSL"><a href="#监控项描述DSL" class="headerlink" title="监控项描述DSL"></a>监控项描述DSL</h2><p>为了应对监控的动态可配置，开发了一个小的dsl。虽然可以基于现有的jvm方言或者自定义解析器搞，但是时间不够，担心改不动bug目前简单解析了一下。</p>
@@ -3270,64 +3270,6 @@ Dependencies=python;
       </tags>
   </entry>
   <entry>
-    <title>关联分析.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%85%B3%E8%81%94%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h1 id="关联分析"><a href="#关联分析" class="headerlink" title="关联分析"></a>关联分析</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
-<li>关联分析： 在大规模数据集中寻找有趣的关系</li>
-<li>频繁项集：经常在一起出现的物品集合</li>
-<li>支持度：数据集中包含该项集的记录所占的比例</li>
-<li>置信度（Confidence）：出现某些物品时，另外一些物品必定出现的概率，针对规则而言。</li>
-<li>关联规则（Association Rules）：暗示两个物品之间可能存在很强的关系。形如A-&gt;B的表达式，规则A-&gt;B的度量包括支持度和置信度</li>
-<li>项集支持度：一个项集出现的次数与数据集所有事物数的百分比称为项集的支持度</li>
-<li>项集置信度：包含A的数据集中包含B的百分比</li>
-</ul>
-<h2 id="关联分析步骤"><a href="#关联分析步骤" class="headerlink" title="关联分析步骤"></a>关联分析步骤</h2><ol>
-<li>发现频繁项集，即计算所有可能组合数的支持度，找出不少于人为设定的最小支持度的集合。</li>
-<li>发现关联规则，即计算不小于人为设定的最小支持度的集合的置信度，找到不小于认为设定的最小置信度规则。</li>
-</ol>
-<h3 id="简单关联关系"><a href="#简单关联关系" class="headerlink" title="简单关联关系"></a>简单关联关系</h3><p>​        简单关联关系可以从经典的购物中进行分析，购买面包的顾客80%都会购买牛奶，由于面包和牛奶是早餐搭配的必需品，二者搭配构成了早餐的组成部分，这就是一种简单的关联关系。</p>
-<h3 id="序列关联关系"><a href="#序列关联关系" class="headerlink" title="序列关联关系"></a>序列关联关系</h3><p>​        当购买一款新手机后，就会考虑去购买手机膜等手机配件，这就是一种序列关系，不会先买手机膜再买手机的，先后关系是非常明显的，这种关系是一种顺序性的关系，也就是一种序列关联关系。</p>
-<blockquote>
-<p>关联规则：规则就是一种衡量事物的标准，也就是一个算法。</p>
-</blockquote>
-<h2 id="简单关联规则算法"><a href="#简单关联规则算法" class="headerlink" title="简单关联规则算法"></a>简单关联规则算法</h2><h3 id="算法思想基础"><a href="#算法思想基础" class="headerlink" title="算法思想基础"></a>算法思想基础</h3><blockquote>
-<p>如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
-</blockquote>
-<p>​        简单关联规则是无指导的学习方法，着重探索内部结构。简单关联规则也是使用最多的技术，主要算法包括：Apriori、GRI、Carma，其中Apriori和Carma主要是如何提高关联规则的分析效率，而GRI注重如何将单一概念层次的关联推广到更多概念层次的关联，进而揭示事物内在结构。</p>
-<p>简单关联规则的数据存储形式：一种是交易数据格式，一种是表格数据格式。</p>
-<h2 id="序列关联规则算法"><a href="#序列关联规则算法" class="headerlink" title="序列关联规则算法"></a>序列关联规则算法</h2><p>​        序列关联规则的核心就是找到事物发展的前后关联性，研究序列关联可以来推测事物未来的发展情况，并根据预测的发展情况进行事物的分配和安排。</p>
-<h2 id="如何设定合理的支持度和置信度？"><a href="#如何设定合理的支持度和置信度？" class="headerlink" title="如何设定合理的支持度和置信度？"></a>如何设定合理的支持度和置信度？</h2><p>对于某条规则：（A=a）−&gt;（B=b）</p>
-<p>（support=30%,confident=60%）；其中support=30%表示在所有的数据记录中，同时出现A=a和B=b的概率为30%；confident=60%表示在所有的数据记录中，在出现A=a的情况下出现B=b的概率为60%，也就是条件概率。支持度揭示了A=a和B=b同时出现的概率，置信度揭示了当A=a出现时，B=b是否会一定出现的概率。</p>
-<p>（1）如果支持度和置信度闭值设置的过高，虽然可以减少挖掘时间，但是容易造成一些隐含在数据中非频繁特征项被忽略掉，难以发现足够有用的规则；</p>
-<p>（2）如果支持度和置信度闭值设置的过低，又有可能产生过多的规则，甚至产生大量冗余和无效的规则，同时由于算法存在的固有问题，会导致高负荷的计算量，大大增加挖掘时间。</p>
-<h2 id="关联分析的应用"><a href="#关联分析的应用" class="headerlink" title="关联分析的应用"></a>关联分析的应用</h2><p>(1)：购物篮分析，通过查看那些商品经常在一起出售，可以帮助商店了解用户的购物行为，这种从数据的海洋中抽取只是可以用于商品定价、市场促销、存货管理等环节</p>
-<p>(2)：在Twitter源中发现一些公共词。对于给定的搜索词，发现推文中频繁出现的单词集合</p>
-<p>(3)：从新闻网站点击流中挖掘新闻流行趋势，挖掘哪些新闻广泛被用户浏览到</p>
-<p>(4)：搜索引擎推荐，在用户输入查询时推荐同时相关的查询词项</p>
-<p>(5)：发现毒蘑菇的相似特征。这里只对包含某个特征元素（有毒素）的项集感兴趣，从中寻找毒蘑菇中的一些公共特征，利用这些特征来避免迟到哪些有毒的蘑菇</p>
-<p>(6)：图书馆信息的书籍推荐，对于学生的借书信息，不同专业学生的借书情况，来挖掘不同学生的借书情况，进行数目的推荐。</p>
-<p>(7)：校园网新闻通知信息的推荐，在对校园网新闻通知信息进行挖掘的过程中，分析不同部门，不同学院的新闻信息的不同，在进行新闻信息浏览的过程中进行新闻的推荐。</p>
-<h2 id="Apriori算法"><a href="#Apriori算法" class="headerlink" title="Apriori算法"></a>Apriori算法</h2><p>假设我们有一家经营着4种商品（商品0，商品1，商品2和商品3）的杂货店，2图显示了所有商品之间所有的可能组合：</p>
-<p>对于单个项集的支持度，我们可以通过遍历每条记录并检查该记录是否包含该项集来计算。对于包含N中物品的数据集共有2N−1种项集组合，重复上述计算过程是不现实的。</p>
-<p>研究人员发现一种所谓的Apriori原理，可以帮助我们减少计算量。Apriori原理是说如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
-<p>注意：这里的子集不是传统数学中的子集，而是子项的项集。例如一个频繁项集包含3个项，则这三个项的子集组成的项集一定是频繁项集。</p>
-<p>在图3中，已知阴影项集{2,3}是非频繁的。利用这个知识，我们就知道项集{0,2,3}，{1,2,3}以及{0,1,2,3}也是非频繁的。也就是说，一旦计算出了{2,3}的支持度，知道它是非频繁的后，就可以紧接着排除{0,2,3}、{1,2,3}和{0,1,2,3}。</p>
-<p>Apriori算法是发现频繁项集的一种方法。</p>
-<p>Apriori算法的两个输入参数分别是最小支持度和数据集。该算法首先会生成所有单个元素的项集列表。接着扫描数据集来查看哪些项集满足最小支持度要求，那些不满足最小支持度的集合会被去掉。然后，对剩下来的集合进行组合以生成包含两个元素的项集。接下来，再重新扫描交易记录，去掉不满足最小支持度的项集。该过程重复进行直到所有项集都被去掉。</p>
-<p>该算法需要不断寻找候选集，然后剪枝即去掉非频繁子集的候选集，时间复杂度由暴力枚举所有子集的指数级别O（n2）将为多项式级别，多项式具体系数是底层实现情况而定的。<br>Ariori算法有两个主要步骤：</p>
-<p>1、连接：（将项集进行两两连接形成新的候选集）利用已经找到的k个项的频繁项集Lk，通过两两连接得出候选集Ck+1，注意进行连接的Lk[i]，Lk[j]，必须有k-1个属性值相同，然后另外两个不同的分别分布Lk[i]，Lk[j]，这样的求出的Ck+1为Lk+1的候选集。</p>
-<p>2、<strong>剪枝</strong>：（去掉非频繁项集）候选集 Ck+1中的并不都是频繁项集，必须剪枝去掉，越早越好以防止所处理的数据无效项越来越多。只有当子集都是频繁集的候选集才是频繁集，这是剪枝的依据。</p>
-]]></content>
-      <categories>
-        <category>书籍源码</category>
-      </categories>
-      <tags>
-        <tag>新闻</tag>
-        <tag>规则</tag>
-        <tag>关联</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>工程记录.md</title>
     <url>/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<table>
@@ -3491,171 +3433,61 @@ func main() &#123;
       </tags>
   </entry>
   <entry>
-    <title>康德.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%BA%B7%E5%BE%B7/</url>
-    <content><![CDATA[<h1 id="康德"><a href="#康德" class="headerlink" title="康德"></a>康德</h1><p><code>德国</code>古典哲学</p>
-<ul>
-<li>纯粹理性批判</li>
+    <title>关联分析.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%85%B3%E8%81%94%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h1 id="关联分析"><a href="#关联分析" class="headerlink" title="关联分析"></a>关联分析</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>关联分析： 在大规模数据集中寻找有趣的关系</li>
+<li>频繁项集：经常在一起出现的物品集合</li>
+<li>支持度：数据集中包含该项集的记录所占的比例</li>
+<li>置信度（Confidence）：出现某些物品时，另外一些物品必定出现的概率，针对规则而言。</li>
+<li>关联规则（Association Rules）：暗示两个物品之间可能存在很强的关系。形如A-&gt;B的表达式，规则A-&gt;B的度量包括支持度和置信度</li>
+<li>项集支持度：一个项集出现的次数与数据集所有事物数的百分比称为项集的支持度</li>
+<li>项集置信度：包含A的数据集中包含B的百分比</li>
 </ul>
-<p><code>卢梭</code>改变了康德，虚幻的优越感</p>
-<p><code>二律背反</code> </p>
+<h2 id="关联分析步骤"><a href="#关联分析步骤" class="headerlink" title="关联分析步骤"></a>关联分析步骤</h2><ol>
+<li>发现频繁项集，即计算所有可能组合数的支持度，找出不少于人为设定的最小支持度的集合。</li>
+<li>发现关联规则，即计算不小于人为设定的最小支持度的集合的置信度，找到不小于认为设定的最小置信度规则。</li>
+</ol>
+<h3 id="简单关联关系"><a href="#简单关联关系" class="headerlink" title="简单关联关系"></a>简单关联关系</h3><p>​        简单关联关系可以从经典的购物中进行分析，购买面包的顾客80%都会购买牛奶，由于面包和牛奶是早餐搭配的必需品，二者搭配构成了早餐的组成部分，这就是一种简单的关联关系。</p>
+<h3 id="序列关联关系"><a href="#序列关联关系" class="headerlink" title="序列关联关系"></a>序列关联关系</h3><p>​        当购买一款新手机后，就会考虑去购买手机膜等手机配件，这就是一种序列关系，不会先买手机膜再买手机的，先后关系是非常明显的，这种关系是一种顺序性的关系，也就是一种序列关联关系。</p>
 <blockquote>
-<p> 知性 正反都能成立，违背逻辑</p>
+<p>关联规则：规则就是一种衡量事物的标准，也就是一个算法。</p>
 </blockquote>
-<ul>
-<li>时间有开端  时间没有开端</li>
-<li>世界有自由  反 世界没有自由只有因果</li>
-<li>世界有必然绝对存在 世界没有必然绝对存在</li>
-</ul>
-<p>传统形而上学错误的被提出，知性，理性有边界。自由是否存在，超出人的能力，人不能推理出来。解放了自由，揭示了自由有可能存在</p>
-<p><code>自由</code>是先验的设定，从本体意义上的人，无法通过理论证明，不是理论问题，是实践问题，</p>
-<p><strong>你认不认为自己是自由的？</strong></p>
-<p><code>自由</code>是信念，是生命的承诺，不是理论论证命题</p>
+<h2 id="简单关联规则算法"><a href="#简单关联规则算法" class="headerlink" title="简单关联规则算法"></a>简单关联规则算法</h2><h3 id="算法思想基础"><a href="#算法思想基础" class="headerlink" title="算法思想基础"></a>算法思想基础</h3><blockquote>
+<p>如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
+</blockquote>
+<p>​        简单关联规则是无指导的学习方法，着重探索内部结构。简单关联规则也是使用最多的技术，主要算法包括：Apriori、GRI、Carma，其中Apriori和Carma主要是如何提高关联规则的分析效率，而GRI注重如何将单一概念层次的关联推广到更多概念层次的关联，进而揭示事物内在结构。</p>
+<p>简单关联规则的数据存储形式：一种是交易数据格式，一种是表格数据格式。</p>
+<h2 id="序列关联规则算法"><a href="#序列关联规则算法" class="headerlink" title="序列关联规则算法"></a>序列关联规则算法</h2><p>​        序列关联规则的核心就是找到事物发展的前后关联性，研究序列关联可以来推测事物未来的发展情况，并根据预测的发展情况进行事物的分配和安排。</p>
+<h2 id="如何设定合理的支持度和置信度？"><a href="#如何设定合理的支持度和置信度？" class="headerlink" title="如何设定合理的支持度和置信度？"></a>如何设定合理的支持度和置信度？</h2><p>对于某条规则：（A=a）−&gt;（B=b）</p>
+<p>（support=30%,confident=60%）；其中support=30%表示在所有的数据记录中，同时出现A=a和B=b的概率为30%；confident=60%表示在所有的数据记录中，在出现A=a的情况下出现B=b的概率为60%，也就是条件概率。支持度揭示了A=a和B=b同时出现的概率，置信度揭示了当A=a出现时，B=b是否会一定出现的概率。</p>
+<p>（1）如果支持度和置信度闭值设置的过高，虽然可以减少挖掘时间，但是容易造成一些隐含在数据中非频繁特征项被忽略掉，难以发现足够有用的规则；</p>
+<p>（2）如果支持度和置信度闭值设置的过低，又有可能产生过多的规则，甚至产生大量冗余和无效的规则，同时由于算法存在的固有问题，会导致高负荷的计算量，大大增加挖掘时间。</p>
+<h2 id="关联分析的应用"><a href="#关联分析的应用" class="headerlink" title="关联分析的应用"></a>关联分析的应用</h2><p>(1)：购物篮分析，通过查看那些商品经常在一起出售，可以帮助商店了解用户的购物行为，这种从数据的海洋中抽取只是可以用于商品定价、市场促销、存货管理等环节</p>
+<p>(2)：在Twitter源中发现一些公共词。对于给定的搜索词，发现推文中频繁出现的单词集合</p>
+<p>(3)：从新闻网站点击流中挖掘新闻流行趋势，挖掘哪些新闻广泛被用户浏览到</p>
+<p>(4)：搜索引擎推荐，在用户输入查询时推荐同时相关的查询词项</p>
+<p>(5)：发现毒蘑菇的相似特征。这里只对包含某个特征元素（有毒素）的项集感兴趣，从中寻找毒蘑菇中的一些公共特征，利用这些特征来避免迟到哪些有毒的蘑菇</p>
+<p>(6)：图书馆信息的书籍推荐，对于学生的借书信息，不同专业学生的借书情况，来挖掘不同学生的借书情况，进行数目的推荐。</p>
+<p>(7)：校园网新闻通知信息的推荐，在对校园网新闻通知信息进行挖掘的过程中，分析不同部门，不同学院的新闻信息的不同，在进行新闻信息浏览的过程中进行新闻的推荐。</p>
+<h2 id="Apriori算法"><a href="#Apriori算法" class="headerlink" title="Apriori算法"></a>Apriori算法</h2><p>假设我们有一家经营着4种商品（商品0，商品1，商品2和商品3）的杂货店，2图显示了所有商品之间所有的可能组合：</p>
+<p>对于单个项集的支持度，我们可以通过遍历每条记录并检查该记录是否包含该项集来计算。对于包含N中物品的数据集共有2N−1种项集组合，重复上述计算过程是不现实的。</p>
+<p>研究人员发现一种所谓的Apriori原理，可以帮助我们减少计算量。Apriori原理是说如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
+<p>注意：这里的子集不是传统数学中的子集，而是子项的项集。例如一个频繁项集包含3个项，则这三个项的子集组成的项集一定是频繁项集。</p>
+<p>在图3中，已知阴影项集{2,3}是非频繁的。利用这个知识，我们就知道项集{0,2,3}，{1,2,3}以及{0,1,2,3}也是非频繁的。也就是说，一旦计算出了{2,3}的支持度，知道它是非频繁的后，就可以紧接着排除{0,2,3}、{1,2,3}和{0,1,2,3}。</p>
+<p>Apriori算法是发现频繁项集的一种方法。</p>
+<p>Apriori算法的两个输入参数分别是最小支持度和数据集。该算法首先会生成所有单个元素的项集列表。接着扫描数据集来查看哪些项集满足最小支持度要求，那些不满足最小支持度的集合会被去掉。然后，对剩下来的集合进行组合以生成包含两个元素的项集。接下来，再重新扫描交易记录，去掉不满足最小支持度的项集。该过程重复进行直到所有项集都被去掉。</p>
+<p>该算法需要不断寻找候选集，然后剪枝即去掉非频繁子集的候选集，时间复杂度由暴力枚举所有子集的指数级别O（n2）将为多项式级别，多项式具体系数是底层实现情况而定的。<br>Ariori算法有两个主要步骤：</p>
+<p>1、连接：（将项集进行两两连接形成新的候选集）利用已经找到的k个项的频繁项集Lk，通过两两连接得出候选集Ck+1，注意进行连接的Lk[i]，Lk[j]，必须有k-1个属性值相同，然后另外两个不同的分别分布Lk[i]，Lk[j]，这样的求出的Ck+1为Lk+1的候选集。</p>
+<p>2、<strong>剪枝</strong>：（去掉非频繁项集）候选集 Ck+1中的并不都是频繁项集，必须剪枝去掉，越早越好以防止所处理的数据无效项越来越多。只有当子集都是频繁集的候选集才是频繁集，这是剪枝的依据。</p>
 ]]></content>
       <categories>
         <category>书籍源码</category>
       </categories>
       <tags>
-        <tag>时间</tag>
-        <tag>世界</tag>
-        <tag>康德</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常用笔记记录.md</title>
-    <url>/2021/%E5%B8%B8%E7%94%A8%E7%AC%94%E8%AE%B0%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<table>
-<thead>
-<tr>
-<th>笔记内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="linux/common.md">linux常用命令</a></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>2021</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>内容</tag>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>服务定义.md</title>
-    <url>/2021/koal/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%B9%89/</url>
-    <content><![CDATA[<h1 id="服务上架步骤"><a href="#服务上架步骤" class="headerlink" title="服务上架步骤"></a>服务上架步骤</h1><p>本文档定义了，满足上架要求的服务在密码服务平台上架的步骤：</p>
-<ol>
-<li>修改字典-应用类型，增加新的应用类型<code>srv_tpl_apt</code></li>
-<li>服务定义-定义服务</li>
-<li>修改数据库</li>
-<li>服务上架</li>
-</ol>
-<h2 id="准备材料"><a href="#准备材料" class="headerlink" title="准备材料"></a>准备材料</h2><ul>
-<li>应用编排文件（要求镜像满足服务发布要求，编排文件按照服务要求修改）</li>
-<li>用户手册 pdf</li>
-<li>用户手册摘要 txt</li>
-<li>白皮书 pdf</li>
-<li>白皮书摘要 txt</li>
-<li>服务详情 txt</li>
-<li>sdk</li>
-<li>服务图标</li>
-<li>服务介绍</li>
-</ul>
-<h2 id="修改字典-应用类型"><a href="#修改字典-应用类型" class="headerlink" title="修改字典-应用类型"></a>修改字典-应用类型</h2><p>使用<strong>管理员</strong>,进入数据字典管理功能，搜索<code>srv_tpl_apt</code>，增加新的应用类型</p>
-<h2 id="服务定义"><a href="#服务定义" class="headerlink" title="服务定义"></a>服务定义</h2><p>使用<strong>运维人员</strong>打开<code>服务定义</code>新增：</p>
-<p>按照要求填入信息，选择刚刚新增的应用类型，上传文件和图标,应用编排文件上传至服务元数据，</p>
-<p>服务定义下方有4个tab,<code>密钥</code>，<code>服务模板标签</code>，<code>模板参数</code>，<code>扩容参数</code>，<code>API地址</code></p>
-<h3 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h3><p>如果服务有密钥需求，在此处定义，需求密钥用途，长度，类型 ，算法</p>
-<h3 id="服务模板标签"><a href="#服务模板标签" class="headerlink" title="服务模板标签"></a>服务模板标签</h3><p>无特殊要求不填</p>
-<h3 id="模板参数"><a href="#模板参数" class="headerlink" title="模板参数"></a>模板参数</h3><p>新增如下参数</p>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>参数描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>port</td>
-<td></td>
-</tr>
-<tr>
-<td>ns</td>
-<td></td>
-</tr>
-<tr>
-<td>KCSPVSMIP</td>
-<td></td>
-</tr>
-<tr>
-<td>KCSPPORT</td>
-<td></td>
-</tr>
-<tr>
-<td>KCSPAK</td>
-<td></td>
-</tr>
-<tr>
-<td>serviceId</td>
-<td></td>
-</tr>
-<tr>
-<td>NFS_IP</td>
-<td></td>
-</tr>
-<tr>
-<td>version</td>
-<td></td>
-</tr>
-<tr>
-<td>KCSPINGRESS</td>
-<td></td>
-</tr>
-<tr>
-<td>KCSPURL</td>
-<td></td>
-</tr>
-<tr>
-<td>KEY_INDEX</td>
-<td></td>
-</tr>
-<tr>
-<td>harbor</td>
-<td></td>
-</tr>
-<tr>
-<td>FRONTURL</td>
-<td></td>
-</tr>
-<tr>
-<td>replicas</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>其中<strong>replicas</strong>定义了服务初始副本节点数量，为必填 要求&gt;=1的整数</p>
-]]></content>
-      <categories>
-        <category>2021</category>
-        <category>koal</category>
-      </categories>
-      <tags>
-        <tag>定义</tag>
-        <tag>参数</tag>
-        <tag>类型</tag>
+        <tag>新闻</tag>
+        <tag>规则</tag>
+        <tag>关联</tag>
       </tags>
   </entry>
   <entry>
@@ -3832,9 +3664,196 @@ func main() &#123;
 </tbody></table>
 <h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
       <tags>
-        <tag>类型</tag>
         <tag>key</tag>
         <tag>长度</tag>
+        <tag>类型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>康德.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%BA%B7%E5%BE%B7/</url>
+    <content><![CDATA[<h1 id="康德"><a href="#康德" class="headerlink" title="康德"></a>康德</h1><p><code>德国</code>古典哲学</p>
+<ul>
+<li>纯粹理性批判</li>
+</ul>
+<p><code>卢梭</code>改变了康德，虚幻的优越感</p>
+<p><code>二律背反</code> </p>
+<blockquote>
+<p> 知性 正反都能成立，违背逻辑</p>
+</blockquote>
+<ul>
+<li>时间有开端  时间没有开端</li>
+<li>世界有自由  反 世界没有自由只有因果</li>
+<li>世界有必然绝对存在 世界没有必然绝对存在</li>
+</ul>
+<p>传统形而上学错误的被提出，知性，理性有边界。自由是否存在，超出人的能力，人不能推理出来。解放了自由，揭示了自由有可能存在</p>
+<p><code>自由</code>是先验的设定，从本体意义上的人，无法通过理论证明，不是理论问题，是实践问题，</p>
+<p><strong>你认不认为自己是自由的？</strong></p>
+<p><code>自由</code>是信念，是生命的承诺，不是理论论证命题</p>
+]]></content>
+      <categories>
+        <category>书籍源码</category>
+      </categories>
+      <tags>
+        <tag>时间</tag>
+        <tag>世界</tag>
+        <tag>康德</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用笔记记录.md</title>
+    <url>/2021/%E5%B8%B8%E7%94%A8%E7%AC%94%E8%AE%B0%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th>笔记内容</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="linux/common.md">linux常用命令</a></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>2021</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>内容</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>服务定义.md</title>
+    <url>/2021/koal/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%B9%89/</url>
+    <content><![CDATA[<h1 id="服务上架步骤"><a href="#服务上架步骤" class="headerlink" title="服务上架步骤"></a>服务上架步骤</h1><p>本文档定义了，满足上架要求的服务在密码服务平台上架的步骤：</p>
+<ol>
+<li>修改字典-应用类型，增加新的应用类型<code>srv_tpl_apt</code></li>
+<li>服务定义-定义服务</li>
+<li>修改数据库</li>
+<li>服务上架</li>
+</ol>
+<h2 id="准备材料"><a href="#准备材料" class="headerlink" title="准备材料"></a>准备材料</h2><ul>
+<li>应用编排文件（要求镜像满足服务发布要求，编排文件按照服务要求修改）</li>
+<li>用户手册 pdf</li>
+<li>用户手册摘要 txt</li>
+<li>白皮书 pdf</li>
+<li>白皮书摘要 txt</li>
+<li>服务详情 txt</li>
+<li>sdk</li>
+<li>服务图标</li>
+<li>服务介绍</li>
+</ul>
+<h2 id="修改字典-应用类型"><a href="#修改字典-应用类型" class="headerlink" title="修改字典-应用类型"></a>修改字典-应用类型</h2><p>使用<strong>管理员</strong>,进入数据字典管理功能，搜索<code>srv_tpl_apt</code>，增加新的应用类型</p>
+<h2 id="服务定义"><a href="#服务定义" class="headerlink" title="服务定义"></a>服务定义</h2><p>使用<strong>运维人员</strong>打开<code>服务定义</code>新增：</p>
+<p>按照要求填入信息，选择刚刚新增的应用类型，上传文件和图标,应用编排文件上传至服务元数据，</p>
+<p>服务定义下方有4个tab,<code>密钥</code>，<code>服务模板标签</code>，<code>模板参数</code>，<code>扩容参数</code>，<code>API地址</code></p>
+<h3 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h3><p>如果服务有密钥需求，在此处定义，需求密钥用途，长度，类型 ，算法</p>
+<h3 id="服务模板标签"><a href="#服务模板标签" class="headerlink" title="服务模板标签"></a>服务模板标签</h3><p>无特殊要求不填</p>
+<h3 id="模板参数"><a href="#模板参数" class="headerlink" title="模板参数"></a>模板参数</h3><p>新增如下参数</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>port</td>
+<td></td>
+</tr>
+<tr>
+<td>ns</td>
+<td></td>
+</tr>
+<tr>
+<td>KCSPVSMIP</td>
+<td></td>
+</tr>
+<tr>
+<td>KCSPPORT</td>
+<td></td>
+</tr>
+<tr>
+<td>KCSPAK</td>
+<td></td>
+</tr>
+<tr>
+<td>serviceId</td>
+<td></td>
+</tr>
+<tr>
+<td>NFS_IP</td>
+<td></td>
+</tr>
+<tr>
+<td>version</td>
+<td></td>
+</tr>
+<tr>
+<td>KCSPINGRESS</td>
+<td></td>
+</tr>
+<tr>
+<td>KCSPURL</td>
+<td></td>
+</tr>
+<tr>
+<td>KEY_INDEX</td>
+<td></td>
+</tr>
+<tr>
+<td>harbor</td>
+<td></td>
+</tr>
+<tr>
+<td>FRONTURL</td>
+<td></td>
+</tr>
+<tr>
+<td>replicas</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>其中<strong>replicas</strong>定义了服务初始副本节点数量，为必填 要求&gt;=1的整数</p>
+]]></content>
+      <categories>
+        <category>2021</category>
+        <category>koal</category>
+      </categories>
+      <tags>
+        <tag>定义</tag>
+        <tag>参数</tag>
+        <tag>类型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机器学习.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="二元分类"><a href="#二元分类" class="headerlink" title="二元分类"></a>二元分类</h2><p>线性回归，做二元分类，通常效果不好，因为会受极值影响较大</p>
+<p>决策边界</p>
+<p>决策边界是假设函数的属性</p>
+<p>使用数据集推测O</p>
+<h2 id="算法选择"><a href="#算法选择" class="headerlink" title="算法选择"></a>算法选择</h2><p><img src="/images/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.assets/v2-7f81a81d5d05bab99dff24b67c34a072_720w.jpg" alt="img"></p>
+<p><img src="/images/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.assets/v2-e2f9eabbce380282f2b242a93651d879_720w.jpg" alt="img"></p>
+]]></content>
+      <categories>
+        <category>书籍源码</category>
+      </categories>
+      <tags>
+        <tag>决策</tag>
+        <tag>边界</tag>
+        <tag>函数</tag>
       </tags>
   </entry>
   <entry>
@@ -3871,22 +3890,25 @@ Note right of 菡妹妹:&quot;hhhh&quot;
       </tags>
   </entry>
   <entry>
-    <title>机器学习.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h2 id="二元分类"><a href="#二元分类" class="headerlink" title="二元分类"></a>二元分类</h2><p>线性回归，做二元分类，通常效果不好，因为会受极值影响较大</p>
-<p>决策边界</p>
-<p>决策边界是假设函数的属性</p>
-<p>使用数据集推测O</p>
-<h2 id="算法选择"><a href="#算法选择" class="headerlink" title="算法选择"></a>算法选择</h2><p><img src="/images/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.assets/v2-7f81a81d5d05bab99dff24b67c34a072_720w.jpg" alt="img"></p>
-<p><img src="/images/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.assets/v2-e2f9eabbce380282f2b242a93651d879_720w.jpg" alt="img"></p>
+    <title>算法研究_算法相关扩展.md</title>
+    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6_%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3%E6%89%A9%E5%B1%95/</url>
+    <content><![CDATA[<h1 id="算法相关扩展"><a href="#算法相关扩展" class="headerlink" title="算法相关扩展"></a>算法相关扩展</h1><h2 id="似然与极大似然估计"><a href="#似然与极大似然估计" class="headerlink" title="似然与极大似然估计"></a>似然与极大似然估计</h2><p><code>Likelihood</code>&amp;<code>Maximum likelihood</code>似然与概率，在非正式场合似然和概率（Probability）几乎是一对同义词，但是在统计学中似然和概率却是两个不同的概念.<span style="color:#0ae">概率是在特定环境下某件事情发生的可能性，也就是结果没有产生之前依据环境所对应的参数来预测某件事情发生的可能性</span>，比如抛硬币，抛之前我们不知道最后是哪一面朝上，但是根据硬币的性质我们可以推测任何一面朝上的可能性均为50%，这个概率只有在抛硬币之前才是有意义的，抛完硬币后的结果便是确定的；<span style="color:#0ae">而似然刚好相反，是在确定的结果下去推测产生这个结果的可能环境（参数）</span>，还是抛硬币的例子，假设我们随机抛掷一枚硬币1,000次，结果500次人头朝上，500次数字朝上（实际情况一般不会这么理想，这里只是举个例子），我们很容易判断这是一枚标准的硬币，两面朝上的概率均为50%，这个过程就是我们运用出现的结果来判断这个事情本身的性质（参数），也就是似然。</p>
+<p>结果和参数相互对应的时候，似然和概率在数值上是相等的，如果用 <em>θ</em>θ 表示环境对应的参数，<em>x</em>x 表示结果，那么概率可以表示为：</p>
+<p><em>P</em>(<em>x</em>|<em>θ</em>)</p>
+<p><em>p</em>(<em>x</em>|<em>θ</em>)p(x|θ) 是条件概率的表示方法，<em>θ</em>θ 是前置条件，理解为在 <em>θ</em>θ 的前提下，事件 <em>x</em>x 发生的概率，相对应的似然可以表示为：</p>
+<p>L(<em>θ</em>|<em>x</em></p>
+<p>可以理解为已知结果为 <em>x</em>x ，参数为 <em>θ</em>θ (似然函数里 <em>θ</em>θ 是变量，这里说的参数和变量是相对与概率而言的)对应的概率，即：L(<em>θ</em>|<em>x</em>)=<em>P</em>(<em>x</em>|<em>θ</em>)</p>
+<p>需要说明的是两者在数值上相等，但是意义并不相同，LL 是关于 <em>θ</em>θ 的函数，而 <em>P</em>P 则是关于 <em>x</em>x 的函数，两者从不同的角度描述一件事情。</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>以伯努利分布（Bernoulli distribution，又叫做两点分布或0-1分布）为例：</p>
+<p>A Graduate Course in Applied Cryptography</p>
 ]]></content>
       <categories>
         <category>书籍源码</category>
       </categories>
       <tags>
-        <tag>决策</tag>
-        <tag>边界</tag>
-        <tag>函数</tag>
+        <tag>算法</tag>
+        <tag>伯努利</tag>
+        <tag>bernoulli</tag>
       </tags>
   </entry>
   <entry>
@@ -3922,28 +3944,6 @@ Note right of 菡妹妹:&quot;hhhh&quot;
         <tag>常用</tag>
         <tag>实体</tag>
         <tag>关系</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>算法研究_算法相关扩展.md</title>
-    <url>/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6_%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3%E6%89%A9%E5%B1%95/</url>
-    <content><![CDATA[<h1 id="算法相关扩展"><a href="#算法相关扩展" class="headerlink" title="算法相关扩展"></a>算法相关扩展</h1><h2 id="似然与极大似然估计"><a href="#似然与极大似然估计" class="headerlink" title="似然与极大似然估计"></a>似然与极大似然估计</h2><p><code>Likelihood</code>&amp;<code>Maximum likelihood</code>似然与概率，在非正式场合似然和概率（Probability）几乎是一对同义词，但是在统计学中似然和概率却是两个不同的概念.<span style="color:#0ae">概率是在特定环境下某件事情发生的可能性，也就是结果没有产生之前依据环境所对应的参数来预测某件事情发生的可能性</span>，比如抛硬币，抛之前我们不知道最后是哪一面朝上，但是根据硬币的性质我们可以推测任何一面朝上的可能性均为50%，这个概率只有在抛硬币之前才是有意义的，抛完硬币后的结果便是确定的；<span style="color:#0ae">而似然刚好相反，是在确定的结果下去推测产生这个结果的可能环境（参数）</span>，还是抛硬币的例子，假设我们随机抛掷一枚硬币1,000次，结果500次人头朝上，500次数字朝上（实际情况一般不会这么理想，这里只是举个例子），我们很容易判断这是一枚标准的硬币，两面朝上的概率均为50%，这个过程就是我们运用出现的结果来判断这个事情本身的性质（参数），也就是似然。</p>
-<p>结果和参数相互对应的时候，似然和概率在数值上是相等的，如果用 <em>θ</em>θ 表示环境对应的参数，<em>x</em>x 表示结果，那么概率可以表示为：</p>
-<p><em>P</em>(<em>x</em>|<em>θ</em>)</p>
-<p><em>p</em>(<em>x</em>|<em>θ</em>)p(x|θ) 是条件概率的表示方法，<em>θ</em>θ 是前置条件，理解为在 <em>θ</em>θ 的前提下，事件 <em>x</em>x 发生的概率，相对应的似然可以表示为：</p>
-<p>L(<em>θ</em>|<em>x</em></p>
-<p>可以理解为已知结果为 <em>x</em>x ，参数为 <em>θ</em>θ (似然函数里 <em>θ</em>θ 是变量，这里说的参数和变量是相对与概率而言的)对应的概率，即：L(<em>θ</em>|<em>x</em>)=<em>P</em>(<em>x</em>|<em>θ</em>)</p>
-<p>需要说明的是两者在数值上相等，但是意义并不相同，LL 是关于 <em>θ</em>θ 的函数，而 <em>P</em>P 则是关于 <em>x</em>x 的函数，两者从不同的角度描述一件事情。</p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>以伯努利分布（Bernoulli distribution，又叫做两点分布或0-1分布）为例：</p>
-<p>A Graduate Course in Applied Cryptography</p>
-]]></content>
-      <categories>
-        <category>书籍源码</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>伯努利</tag>
-        <tag>bernoulli</tag>
       </tags>
   </entry>
   <entry>

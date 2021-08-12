@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -96,7 +96,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '',
-    scheme: 'Pisces',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -451,7 +451,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_LockFree/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_%E5%86%B3%E7%AD%96%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -470,7 +470,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_LockFree/" itemprop="url">01_LockFree.md</a></h2>
+                <a class="post-title-link" href="/1/01_%E5%86%B3%E7%AD%96%E6%A0%91/" itemprop="url">01_决策树.md</a></h2>
         
 
         <div class="post-meta">
@@ -544,190 +544,30 @@
       
         
           
-            <h1 id="LockFree"><a href="#LockFree" class="headerlink" title="LockFree"></a>LockFree</h1><p>传统共享数据访问方式采用同步原语（<code>临界区</code>,<code>锁</code>,<code>条件变量</code>)等达到共享数据的安全访问，同步操作很容易成为并行程序中的瓶颈。</p>
-<ul>
-<li>同步原语是操作系统的内核对象，调用该原语会带来上下文切换（用户态换到内核态)</li>
-<li>杜绝并行操作，一个线程在访问共享数据的时候，其他多个线程必须在排队等待</li>
+            <h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h3 id="决策树算法"><a href="#决策树算法" class="headerlink" title="决策树算法"></a>决策树算法</h3><ul>
+<li>ID3</li>
 </ul>
-<p>于是，人们开始研究对共享数据进行并发访问的数据结构和算法</p>
-<ul>
-<li>Transactional memory 事务性内存</li>
-<li>Fine-grained algorithms 细粒度苏阿案发</li>
-<li>Lock-free data structures 无锁数据结构</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_DSL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/1/01_DSL/" itemprop="url">01_DSL.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
-                2021-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/1/" itemprop="url" rel="index">
-                    <span itemprop="name">1</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="DSL"><a href="#DSL" class="headerlink" title="DSL"></a>DSL</h1><p><code>GPL</code>通用编程语言如 python,java,c等等</p>
-<p><code>DSL</code>领域特定语言 Martin Fowler </p>
-<blockquote>
-<p>DSL通过在表达能力上做的妥协换取在某一领域内的高效</p>
+<h4 id="ID3"><a href="#ID3" class="headerlink" title="ID3"></a>ID3</h4><blockquote>
+<p>计算信息謪增益 需要剪枝</p>
 </blockquote>
-<p>常见<code>DSL</code></p>
+<h2 id="树莓派"><a href="#树莓派" class="headerlink" title="树莓派"></a>树莓派</h2><p><img src="/images/01.assets/171439-07c52987d148a108.png" alt="img"></p>
 <ul>
-<li>SQL</li>
-<li>REGEX</li>
-<li>HTML &amp; CSS</li>
+<li>5V</li>
+<li>3V</li>
+<li>接地</li>
+<li>通用GPIO</li>
 </ul>
-<h3 id="feature"><a href="#feature" class="headerlink" title="feature"></a>feature</h3><p>上面的几个?明显的缩小了通用编程语言的概念，但是它们确实在自己领域表现地非常出色，因为这些 DSL 就是根据某一个特定领域的特点塑造的；而通用编程语言相比领域特定语言，在设计时是为了解决更加抽象的问题，而关注点并不只是在某一个领域。</p>
-<p>上面的几个例子有着一些共同的特点：</p>
-<ul>
-<li>没有计算和执行的概念；</li>
-<li>其本身并不需要直接表示计算；</li>
-<li>使用时只需要声明规则、事实以及某些元素之间的层级和关系；</li>
-</ul>
-<h3 id="构建DSL"><a href="#构建DSL" class="headerlink" title="构建DSL"></a>构建DSL</h3><p>DSL 的构建与编程语言其实比较类似，想想我们在重新实现编程语言时，需要做那些事情；实现编程语言的过程可以简化为定义语法与语义，然后实现编译器或者解释器的过程，而 DSL 的实现与它也非常类似，我们也需要对 DSL 进行语法与语义上的设计。</p>
-<p>总结下来，实现 DSL 总共有这么两个需要完成的工作：</p>
-<ol>
-<li>设计语法和语义，定义 DSL 中的元素是什么样的，元素代表什么意思</li>
-<li>实现 parser，对 DSL 解析，最终通过解释器来执行</li>
-</ol>
-<h3 id="设计原则和妥协"><a href="#设计原则和妥协" class="headerlink" title="设计原则和妥协"></a>设计原则和妥协</h3><p>DSL 最大的设计原则就是<strong>简单</strong>，通过简化语言中的元素，降低使用者的负担；无论是 Regex、SQL 还是 HTML 以及 CSS，其说明文档往往只有几页，非常易于学习和掌握。但是，由此带来的问题就是，DSL 中缺乏抽象的概念，比如：模块化、变量以及方法等。</p>
-<blockquote>
-<p>抽象的概念并不是某个领域所关注的问题，就像 Regex 并不需要有模块、变量以及方法等概念。</p>
-</blockquote>
-<p>由于抽象能力的缺乏，在我们的项目规模变得越来越大时，DSL 往往满足不了开发者的需求；我们仍然需要编程语言中的模块化等概念对 DSL 进行补充，以此解决 DSL 并不是真正编程语言的问题。</p>
-<h3 id="DSL分类"><a href="#DSL分类" class="headerlink" title="DSL分类"></a>DSL分类</h3><p>DSL不是什么新鲜的玩意儿，我们平时经常接触的SQL，CSS，正则表达式等等都属于DSL。有的DSL可能更加专注于一个方面，例如Mathematica，LOGO等等。这些语言的目标都是特定的领域，与之相对的则是GPPL(General Purpose Programming Language，通用目的编程语言)。Martin Fowler将DSL分为外部DSL及内部DSL两种。外部DSL有自己的特定语法、解析器和词法分析器等等，它们往往是一种小型的编程语言，甚至不会像GPPL那样需要源文件。与之相对的则是内部DSL。内部DSL其实更像是种别称，它代表一类特别API及使用模式。</p>
-<p>　　XSLT，SQL等等都可以算作是外部DSL。外部DSL一般会直接针对特定的领域设计，而不考虑其他方面。James Gosling曾经说过：每个配置文件最终都会变成一门编程语言。一开始您可能只会用它表示一点点东西，慢慢地您便会想要一些规则，而这些规则则变成了表达式，后来您可能还会定义变量，进行条件判断等等，而最终它就变成了一种奇怪的编程语言，这样的情况屡见不鲜。</p>
-<p>　　而内部DSL，正像之前提到的那样，它往往只是代表了一系列特别的API及使用模式，例如LINQ查询语句及Ruby on Rails中的Active Record声明代码等等。内部DSL可以使用一系列API来“伪装”成一种DSL，它往往会利用一些“流畅化”的技巧，例如像jQuery那样把一些方法通过“点”连接起来，而另一些也会利用元编程的方式。内部DSL还有一些优势，例如可以访问语言中的代码或变量，以及利用代码补全，重构等母语言的所有特性。</p>
+<pre><code class="sh">pinout #获取针脚定义
+</code></pre>
+<p><code>连接led灯</code></p>
+<p><img src="/images/01.assets/413416-20170423112841319-1486568645.png" alt="img"></p>
+<p>两个树莓派的GPIO</p>
+<p><img src="/images/01.assets/413416-20170423143302335-1742281986.png" alt="img"></p>
+<p>我们可以用GPIO的方式连接两个树莓派。一个树莓派的GPIO输出，将成为另一个树莓派的GPIO输入。连接方式很简单，只需要2根导线。一个导线连接两个树莓派的地线，另一根导线连接树莓派的两个PIN</p>
+<p>我们用左侧的树莓派来输出，右侧树莓派来输入。输出过程和上面控制LED灯的例子相似。在第一个树莓派中的GPIO21准备输出：</p>
+<pre><code class="sh">echo 21 &gt; /sys/class/gpio/export
+echo out &gt; /sys/class/gpio/gpio21/direction
+</code></pre>
 
           
         
@@ -1061,6 +901,179 @@
 <p>包含带有<strong>attachmentTemplate</strong>的Type的Relationship标记，是告诉Word打开该.docx时从哪里加载模板的设置，我们可以将Target值修改为远程位置。</p>
 </li>
 </ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_DSL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_DSL/" itemprop="url">01_DSL.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
+                2021-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="DSL"><a href="#DSL" class="headerlink" title="DSL"></a>DSL</h1><p><code>GPL</code>通用编程语言如 python,java,c等等</p>
+<p><code>DSL</code>领域特定语言 Martin Fowler </p>
+<blockquote>
+<p>DSL通过在表达能力上做的妥协换取在某一领域内的高效</p>
+</blockquote>
+<p>常见<code>DSL</code></p>
+<ul>
+<li>SQL</li>
+<li>REGEX</li>
+<li>HTML &amp; CSS</li>
+</ul>
+<h3 id="feature"><a href="#feature" class="headerlink" title="feature"></a>feature</h3><p>上面的几个?明显的缩小了通用编程语言的概念，但是它们确实在自己领域表现地非常出色，因为这些 DSL 就是根据某一个特定领域的特点塑造的；而通用编程语言相比领域特定语言，在设计时是为了解决更加抽象的问题，而关注点并不只是在某一个领域。</p>
+<p>上面的几个例子有着一些共同的特点：</p>
+<ul>
+<li>没有计算和执行的概念；</li>
+<li>其本身并不需要直接表示计算；</li>
+<li>使用时只需要声明规则、事实以及某些元素之间的层级和关系；</li>
+</ul>
+<h3 id="构建DSL"><a href="#构建DSL" class="headerlink" title="构建DSL"></a>构建DSL</h3><p>DSL 的构建与编程语言其实比较类似，想想我们在重新实现编程语言时，需要做那些事情；实现编程语言的过程可以简化为定义语法与语义，然后实现编译器或者解释器的过程，而 DSL 的实现与它也非常类似，我们也需要对 DSL 进行语法与语义上的设计。</p>
+<p>总结下来，实现 DSL 总共有这么两个需要完成的工作：</p>
+<ol>
+<li>设计语法和语义，定义 DSL 中的元素是什么样的，元素代表什么意思</li>
+<li>实现 parser，对 DSL 解析，最终通过解释器来执行</li>
+</ol>
+<h3 id="设计原则和妥协"><a href="#设计原则和妥协" class="headerlink" title="设计原则和妥协"></a>设计原则和妥协</h3><p>DSL 最大的设计原则就是<strong>简单</strong>，通过简化语言中的元素，降低使用者的负担；无论是 Regex、SQL 还是 HTML 以及 CSS，其说明文档往往只有几页，非常易于学习和掌握。但是，由此带来的问题就是，DSL 中缺乏抽象的概念，比如：模块化、变量以及方法等。</p>
+<blockquote>
+<p>抽象的概念并不是某个领域所关注的问题，就像 Regex 并不需要有模块、变量以及方法等概念。</p>
+</blockquote>
+<p>由于抽象能力的缺乏，在我们的项目规模变得越来越大时，DSL 往往满足不了开发者的需求；我们仍然需要编程语言中的模块化等概念对 DSL 进行补充，以此解决 DSL 并不是真正编程语言的问题。</p>
+<h3 id="DSL分类"><a href="#DSL分类" class="headerlink" title="DSL分类"></a>DSL分类</h3><p>DSL不是什么新鲜的玩意儿，我们平时经常接触的SQL，CSS，正则表达式等等都属于DSL。有的DSL可能更加专注于一个方面，例如Mathematica，LOGO等等。这些语言的目标都是特定的领域，与之相对的则是GPPL(General Purpose Programming Language，通用目的编程语言)。Martin Fowler将DSL分为外部DSL及内部DSL两种。外部DSL有自己的特定语法、解析器和词法分析器等等，它们往往是一种小型的编程语言，甚至不会像GPPL那样需要源文件。与之相对的则是内部DSL。内部DSL其实更像是种别称，它代表一类特别API及使用模式。</p>
+<p>　　XSLT，SQL等等都可以算作是外部DSL。外部DSL一般会直接针对特定的领域设计，而不考虑其他方面。James Gosling曾经说过：每个配置文件最终都会变成一门编程语言。一开始您可能只会用它表示一点点东西，慢慢地您便会想要一些规则，而这些规则则变成了表达式，后来您可能还会定义变量，进行条件判断等等，而最终它就变成了一种奇怪的编程语言，这样的情况屡见不鲜。</p>
+<p>　　而内部DSL，正像之前提到的那样，它往往只是代表了一系列特别的API及使用模式，例如LINQ查询语句及Ruby on Rails中的Active Record声明代码等等。内部DSL可以使用一系列API来“伪装”成一种DSL，它往往会利用一些“流畅化”的技巧，例如像jQuery那样把一些方法通过“点”连接起来，而另一些也会利用元编程的方式。内部DSL还有一些优势，例如可以访问语言中的代码或变量，以及利用代码补全，重构等母语言的所有特性。</p>
 
           
         
@@ -2107,7 +2120,7 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
     <h3 class="widget-title">不知所云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
       <canvas width="250" height="250" id="resCanvas" style="width:100%">
-        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E7%AB%AF/" rel="tag">云端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usr/" rel="tag">usr</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/share/" rel="tag">share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crl/" rel="tag">crl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpio/" rel="tag">gpio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/id3/" rel="tag">id3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%A8%E6%88%B7/" rel="tag">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC/" rel="tag">文本</a><span class="tag-list-count">1</span></li></ul>
+        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usr/" rel="tag">usr</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/share/" rel="tag">share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crl/" rel="tag">crl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%A8%E6%88%B7/" rel="tag">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC/" rel="tag">文本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dna/" rel="tag">dna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/" rel="tag">pod</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svs/" rel="tag">svs</a><span class="tag-list-count">1</span></li></ul>
       </canvas>
     </div>
   </div>
@@ -2197,7 +2210,7 @@ kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
