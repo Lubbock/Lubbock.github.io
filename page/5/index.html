@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/golang/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_TSAAPI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -314,7 +314,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/golang/" itemprop="url">golang.md</a></h2>
+                <a class="post-title-link" href="/root/koal_TSAAPI/" itemprop="url">koal_TSAAPI.md</a></h2>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-10T18:00:29+08:00">
-                2021-06-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
+                2021-08-27
               </time>
             
 
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍源码</span>
+                  <a href="/categories/root/" itemprop="url" rel="index">
+                    <span itemprop="name">root</span>
                   </a>
                 </span>
 
@@ -388,647 +388,142 @@
       
         
           
-            <h1 id="golang基础API"><a href="#golang基础API" class="headerlink" title="golang基础API"></a>golang基础API</h1><h2 id="golang文件操作"><a href="#golang文件操作" class="headerlink" title="golang文件操作"></a>golang文件操作</h2><p>文件操作大多数api包含在<code>os</code>中</p>
-<table>
+            <h1 id="TSAAPI"><a href="#TSAAPI" class="headerlink" title="TSAAPI"></a>TSAAPI</h1><h2 id="接口列表"><a href="#接口列表" class="headerlink" title="接口列表"></a>接口列表</h2><table>
 <thead>
 <tr>
-<th>命令</th>
-<th>描述</th>
+<th>接口</th>
+<th>URL</th>
+<th>METHOD</th>
+<th>备注</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Mkdir(name string,perm FileModel) error</td>
-<td>os.Mkdir(“./x”,0777)</td>
-</tr>
-<tr>
-<td>MkdirAll(path string,Perm FileModel)</td>
-<td>创建多级目录</td>
-</tr>
-<tr>
-<td>Remove(name string)</td>
+<td><a name="解析签名结果">解析签名结果</a></td>
+<td>/tss/parser</td>
+<td>POST</td>
 <td></td>
 </tr>
 <tr>
-<td>RemoveAll(name string)</td>
-<td>有文件或者其他目录会报错</td>
+<td><a href="#%E5%88%9B%E5%BB%BA%E6%97%B6%E9%97%B4%E6%88%B3%E8%AF%B7%E6%B1%82">创建时间戳请求</a></td>
+<td>/tss/request/builder</td>
+<td>POST</td>
+<td></td>
 </tr>
 <tr>
+<td><a href="#%E7%AD%BE%E5%90%8D">签名</a></td>
+<td>/tss/signer</td>
+<td>POST</td>
 <td></td>
+</tr>
+<tr>
+<td><a href="#%E9%AA%8C%E7%AD%BE">验签</a></td>
+<td>/tss/verifier</td>
+<td>POST</td>
 <td></td>
 </tr>
 </tbody></table>
-<pre><code class="go">import (
-&quot;fmt&quot;
-&quot;os&quot;
-)
-func main() &#123;
-os.Mkdir(&quot;astaxie&quot;, 0777)
-os.MkdirAll(&quot;astaxie/test1/test2&quot;, 0777)
-err := os.Remove(&quot;astaxie&quot;)
-if err != nil &#123;
-fmt.Println(err)
-&#125;
-os.RemoveAll(&quot;astaxie&quot;)
-&#125;
-</code></pre>
-<h3 id="创建打开文件"><a href="#创建打开文件" class="headerlink" title="创建打开文件"></a>创建打开文件</h3><ul>
-<li>Create</li>
-<li>NewFile</li>
-<li>Open</li>
-<li>OpenFile</li>
-</ul>
-<h3 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h3><ul>
-<li>Write</li>
-<li>WiteAt</li>
-<li>WiteString</li>
-</ul>
-<pre><code class="go">func main() &#123;
-userFile := &quot;astaxie.txt&quot;
-fout, err := os.Create(userFile)
-defer fout.Close()
-if err != nil &#123;
-fmt.Println(userFile, err)
-return
-&#125;
-for i := 0; i &lt; 10; i++ &#123;
-fout.WriteString(&quot;Just a test!\r\n&quot;)
-fout.Write([]byte(&quot;Just a test!\r\n&quot;))
-&#125;
+<h3 id="解析签名结果"><a href="#解析签名结果" class="headerlink" title="解析签名结果"></a>解析签名结果</h3><h4 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h4><pre><code class="shell">curl --location --request POST &#39;http://10.0.130.232:32733/TSAAPI1.0/api/1178b018469988//tss/parser?ak=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
+
+--header &#39;Content-Type: application/json&#39; \
+
+--header &#39;ak: 7a83aa233867450e980ec46348bdb2641782530164950&#39; \
+
+--header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
+
+--data-raw &#39;&#123;
+
+​    &quot;b64TsResp&quot;: &quot;MIIFVzADAgEAMIIFTgYJKoZIhvcNAQcCoIIFPzCCBTsCAQExDjAMBggqgRzPVQGDEQUAMIG7BgkqhkiG9w0BBwGgga0EgaowgacCAQEGDCsGAQQBgrdkAwEBATAwMAwGCCqBHM9VAYMRBQAEIG4PnhQ0TFQGoM9aO037Zl+H9Kdxox9+27XHKHSjKylXAggBI0//oRERQxgTMjAyMDA5MTEwOTQ1MzcuOTk3WgIKCeE8vPOukVoP5qA3pDUwMzELMAkGA1UEBhMCY24xEjAQBgNVBAoMCWtvYWwtdGVzdDEQMA4GA1UEAwwHc2RmLXNtMqCCA8QwggPAMIIDZaADAgECAgwbTwAAAAABhsUtBN8wDAYIKoEcz1UBg3UFADAoMQswCQYDVQQGEwJDTjEZMBcGA1UEAwwQU3ViQ0FfU00yXzE5MDcxMDAeFw0yMDA5MTAxNjAwMDBaFw0yNTA5MTAxNTU5NTlaMDMxCzAJBgNVBAYTAmNuMRIwEAYDVQQKDAlrb2FsLXRlc3QxEDAOBgNVBAMMB3NkZi1zbTIwWTATBgcqhkjOPQIBBggqgRzPVQGCLQNCAAQLJ8wYSP2TLQefK24di5KBx5cBDuu8jVhzCQTrZoGpDIlTw6A4hUTuXD9tM7iR5cgWzS6szPgOgbvBQwuvhT0Lo4ICZjCCAmIwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDgYDVR0PAQH/BAQDAgDAMBEGCWCGSAGG+EIBAQQEAwIAQDAfBgNVHSMEGDAWgBTtcSbKG458yuzmAmC8UE5M7w3qQDCB8gYDVR0fBIHqMIHnMIGooIGloIGihoGfbGRhcDovLzEwLjEuMS4yNTI6Mzg5L0NOPVN1YkNBX1NNMl8xOTA3MTAsQ049U3ViQ0FfU00yXzE5MDcxMCwgT1U9Q1JMRGlzdHJpYnV0ZVBvaW50cywgbz1rb2FsY2E/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdGNsYXNzPWNSTERpc3RyaWJ1dGlvblBvaW50MDqgOKA2hjRodHRwOi8vMTAuMS4xLjI1Mjo4ODgwL2Rvd25sb2FkL1N1YkNBX1NNMl8xOTA3MTAuY3JsMIHyBggrBgEFBQcBAQSB5TCB4jCBnQYIKwYBBQUHMAKGgZBsZGFwOi8vMTAuMS4xLjI1MjozODkvQ049U3ViQ0FfU00yXzE5MDcxMCxDTj1TdWJDQV9TTTJfMTkwNzEwLCBPVT1jQUNlcnRpZmljYXRlcywgbz1rb2FsY2E/Y0FDZXJ0aWZpY2F0ZT9iYXNlP29iamVjdENsYXNzPWNlcnRpZmljYXRpb25BdXRob3JpdHkwQAYIKwYBBQUHMAKGNGh0dHA6Ly8xMC4xLjEuMjUyOjg4ODAvZG93bmxvYWQvU3ViQ0FfU00yXzE5MDcxMC5jZXIwHQYDVR0OBBYEFCU7Ci2Nl0QPNocVjujQkB8FDFFCMAwGCCqBHM9VAYN1BQADRwAwRAIgKFdvoOTv35kWdbvlBCkrPguqSAYbMNV3/iJZ/VojeA4CIBgfnJVEkTx1AeT2H7AEVfd+uNbQeo5uRXaH19xxBAjLMYGfMIGcAgEBMDgwKDELMAkGA1UEBhMCQ04xGTAXBgNVBAMMEFN1YkNBX1NNMl8xOTA3MTACDBtPAAAAAAGGxS0E3zAMBggqgRzPVQGDEQUAMA0GCSqBHM9VAYItAQUABEDtP8dfmvvutrbvcNpKer78305pakBkGc8qYjHEMHgUv+K3BXtqaWJrne3d0IO/zEYNIyJZKtHJl6NkmIjxDhIT&quot;
+
 &#125;
 </code></pre>
-<h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><ul>
-<li>Read(b []byte)(n int,err Error)</li>
-<li>ReadAt(b []byte,off int64)(n int,err Error)</li>
-</ul>
-<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><p>Go删除文件和删除文件夹是同一个函数</p>
-<pre><code class="go">func Remove(name string) Error
-</code></pre>
-<h2 id="字符串转换"><a href="#字符串转换" class="headerlink" title="字符串转换"></a>字符串转换</h2><blockquote>
-<p>字符串转化的函数在strconv中</p>
-</blockquote>
-<pre><code class="golang">func main() &#123;
- str := make([]byte, 0, 100)
- str = strconv.AppendInt(str, 4567, 10)
- str = strconv.AppendBool(str, false)
- str = strconv.AppendQuote(str, &quot;abcdefg&quot;)
- str = strconv.AppendQuoteRune(str, &#39;单&#39;)
- fmt.Println(string(str))
- &#125;
-</code></pre>
-<p>其他转换成字符串</p>
-<pre><code class="go">func main() &#123;
- a := strconv.FormatBool(false)
- b := strconv.FormatFloat(123.23, &#39;g&#39;, 12, 64)
- c := strconv.FormatInt(1234, 10)
- d := strconv.FormatUint(12345, 10)
- e := strconv.Itoa(1023)
- fmt.Println(a, b, c, d, e)
- &#125;
-</code></pre>
-<p>字符串转换成其他类型</p>
-<pre><code class="go">func main()&#123;
-    b, err := strconv.ParseFloat(&quot;123.23&quot;, 64)
- if err != nil &#123;
-
-fmt.Println(err)
- &#125;
- c, err := strconv.ParseInt(&quot;1234&quot;, 10, 64)
- if err != nil &#123;
-
-fmt.Println(err)
- &#125;
- d, err := strconv.ParseUint(&quot;12345&quot;, 10, 64)
- if err != nil &#123;
-
-fmt.Println(err)
- &#125;
- e, err := strconv.Itoa(&quot;1023&quot;)
- if err != nil &#123;
-
-fmt.Println(err)
- &#125;
-&#125;
-</code></pre>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/" itemprop="url">算法研究.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-27T18:08:36+08:00">
-                2021-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="算法研究"><a href="#算法研究" class="headerlink" title="算法研究"></a>算法研究</h1><p>这个章节，会用来解决一些算法相关的问题，目前列出算法如下，预期会提供<code>算法描述</code>，<code>代码实现</code>，<code>动态图-有就会给</code>，<code>算法相关扩展</code></p>
-<ul>
-<li>动态规划算法</li>
-<li>概率算法</li>
-<li>排序算法</li>
-<li>加密算法</li>
-</ul>
-<h2 id="概率算法"><a href="#概率算法" class="headerlink" title="概率算法"></a>概率算法</h2><h3 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h3><h4 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h4><h4 id="动态图"><a href="#动态图" class="headerlink" title="动态图"></a>动态图</h4><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h2 id="排序算法-1"><a href="#排序算法-1" class="headerlink" title="排序算法"></a>排序算法</h2><h2 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6_%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3%E6%89%A9%E5%B1%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6_%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3%E6%89%A9%E5%B1%95/" itemprop="url">算法研究_算法相关扩展.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-27T18:08:36+08:00">
-                2021-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="算法相关扩展"><a href="#算法相关扩展" class="headerlink" title="算法相关扩展"></a>算法相关扩展</h1><h2 id="似然与极大似然估计"><a href="#似然与极大似然估计" class="headerlink" title="似然与极大似然估计"></a>似然与极大似然估计</h2><p><code>Likelihood</code>&amp;<code>Maximum likelihood</code>似然与概率，在非正式场合似然和概率（Probability）几乎是一对同义词，但是在统计学中似然和概率却是两个不同的概念.<span style="color:#0ae">概率是在特定环境下某件事情发生的可能性，也就是结果没有产生之前依据环境所对应的参数来预测某件事情发生的可能性</span>，比如抛硬币，抛之前我们不知道最后是哪一面朝上，但是根据硬币的性质我们可以推测任何一面朝上的可能性均为50%，这个概率只有在抛硬币之前才是有意义的，抛完硬币后的结果便是确定的；<span style="color:#0ae">而似然刚好相反，是在确定的结果下去推测产生这个结果的可能环境（参数）</span>，还是抛硬币的例子，假设我们随机抛掷一枚硬币1,000次，结果500次人头朝上，500次数字朝上（实际情况一般不会这么理想，这里只是举个例子），我们很容易判断这是一枚标准的硬币，两面朝上的概率均为50%，这个过程就是我们运用出现的结果来判断这个事情本身的性质（参数），也就是似然。</p>
-<p>结果和参数相互对应的时候，似然和概率在数值上是相等的，如果用 <em>θ</em>θ 表示环境对应的参数，<em>x</em>x 表示结果，那么概率可以表示为：</p>
-<p><em>P</em>(<em>x</em>|<em>θ</em>)</p>
-<p><em>p</em>(<em>x</em>|<em>θ</em>)p(x|θ) 是条件概率的表示方法，<em>θ</em>θ 是前置条件，理解为在 <em>θ</em>θ 的前提下，事件 <em>x</em>x 发生的概率，相对应的似然可以表示为：</p>
-<p>L(<em>θ</em>|<em>x</em></p>
-<p>可以理解为已知结果为 <em>x</em>x ，参数为 <em>θ</em>θ (似然函数里 <em>θ</em>θ 是变量，这里说的参数和变量是相对与概率而言的)对应的概率，即：L(<em>θ</em>|<em>x</em>)=<em>P</em>(<em>x</em>|<em>θ</em>)</p>
-<p>需要说明的是两者在数值上相等，但是意义并不相同，LL 是关于 <em>θ</em>θ 的函数，而 <em>P</em>P 则是关于 <em>x</em>x 的函数，两者从不同的角度描述一件事情。</p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>以伯努利分布（Bernoulli distribution，又叫做两点分布或0-1分布）为例：</p>
-<p>A Graduate Course in Applied Cryptography</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/java/" itemprop="url">java.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-13T17:47:10+08:00">
-                2021-05-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" itemprop="url" rel="index">
-                    <span itemprop="name">代码片段</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="代码片段收集"><a href="#代码片段收集" class="headerlink" title="代码片段收集"></a>代码片段收集</h1><blockquote>
-<p>收集平常好用的代码片段</p>
-</blockquote>
-<h2 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h2><h3 id="jpa拼接脚本"><a href="#jpa拼接脚本" class="headerlink" title="jpa拼接脚本"></a>jpa拼接脚本</h3><pre><code class="java">    @Select(&quot;&lt;script&gt; &quot; +
-            &quot; select v.* from tb_srv_inse t left join vsm_apply_detail p &quot; +
-            &quot; on t.application_id = p.application_id left join tb_vsm_group v &quot; +
-            &quot; on p.hsm_group_id = v.id &quot; +
-            &quot; &lt;where&gt; v.id is not null &quot; +
-            &quot; &lt;if test=&#39;tenantId != null&#39;&gt;&quot; +
-            &quot;    and t.srv_inse_tenant_id = #&#123;tenantId&#125;&quot; +
-            &quot; &lt;/if&gt;&quot; +
-            &quot; &lt;/where&gt; &quot; +
-            &quot; &lt;/script&gt; &quot;)
-</code></pre>
-<h3 id="动态查询"><a href="#动态查询" class="headerlink" title="动态查询"></a>动态查询</h3><pre><code class="java">    @Select(&quot;&lt;script&gt; select t.* from tb_srv_inse t where t.srv_inse_type != 3 and t.id &quot; +
-            &quot;in (select s.tb_srv_inse_id from sys_user_srv_inse_role s where s.user_id=#&#123;userId&#125; &quot; +
-            &quot; &lt;if test=&#39;tbSrvInse.srvInseName !=null and tbSrvInse.srvInseName !=\&quot;\&quot;&#39;&gt; &quot; +
-            &quot;and t.srv_inse_name like &#39;%$&#123;tbSrvInse.srvInseName&#125;%&#39;&quot; +
-            &quot;&lt;/if&gt;&quot; +
-            &quot;) &lt;/script&gt;&quot;)
-    IPage&lt;TbSrvInse&gt; queryInlineUserMMyyTbSrvInse(Page&lt;TbSrvInse&gt; page, @Param(&quot;userId&quot;) String userId, @Param(&quot;tbSrvInse&quot;) TbSrvInse tbSrvInse);
-</code></pre>
-<h2 id="常用业务代码"><a href="#常用业务代码" class="headerlink" title="常用业务代码"></a>常用业务代码</h2><pre><code class="java">    items = JSON.parseObject(shget, new TypeReference&lt;List&lt;SysUserSrvInseRole&gt;&gt;() &#123;
-                &#125;.getType());
-</code></pre>
-<h3 id="区间合成"><a href="#区间合成" class="headerlink" title="区间合成"></a>区间合成</h3><p>先找到区间开始的索引，在拉出区间</p>
-<pre><code class="java">private static String toRange(List&lt;Integer&gt; waitMerge) &#123;
-        List&lt;Integer&gt; heads = new ArrayList&lt;&gt;();
-        for (int i = 0; i &lt; waitMerge.size(); i++) &#123;
-            if (i == 0) &#123;
-                heads.add(0);
-                continue;
-            &#125;
-            int beforeNode = i - 1;
-            if ((waitMerge.get(beforeNode)+1) != waitMerge.get(i)) &#123;
-                heads.add(i);
-            &#125;
-        &#125;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i &lt; heads.size(); i++) &#123;
-            int nextHead = i + 1;
-            if (nextHead &gt;= heads.size()) &#123;
-                Integer i1 = heads.get(i);
-                if (i1 == (waitMerge.size() - 1)) &#123;
-                    sb.append(&quot;,&quot;);
-                    sb.append(waitMerge.get(i1));
-                &#125;else &#123;
-                    sb.append(&quot;,&quot;);
-                    sb.append(waitMerge.get(i1));
-                    sb.append(&quot;-&quot;);
-                    sb.append(waitMerge.get(waitMerge.size() - 1));
-                &#125;
-            &#125;else &#123;
-                Integer nb = heads.get(nextHead);
-                Integer ls = heads.get(i);
-                if (ls == (nb - 1)) &#123;
-                    sb.append(&quot;,&quot;);
-                    sb.append(waitMerge.get(ls));
-                &#125;else &#123;
-                    sb.append(&quot;,&quot;);
-                    sb.append(waitMerge.get(ls));
-                    sb.append(&quot;-&quot;);
-                    sb.append(waitMerge.get(nb - 1));
-                &#125;
-            &#125;
-        &#125;
-        return sb.toString();
+<h4 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
+    &quot;tsResp&quot;: &#123;
+        &quot;tsRespStatus&quot;: &quot;0&quot;,
+        &quot;tsRespStatuString&quot;: null,
+        &quot;tsRespFailInfo&quot;: &quot;null(0)&quot;
+    &#125;,
+    &quot;tsInfo&quot;: &#123;
+        &quot;b64HashedMsg&quot;: &quot;bg+eFDRMVAagz1o7TftmX4f0p3GjH37btccodKMrKVc=&quot;,
+        &quot;hashAlg&quot;: &quot;SM3&quot;,
+        &quot;policyOid&quot;: &quot;1.3.6.1.4.1.39908.3.1.1.1&quot;,
+        &quot;hexNonce&quot;: &quot;09e13cbcf3ae915a0fe6&quot;,
+        &quot;genTime&quot;: &quot;20200911094537.997 +0000&quot;,
+        &quot;accuracySecs&quot;: &quot;0&quot;,
+        &quot;accuracyMills&quot;: &quot;0&quot;,
+        &quot;accuracyMicros&quot;: &quot;0&quot;,
+        &quot;tsaDN&quot;: &quot;4: C=cn,O=koal-test,CN=sdf-sm2&quot;,
+        &quot;ordering&quot;: &quot;0&quot;,
+        &quot;exts&quot;: null,
+        &quot;hexSerial&quot;: &quot;01234fffa1111143&quot;
+    &#125;,
+    &quot;tsToken&quot;: &#123;
+        &quot;b64Token&quot;: &quot;MIIFTgYJKoZIhvcNAQcCoIIFPzCCBTsCAQExDjAMBggqgRzPVQGDEQUAMIG7BgkqhkiG9w0BBwGgga0EgaowgacCAQEGDCsGAQQBgrdkAwEBATAwMAwGCCqBHM9VAYMRBQAEIG4PnhQ0TFQGoM9aO037Zl+H9Kdxox9+27XHKHSjKylXAggBI0//oRERQxgTMjAyMDA5MTEwOTQ1MzcuOTk3WgIKCeE8vPOukVoP5qA3pDUwMzELMAkGA1UEBhMCY24xEjAQBgNVBAoMCWtvYWwtdGVzdDEQMA4GA1UEAwwHc2RmLXNtMqCCA8QwggPAMIIDZaADAgECAgwbTwAAAAABhsUtBN8wDAYIKoEcz1UBg3UFADAoMQswCQYDVQQGEwJDTjEZMBcGA1UEAwwQU3ViQ0FfU00yXzE5MDcxMDAeFw0yMDA5MTAxNjAwMDBaFw0yNTA5MTAxNTU5NTlaMDMxCzAJBgNVBAYTAmNuMRIwEAYDVQQKDAlrb2FsLXRlc3QxEDAOBgNVBAMMB3NkZi1zbTIwWTATBgcqhkjOPQIBBggqgRzPVQGCLQNCAAQLJ8wYSP2TLQefK24di5KBx5cBDuu8jVhzCQTrZoGpDIlTw6A4hUTuXD9tM7iR5cgWzS6szPgOgbvBQwuvhT0Lo4ICZjCCAmIwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDgYDVR0PAQH/BAQDAgDAMBEGCWCGSAGG+EIBAQQEAwIAQDAfBgNVHSMEGDAWgBTtcSbKG458yuzmAmC8UE5M7w3qQDCB8gYDVR0fBIHqMIHnMIGooIGloIGihoGfbGRhcDovLzEwLjEuMS4yNTI6Mzg5L0NOPVN1YkNBX1NNMl8xOTA3MTAsQ049U3ViQ0FfU00yXzE5MDcxMCwgT1U9Q1JMRGlzdHJpYnV0ZVBvaW50cywgbz1rb2FsY2E/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdGNsYXNzPWNSTERpc3RyaWJ1dGlvblBvaW50MDqgOKA2hjRodHRwOi8vMTAuMS4xLjI1Mjo4ODgwL2Rvd25sb2FkL1N1YkNBX1NNMl8xOTA3MTAuY3JsMIHyBggrBgEFBQcBAQSB5TCB4jCBnQYIKwYBBQUHMAKGgZBsZGFwOi8vMTAuMS4xLjI1MjozODkvQ049U3ViQ0FfU00yXzE5MDcxMCxDTj1TdWJDQV9TTTJfMTkwNzEwLCBPVT1jQUNlcnRpZmljYXRlcywgbz1rb2FsY2E/Y0FDZXJ0aWZpY2F0ZT9iYXNlP29iamVjdENsYXNzPWNlcnRpZmljYXRpb25BdXRob3JpdHkwQAYIKwYBBQUHMAKGNGh0dHA6Ly8xMC4xLjEuMjUyOjg4ODAvZG93bmxvYWQvU3ViQ0FfU00yXzE5MDcxMC5jZXIwHQYDVR0OBBYEFCU7Ci2Nl0QPNocVjujQkB8FDFFCMAwGCCqBHM9VAYN1BQADRwAwRAIgKFdvoOTv35kWdbvlBCkrPguqSAYbMNV3/iJZ/VojeA4CIBgfnJVEkTx1AeT2H7AEVfd+uNbQeo5uRXaH19xxBAjLMYGfMIGcAgEBMDgwKDELMAkGA1UEBhMCQ04xGTAXBgNVBAMMEFN1YkNBX1NNMl8xOTA3MTACDBtPAAAAAAGGxS0E3zAMBggqgRzPVQGDEQUAMA0GCSqBHM9VAYItAQUABEDtP8dfmvvutrbvcNpKer78305pakBkGc8qYjHEMHgUv+K3BXtqaWJrne3d0IO/zEYNIyJZKtHJl6NkmIjxDhIT&quot;,
+        &quot;b64Cert&quot;: &quot;MIIDwDCCA2WgAwIBAgIMG08AAAAAAYbFLQTfMAwGCCqBHM9VAYN1BQAwKDELMAkGA1UEBhMCQ04xGTAXBgNVBAMMEFN1YkNBX1NNMl8xOTA3MTAwHhcNMjAwOTEwMTYwMDAwWhcNMjUwOTEwMTU1OTU5WjAzMQswCQYDVQQGEwJjbjESMBAGA1UECgwJa29hbC10ZXN0MRAwDgYDVQQDDAdzZGYtc20yMFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAECyfMGEj9ky0HnytuHYuSgceXAQ7rvI1YcwkE62aBqQyJU8OgOIVE7lw/bTO4keXIFs0urMz4DoG7wUMLr4U9C6OCAmYwggJiMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA4GA1UdDwEB/wQEAwIAwDARBglghkgBhvhCAQEEBAMCAEAwHwYDVR0jBBgwFoAU7XEmyhuOfMrs5gJgvFBOTO8N6kAwgfIGA1UdHwSB6jCB5zCBqKCBpaCBooaBn2xkYXA6Ly8xMC4xLjEuMjUyOjM4OS9DTj1TdWJDQV9TTTJfMTkwNzEwLENOPVN1YkNBX1NNMl8xOTA3MTAsIE9VPUNSTERpc3RyaWJ1dGVQb2ludHMsIG89a29hbGNhP2NlcnRpZmljYXRlUmV2b2NhdGlvbkxpc3Q/YmFzZT9vYmplY3RjbGFzcz1jUkxEaXN0cmlidXRpb25Qb2ludDA6oDigNoY0aHR0cDovLzEwLjEuMS4yNTI6ODg4MC9kb3dubG9hZC9TdWJDQV9TTTJfMTkwNzEwLmNybDCB8gYIKwYBBQUHAQEEgeUwgeIwgZ0GCCsGAQUFBzAChoGQbGRhcDovLzEwLjEuMS4yNTI6Mzg5L0NOPVN1YkNBX1NNMl8xOTA3MTAsQ049U3ViQ0FfU00yXzE5MDcxMCwgT1U9Y0FDZXJ0aWZpY2F0ZXMsIG89a29hbGNhP2NBQ2VydGlmaWNhdGU/YmFzZT9vYmplY3RDbGFzcz1jZXJ0aWZpY2F0aW9uQXV0aG9yaXR5MEAGCCsGAQUFBzAChjRodHRwOi8vMTAuMS4xLjI1Mjo4ODgwL2Rvd25sb2FkL1N1YkNBX1NNMl8xOTA3MTAuY2VyMB0GA1UdDgQWBBQlOwotjZdEDzaHFY7o0JAfBQxRQjAMBggqgRzPVQGDdQUAA0cAMEQCIChXb6Dk79+ZFnW75QQpKz4LqkgGGzDVd/4iWf1aI3gOAiAYH5yVRJE8dQHk9h+wBFX3frjW0HqObkV2h9fccQQIyw==&quot;
     &#125;
+&#125;
 </code></pre>
-<pre><code>sys_quartz_job
+<h3 id="创建时间戳请求"><a href="#创建时间戳请求" class="headerlink" title="创建时间戳请求"></a>创建时间戳请求</h3><h4 id="请求-1"><a href="#请求-1" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/TSAAPI1.0/api/1178b018469988/tss/request/builder?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
+--header &#39;Content-Type: application/json&#39; \
+--header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
+--data-raw &#39;&#123;
+    &quot;b64HashedMsg&quot;: &quot;&quot;,
+    &quot;b64OriData&quot;: &quot;MTIz&quot;,
+    &quot;hasCert&quot;: &quot;&quot;,
+    &quot;hashAlg&quot;: &quot;&quot;
+&#125;&#39;
 </code></pre>
-<p>delete qrtz_job_details where JOB_NAME=’kl.kcsp.modules.srvinse.job.TbSrvInseValidMonitorJob’</p>
-<p>1391576778795036674    admin    2021-05-10 10:12:13    0    admin    2021-05-10 10:12:24    kl.kcsp.modules.srvinse.job.TbSrvInseValidMonitorJob    0 1 1 * * ? *    NULL    服务过期检查    -1</p>
-<pre><code>INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.bakrec.job.AutoBkJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.bakrec.job.AutoBkJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.chsm.job.CheckChsmStatusJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.chsm.job.CheckChsmStatusJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.message.job.SendMsgJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.message.job.SendMsgJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.monitor.utils.SaveChsmMonitorInfo&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.monitor.utils.SaveChsmMonitorInfo&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.srvinse.job.InseMonitorJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.srvinse.job.InseMonitorJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.srvinse.job.SrvKeySyncJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.srvinse.job.SrvKeySyncJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
-
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.vsm.job.CheckVsmStatusJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.vsm.job.CheckVsmStatusJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
+<h4 id="响应-1"><a href="#响应-1" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
+    &quot;b64TsReq&quot;: &quot;MFECAQEwMTANBglghkgBZQMEAgEFAAQgpmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuMGDCsGAQQBgrdkAwEBAQILAJNR6xaO8AxyWhA=&quot;
+&#125;
+</code></pre>
+<h3 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h3><h4 id="请求-2"><a href="#请求-2" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/TSAAPI1.0/api/1178c47e964368/tss/signer?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
+--header &#39;Content-Type: application/json&#39; \
+--header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
+--data-raw &#39;&#123;
+  &quot;certAlias&quot;: &quot;RABizOper&quot;,
+  &quot;certDn&quot;: &quot;&quot;,
+  &quot;certHexSn&quot;: &quot;&quot;,
+  &quot;keyPin&quot;: &quot;&quot;,
+  &quot;serviceName&quot;: &quot;&quot;,
+  &quot;signHashAlg&quot;: &quot;&quot;,
+  &quot;tsReq&quot;: &#123;
+    &quot;b64HashedMsg&quot;: &quot;&quot;,
+    &quot;b64OriData&quot;: &quot;MTIz&quot;,
+    &quot;hasCert&quot;: &quot;1&quot;,
+    &quot;hashAlg&quot;: &quot;&quot;
+  &#125;
+&#125;&#39;
+</code></pre>
+<h4 id="响应-2"><a href="#响应-2" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
+    &quot;sid&quot;: &quot;01234fffa1111112&quot;,
+    &quot;b64TsResp&quot;: &quot;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&quot;,
+    &quot;b64Cert&quot;: &quot;MIIDlTCCAn2gAwIBAgIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBCwUAMCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdDAeFw0xOTA3MDkxNjAwMDBaFw0yOTA3MDcxNTU5NTlaMGIxCzAJBgNVBAYTAkNOMQ0wCwYDVQQKDARrb2FsMQ0wCwYDVQQLDARrb2FsMSEwHwYJKoZIhvcNAQkBFhJSQUJpek9wZXJAa29hbC5jb20xEjAQBgNVBAMMCVJBQml6T3BlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIh9X4tOUBWjRgToRmxA/626IBuWRNlP2iLb2iynGgcnXa4XM/ZG4YERXFC3AnUlu5Eb3/gapAbvobvC6a/rmIOVgbxdRmDmEt9nwoVJT2nzU85H02pCgWbAiVB5ey3aUeRob0aVwRf1xDL/7Xs/PyAgpM6pvS0Qix6Ao2SsTUITsdEsJsWY8pMlEPX15Toa/Md3yG4nWG0PfNQy+PSIcL8r6zDP9icnlGGj/lRmHGTD91dSgtN9MPw5FgITBC3jyormMUim+OQvte4JrUO88w+Br9vRstuxgmaxT1ZbauVFzJ8qgJcHCGnsvms6Gv+ntF4ywWWgW6+aZSzplGJ3hC8CAwEAAaOBhjCBgzAMBgNVHRMEBTADAQEAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQEAwIAwDARBglghkgBhvhCAQEEBAMCAIAwHwYDVR0jBBgwFoAUxgVcLA9r0CufSgccJy5I92oa6k4wHQYDVR0OBBYEFBPT7mMeqz1cAWEntfw5191d8zm/MA0GCSqGSIb3DQEBCwUAA4IBAQAs5YN6BeisLwJel7QReoAYn6SpGjx3Kfa0d4MLt553vqDyDYRi7iB/xn0QK2cRs4t2nU/ENjYHMC5D8MpoCycifueEvv07nUsF7G7B+8XgyegoccRtZFNDvYAOBPfIenzzZCVCD+w23rFVIFWJDnRsxSxI9KHaSaqzr6y/InuW+6ThEDJtdOof4QR58hnlxF17O7NwQNS104IEk2Lnl4ayKdIA2SXk2t1smgYBprdndvtEhvNJBROIXdkk6sYl95mml6Q1LdvY7koaVgd4jzFm2qGaWqwKof8tBQckVxbwdAFELwEXfqF/vRhY9QDYyqlw6k5hC/LYjZYjjUPACoUF&quot;
+&#125;
+</code></pre>
+<h3 id="验签"><a href="#验签" class="headerlink" title="验签"></a>验签</h3><h4 id="请求-3"><a href="#请求-3" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/TSAAPI1.0/api/1178c47e964368/tss/verifier?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
+--header &#39;Content-Type: application/json&#39; \
+--header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
+--data-raw &#39;&#123;
+  &quot;b64CertData&quot;: &quot;&quot;,
+  &quot;b64OriData&quot;: &quot;MTIz&quot;,
+  &quot;b64TsResp&quot;: &quot;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&quot;,
+  &quot;serviceName&quot;: &quot;&quot;,
+  &quot;verifyCertOpt&quot;: &#123;
+    &quot;allowListFlag&quot;: true,
+    &quot;b64CertChain&quot;: [],
+    &quot;caName&quot;: &quot;&quot;,
+    &quot;certChainFlag&quot;: false,
+    &quot;certValidFlag&quot;: true,
+    &quot;crlFlag&quot;: true,
+    &quot;ocspUrl&quot;: &quot;&quot;,
+    &quot;verifyCertFlag&quot;: true
+  &#125;
+&#125;&#39;
+</code></pre>
+<h4 id="响应-3"><a href="#响应-3" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
+    &quot;errorCode&quot;: 0,
+    &quot;msg&quot;: &quot;success&quot;
+&#125;
 </code></pre>
 
           
@@ -1078,7 +573,7 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/2021/koal/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%B9%89/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_Saas%E6%94%B9%E9%80%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1097,7 +592,7 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/koal/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%B9%89/" itemprop="url">服务定义.md</a></h2>
+                <a class="post-title-link" href="/root/koal_Saas%E6%94%B9%E9%80%A0/" itemprop="url">koal_Saas改造.md</a></h2>
         
 
         <div class="post-meta">
@@ -1109,8 +604,410 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-27T14:01:47+08:00">
-                2021-04-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
+                2021-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/root/" itemprop="url" rel="index">
+                    <span itemprop="name">root</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Saas改造"><a href="#Saas改造" class="headerlink" title="Saas改造"></a>Saas改造</h1><table>
+<thead>
+<tr>
+<th>x0</th>
+<th>x1</th>
+<th>y</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>kcsp</td>
+<td>运维管理员开通租户</td>
+<td>/v1/tenant/action</td>
+</tr>
+<tr>
+<td>kcsp</td>
+<td>查询租户下实例列表</td>
+<td>/v1/instance/get</td>
+</tr>
+<tr>
+<td>kcsp</td>
+<td>查询租户下可用密钥</td>
+<td>/v1/secretkey/get</td>
+</tr>
+<tr>
+<td>kcsp</td>
+<td>在线测试密码应用角色是否可用</td>
+<td>/v1/health</td>
+</tr>
+<tr>
+<td>kcsp</td>
+<td>查询密码应用服务角色</td>
+<td>/v1/roles</td>
+</tr>
+<tr>
+<td>kcsp</td>
+<td>备份密码应用服务数据库数据</td>
+<td>/v1/backups</td>
+</tr>
+<tr>
+<td>kcsp</td>
+<td>从数据库中护肤密码应用服务数据</td>
+<td>/v1/recover</td>
+</tr>
+</tbody></table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_CISAW/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/root/koal_CISAW/" itemprop="url">koal_CISAW.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
+                2021-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/root/" itemprop="url" rel="index">
+                    <span itemprop="name">root</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="CISAW"><a href="#CISAW" class="headerlink" title="CISAW"></a>CISAW</h1><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>软件安全属性</td>
+<td></td>
+</tr>
+<tr>
+<td>安全性</td>
+<td></td>
+</tr>
+<tr>
+<td>完整性</td>
+<td></td>
+</tr>
+<tr>
+<td>可用性</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>可追踪性</td>
+<td></td>
+</tr>
+<tr>
+<td>抗di lai xing</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>数据安全<ul>
+<li>对称算法</li>
+<li>非对称算法</li>
+</ul>
+</li>
+<li>程序安全</li>
+<li>文档资料安全</li>
+</ul>
+<h2 id="简答题"><a href="#简答题" class="headerlink" title="简答题"></a>简答题</h2><ol>
+<li><p>简要论述CISAW软件安全开发模型的核心思想</p>
+<p>CISAW软件安全开发模型与CISAW信息安全保障模型一脉相承，通过实现 <code>程序</code>，<code>数据</code>和<code>文档</code>3个实体对象全生命周期的<code>可用性</code>，<code>完整性</code>,<code>机密性</code>,<code>不可否认性</code>等若干安全属性来支撑“业务”的正常进行，并在实现安全属性的过程中关注<code>需求分析</code>，<code>设计</code>，<code>编码</code>,<code>测试</code>,<code>运行</code>5个环节的技术手段和措施，模型中为实现上述对象的安全属性及5个环节需要充足的<code>人力</code>，<code>财务</code>，<code>技术</code>，<code>信息资源</code>提供保障，而以上的各类<code>对象</code>，<code>环节</code>，<code>资源</code>都必须进行综合有效的管理。</p>
+<ol start="2">
+<li>简述用户数据保护功能包含那几个功能类以及作用</li>
+</ol>
+<p>用户数据保护功能包含了<code>访问控制</code>，<code>数据流控制</code>，<code>数据鉴别</code>，<code>系统内部传送</code>，<code>残余信息保护</code>，<code>回退</code>，<code>存储数据完整性</code>共七个功能类，这些功能类规定了一些与用户数据保护相关的安全功能和安全策略</p>
+<ol start="3">
+<li>如何通过软件安全功能对用户数据进行保护</li>
+</ol>
+<p><code>为了保证软件安全，需要对</code>输入<code>，</code>输出<code>，和</code>存储中的用户数据<code>进行保护，而这种保护由用户数据保护功能来实现，具体来说，用户数据保护功能包含了</code>访问控制<code>，</code>数据流控制<code>，</code>数据鉴别<code>，</code>系统内部传送<code>，</code>残余信息保护<code>，</code>回退<code>，</code>存储数据完整性`共七个功能类，这些功能类规定了一些与用户数据保护相关的安全功能和安全策略，其中：</p>
+<ol>
+<li>访问控制类主要设计主题和课题间的操作权限</li>
+<li>数据流控制主要处理系统和用户间，用户和用户间数据传输过程中的安全需求</li>
+<li>数据鉴别主要保证存储数据的有效性</li>
+<li>系统内部传送功能主要保护数据在传输过程中的安全可靠</li>
+<li>残余信息保护主要为那些已被逻辑上删除或释放，但仍可能残存在系统中的信息提供保护功能</li>
+<li>回退是未来保证用户数据的完整性</li>
+<li>存储数据完整性则是为了让系统保证其存储的所有数据没有遭到破坏</li>
+</ol>
+</li>
+</ol>
+<h3 id="软件安全"><a href="#软件安全" class="headerlink" title="软件安全"></a>软件安全</h3><h4 id="五大原则"><a href="#五大原则" class="headerlink" title="五大原则"></a>五大原则</h4><ul>
+<li>减少攻击面</li>
+<li>不要轻信第三方</li>
+<li>不要通过隐藏来实现安全</li>
+<li>正确纠正安全问题</li>
+<li>安全的发生故障</li>
+</ul>
+<h3 id="McGraw-软件安全开发模型"><a href="#McGraw-软件安全开发模型" class="headerlink" title="McGraw 软件安全开发模型"></a>McGraw 软件安全开发模型</h3><p>强调使用工程后的方法来实施软件安全。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><hr>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/2021/secraft2/AK%E9%AA%8C%E8%AF%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/secraft2/AK%E9%AA%8C%E8%AF%81/" itemprop="url">AK验证.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:58+08:00">
+                2021-08-27
               </time>
             
 
@@ -1143,8 +1040,8 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021/koal/" itemprop="url" rel="index">
-                    <span itemprop="name">koal</span>
+                  <a href="/categories/2021/secraft2/" itemprop="url" rel="index">
+                    <span itemprop="name">secraft2</span>
                   </a>
                 </span>
 
@@ -1182,403 +1079,9 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
       
         
           
-            <h1 id="服务上架步骤"><a href="#服务上架步骤" class="headerlink" title="服务上架步骤"></a>服务上架步骤</h1><p>本文档定义了，满足上架要求的服务在密码服务平台上架的步骤：</p>
-<ol>
-<li>修改字典-应用类型，增加新的应用类型<code>srv_tpl_apt</code></li>
-<li>服务定义-定义服务</li>
-<li>修改数据库</li>
-<li>服务上架</li>
-</ol>
-<h2 id="准备材料"><a href="#准备材料" class="headerlink" title="准备材料"></a>准备材料</h2><ul>
-<li>应用编排文件（要求镜像满足服务发布要求，编排文件按照服务要求修改）</li>
-<li>用户手册 pdf</li>
-<li>用户手册摘要 txt</li>
-<li>白皮书 pdf</li>
-<li>白皮书摘要 txt</li>
-<li>服务详情 txt</li>
-<li>sdk</li>
-<li>服务图标</li>
-<li>服务介绍</li>
-</ul>
-<h2 id="修改字典-应用类型"><a href="#修改字典-应用类型" class="headerlink" title="修改字典-应用类型"></a>修改字典-应用类型</h2><p>使用<strong>管理员</strong>,进入数据字典管理功能，搜索<code>srv_tpl_apt</code>，增加新的应用类型</p>
-<h2 id="服务定义"><a href="#服务定义" class="headerlink" title="服务定义"></a>服务定义</h2><p>使用<strong>运维人员</strong>打开<code>服务定义</code>新增：</p>
-<p>按照要求填入信息，选择刚刚新增的应用类型，上传文件和图标,应用编排文件上传至服务元数据，</p>
-<p>服务定义下方有4个tab,<code>密钥</code>，<code>服务模板标签</code>，<code>模板参数</code>，<code>扩容参数</code>，<code>API地址</code></p>
-<h3 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h3><p>如果服务有密钥需求，在此处定义，需求密钥用途，长度，类型 ，算法</p>
-<h3 id="服务模板标签"><a href="#服务模板标签" class="headerlink" title="服务模板标签"></a>服务模板标签</h3><p>无特殊要求不填</p>
-<h3 id="模板参数"><a href="#模板参数" class="headerlink" title="模板参数"></a>模板参数</h3><p>新增如下参数</p>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>参数描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>port</td>
-<td></td>
-</tr>
-<tr>
-<td>ns</td>
-<td></td>
-</tr>
-<tr>
-<td>KCSPVSMIP</td>
-<td></td>
-</tr>
-<tr>
-<td>KCSPPORT</td>
-<td></td>
-</tr>
-<tr>
-<td>KCSPAK</td>
-<td></td>
-</tr>
-<tr>
-<td>serviceId</td>
-<td></td>
-</tr>
-<tr>
-<td>NFS_IP</td>
-<td></td>
-</tr>
-<tr>
-<td>version</td>
-<td></td>
-</tr>
-<tr>
-<td>KCSPINGRESS</td>
-<td></td>
-</tr>
-<tr>
-<td>KCSPURL</td>
-<td></td>
-</tr>
-<tr>
-<td>KEY_INDEX</td>
-<td></td>
-</tr>
-<tr>
-<td>harbor</td>
-<td></td>
-</tr>
-<tr>
-<td>FRONTURL</td>
-<td></td>
-</tr>
-<tr>
-<td>replicas</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>其中<strong>replicas</strong>定义了服务初始副本节点数量，为必填 要求&gt;=1的整数</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/python/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/python/" itemprop="url">python.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-26T11:35:58+08:00">
-                2021-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">书籍源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="prompt-toolkit"><a href="#prompt-toolkit" class="headerlink" title="prompt_toolkit"></a>prompt_toolkit</h1><p><code> prompt_toolkit</code>用于在<strong>Python</strong>中构建功能强大的交互式命令行和终端应用程序的库，它可以是<strong>GNU readline</strong>的高级替代品.</p>
-<ul>
-<li>键入时语法高亮显示输入。（例如，使用Pygments词法分析器。）</li>
-<li>多行输入编辑。</li>
-<li>高级代码自动完成。</li>
-<li>选择要复制/粘贴的文本。（Emacs和Vi风格。）</li>
-<li>鼠标支持光标定位和滚动。</li>
-<li>自动建议。（像<a href="http://fishshell.com/">fish shell</a>。）</li>
-<li>没有global状态。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/Antlr/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/Antlr/" itemprop="url">Antlr.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-26T11:00:12+08:00">
-                2021-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index">
-                    <span itemprop="name">工程记录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Antlr的使用"><a href="#Antlr的使用" class="headerlink" title="Antlr的使用"></a>Antlr的使用</h1><p>为了应对无休止的规范开发的项目<a href="https://gitee.com/sevenclear/sb-constant.git">SBConstant</a></p>
-<p>使用Antlr </p>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
-<li>下载<strong>java</strong>词法文件</li>
-<li>开始解析</li>
-</ol>
-<h3 id="核心类"><a href="#核心类" class="headerlink" title="核心类"></a>核心类</h3><p><strong>TokenStreamRewriter</strong>提供了antlr4的流修改能力</p>
-<ul>
-<li>访问器模式</li>
-<li>监听摸索</li>
-</ul>
-<p>antlr 解析出<strong>tokenStream</strong>后通过listener,visit可以访问完整的数</p>
-<p>然后根据java语法，编写对应的识别抽取代码，</p>
-<p>第一遍遍历抽出想要的数据</p>
-<p>第二遍开始修改流，插入想要的数据</p>
+            <h1 id="AK生成策略"><a href="#AK生成策略" class="headerlink" title="AK生成策略"></a>AK生成策略</h1><p>[toc]</p>
+<p>系统的ak生成策略。</p>
+<p><img src="http://assets.processon.com/chart_image/5ffd14aa1e0853437c3d6eb2.png?_=1614844942791" alt="策略"></p>
 
           
         
@@ -1658,8 +1161,8 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-15T13:06:55+08:00">
-                2021-04-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:55+08:00">
+                2021-08-27
               </time>
             
 
@@ -2156,7 +1659,7 @@ Window环境：java -XX:+PrintFlagsInitial | findstr manageable
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%BA%B7%E5%BE%B7/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E4%B8%8D%E5%AE%89%E4%B9%8B%E4%B9%A6_%E9%9A%8F%E6%9C%BA%E7%94%9F%E5%AD%98%E7%9A%84%E6%99%BA%E6%85%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -2175,7 +1678,7 @@ Window环境：java -XX:+PrintFlagsInitial | findstr manageable
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%BA%B7%E5%BE%B7/" itemprop="url">康德.md</a></h2>
+                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E4%B8%8D%E5%AE%89%E4%B9%8B%E4%B9%A6_%E9%9A%8F%E6%9C%BA%E7%94%9F%E5%AD%98%E7%9A%84%E6%99%BA%E6%85%A7/" itemprop="url">不安之书_随机生存的智慧.md</a></h2>
         
 
         <div class="post-meta">
@@ -2187,8 +1690,8 @@ Window环境：java -XX:+PrintFlagsInitial | findstr manageable
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-15T12:01:53+08:00">
-                2021-04-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:53+08:00">
+                2021-08-27
               </time>
             
 
@@ -2249,24 +1752,20 @@ Window环境：java -XX:+PrintFlagsInitial | findstr manageable
       
         
           
-            <h1 id="康德"><a href="#康德" class="headerlink" title="康德"></a>康德</h1><p><code>德国</code>古典哲学</p>
-<ul>
-<li>纯粹理性批判</li>
-</ul>
-<p><code>卢梭</code>改变了康德，虚幻的优越感</p>
-<p><code>二律背反</code> </p>
-<blockquote>
-<p> 知性 正反都能成立，违背逻辑</p>
-</blockquote>
-<ul>
-<li>时间有开端  时间没有开端</li>
-<li>世界有自由  反 世界没有自由只有因果</li>
-<li>世界有必然绝对存在 世界没有必然绝对存在</li>
-</ul>
-<p>传统形而上学错误的被提出，知性，理性有边界。自由是否存在，超出人的能力，人不能推理出来。解放了自由，揭示了自由有可能存在</p>
-<p><code>自由</code>是先验的设定，从本体意义上的人，无法通过理论证明，不是理论问题，是实践问题，</p>
-<p><strong>你认不认为自己是自由的？</strong></p>
-<p><code>自由</code>是信念，是生命的承诺，不是理论论证命题</p>
+            <h1 id="随机生存的智慧"><a href="#随机生存的智慧" class="headerlink" title="随机生存的智慧"></a>随机生存的智慧</h1><p><code>普罗克拉斯提斯之床</code><br>有关⸺遇到我们不了解、不清楚的东西时,我们的解决办法是对我们自己的人生观和世界观进行“拉伸”或者“压缩”,强迫它们符合世俗的、预设的、人为制定的观念、⻔类和套路</p>
+<p>一个创意独特性的最好证据,不是过去没有跟它类似的创意,而是现在有很多跟它<strong>相左</strong>的创意。</p>
+<ol>
+<li>当你真心想说“不”的时候,就会更难说出口。</li>
+<li>如果你说“不”是认真的,就用不着再说第二次。</li>
+<li>对你名誉损害最大的是你为了维护它而说的话</li>
+<li>当一个人开始谈论衰老的时候,他就真的开始老了。</li>
+<li>他们会羡慕你的成功、你的财富、你的聪明、你的相貌、你的地位⸺但是很少有人会羡慕你的智慧。</li>
+<li>人们所谓的“谦逊”,其实通常都是掩饰得比较成功的傲慢。</li>
+<li>成功就是在中年时成为你在少年时梦想成为的那个人,别的都是失控导致的结果。</li>
+<li>在绝大多数争论中,人们似乎都在试图说服对方,但他们其实最<br>多只能说服自己。</li>
+</ol>
+<p>学习只是为了学习,希望使人成为一个好人、一个值得交谈的对象;</p>
+<p>教育和财富增长无必要关联</p>
 
           
         
@@ -2315,7 +1814,7 @@ Window环境：java -XX:+PrintFlagsInitial | findstr manageable
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/2021/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E8%A7%84%E5%88%92/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E4%B8%8D%E5%AE%89%E4%B9%8B%E4%B9%A6_%E4%B8%8D%E5%AE%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -2334,7 +1833,7 @@ Window环境：java -XX:+PrintFlagsInitial | findstr manageable
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E8%A7%84%E5%88%92/" itemprop="url">编程语言规划.md</a></h2>
+                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E4%B8%8D%E5%AE%89%E4%B9%8B%E4%B9%A6_%E4%B8%8D%E5%AE%89/" itemprop="url">不安之书_不安.md</a></h2>
         
 
         <div class="post-meta">
@@ -2346,8 +1845,324 @@ Window环境：java -XX:+PrintFlagsInitial | findstr manageable
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-29T15:36:34+08:00">
-                2021-03-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:53+08:00">
+                2021-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="不安"><a href="#不安" class="headerlink" title="不安"></a>不安</h1><table>
+<thead>
+<tr>
+<th>x</th>
+<th>y</th>
+<th>z</th>
+<th>f</th>
+<th>g</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>姜旭芸</td>
+<td>杭州象鲸视圈信息科技有限公司</td>
+<td>500万(元)</td>
+<td>浙江省杭州市江干区</td>
+<td>2019-12-23</td>
+</tr>
+<tr>
+<td></td>
+<td>宁波象象软件有限公司</td>
+<td>100万(元)</td>
+<td>浙江省宁波市鄞州区</td>
+<td>2018-12-03</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://aiqicha.baidu.com/company_detail_29843431900322">中投世纪国际投资(深圳)有限公司</a></td>
+<td>50</td>
+<td>广东省深圳市龙华区</td>
+<td>2017-0628</td>
+</tr>
+</tbody></table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E4%B8%8D%E5%AE%89%E4%B9%8B%E4%B9%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E4%B8%8D%E5%AE%89%E4%B9%8B%E4%B9%A6/" itemprop="url">不安之书.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:53+08:00">
+                2021-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="不安之书"><a href="#不安之书" class="headerlink" title="不安之书"></a>不安之书</h2><p>认识到自己可以产生的破坏，是自我尊重的开始。</p>
+<p>认识到世界的脆弱性呢，越往前走，越瞧见伟大的事业，伟大的人。越发感觉到人的渺小。越发感到人的脆弱。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/2021/%E5%B8%B8%E7%94%A8%E7%AC%94%E8%AE%B0%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/%E5%B8%B8%E7%94%A8%E7%AC%94%E8%AE%B0%E8%AE%B0%E5%BD%95/" itemprop="url">常用笔记记录.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:51+08:00">
+                2021-08-27
               </time>
             
 
@@ -2408,215 +2223,268 @@ Window环境：java -XX:+PrintFlagsInitial | findstr manageable
       
         
           
-            <h1 id="各编程语言学习目标"><a href="#各编程语言学习目标" class="headerlink" title="各编程语言学习目标"></a>各编程语言学习目标</h1><blockquote>
-<p>编程语言现在错综复杂，为了规避心思乱掉，这里基本描述下学习目标</p>
-</blockquote>
+            <table>
+<thead>
+<tr>
+<th>笔记内容</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="linux/common.md">linux常用命令</a></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/2021/koal/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%B9%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/koal/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%B9%89/" itemprop="url">服务定义.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:48+08:00">
+                2021-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/2021/" itemprop="url" rel="index">
+                    <span itemprop="name">2021</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/2021/koal/" itemprop="url" rel="index">
+                    <span itemprop="name">koal</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="服务上架步骤"><a href="#服务上架步骤" class="headerlink" title="服务上架步骤"></a>服务上架步骤</h1><p>本文档定义了，满足上架要求的服务在密码服务平台上架的步骤：</p>
+<ol>
+<li>修改字典-应用类型，增加新的应用类型<code>srv_tpl_apt</code></li>
+<li>服务定义-定义服务</li>
+<li>修改数据库</li>
+<li>服务上架</li>
+</ol>
+<h2 id="准备材料"><a href="#准备材料" class="headerlink" title="准备材料"></a>准备材料</h2><ul>
+<li>应用编排文件（要求镜像满足服务发布要求，编排文件按照服务要求修改）</li>
+<li>用户手册 pdf</li>
+<li>用户手册摘要 txt</li>
+<li>白皮书 pdf</li>
+<li>白皮书摘要 txt</li>
+<li>服务详情 txt</li>
+<li>sdk</li>
+<li>服务图标</li>
+<li>服务介绍</li>
+</ul>
+<h2 id="修改字典-应用类型"><a href="#修改字典-应用类型" class="headerlink" title="修改字典-应用类型"></a>修改字典-应用类型</h2><p>使用<strong>管理员</strong>,进入数据字典管理功能，搜索<code>srv_tpl_apt</code>，增加新的应用类型</p>
+<h2 id="服务定义"><a href="#服务定义" class="headerlink" title="服务定义"></a>服务定义</h2><p>使用<strong>运维人员</strong>打开<code>服务定义</code>新增：</p>
+<p>按照要求填入信息，选择刚刚新增的应用类型，上传文件和图标,应用编排文件上传至服务元数据，</p>
+<p>服务定义下方有4个tab,<code>密钥</code>，<code>服务模板标签</code>，<code>模板参数</code>，<code>扩容参数</code>，<code>API地址</code></p>
+<h3 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h3><p>如果服务有密钥需求，在此处定义，需求密钥用途，长度，类型 ，算法</p>
+<h3 id="服务模板标签"><a href="#服务模板标签" class="headerlink" title="服务模板标签"></a>服务模板标签</h3><p>无特殊要求不填</p>
+<h3 id="模板参数"><a href="#模板参数" class="headerlink" title="模板参数"></a>模板参数</h3><p>新增如下参数</p>
 <table>
 <thead>
 <tr>
-<th>编程语言</th>
-<th>计划目标描述</th>
+<th>参数名</th>
+<th>参数描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>python</td>
-<td>胶水语言，熟练掌握</td>
+<td>port</td>
+<td></td>
 </tr>
 <tr>
-<td>c,c++</td>
-<td>能简单使用</td>
+<td>ns</td>
+<td></td>
 </tr>
 <tr>
-<td>js,css</td>
-<td>基本使用</td>
+<td>KCSPVSMIP</td>
+<td></td>
 </tr>
 <tr>
-<td>java</td>
-<td>精通</td>
+<td>KCSPPORT</td>
+<td></td>
 </tr>
 <tr>
-<td>golang</td>
-<td>精通</td>
+<td>KCSPAK</td>
+<td></td>
 </tr>
 <tr>
-<td>haskhell,list</td>
-<td>学起来玩</td>
+<td>serviceId</td>
+<td></td>
 </tr>
 <tr>
-<td>vue,js,nodejs,</td>
+<td>NFS_IP</td>
+<td></td>
+</tr>
+<tr>
+<td>version</td>
+<td></td>
+</tr>
+<tr>
+<td>KCSPINGRESS</td>
+<td></td>
+</tr>
+<tr>
+<td>KCSPURL</td>
+<td></td>
+</tr>
+<tr>
+<td>KEY_INDEX</td>
+<td></td>
+</tr>
+<tr>
+<td>harbor</td>
+<td></td>
+</tr>
+<tr>
+<td>FRONTURL</td>
+<td></td>
+</tr>
+<tr>
+<td>replicas</td>
 <td></td>
 </tr>
 </tbody></table>
-<h2 id="golang"><a href="#golang" class="headerlink" title="golang"></a>golang</h2><p>etcd,k8s</p>
-<h3 id="k8s"><a href="#k8s" class="headerlink" title="k8s"></a>k8s</h3><h4 id="ingress"><a href="#ingress" class="headerlink" title="ingress"></a>ingress</h4><p>在本篇文章中你将会看到一些在其他地方被交叉使用的术语，为了防止产生歧义，我们首先来澄清下。</p>
-<ul>
-<li>节点：Kubernetes集群中的服务器；</li>
-<li>集群：Kubernetes管理的一组服务器集合；</li>
-<li>边界路由器：为局域网和Internet路由数据包的路由器，执行防火墙保护局域网络；</li>
-<li>集群网络：遵循Kubernetes<a href="https://kubernetes.io/docs/admin/networking/">网络模型</a>实现群集内的通信的具体实现，比如<a href="https://github.com/coreos/flannel#flannel">flannel</a> 和 <a href="https://kubernetes.io/docs/admin/ovs-networking/">OVS</a>。</li>
-<li>服务：使用标签选择器标识一组pod成为的Kubernetes <a href="https://kubernetes.io/docs/user-guide/services/">Service</a>。 除非另有说明，否则服务的虚拟IP仅可在集群内部访问。</li>
-</ul>
-<h5 id="什么是Ingress"><a href="#什么是Ingress" class="headerlink" title="什么是Ingress?"></a>什么是Ingress?</h5><p>通常情况下，service和pod的IP仅可在集群内部访问。集群外部的请求需要通过负载均衡转发到service在Node上暴露的NodePort上，然后再由kube-proxy将其转发给相关的Pod。</p>
-<p>而Ingress就是为进入集群的请求提供路由规则的集合，如下图所</p>
-<pre><code class="sh">    internet
-        |
-   [ Ingress ]
-   --|-----|--
-   [ Services ]
-</code></pre>
-<p>Ingress可以给service提供集群外部访问的URL、负载均衡、SSL终止、HTTP路由等。为了配置这些Ingress规则，集群管理员需要部署一个<a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-controllers">Ingress controller</a>，它监听Ingress和service的变化，并根据规则配置负载均衡并提供访问入口。</p>
-<h5 id="Ingress格式"><a href="#Ingress格式" class="headerlink" title="Ingress格式"></a>Ingress格式</h5><pre><code class="yaml">apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: test-ingress
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /testpath
-        backend:
-          serviceName: test
-          servicePort: 80
-</code></pre>
-<p>每个Ingress都需要配置rules，目前Kubernetes仅支持http规则。上面的示例表示请求/testpath时转发到服务test的80端口。</p>
-<p>根据Ingress Spec配置的不同，Ingress可以分为以下几种类型：</p>
-<h5 id="单服务Ingress"><a href="#单服务Ingress" class="headerlink" title="单服务Ingress"></a>单服务Ingress</h5><p>单服务Ingress即该Ingress仅指定一个没有任何规则的后端服务。</p>
-<pre><code class="yaml">apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: test-ingress
-spec:
-  backend:
-    serviceName: testsvc
-    servicePort: 80
-</code></pre>
-<blockquote>
-<p>注：单个服务还可以通过设置Service.Type=NodePort或者Service.Type=LoadBalancer来对外暴露。</p>
-</blockquote>
-<h5 id="路由到多服务的Ingress"><a href="#路由到多服务的Ingress" class="headerlink" title="路由到多服务的Ingress"></a>路由到多服务的Ingress</h5><p>路由到多服务的Ingress即根据请求路径的不同转发到不同的后端服务上，比如</p>
-<pre><code class="shell">foo.bar.com -&gt; 178.91.123.132 -&gt; / foo    s1:80
-                                 / bar    s2:80
-</code></pre>
-<p>可以通过下面的Ingress来定义：</p>
-<pre><code class="yaml">apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: test
-spec:
-  rules:
-  - host: foo.bar.com
-    http:
-      paths:
-      - path: /foo
-        backend:
-          serviceName: s1
-          servicePort: 80
-      - path: /bar
-        backend:
-          serviceName: s2
-          servicePort: 80
-</code></pre>
-<p>使用kubectl create -f创建完ingress后：</p>
-<pre><code class="shell">$ kubectl get ing
-NAME      RULE          BACKEND   ADDRESS
-test      -
-          foo.bar.com
-          /foo          s1:80
-          /bar          s2:80
-</code></pre>
-<h5 id="虚拟主机Ingress"><a href="#虚拟主机Ingress" class="headerlink" title="虚拟主机Ingress"></a>虚拟主机Ingress</h5><p>虚拟主机Ingress即根据名字的不同转发到不同的后端服务上，而他们共用同一个的IP地址，如下所示</p>
-<pre><code class="shell">foo.bar.com --|                 |-&gt; foo.bar.com s1:80
-              | 178.91.123.132  |
-bar.foo.com --|                 |-&gt; bar.foo.com s2:80
-</code></pre>
-<p>下面是一个基于<a href="https://tools.ietf.org/html/rfc7230#section-5.4">Host header</a>路由请求的Ingress：</p>
-<pre><code class="yaml">apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: test
-spec:
-  rules:
-  - host: foo.bar.com
-    http:
-      paths:
-      - backend:
-          serviceName: s1
-          servicePort: 80
-  - host: bar.foo.com
-    http:
-      paths:
-      - backend:
-          serviceName: s2
-          servicePort: 80
-</code></pre>
-<blockquote>
-<p>注：没有定义规则的后端服务称为默认后端服务，可以用来方便的处理404页面。</p>
-</blockquote>
-<h5 id="TLS-Ingress"><a href="#TLS-Ingress" class="headerlink" title="TLS Ingress"></a>TLS Ingress</h5><p>TLS Ingress通过Secret获取TLS私钥和证书(名为tls.crt和tls.key)，来执行TLS终止。如果Ingress中的TLS配置部分指定了不同的主机，则它们将根据通过SNI TLS扩展指定的主机名（假如Ingress controller支持SNI）在多个相同端口上进行复用。</p>
-<p>定义一个包含tls.crt和tls.key的secret：</p>
-<pre><code class="yaml">apiVersion: v1
-data:
-  tls.crt: base64 encoded cert
-  tls.key: base64 encoded key
-kind: Secret
-metadata:
-  name: testsecret
-  namespace: default
-type: Opaque
-</code></pre>
-<p>Ingress中引用secret：</p>
-<pre><code class="yaml">apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: no-rules-map
-spec:
-  tls:
-    - secretName: testsecret
-  backend:
-    serviceName: s1
-    servicePort: 80
-</code></pre>
-<h3 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h3><blockquote>
-<p>容器是linux内核提供的技术，<code>Docker</code>只是个容器工具</p>
-</blockquote>
-<h4 id="什么是容器"><a href="#什么是容器" class="headerlink" title="什么是容器"></a>什么是容器</h4><h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><p>数据处理，基本图像处理，人工智能</p>
-<h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><p>java全系，包含<strong>jvm</strong>,<strong>kotlin</strong></p>
-<h3 id="netty"><a href="#netty" class="headerlink" title="netty"></a>netty</h3><table>
-<thead>
-<tr>
-<th>项目</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>netty-http代理</td>
-<td>https代理</td>
-</tr>
-<tr>
-<td>stunnel隧道</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><code>HTTP</code> 模式很好的解决了大部分场景，但是解决不了<code>HTTPS</code>密文传输问题，代理服务器没有服务端密钥，无法模拟目标服务端对客户端进行<code>HTTPS</code>握手，更不能代替目标服务端响应客户端请求。</p>
-<p><code>HTTP 1.1</code>协议的<code>CONNECT</code>方法提供了一个解决思路，<code>CONNECT</code>方法给予一个目标地址，要求代理服务器建立一条到目标地址的隧道，之后的<code>SSL</code>握手和接下来的数据交换将在隧道中进行，传输的流量完全加密，代理服务器无法监控</p>
-<h3 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h3><table>
-<thead>
-<tr>
-<th>项目</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>https代理实现</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>vue,js,nodejs</p>
-<h2 id="技术路线"><a href="#技术路线" class="headerlink" title="技术路线"></a>技术路线</h2><ul>
-<li>小程序开发</li>
-<li>web开发</li>
-<li>微信公众号，企业号开发</li>
-</ul>
+<p>其中<strong>replicas</strong>定义了服务初始副本节点数量，为必填 要求&gt;=1的整数</p>
 
           
         
@@ -2656,7 +2524,7 @@ spec:
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/6/">&gt;</a>
   </nav>
 
 
@@ -2702,7 +2570,7 @@ spec:
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">109</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2726,7 +2594,7 @@ spec:
     <h3 class="widget-title">不知所云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
       <canvas width="250" height="250" id="resCanvas" style="width:100%">
-        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usr/" rel="tag">usr</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/share/" rel="tag">share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crl/" rel="tag">crl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%A8%E6%88%B7/" rel="tag">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC/" rel="tag">文本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dna/" rel="tag">dna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/" rel="tag">pod</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svs/" rel="tag">svs</a><span class="tag-list-count">1</span></li></ul>
+        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/" rel="tag">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90/" rel="tag">资源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/" rel="tag">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ingress/" rel="tag">ingress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B3%E7%B3%BB/" rel="tag">关系</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%BD%93/" rel="tag">实体</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%92/" rel="tag">规划</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0/" rel="tag">函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%B9%E7%95%8C/" rel="tag">边界</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96/" rel="tag">决策</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E5%9E%8B/" rel="tag">类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E5%8F%B8/" rel="tag">公司</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koal123/" rel="tag">koal123</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%B7%E5%BE%B7/" rel="tag">康德</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idle/" rel="tag">idle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B3%E8%81%94/" rel="tag">关联</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%99/" rel="tag">规则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB/" rel="tag">新闻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%84%E5%88%86/" rel="tag">评分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%9B%E7%A8%8B/" rel="tag">赛程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dear/" rel="tag">dear</a><span class="tag-list-count">1</span></li></ul>
       </canvas>
     </div>
   </div>
@@ -2752,7 +2620,7 @@ spec:
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="2913408047@qq.com" target="_blank" title="E-Mail">
+                    <a href="mailto:2913408047@qq.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
@@ -3307,28 +3175,6 @@ spec:
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-
 
   
   <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>

@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/koal_%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%99%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_DSL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -314,7 +314,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/uncategorized/koal_%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%99%E6%B3%95/" itemprop="url">koal_简单的写法.md</a></h2>
+                <a class="post-title-link" href="/1/01_DSL/" itemprop="url">01_DSL.md</a></h2>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:20:49+08:00">
-                2021-08-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:40:01+08:00">
+                2021-08-27
               </time>
             
 
@@ -336,6 +336,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -366,472 +388,38 @@
       
         
           
-            <h1 id="简单的写法"><a href="#简单的写法" class="headerlink" title="简单的写法"></a>简单的写法</h1><h2 id="监控项描述DSL"><a href="#监控项描述DSL" class="headerlink" title="监控项描述DSL"></a>监控项描述DSL</h2><p>为了应对监控的动态可配置，开发了一个小的dsl。虽然可以基于现有的jvm方言或者自定义解析器搞，但是时间不够，担心改不动bug目前简单解析了一下。</p>
-<h3 id="methodName"><a href="#methodName" class="headerlink" title="methodName"></a>methodName</h3><blockquote>
-<p>目前定义了，两种</p>
+            <h1 id="DSL"><a href="#DSL" class="headerlink" title="DSL"></a>DSL</h1><p><code>GPL</code>通用编程语言如 python,java,c等等</p>
+<p><code>DSL</code>领域特定语言 Martin Fowler </p>
+<blockquote>
+<p>DSL通过在表达能力上做的妥协换取在某一领域内的高效</p>
 </blockquote>
+<p>常见<code>DSL</code></p>
 <ul>
-<li>yaml@:: 从配置文件中获取参数的方式</li>
-<li>form@:: 配置在监控面板的展示</li>
-<li>-&gt; 定义了配置对应的key</li>
+<li>SQL</li>
+<li>REGEX</li>
+<li>HTML &amp; CSS</li>
 </ul>
-<p>语句之间用<code>;</code>分开</p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>那我来给大家举个例子，</p>
-<p><code>yaml@::</code> 定义了从配置文件的kube.nfs 捞取配置，监控使用的传输参数为ip,</p>
-<p><code>form@::</code> 定义了，在表单展示的名字为，NFSIP，不可编辑，传输到后端存的fieldName是nfsIp</p>
-<pre><code class="sh">yaml@::kube.nfs-&gt;ip;form@::NFSIP,false,nfsIp
-</code></pre>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/koal_TSAAPI/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/uncategorized/koal_TSAAPI/" itemprop="url">koal_TSAAPI.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:20:49+08:00">
-                2021-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="TSAAPI"><a href="#TSAAPI" class="headerlink" title="TSAAPI"></a>TSAAPI</h1><h2 id="接口列表"><a href="#接口列表" class="headerlink" title="接口列表"></a>接口列表</h2><table>
-<thead>
-<tr>
-<th>接口</th>
-<th>URL</th>
-<th>METHOD</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a name="解析签名结果">解析签名结果</a></td>
-<td>/tss/parser</td>
-<td>POST</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#%E5%88%9B%E5%BB%BA%E6%97%B6%E9%97%B4%E6%88%B3%E8%AF%B7%E6%B1%82">创建时间戳请求</a></td>
-<td>/tss/request/builder</td>
-<td>POST</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#%E7%AD%BE%E5%90%8D">签名</a></td>
-<td>/tss/signer</td>
-<td>POST</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#%E9%AA%8C%E7%AD%BE">验签</a></td>
-<td>/tss/verifier</td>
-<td>POST</td>
-<td></td>
-</tr>
-</tbody></table>
-<h3 id="解析签名结果"><a href="#解析签名结果" class="headerlink" title="解析签名结果"></a>解析签名结果</h3><h4 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h4><pre><code class="shell">curl --location --request POST &#39;http://10.0.130.232:32733/TSAAPI1.0/api/1178b018469988//tss/parser?ak=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
-
---header &#39;Content-Type: application/json&#39; \
-
---header &#39;ak: 7a83aa233867450e980ec46348bdb2641782530164950&#39; \
-
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
-
---data-raw &#39;&#123;
-
-​    &quot;b64TsResp&quot;: &quot;MIIFVzADAgEAMIIFTgYJKoZIhvcNAQcCoIIFPzCCBTsCAQExDjAMBggqgRzPVQGDEQUAMIG7BgkqhkiG9w0BBwGgga0EgaowgacCAQEGDCsGAQQBgrdkAwEBATAwMAwGCCqBHM9VAYMRBQAEIG4PnhQ0TFQGoM9aO037Zl+H9Kdxox9+27XHKHSjKylXAggBI0//oRERQxgTMjAyMDA5MTEwOTQ1MzcuOTk3WgIKCeE8vPOukVoP5qA3pDUwMzELMAkGA1UEBhMCY24xEjAQBgNVBAoMCWtvYWwtdGVzdDEQMA4GA1UEAwwHc2RmLXNtMqCCA8QwggPAMIIDZaADAgECAgwbTwAAAAABhsUtBN8wDAYIKoEcz1UBg3UFADAoMQswCQYDVQQGEwJDTjEZMBcGA1UEAwwQU3ViQ0FfU00yXzE5MDcxMDAeFw0yMDA5MTAxNjAwMDBaFw0yNTA5MTAxNTU5NTlaMDMxCzAJBgNVBAYTAmNuMRIwEAYDVQQKDAlrb2FsLXRlc3QxEDAOBgNVBAMMB3NkZi1zbTIwWTATBgcqhkjOPQIBBggqgRzPVQGCLQNCAAQLJ8wYSP2TLQefK24di5KBx5cBDuu8jVhzCQTrZoGpDIlTw6A4hUTuXD9tM7iR5cgWzS6szPgOgbvBQwuvhT0Lo4ICZjCCAmIwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDgYDVR0PAQH/BAQDAgDAMBEGCWCGSAGG+EIBAQQEAwIAQDAfBgNVHSMEGDAWgBTtcSbKG458yuzmAmC8UE5M7w3qQDCB8gYDVR0fBIHqMIHnMIGooIGloIGihoGfbGRhcDovLzEwLjEuMS4yNTI6Mzg5L0NOPVN1YkNBX1NNMl8xOTA3MTAsQ049U3ViQ0FfU00yXzE5MDcxMCwgT1U9Q1JMRGlzdHJpYnV0ZVBvaW50cywgbz1rb2FsY2E/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdGNsYXNzPWNSTERpc3RyaWJ1dGlvblBvaW50MDqgOKA2hjRodHRwOi8vMTAuMS4xLjI1Mjo4ODgwL2Rvd25sb2FkL1N1YkNBX1NNMl8xOTA3MTAuY3JsMIHyBggrBgEFBQcBAQSB5TCB4jCBnQYIKwYBBQUHMAKGgZBsZGFwOi8vMTAuMS4xLjI1MjozODkvQ049U3ViQ0FfU00yXzE5MDcxMCxDTj1TdWJDQV9TTTJfMTkwNzEwLCBPVT1jQUNlcnRpZmljYXRlcywgbz1rb2FsY2E/Y0FDZXJ0aWZpY2F0ZT9iYXNlP29iamVjdENsYXNzPWNlcnRpZmljYXRpb25BdXRob3JpdHkwQAYIKwYBBQUHMAKGNGh0dHA6Ly8xMC4xLjEuMjUyOjg4ODAvZG93bmxvYWQvU3ViQ0FfU00yXzE5MDcxMC5jZXIwHQYDVR0OBBYEFCU7Ci2Nl0QPNocVjujQkB8FDFFCMAwGCCqBHM9VAYN1BQADRwAwRAIgKFdvoOTv35kWdbvlBCkrPguqSAYbMNV3/iJZ/VojeA4CIBgfnJVEkTx1AeT2H7AEVfd+uNbQeo5uRXaH19xxBAjLMYGfMIGcAgEBMDgwKDELMAkGA1UEBhMCQ04xGTAXBgNVBAMMEFN1YkNBX1NNMl8xOTA3MTACDBtPAAAAAAGGxS0E3zAMBggqgRzPVQGDEQUAMA0GCSqBHM9VAYItAQUABEDtP8dfmvvutrbvcNpKer78305pakBkGc8qYjHEMHgUv+K3BXtqaWJrne3d0IO/zEYNIyJZKtHJl6NkmIjxDhIT&quot;
-
-&#125;
-</code></pre>
-<h4 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;tsResp&quot;: &#123;
-        &quot;tsRespStatus&quot;: &quot;0&quot;,
-        &quot;tsRespStatuString&quot;: null,
-        &quot;tsRespFailInfo&quot;: &quot;null(0)&quot;
-    &#125;,
-    &quot;tsInfo&quot;: &#123;
-        &quot;b64HashedMsg&quot;: &quot;bg+eFDRMVAagz1o7TftmX4f0p3GjH37btccodKMrKVc=&quot;,
-        &quot;hashAlg&quot;: &quot;SM3&quot;,
-        &quot;policyOid&quot;: &quot;1.3.6.1.4.1.39908.3.1.1.1&quot;,
-        &quot;hexNonce&quot;: &quot;09e13cbcf3ae915a0fe6&quot;,
-        &quot;genTime&quot;: &quot;20200911094537.997 +0000&quot;,
-        &quot;accuracySecs&quot;: &quot;0&quot;,
-        &quot;accuracyMills&quot;: &quot;0&quot;,
-        &quot;accuracyMicros&quot;: &quot;0&quot;,
-        &quot;tsaDN&quot;: &quot;4: C=cn,O=koal-test,CN=sdf-sm2&quot;,
-        &quot;ordering&quot;: &quot;0&quot;,
-        &quot;exts&quot;: null,
-        &quot;hexSerial&quot;: &quot;01234fffa1111143&quot;
-    &#125;,
-    &quot;tsToken&quot;: &#123;
-        &quot;b64Token&quot;: &quot;MIIFTgYJKoZIhvcNAQcCoIIFPzCCBTsCAQExDjAMBggqgRzPVQGDEQUAMIG7BgkqhkiG9w0BBwGgga0EgaowgacCAQEGDCsGAQQBgrdkAwEBATAwMAwGCCqBHM9VAYMRBQAEIG4PnhQ0TFQGoM9aO037Zl+H9Kdxox9+27XHKHSjKylXAggBI0//oRERQxgTMjAyMDA5MTEwOTQ1MzcuOTk3WgIKCeE8vPOukVoP5qA3pDUwMzELMAkGA1UEBhMCY24xEjAQBgNVBAoMCWtvYWwtdGVzdDEQMA4GA1UEAwwHc2RmLXNtMqCCA8QwggPAMIIDZaADAgECAgwbTwAAAAABhsUtBN8wDAYIKoEcz1UBg3UFADAoMQswCQYDVQQGEwJDTjEZMBcGA1UEAwwQU3ViQ0FfU00yXzE5MDcxMDAeFw0yMDA5MTAxNjAwMDBaFw0yNTA5MTAxNTU5NTlaMDMxCzAJBgNVBAYTAmNuMRIwEAYDVQQKDAlrb2FsLXRlc3QxEDAOBgNVBAMMB3NkZi1zbTIwWTATBgcqhkjOPQIBBggqgRzPVQGCLQNCAAQLJ8wYSP2TLQefK24di5KBx5cBDuu8jVhzCQTrZoGpDIlTw6A4hUTuXD9tM7iR5cgWzS6szPgOgbvBQwuvhT0Lo4ICZjCCAmIwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDgYDVR0PAQH/BAQDAgDAMBEGCWCGSAGG+EIBAQQEAwIAQDAfBgNVHSMEGDAWgBTtcSbKG458yuzmAmC8UE5M7w3qQDCB8gYDVR0fBIHqMIHnMIGooIGloIGihoGfbGRhcDovLzEwLjEuMS4yNTI6Mzg5L0NOPVN1YkNBX1NNMl8xOTA3MTAsQ049U3ViQ0FfU00yXzE5MDcxMCwgT1U9Q1JMRGlzdHJpYnV0ZVBvaW50cywgbz1rb2FsY2E/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdGNsYXNzPWNSTERpc3RyaWJ1dGlvblBvaW50MDqgOKA2hjRodHRwOi8vMTAuMS4xLjI1Mjo4ODgwL2Rvd25sb2FkL1N1YkNBX1NNMl8xOTA3MTAuY3JsMIHyBggrBgEFBQcBAQSB5TCB4jCBnQYIKwYBBQUHMAKGgZBsZGFwOi8vMTAuMS4xLjI1MjozODkvQ049U3ViQ0FfU00yXzE5MDcxMCxDTj1TdWJDQV9TTTJfMTkwNzEwLCBPVT1jQUNlcnRpZmljYXRlcywgbz1rb2FsY2E/Y0FDZXJ0aWZpY2F0ZT9iYXNlP29iamVjdENsYXNzPWNlcnRpZmljYXRpb25BdXRob3JpdHkwQAYIKwYBBQUHMAKGNGh0dHA6Ly8xMC4xLjEuMjUyOjg4ODAvZG93bmxvYWQvU3ViQ0FfU00yXzE5MDcxMC5jZXIwHQYDVR0OBBYEFCU7Ci2Nl0QPNocVjujQkB8FDFFCMAwGCCqBHM9VAYN1BQADRwAwRAIgKFdvoOTv35kWdbvlBCkrPguqSAYbMNV3/iJZ/VojeA4CIBgfnJVEkTx1AeT2H7AEVfd+uNbQeo5uRXaH19xxBAjLMYGfMIGcAgEBMDgwKDELMAkGA1UEBhMCQ04xGTAXBgNVBAMMEFN1YkNBX1NNMl8xOTA3MTACDBtPAAAAAAGGxS0E3zAMBggqgRzPVQGDEQUAMA0GCSqBHM9VAYItAQUABEDtP8dfmvvutrbvcNpKer78305pakBkGc8qYjHEMHgUv+K3BXtqaWJrne3d0IO/zEYNIyJZKtHJl6NkmIjxDhIT&quot;,
-        &quot;b64Cert&quot;: &quot;MIIDwDCCA2WgAwIBAgIMG08AAAAAAYbFLQTfMAwGCCqBHM9VAYN1BQAwKDELMAkGA1UEBhMCQ04xGTAXBgNVBAMMEFN1YkNBX1NNMl8xOTA3MTAwHhcNMjAwOTEwMTYwMDAwWhcNMjUwOTEwMTU1OTU5WjAzMQswCQYDVQQGEwJjbjESMBAGA1UECgwJa29hbC10ZXN0MRAwDgYDVQQDDAdzZGYtc20yMFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAECyfMGEj9ky0HnytuHYuSgceXAQ7rvI1YcwkE62aBqQyJU8OgOIVE7lw/bTO4keXIFs0urMz4DoG7wUMLr4U9C6OCAmYwggJiMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA4GA1UdDwEB/wQEAwIAwDARBglghkgBhvhCAQEEBAMCAEAwHwYDVR0jBBgwFoAU7XEmyhuOfMrs5gJgvFBOTO8N6kAwgfIGA1UdHwSB6jCB5zCBqKCBpaCBooaBn2xkYXA6Ly8xMC4xLjEuMjUyOjM4OS9DTj1TdWJDQV9TTTJfMTkwNzEwLENOPVN1YkNBX1NNMl8xOTA3MTAsIE9VPUNSTERpc3RyaWJ1dGVQb2ludHMsIG89a29hbGNhP2NlcnRpZmljYXRlUmV2b2NhdGlvbkxpc3Q/YmFzZT9vYmplY3RjbGFzcz1jUkxEaXN0cmlidXRpb25Qb2ludDA6oDigNoY0aHR0cDovLzEwLjEuMS4yNTI6ODg4MC9kb3dubG9hZC9TdWJDQV9TTTJfMTkwNzEwLmNybDCB8gYIKwYBBQUHAQEEgeUwgeIwgZ0GCCsGAQUFBzAChoGQbGRhcDovLzEwLjEuMS4yNTI6Mzg5L0NOPVN1YkNBX1NNMl8xOTA3MTAsQ049U3ViQ0FfU00yXzE5MDcxMCwgT1U9Y0FDZXJ0aWZpY2F0ZXMsIG89a29hbGNhP2NBQ2VydGlmaWNhdGU/YmFzZT9vYmplY3RDbGFzcz1jZXJ0aWZpY2F0aW9uQXV0aG9yaXR5MEAGCCsGAQUFBzAChjRodHRwOi8vMTAuMS4xLjI1Mjo4ODgwL2Rvd25sb2FkL1N1YkNBX1NNMl8xOTA3MTAuY2VyMB0GA1UdDgQWBBQlOwotjZdEDzaHFY7o0JAfBQxRQjAMBggqgRzPVQGDdQUAA0cAMEQCIChXb6Dk79+ZFnW75QQpKz4LqkgGGzDVd/4iWf1aI3gOAiAYH5yVRJE8dQHk9h+wBFX3frjW0HqObkV2h9fccQQIyw==&quot;
-    &#125;
-&#125;
-</code></pre>
-<h3 id="创建时间戳请求"><a href="#创建时间戳请求" class="headerlink" title="创建时间戳请求"></a>创建时间戳请求</h3><h4 id="请求-1"><a href="#请求-1" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/TSAAPI1.0/api/1178b018469988/tss/request/builder?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-    &quot;b64HashedMsg&quot;: &quot;&quot;,
-    &quot;b64OriData&quot;: &quot;MTIz&quot;,
-    &quot;hasCert&quot;: &quot;&quot;,
-    &quot;hashAlg&quot;: &quot;&quot;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-1"><a href="#响应-1" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;b64TsReq&quot;: &quot;MFECAQEwMTANBglghkgBZQMEAgEFAAQgpmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuMGDCsGAQQBgrdkAwEBAQILAJNR6xaO8AxyWhA=&quot;
-&#125;
-</code></pre>
-<h3 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h3><h4 id="请求-2"><a href="#请求-2" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/TSAAPI1.0/api/1178c47e964368/tss/signer?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-  &quot;certAlias&quot;: &quot;RABizOper&quot;,
-  &quot;certDn&quot;: &quot;&quot;,
-  &quot;certHexSn&quot;: &quot;&quot;,
-  &quot;keyPin&quot;: &quot;&quot;,
-  &quot;serviceName&quot;: &quot;&quot;,
-  &quot;signHashAlg&quot;: &quot;&quot;,
-  &quot;tsReq&quot;: &#123;
-    &quot;b64HashedMsg&quot;: &quot;&quot;,
-    &quot;b64OriData&quot;: &quot;MTIz&quot;,
-    &quot;hasCert&quot;: &quot;1&quot;,
-    &quot;hashAlg&quot;: &quot;&quot;
-  &#125;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-2"><a href="#响应-2" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;sid&quot;: &quot;01234fffa1111112&quot;,
-    &quot;b64TsResp&quot;: &quot;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&quot;,
-    &quot;b64Cert&quot;: &quot;MIIDlTCCAn2gAwIBAgIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBCwUAMCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdDAeFw0xOTA3MDkxNjAwMDBaFw0yOTA3MDcxNTU5NTlaMGIxCzAJBgNVBAYTAkNOMQ0wCwYDVQQKDARrb2FsMQ0wCwYDVQQLDARrb2FsMSEwHwYJKoZIhvcNAQkBFhJSQUJpek9wZXJAa29hbC5jb20xEjAQBgNVBAMMCVJBQml6T3BlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIh9X4tOUBWjRgToRmxA/626IBuWRNlP2iLb2iynGgcnXa4XM/ZG4YERXFC3AnUlu5Eb3/gapAbvobvC6a/rmIOVgbxdRmDmEt9nwoVJT2nzU85H02pCgWbAiVB5ey3aUeRob0aVwRf1xDL/7Xs/PyAgpM6pvS0Qix6Ao2SsTUITsdEsJsWY8pMlEPX15Toa/Md3yG4nWG0PfNQy+PSIcL8r6zDP9icnlGGj/lRmHGTD91dSgtN9MPw5FgITBC3jyormMUim+OQvte4JrUO88w+Br9vRstuxgmaxT1ZbauVFzJ8qgJcHCGnsvms6Gv+ntF4ywWWgW6+aZSzplGJ3hC8CAwEAAaOBhjCBgzAMBgNVHRMEBTADAQEAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQEAwIAwDARBglghkgBhvhCAQEEBAMCAIAwHwYDVR0jBBgwFoAUxgVcLA9r0CufSgccJy5I92oa6k4wHQYDVR0OBBYEFBPT7mMeqz1cAWEntfw5191d8zm/MA0GCSqGSIb3DQEBCwUAA4IBAQAs5YN6BeisLwJel7QReoAYn6SpGjx3Kfa0d4MLt553vqDyDYRi7iB/xn0QK2cRs4t2nU/ENjYHMC5D8MpoCycifueEvv07nUsF7G7B+8XgyegoccRtZFNDvYAOBPfIenzzZCVCD+w23rFVIFWJDnRsxSxI9KHaSaqzr6y/InuW+6ThEDJtdOof4QR58hnlxF17O7NwQNS104IEk2Lnl4ayKdIA2SXk2t1smgYBprdndvtEhvNJBROIXdkk6sYl95mml6Q1LdvY7koaVgd4jzFm2qGaWqwKof8tBQckVxbwdAFELwEXfqF/vRhY9QDYyqlw6k5hC/LYjZYjjUPACoUF&quot;
-&#125;
-</code></pre>
-<h3 id="验签"><a href="#验签" class="headerlink" title="验签"></a>验签</h3><h4 id="请求-3"><a href="#请求-3" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/TSAAPI1.0/api/1178c47e964368/tss/verifier?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-  &quot;b64CertData&quot;: &quot;&quot;,
-  &quot;b64OriData&quot;: &quot;MTIz&quot;,
-  &quot;b64TsResp&quot;: &quot;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&quot;,
-  &quot;serviceName&quot;: &quot;&quot;,
-  &quot;verifyCertOpt&quot;: &#123;
-    &quot;allowListFlag&quot;: true,
-    &quot;b64CertChain&quot;: [],
-    &quot;caName&quot;: &quot;&quot;,
-    &quot;certChainFlag&quot;: false,
-    &quot;certValidFlag&quot;: true,
-    &quot;crlFlag&quot;: true,
-    &quot;ocspUrl&quot;: &quot;&quot;,
-    &quot;verifyCertFlag&quot;: true
-  &#125;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-3"><a href="#响应-3" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;msg&quot;: &quot;success&quot;
-&#125;
-</code></pre>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/koal_CISAW/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/uncategorized/koal_CISAW/" itemprop="url">koal_CISAW.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:20:49+08:00">
-                2021-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="CISAW"><a href="#CISAW" class="headerlink" title="CISAW"></a>CISAW</h1><table>
-<thead>
-<tr>
-<th>内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>软件安全属性</td>
-<td></td>
-</tr>
-<tr>
-<td>安全性</td>
-<td></td>
-</tr>
-<tr>
-<td>完整性</td>
-<td></td>
-</tr>
-<tr>
-<td>可用性</td>
-<td></td>
-</tr>
-<tr>
-<td>1</td>
-<td></td>
-</tr>
-<tr>
-<td>可追踪性</td>
-<td></td>
-</tr>
-<tr>
-<td>抗di lai xing</td>
-<td></td>
-</tr>
-</tbody></table>
+<h3 id="feature"><a href="#feature" class="headerlink" title="feature"></a>feature</h3><p>上面的几个?明显的缩小了通用编程语言的概念，但是它们确实在自己领域表现地非常出色，因为这些 DSL 就是根据某一个特定领域的特点塑造的；而通用编程语言相比领域特定语言，在设计时是为了解决更加抽象的问题，而关注点并不只是在某一个领域。</p>
+<p>上面的几个例子有着一些共同的特点：</p>
 <ul>
-<li>数据安全<ul>
-<li>对称算法</li>
-<li>非对称算法</li>
+<li>没有计算和执行的概念；</li>
+<li>其本身并不需要直接表示计算；</li>
+<li>使用时只需要声明规则、事实以及某些元素之间的层级和关系；</li>
 </ul>
-</li>
-<li>程序安全</li>
-<li>文档资料安全</li>
-</ul>
-<h2 id="简答题"><a href="#简答题" class="headerlink" title="简答题"></a>简答题</h2><ol>
-<li><p>简要论述CISAW软件安全开发模型的核心思想</p>
-<p>CISAW软件安全开发模型与CISAW信息安全保障模型一脉相承，通过实现 <code>程序</code>，<code>数据</code>和<code>文档</code>3个实体对象全生命周期的<code>可用性</code>，<code>完整性</code>,<code>机密性</code>,<code>不可否认性</code>等若干安全属性来支撑“业务”的正常进行，并在实现安全属性的过程中关注<code>需求分析</code>，<code>设计</code>，<code>编码</code>,<code>测试</code>,<code>运行</code>5个环节的技术手段和措施，模型中为实现上述对象的安全属性及5个环节需要充足的<code>人力</code>，<code>财务</code>，<code>技术</code>，<code>信息资源</code>提供保障，而以上的各类<code>对象</code>，<code>环节</code>，<code>资源</code>都必须进行综合有效的管理。</p>
-<ol start="2">
-<li>简述用户数据保护功能包含那几个功能类以及作用</li>
-</ol>
-<p>用户数据保护功能包含了<code>访问控制</code>，<code>数据流控制</code>，<code>数据鉴别</code>，<code>系统内部传送</code>，<code>残余信息保护</code>，<code>回退</code>，<code>存储数据完整性</code>共七个功能类，这些功能类规定了一些与用户数据保护相关的安全功能和安全策略</p>
-<ol start="3">
-<li>如何通过软件安全功能对用户数据进行保护</li>
-</ol>
-<p><code>为了保证软件安全，需要对</code>输入<code>，</code>输出<code>，和</code>存储中的用户数据<code>进行保护，而这种保护由用户数据保护功能来实现，具体来说，用户数据保护功能包含了</code>访问控制<code>，</code>数据流控制<code>，</code>数据鉴别<code>，</code>系统内部传送<code>，</code>残余信息保护<code>，</code>回退<code>，</code>存储数据完整性`共七个功能类，这些功能类规定了一些与用户数据保护相关的安全功能和安全策略，其中：</p>
+<h3 id="构建DSL"><a href="#构建DSL" class="headerlink" title="构建DSL"></a>构建DSL</h3><p>DSL 的构建与编程语言其实比较类似，想想我们在重新实现编程语言时，需要做那些事情；实现编程语言的过程可以简化为定义语法与语义，然后实现编译器或者解释器的过程，而 DSL 的实现与它也非常类似，我们也需要对 DSL 进行语法与语义上的设计。</p>
+<p>总结下来，实现 DSL 总共有这么两个需要完成的工作：</p>
 <ol>
-<li>访问控制类主要设计主题和课题间的操作权限</li>
-<li>数据流控制主要处理系统和用户间，用户和用户间数据传输过程中的安全需求</li>
-<li>数据鉴别主要保证存储数据的有效性</li>
-<li>系统内部传送功能主要保护数据在传输过程中的安全可靠</li>
-<li>残余信息保护主要为那些已被逻辑上删除或释放，但仍可能残存在系统中的信息提供保护功能</li>
-<li>回退是未来保证用户数据的完整性</li>
-<li>存储数据完整性则是为了让系统保证其存储的所有数据没有遭到破坏</li>
+<li>设计语法和语义，定义 DSL 中的元素是什么样的，元素代表什么意思</li>
+<li>实现 parser，对 DSL 解析，最终通过解释器来执行</li>
 </ol>
-</li>
-</ol>
-<h3 id="软件安全"><a href="#软件安全" class="headerlink" title="软件安全"></a>软件安全</h3><h4 id="五大原则"><a href="#五大原则" class="headerlink" title="五大原则"></a>五大原则</h4><ul>
-<li>减少攻击面</li>
-<li>不要轻信第三方</li>
-<li>不要通过隐藏来实现安全</li>
-<li>正确纠正安全问题</li>
-<li>安全的发生故障</li>
-</ul>
-<h3 id="McGraw-软件安全开发模型"><a href="#McGraw-软件安全开发模型" class="headerlink" title="McGraw 软件安全开发模型"></a>McGraw 软件安全开发模型</h3><p>强调使用工程后的方法来实施软件安全。</p>
-<h3 id="练习册答案"><a href="#练习册答案" class="headerlink" title="练习册答案"></a>练习册答案</h3><hr>
+<h3 id="设计原则和妥协"><a href="#设计原则和妥协" class="headerlink" title="设计原则和妥协"></a>设计原则和妥协</h3><p>DSL 最大的设计原则就是<strong>简单</strong>，通过简化语言中的元素，降低使用者的负担；无论是 Regex、SQL 还是 HTML 以及 CSS，其说明文档往往只有几页，非常易于学习和掌握。但是，由此带来的问题就是，DSL 中缺乏抽象的概念，比如：模块化、变量以及方法等。</p>
+<blockquote>
+<p>抽象的概念并不是某个领域所关注的问题，就像 Regex 并不需要有模块、变量以及方法等概念。</p>
+</blockquote>
+<p>由于抽象能力的缺乏，在我们的项目规模变得越来越大时，DSL 往往满足不了开发者的需求；我们仍然需要编程语言中的模块化等概念对 DSL 进行补充，以此解决 DSL 并不是真正编程语言的问题。</p>
+<h3 id="DSL分类"><a href="#DSL分类" class="headerlink" title="DSL分类"></a>DSL分类</h3><p>DSL不是什么新鲜的玩意儿，我们平时经常接触的SQL，CSS，正则表达式等等都属于DSL。有的DSL可能更加专注于一个方面，例如Mathematica，LOGO等等。这些语言的目标都是特定的领域，与之相对的则是GPPL(General Purpose Programming Language，通用目的编程语言)。Martin Fowler将DSL分为外部DSL及内部DSL两种。外部DSL有自己的特定语法、解析器和词法分析器等等，它们往往是一种小型的编程语言，甚至不会像GPPL那样需要源文件。与之相对的则是内部DSL。内部DSL其实更像是种别称，它代表一类特别API及使用模式。</p>
+<p>　　XSLT，SQL等等都可以算作是外部DSL。外部DSL一般会直接针对特定的领域设计，而不考虑其他方面。James Gosling曾经说过：每个配置文件最终都会变成一门编程语言。一开始您可能只会用它表示一点点东西，慢慢地您便会想要一些规则，而这些规则则变成了表达式，后来您可能还会定义变量，进行条件判断等等，而最终它就变成了一种奇怪的编程语言，这样的情况屡见不鲜。</p>
+<p>　　而内部DSL，正像之前提到的那样，它往往只是代表了一系列特别的API及使用模式，例如LINQ查询语句及Ruby on Rails中的Active Record声明代码等等。内部DSL可以使用一系列API来“伪装”成一种DSL，它往往会利用一些“流畅化”的技巧，例如像jQuery那样把一些方法通过“点”连接起来，而另一些也会利用元编程的方式。内部DSL还有一些优势，例如可以访问语言中的代码或变量，以及利用代码补全，重构等母语言的所有特性。</p>
 
           
         
@@ -880,7 +468,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/koal/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -899,7 +487,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/uncategorized/koal/" itemprop="url">koal.md</a></h2>
+                <a class="post-title-link" href="/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/" itemprop="url">01_NOSQL数据库分类.md</a></h2>
         
 
         <div class="post-meta">
@@ -911,8 +499,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:20:49+08:00">
-                2021-08-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:40:01+08:00">
+                2021-08-27
               </time>
             
 
@@ -921,6 +509,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -951,335 +561,415 @@
       
         
           
-            <h1 id="周计划"><a href="#周计划" class="headerlink" title="周计划"></a>周计划</h1><h2 id="20210130"><a href="#20210130" class="headerlink" title="20210130"></a>20210130</h2><ul>
-<li>密码应用服务，用户，功能接口对接开发 100%</li>
-<li>密码服务平台角色扩展租户内角色，kms角色 100%</li>
-<li>密码应用服务扩容释放 100%</li>
-<li>kms服务编排对接和发布完成 100%</li>
-<li>服务定义上架功能重构100%</li>
-</ul>
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/koal_%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/uncategorized/koal_%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="url">koal_部署服务出现的问题.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:20:49+08:00">
-                2021-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="部署服务出现的问题"><a href="#部署服务出现的问题" class="headerlink" title="部署服务出现的问题"></a>部署服务出现的问题</h1><ol>
-<li><p>pod找不到地址</p>
-<blockquote>
-<p>有节点不网络不正常， dns调度在网络不正常节点。使dns调度在正常节点</p>
-</blockquote>
-</li>
-<li><p>密码应用服务500</p>
-<blockquote>
-<p>检查traefit kubecheck 是否有日志，没日志检查配置文件authurl以及middleware kubecheck 两处地址是否正常 </p>
-</blockquote>
-</li>
-<li><p>服务503</p>
-<blockquote>
-<p>  代表服务未启动</p>
-</blockquote>
-</li>
-<li><p>镜像奇怪异常问题</p>
-<blockquote>
-<p> 重新上传镜像</p>
-</blockquote>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/uncategorized/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/uncategorized/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/" itemprop="url">koal_临时记录.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:20:49+08:00">
-                2021-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="临时记录"><a href="#临时记录" class="headerlink" title="临时记录"></a>临时记录</h1><pre><code>roleKind（string类型） 角色类型/区分是否为管理员  1 是，0 否
-rule (角色排斥规则 string) 没有就不传
-http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda647732746559bb235cc5e590eea1786d0d076939&amp;token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY3NDQzODIsInVzZXJuYW1lIjoiemhhZG1pbiJ9.aBo6YzXqG0bfUgO2S-a0ro3cU0yGIRUG7TtG_B2gzLE
-1336203398069878785  
-</code></pre>
-<h2 id="工作任务"><a href="#工作任务" class="headerlink" title="工作任务"></a>工作任务</h2><ul>
-<li><p>密钥同一个租户能分配几次</p>
-<ul>
-<li><input disabled="" type="checkbox"> <table>
+            <h1 id="NOSQL数据库分类"><a href="#NOSQL数据库分类" class="headerlink" title="NOSQL数据库分类"></a>NOSQL数据库分类</h1><table>
 <thead>
 <tr>
-<th><em><strong>*编号*</strong></em></th>
-<th><em><strong>*功能点*</strong></em></th>
+<th>类型</th>
+<th>部分代表</th>
+<th>特点</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>1</td>
-<td>系统配置识别密钥隔离还是密码机隔离 1</td>
+<td>列存储</td>
+<td>HbaseCassandraHypertable</td>
+<td>顾名思义，是按列存储数据的。最大的特点是方便存储结构化和半结构化数据，方便做数据压缩，对针对某一列或者某几列的查询有非常大的IO优势。</td>
 </tr>
 <tr>
-<td>2</td>
-<td>系统启动初始化功能命令空间  \1**. 如果是密钥级别隔离，则调度服务放在公共命名空间中，在系统初始化时，初始化该公共命名空间。**</td>
+<td>文档存储</td>
+<td>MongoDBCouchDB</td>
+<td>文档存储一般用类似json的格式存储，存储的内容是文档型的。这样也就有机会对某些字段建立索引，实现关系数据库的某些功能。</td>
 </tr>
 <tr>
-<td>3</td>
-<td>租户申请单中增加密钥列表</td>
+<td>key-value存储</td>
+<td>Tokyo Cabinet / TyrantBerkeley DBMemcacheDBRedis</td>
+<td>可以通过key快速查询到其value。一般来说，存储不管value的格式，照单全收。（Redis包含了其他功能）</td>
 </tr>
 <tr>
-<td>4</td>
-<td>运营、运维申请单中展示密钥详情</td>
+<td>图存储</td>
+<td>Neo4JFlockDB</td>
+<td>图形关系的最佳存储。使用传统关系数据库来解决的话性能低下，而且设计使用不方便。</td>
 </tr>
 <tr>
-<td>5</td>
-<td>运维管理员交付密码机服务，包含填写密钥</td>
+<td>对象存储</td>
+<td>db4oVersant</td>
+<td>通过类似面向对象语言的语法操作数据库，通过对象的方式存取数据。</td>
 </tr>
 <tr>
-<td>6</td>
-<td>增加密钥主管角色，密钥管理等</td>
-</tr>
-<tr>
-<td>7</td>
-<td>调用SDF接口时，应检查该应用是否有权限使用该密码机服务和密钥索引 <strong>怎么检查</strong></td>
-</tr>
-<tr>
-<td>8</td>
-<td>是密钥形式隔离，则新建密码机组时，不需要选择租户 <strong>不需要选择租户</strong></td>
+<td>xml数据库</td>
+<td>Berkeley DB XMLBaseX</td>
+<td>高效的存储XML数据，并支持XML的内部查询语法，比如XQuery,Xpath。</td>
 </tr>
 </tbody></table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_Python%20%E5%A5%BD%E7%94%A8%E7%9A%84%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_Python%20%E5%A5%BD%E7%94%A8%E7%9A%84%E5%8C%85/" itemprop="url">01_Python 好用的包.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:40:01+08:00">
+                2021-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Python-好用的包"><a href="#Python-好用的包" class="headerlink" title="Python 好用的包"></a>Python 好用的包</h1><p> <strong>Dear PyGui</strong></p>
+<p>尽管如我们所见，终端应用程序可以很漂亮，但有时还不够，您需要一个真正的GUI。目前流行的<code>Dear ImGui</code> C ++项目（<code>https://github.com/ocornut/imgui</code>）的Python分支<code>Dear PyGui</code>正是为此而诞生。</p>
+<p><code>Dear PyGui</code>利用了在视频游戏中广为流行的即时模式范例(<code>immediate mode paradigm</code>)。这基本上意味着动态GUI是逐帧独立绘制的，无需保留任何数据。这使得该工具与其他Python GUI框架有着根本不同。它具有高性能，并使用计算机的GPU来促进高度动态界面的构建，这在工程，仿真，游戏或数据科学应用程序中经常用到</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E8%8C%83%E7%95%B4%E8%AE%BA/Haskell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/%E8%8C%83%E7%95%B4%E8%AE%BA/Haskell/" itemprop="url">Haskell.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:23+08:00">
+                2021-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%8C%83%E7%95%B4%E8%AE%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">范畴论</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Haskell由来"><a href="#Haskell由来" class="headerlink" title="Haskell由来"></a>Haskell由来</h2><p>美国数学家ALonzo Church 引入lambda calculus ，通过使用符号表达变量的帮顶和替换来定义函数计算的系统。</p>
+<h2 id="Yoneda-lemma-米田引理"><a href="#Yoneda-lemma-米田引理" class="headerlink" title="Yoneda lemma 米田引理"></a>Yoneda lemma 米田引理</h2><blockquote>
+<p><strong>一个数学对象完全由它与所有其他对象的关系决定</strong>。换句话说，当且仅当两个对象以同样方式与范畴中的每个对象相关时，两个对象本质上是不可区分的。</p>
+</blockquote>
+<p>你可以通过观察人们的关系来了解他们，比如他们在 Facebook 上的朋友，他们在 Twitter 上关注的人，他们周五晚上和谁出去玩。如果你遇到两个人，他们有<strong>完全相同</strong>的朋友，他们在社交媒体上的互动也<strong>完全相同</strong>，他们在周五晚上和<strong>相同</strong>的人在一起，那么你可能会开玩笑地说，“你甚至分不清他们。”撇开所有玩笑不谈，范畴论告诉我们，这其实是真正的数学！</p>
+<h2 id="lambda-定义"><a href="#lambda-定义" class="headerlink" title="lambda|定义"></a>lambda|定义</h2><p>描述一个形式系统需要约定用到的基本符号，</p>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>扩展递归和尾递归</p>
+<pre><code class="haskell">factorial n=if n==0 then 1 else n * factorial(n-1)
+</code></pre>
+<p><code>factorial</code>在没有结束的时候，会不停扩展，导致所有中间结果在内存，这种方式被称<code>扩展递归</code></p>
+<p>尾递归</p>
+<pre><code class="haskell">mygcd x y = if y==0 then x else mygcd y (mod x y)
+</code></pre>
+<p><code>mygcd</code>没有中间缓存变量，不必展开，这种递归被称为<code>尾递归</code></p>
+<h3 id="beta归约"><a href="#beta归约" class="headerlink" title="beta归约"></a>beta归约</h3><blockquote>
+<p>((lambda V.E)E’)=(E[V=E’])</p>
+</blockquote>
+<pre><code class="go">x[x := N]       ≡ N
+y[x := N]       ≡ y //注意 x ≠ y
+(M1 M2)[x := N] ≡ (M1[x := N]) (M2[x := N])
+(λx.M)[x := N]  ≡ λx.M //注意 x 是绑定变量无法替换
+(λy.M)[x := N]  ≡ λy.(M[x := N]) //注意 x ≠ y, 且表达式N的自由变量中不包含 y 即 y ∉ FV(N)
+</code></pre>
+<p>arthmetic function in haskell</p>
+<ul>
+<li>quot </li>
+<li>rem 取余。</li>
+<li>div</li>
+<li>mod  取模</li>
+</ul>
+<p><img src="/images/Haskell.assets/image-20210729111850382.png" alt="image-20210729111850382"></p>
+<p>取模取余运算区别</p>
+<p>对于整型数a，b来说，取模运算或者求余运算的方法都是：</p>
+<ol>
+<li><p>求 整数商： c = a/b;</p>
 </li>
-</ul>
+<li><p>计算模或者余数： r = a - c*b.</p>
 </li>
-<li><p>增加额外数据库SYSGBA 123456789 （密钥隔离）</p>
-</li>
-<li></li>
+</ol>
+<p>求模运算和求余运算在第一步不同: 取余运算在取c的值时，向0 方向舍入(fix()函数)；而取模运算在计算c的值时，向负无穷方向舍入(floor()函数)。</p>
+<p>例如：计算-7 Mod 4</p>
+<p>那么：a = -7；b = 4；</p>
+<p>第一步：求整数商c，如进行求模运算c = -2（向负无穷方向舍入），求余c = -1（向0方向舍入）；</p>
+<p>第二步：计算模和余数的公式相同，但因c的值不同，求模时r = 1，求余时r = -3。</p>
+<p>归纳：当a和b符号一致时，求模运算和求余运算所得的c的值一致，因此结果一致。</p>
+<p>当符号不一致时，结果不一样。求模运算结果的符号和b一致，求余运算结果的符号和a一致。</p>
+<p>另外各个环境下%运算符的含义不同，比如<strong>c/c++，java 为取余</strong>，而<strong>python则为取模</strong>。</p>
+<p>quot舍入为零，div舍入为负无穷：</p>
+<p>rem 舍入为零，mod舍入为负                          无穷</p>
+<p>ps. 我没看懂</p>
+<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><ul>
+<li>不能存放不同类型</li>
+<li>[1,2] !! 0 获取列表第0个元素</li>
 </ul>
-<h2 id="代码review"><a href="#代码review" class="headerlink" title="代码review"></a>代码review</h2><p>review commit</p>
-<ul>
-<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/00b75bfc535d35ff6a5b91929e4b21c238dacb85"> 00b75bfc</a> 使用通用工具累判断  <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
-<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/8f82d5255d0bf4524d14c373317d013b5220cfab"> 8f82d525</a> 存在npe问题，需要修正    <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
-</ul>
-<h2 id="24f56f35-小问题，常量命名，对象复用"><a href="#24f56f35-小问题，常量命名，对象复用" class="headerlink" title="24f56f35 小问题，常量命名，对象复用"></a><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/24f56f356f818f34e42e84bc444998f518428505">24f56f35</a> 小问题，常量命名，对象复用</h2><p>kcsp-kubecheck</p>
+<p><img src="/images/Haskell.assets/image-20210730114744364.png" alt="image-20210730114744364"></p>
+<p>head,tail,init,last</p>
+<pre><code class="sh">ghci&gt;task 3 [3,4,5,4] 
+[3,4,5]
+ghci&gt;task 1 [2,3]
+[3]
+ghci&gt; drop 3 [8,4,2,1,5,6]
+[1,5,6]
+ghci&gt; maximum [1,6,2,3]
+6
+ghci&gt; minimum [8,4,2,1]
+1
+ghci product [1,2,3]
+6 
+ghci&gt; 4`elem` [3,4,5,6]
+True
+</code></pre>
+<pre><code class="sh">ghci&gt; take 10 (cycle [1,2,3])
+[1,2,3,1,2,3,1,2,3,1]
+ghci&gt; take 10 (repeat 5)
+5555555555 10ge
+ghci&gt; replicate 3 10
+[10,10,10]
+</code></pre>
+<pre><code class="sh">ghci&gt; [x*2|x&lt;-[1..10],x*2&gt;=12]
+[12,14,16,18,20]
+</code></pre>
+<h2 id="AS-PATTERN"><a href="#AS-PATTERN" class="headerlink" title="AS-PATTERN"></a>AS-PATTERN</h2><pre><code class="haskell">firstLetter all@(x:xs) = &quot;The first letter of &quot; ++ all ++ &quot; is &quot; ++ [x]
+</code></pre>
+<h2 id="guard-where"><a href="#guard-where" class="headerlink" title="guard where"></a>guard where</h2><p><img src="/images/Haskell.assets/image-20210805104930741.png" alt="image-20210805104930741"></p>
+<h2 id="LEt-it-be"><a href="#LEt-it-be" class="headerlink" title="LEt it be"></a>LEt it be</h2><p>let expressions are very similar to <code>where</code>bindings.<code>where</code>allows you bind to variables at the end of a functions.and those variable are visible to the entire function.</p>
 
           
         
@@ -1328,7 +1018,7 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_nodejs/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1347,7 +1037,7 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_nodejs/" itemprop="url">01_nodejs.md</a></h2>
+                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/" itemprop="url">算法研究.md</a></h2>
         
 
         <div class="post-meta">
@@ -1359,8 +1049,306 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
-                2021-08-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:21+08:00">
+                2021-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="算法研究"><a href="#算法研究" class="headerlink" title="算法研究"></a>算法研究</h1><p>这个章节，会用来解决一些算法相关的问题，目前列出算法如下，预期会提供<code>算法描述</code>，<code>代码实现</code>，<code>动态图-有就会给</code>，<code>算法相关扩展</code></p>
+<ul>
+<li>动态规划算法</li>
+<li>概率算法</li>
+<li>排序算法</li>
+<li>加密算法</li>
+</ul>
+<h2 id="概率算法"><a href="#概率算法" class="headerlink" title="概率算法"></a>概率算法</h2><h3 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h3><h4 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h4><h4 id="动态图"><a href="#动态图" class="headerlink" title="动态图"></a>动态图</h4><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h2 id="排序算法-1"><a href="#排序算法-1" class="headerlink" title="排序算法"></a>排序算法</h2><h2 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6_%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3%E6%89%A9%E5%B1%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6_%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3%E6%89%A9%E5%B1%95/" itemprop="url">算法研究_算法相关扩展.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:21+08:00">
+                2021-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="算法相关扩展"><a href="#算法相关扩展" class="headerlink" title="算法相关扩展"></a>算法相关扩展</h1><h2 id="似然与极大似然估计"><a href="#似然与极大似然估计" class="headerlink" title="似然与极大似然估计"></a>似然与极大似然估计</h2><p><code>Likelihood</code>&amp;<code>Maximum likelihood</code>似然与概率，在非正式场合似然和概率（Probability）几乎是一对同义词，但是在统计学中似然和概率却是两个不同的概念.<span style="color:#0ae">概率是在特定环境下某件事情发生的可能性，也就是结果没有产生之前依据环境所对应的参数来预测某件事情发生的可能性</span>，比如抛硬币，抛之前我们不知道最后是哪一面朝上，但是根据硬币的性质我们可以推测任何一面朝上的可能性均为50%，这个概率只有在抛硬币之前才是有意义的，抛完硬币后的结果便是确定的；<span style="color:#0ae">而似然刚好相反，是在确定的结果下去推测产生这个结果的可能环境（参数）</span>，还是抛硬币的例子，假设我们随机抛掷一枚硬币1,000次，结果500次人头朝上，500次数字朝上（实际情况一般不会这么理想，这里只是举个例子），我们很容易判断这是一枚标准的硬币，两面朝上的概率均为50%，这个过程就是我们运用出现的结果来判断这个事情本身的性质（参数），也就是似然。</p>
+<p>结果和参数相互对应的时候，似然和概率在数值上是相等的，如果用 <em>θ</em>θ 表示环境对应的参数，<em>x</em>x 表示结果，那么概率可以表示为：</p>
+<p><em>P</em>(<em>x</em>|<em>θ</em>)</p>
+<p><em>p</em>(<em>x</em>|<em>θ</em>)p(x|θ) 是条件概率的表示方法，<em>θ</em>θ 是前置条件，理解为在 <em>θ</em>θ 的前提下，事件 <em>x</em>x 发生的概率，相对应的似然可以表示为：</p>
+<p>L(<em>θ</em>|<em>x</em></p>
+<p>可以理解为已知结果为 <em>x</em>x ，参数为 <em>θ</em>θ (似然函数里 <em>θ</em>θ 是变量，这里说的参数和变量是相对与概率而言的)对应的概率，即：L(<em>θ</em>|<em>x</em>)=<em>P</em>(<em>x</em>|<em>θ</em>)</p>
+<p>需要说明的是两者在数值上相等，但是意义并不相同，LL 是关于 <em>θ</em>θ 的函数，而 <em>P</em>P 则是关于 <em>x</em>x 的函数，两者从不同的角度描述一件事情。</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>以伯努利分布（Bernoulli distribution，又叫做两点分布或0-1分布）为例：</p>
+<p>A Graduate Course in Applied Cryptography</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/02/" itemprop="url">02.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:19+08:00">
+                2021-08-27
               </time>
             
 
@@ -1421,41 +1409,23 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
       
         
           
-            <h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><h2 id="template"><a href="#template" class="headerlink" title="template"></a>template</h2><p><code>express-art-template语法</code></p>
-<pre><code class="sh">(1).表达式
-&#123;&#123; 与 &#125;&#125; 符号包裹起来的语句则为模板的逻辑表达式
-
-(2).输出表达式
-2.1对内容编码输出：&#123;&#123;content&#125;&#125;
-2.2不编码输出：&#123;&#123;#content&#125;&#125;
-
-(3).变量
-
-&#123;&#123;set temp = data.sub.content&#125;&#125;
-
-(4).条件表达式
-&#123;&#123;if admin&#125;&#125;
-        &lt;p&gt;admin&lt;/p&gt;
-&#123;&#123;else if code > 0&#125;&#125;
-       &lt;p&gt;master&lt;/p&gt;
-&#123;&#123;else&#125;&#125;
-        &lt;p&gt;error!&lt;/p&gt;
-&#123;&#123;/if&#125;&#125;
-
-(5).遍历表达式
-无论数组或者对象都可以用 each 进行遍历。
-&#123;&#123;each list as value index&#125;&#125;
-    &lt;li&gt;&#123;&#123;index&#125;&#125; - &#123;&#123;value.user&#125;&#125;&lt;/li&gt;
-&#123;&#123;/each&#125;&#125;
-亦可以被简写：
-&#123;&#123;each list&#125;&#125;
-     &lt;li&gt;&#123;&#123;$index&#125;&#125; - &#123;&#123;$value.user&#125;&#125;&lt;/li&gt;
-&#123;&#123;/each&#125;&#125;
-
-(6).子模板（模板包含表达式）
-a.用于嵌入子模板:
-&#123;&#123;include './header.art'&#125;&#125; 
-</code></pre>
+            <h1 id="文本DNA？"><a href="#文本DNA？" class="headerlink" title="文本DNA？"></a>文本DNA？</h1><p>文本描述</p>
+<ul>
+<li>主题提取</li>
+<li>关键字出现频率（去除停用词）</li>
+</ul>
+<p>根据鸭子理论：</p>
+<p>两个文章，主题相同，描述东西方法类似，就认为是同一个文章。</p>
+<ul>
+<li>问题</li>
+<li>创建用户的 存储容量和最大文件 有没有参数能不做限制</li>
+</ul>
+<p>需要提供接口</p>
+<ul>
+<li>KOALCREATEUSER创建的用户为普通用户，不能登陆ums</li>
+<li>管理员用户 增 删 改 查 </li>
+<li>用于远程登陆</li>
+</ul>
 
           
         
@@ -1504,7 +1474,7 @@ a.用于嵌入子模板:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_emacs/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/02_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1523,7 +1493,7 @@ a.用于嵌入子模板:
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_emacs/" itemprop="url">01_emacs.md</a></h2>
+                <a class="post-title-link" href="/1/02_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2/" itemprop="url">02_计算机图形.md</a></h2>
         
 
         <div class="post-meta">
@@ -1535,8 +1505,8 @@ a.用于嵌入子模板:
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
-                2021-08-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:19+08:00">
+                2021-08-27
               </time>
             
 
@@ -1597,18 +1567,42 @@ a.用于嵌入子模板:
       
         
           
-            <h1 id="emacs"><a href="#emacs" class="headerlink" title="emacs"></a>emacs</h1><p>修改<code>init.el</code>不重启emacs</p>
-<pre><code class="sh">Alt+x eval-buffer
-alt+x load-file
-</code></pre>
-<h3 id="major-mode"><a href="#major-mode" class="headerlink" title="major mode"></a>major mode</h3><p>emacs编辑器模式</p>
+            <h1 id="计算机图形"><a href="#计算机图形" class="headerlink" title="计算机图形"></a>计算机图形</h1><h2 id="局部描述子匹配-sift"><a href="#局部描述子匹配-sift" class="headerlink" title="局部描述子匹配 sift"></a>局部描述子匹配 sift</h2><p>对图像做特征匹配，sift特征提取代码处理，然后逐个匹配</p>
+<p><img src="/images/02.assets/image-20210824113149634.png" alt="image-20210824113149634"></p>
+<p><code>pydot</code> 画图</p>
+<h2 id="仿射变换"><a href="#仿射变换" class="headerlink" title="仿射变换"></a>仿射变换</h2><blockquote>
+<p>将图像放置到另一图像中</p>
+</blockquote>
+<p><img src="/images/02.assets/image-20210824113618738.png" alt="image-20210824113618738"></p>
+<h2 id="图像聚类"><a href="#图像聚类" class="headerlink" title="图像聚类"></a>图像聚类</h2><p>对图像进行聚类，从而寻找相似的图像组</p>
 <ul>
-<li>程序语言 emacs-lisp-mode,python-mode,ruby-mode</li>
-<li>dired (file manager dired)</li>
-<li>image-mode view image file</li>
-<li>eww eww web browser</li>
-<li></li>
+<li>kMeans</li>
+<li>PCA</li>
+<li>谱聚类算法</li>
 </ul>
+<h2 id="基于内容的图像检索"><a href="#基于内容的图像检索" class="headerlink" title="基于内容的图像检索"></a>基于内容的图像检索</h2><p>在大型图像数据库，CBIR基于内容的图像检索，用于检索在视觉上具有相似性的图像。对于高层查询，比如寻找相似的物体，将查询图像与数据库中所有的图像进行完全比较比如用特征匹配往往是不可行的，在数据库很大的情况下，这样的查询方式会耗费过多的时间，在过去几年研究者成功引入文本挖掘技术到CBIR中处理问题，使得在数百万图片中搜索具有相似内容的图像成为可能</p>
+<h3 id="从文本挖掘中获取灵感-矢量空间模型"><a href="#从文本挖掘中获取灵感-矢量空间模型" class="headerlink" title="从文本挖掘中获取灵感-矢量空间模型"></a>从文本挖掘中获取灵感-矢量空间模型</h3><p><code>矢量空间模型</code>,通过单词技术来构建文档直方图向量v从而建立文档索引。通常会无视掉停用词。</p>
+<h3 id="视觉单词"><a href="#视觉单词" class="headerlink" title="视觉单词"></a>视觉单词</h3><p>为了将文本挖掘技术应用到图像，需要建立视觉等效单词。通过<code>SIFT</code>局部描述子做到,这些典型实例通过分析训练图像集确定并被认为视觉单词，所有单词的集合称为<code>视觉词汇</code>或者<code>视觉码本</code>，从图像集提取体征描述子，利用k-means构建视觉单词</p>
+<h3 id="图像索引"><a href="#图像索引" class="headerlink" title="图像索引"></a>图像索引</h3><p>搜索前，建立图像数据库和图像的视觉单词表示。在索引图像前,我们需要建立一个数据库。这里,对图像进行索引就<br>是从这些图像中提取描述子,利用词汇将描述子转换成视觉单词,并<br>保存视觉单词及对应图像的单词直方图。从而可以利用图像对数据库<br>进行查询,并返回相似的图像作为搜索结果。</p>
+<h3 id="图像搜索"><a href="#图像搜索" class="headerlink" title="图像搜索"></a>图像搜索</h3><p>建立好图像的索引,我们就可以在数据库中搜索相似的图像了。这里,我们用 BoW(Bag-of-Word,词袋模型)来表示整个图像,不过这里介绍的过程是通用的,可以应用于寻找相似的物体、相似的脸、相似的颜色等,它完全取决于图像及所用的描述子。</p>
+<h3 id="使用几何特性对结果进行排序"><a href="#使用几何特性对结果进行排序" class="headerlink" title="使用几何特性对结果进行排序"></a>使用几何特性对结果进行排序</h3><p>让我们简要地看一种用 BoW 模型改进检索结果的常用方法。BoW 模型的一个主要缺点是在用视觉单词表示图像时不包含图像特征的位置信息,这是为获取速度和可伸缩性而付出的代价</p>
+<h2 id="构建演示程序和web应用"><a href="#构建演示程序和web应用" class="headerlink" title="构建演示程序和web应用"></a>构建演示程序和web应用</h2><p><code>CherryPy</code>构建web应用</p>
+<h2 id="图像内容分类"><a href="#图像内容分类" class="headerlink" title="图像内容分类"></a>图像内容分类</h2><h3 id="knn-K邻近分类法"><a href="#knn-K邻近分类法" class="headerlink" title="knn (K邻近分类法)"></a>knn (K邻近分类法)</h3><p>用 K 邻近分类器分类二维数据。每个示例中,不同颜色代表类标记,正确分类的点用星号表示,分类错误的点用圆点表示,曲线是分类器的决策边界</p>
+<h3 id="用稠密SIFT作为图像特征"><a href="#用稠密SIFT作为图像特征" class="headerlink" title="用稠密SIFT作为图像特征"></a>用稠密SIFT作为图像特征</h3><p>我们来看如何对图像进行分类。要对图像进行分类,我们需要一个特征向量来表示一幅图像。在聚类一章我们用平均 RGB 像素值和 PCA系数作为图像的特征向量;这里我们会介绍另外一种表示形式,即稠密 SIFT 特征向量。在整幅图像上用一个规则的网格应用 SIFT 描述子可以得到稠密 </p>
+<h3 id="⻉叶斯分类器"><a href="#⻉叶斯分类器" class="headerlink" title="⻉叶斯分类器"></a>⻉叶斯分类器</h3><p>另一个简单却有效的分类器是⻉叶斯分类器 3 (或称朴素⻉叶斯分类器)。⻉叶斯分类器是一种基于⻉叶斯条件概率定理的概率分类器,它假设特征是彼此独立不相关的(这就是它“朴素”的部分)。⻉叶斯分类器可以非常有效地被训练出来,原因在于每一个特征模型都是独立选取的。尽管它们的假设非常简单,但是⻉叶斯分类器已经在实际应用中获得显著成效,尤其是对垃圾邮件的过滤。⻉叶斯分类器的另一个好处是,一旦学习了这个模型,就没有必要存储训练数据了,只需存储模型的参数。</p>
+<h2 id="视频处理"><a href="#视频处理" class="headerlink" title="视频处理"></a>视频处理</h2><p>使用<code>open cv</code>进行视频处理</p>
+<h3 id="跟踪"><a href="#跟踪" class="headerlink" title="跟踪"></a>跟踪</h3><p>跟踪是在图像序列或视频里对其中的目标进行跟踪的过程。</p>
+<h3 id="光流"><a href="#光流" class="headerlink" title="光流"></a>光流</h3><p><code>光流</code>是目标，场景或摄像机在连续两帧图像间运动时造成的目标的运动。它是图像在平移过程中的二维矢量场。作为一种经典并深入研究了的方法，它在诸如视频压缩，运动估计，目标跟踪和图像分割等计算机视觉得到了广泛的应用。</p>
+<p><strong>光流法</strong>主要依赖三个假设。</p>
+<ol>
+<li><code>亮度恒定</code> 图像中目标的像素强度在连续帧之间不会发生变化</li>
+<li><code>时间规律</code> 相邻帧之间的时间足够短，以至于在考虑运行变化时可以忽略它们之间的差异。</li>
+<li><code>空间一致性</code>相邻像素具有相似的运动</li>
+</ol>
+<p>在很多情况下这些假设并不成立，但是对于相邻帧间的小运动以及短时间跳跃，是一个非常好的模型。</p>
+<h2 id="Lucas-Kanade算法"><a href="#Lucas-Kanade算法" class="headerlink" title="Lucas-Kanade算法"></a>Lucas-Kanade算法</h2><p>跟踪最基本的形式是跟随感兴趣点，比如角点。对此常用算法是<strong>lucas-Kanade</strong>它利用了稀疏光流算法。</p>
+<h2 id="图像修复"><a href="#图像修复" class="headerlink" title="图像修复"></a>图像修复</h2><p>对图像丢失或者损坏的部分进行重建的过程叫做修复。</p>
+<h2 id="利用霍夫变换检测直线"><a href="#利用霍夫变换检测直线" class="headerlink" title="利用霍夫变换检测直线"></a>利用霍夫变换检测直线</h2><p><a href="http://en.wikipedia.org/wiki/Hough_transform">霍夫变换</a>是一种用于在图像中寻找各种形状的方法。<strong>霍夫变换</strong>常用于在图像中寻找直线结构。</p>
 
           
         
@@ -1657,7 +1651,7 @@ alt+x load-file
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/02_k8s/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1676,7 +1670,7 @@ alt+x load-file
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01/" itemprop="url">01.md</a></h2>
+                <a class="post-title-link" href="/1/02_k8s/" itemprop="url">02_k8s.md</a></h2>
         
 
         <div class="post-meta">
@@ -1688,8 +1682,8 @@ alt+x load-file
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
-                2021-08-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:19+08:00">
+                2021-08-27
               </time>
             
 
@@ -1750,15 +1744,53 @@ alt+x load-file
       
         
           
-            <h1 id="clojure"><a href="#clojure" class="headerlink" title="clojure"></a>clojure</h1><ul>
-<li>clojure <a href="http://cemerick.com/">http://cemerick.com/</a></li>
+            <h1 id="k8s"><a href="#k8s" class="headerlink" title="k8s"></a>k8s</h1><h2 id="k8s容器内域名解析失败学习k8s的DNS策略"><a href="#k8s容器内域名解析失败学习k8s的DNS策略" class="headerlink" title="k8s容器内域名解析失败学习k8s的DNS策略"></a>k8s容器内域名解析失败学习k8s的DNS策略</h2><h3 id="一、k8s默认的DNS策略"><a href="#一、k8s默认的DNS策略" class="headerlink" title="一、k8s默认的DNS策略"></a>一、k8s默认的DNS策略</h3><p>k8s提供了5种DNS策略，如下：</p>
+<ul>
+<li><code>Default</code>: Pod 从运行所在的节点继承名称解析配置。</li>
+<li><code>ClusterFirst</code>: 与配置的集群域后缀不匹配的任何 DNS 查询（例如 “<a href="https://links.jianshu.com/go?to=http://www.kubernetes.io">www.kubernetes.io</a>”） 都将转发到从节点继承的上游名称服务器。集群管理员可能配置了额外的存根域和上游 DNS 服务器。</li>
+<li><code>ClusterFirstWithHostNet</code>：对于以 hostNetwork 方式运行的 Pod，应显式设置其 DNS 策略 <code>ClusterFirstWithHostNet</code>。</li>
+<li><code>None</code>: 此设置允许 Pod 忽略 Kubernetes 环境中的 DNS 设置。Pod 会使用其 <code>dnsConfig</code> 字段 所提供的 DNS 设置。</li>
 </ul>
-<p> <a href="https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/">https://10.0.130.65:30039/TSAAPI1.0/api/217a5b187c2812/</a></p>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><pre><code class="sh"> docker stats --no-stream $(docker ps | grep 217a5b187c2812 | awk &#39;&#123;print $1&#125;&#39;)
+<p>k8s默认使用的DNS策略是<code>ClusterFirst</code>，这点需要注意，也就是说域名解析会优先使用集群的DNS（<code>kube-DNS</code>）进行查询，如果k8s的DNS解析失败，会转发到宿主机的DNS进行解析。</p>
+<h3 id="二、k8s容器的resolv-conf"><a href="#二、k8s容器的resolv-conf" class="headerlink" title="二、k8s容器的resolv.conf"></a>二、k8s容器的<code>resolv.conf</code></h3><p>k8s上运行的容器，其域名解析和一般的Linux一样，都是根据 <code>/etc/resolv.conf</code> 文件进行解析，下面看一个开发环境某一个pod的<code>resolv.conf</code>内容：</p>
+<pre><code class="css">nameserver 10.96.0.10
+search jplat.svc.cluster.local svc.cluster.local cluster.local localhost
+options ndots:5
 </code></pre>
-<p><code>sed</code></p>
-<p>文字处理</p>
-<pre><code class="sh">sed -i &#39;/百度搜索/d&#39; all.txt 
+<p>上面内容中<code>nameserver</code>即为k8s集群中<code>kube-dns</code>的<code>Service</code>的<code>CLUSTER-IP</code>，该集群中容器的<code>nameserver</code>均为<code>kube-dns</code>的ip。</p>
+<p><code>search</code>和<code>options ndots</code>我们一起来讲。首先我们需要了解一个概念<code>FQDN(Fully qualified domain name)</code>即完整域名。一般来说如果一个域名以<code>.</code>结束，就表示一个完整域名。比如<code>www.abc.xyz.</code>就是一个<code>FQDN</code>，而<code>www.abc.xyz</code>则不是<code>FQDN</code>。了解了这个概念之后我们就来看<code>search</code>和<code>options ndots</code>。</p>
+<p>如果我们的pod使用的是默认的DNS策略，即<code>ClusterFirst</code>，那么如果一个域名是<code>FQDN</code>，那么这个域名会被转发给DNS服务器进行解析。如果域名不是<code>FQDN</code>，那么这个域名会到<code>search</code>搜索解析，还是通过一个例子说明，比如访问<code>abc.xyz</code>这个域名，因为它并不是一个<code>FQDN</code>，所以它会和<code>search</code>域中的值进行组合而变成一个<code>FQDN</code>，以上文的<code>resolv.conf</code>为例，这域名会这样组合：</p>
+<pre><code class="css">abx.xyz.jplat.svc.cluster.local.
+abc.xyz.svc.cluster.local.
+abc.xyz.cluster.local.
+...
+</code></pre>
+<p>然后这些域名先被<code>kube-DNS</code>解析，如果没有解析成功再由宿主机的<code>DNS</code>服务器进行解析。</p>
+<p>而<code>ndots</code>是用来表示一个域名中<code>.</code>的个数在不小于该值的情况下会被认为是一个<code>FQDN</code>。简单说这个属性用来判断一个不是以<code>.</code>结束的域名在什么条件下会被认定为是一个<code>FQDN</code>。还是通过我们另一个pod的<code>resolv.conf</code>为例，如下：</p>
+<pre><code class="css">nameserver 10.96.0.10
+search oms-dev.svc.cluster.local svc.cluster.local cluster.local localhost
+options ndots:2 edns0
+</code></pre>
+<p>在这个<code>resolv.conf</code>中<code>ndots</code>为2，也就是说如果一个域名中<code>.</code>的数量大于等于2，即使域名不是以<code>.</code>结尾，也会被认定为是一个<code>FQDN</code>。比如：域名是<code>abc.xyz.xxx</code>这个域名就是<code>FQDN</code>，而<code>abc.xyz</code>则不是<code>FQDN</code>。</p>
+<p>之所以会有<code>search</code>域主要还是为了方便k8s内部服务之间的访问。比如：k8s在同一个<code>namespace</code>下是可以直接通过服务名称进行访问的，其原理就是会在<code>search</code>域查找，比如上面的<code>resolv.conf</code>中<code>jplat、oms-dev</code>着两个其实都是这两个pod所在的<code>namespace</code>的名称。所以通过服务名称访问的时候，会和<code>search</code>域进行组合，这样最终域名会组合成<code>servicename.namespace.svc.cluster.local</code>。而如果是跨<code>namespace</code>访问，则可以通过<code>servicename.namespace</code>这样的形式，在通过和<code>search</code>域组合，依然可以得到<code>servicename.namespace.svc.cluster.local</code>。</p>
+<hr>
+<h3 id="三、解决问题"><a href="#三、解决问题" class="headerlink" title="三、解决问题"></a>三、解决问题</h3><p>在了解k8s的DNS相关知识之后，回到我们项目组在开发中遇到一个问题：一个应用的pod内调用外部接口失败，报错的原因就是<code>unknown host</code>，最开始我以为是外部应用没在一个网段的问题，但是直接通过服务器却可以访问的。当时pod使用的是默认的DNS策略，即<code>ClusterFirst</code>，<code>ndots</code>也是默认值，即5。问题出现了。我请求的域名是<code>www.abc.com/api</code>，域名只有2个点，所以会和<code>search</code>域的域名进行组合，结果当然无法解析。考虑到我们的pod访问都是在同一<code>namespace</code>下，即使跨<code>namespace</code>，我们也是通过<code>servicename.namespace</code>进行访问的，所以最终选择将<code>ndots</code>改为2。修改应用的<code>Deployment yaml</code>文件，修改如下：</p>
+<pre><code class="csharp">      dnsConfig:
+        options:
+          - name: ndots
+            value: &quot;2&quot;
+</code></pre>
+<p>修改完成之后重新部署项目，测试解决。</p>
+<h2 id="kubedns"><a href="#kubedns" class="headerlink" title="kubedns"></a>kubedns</h2><p>查看kubedns</p>
+<pre><code class="sh">kubectl get pods --namespace=kube-system -o wide |grep dns 
+</code></pre>
+<p>查看日志</p>
+<pre><code class="sh">kubectl logs  kube-dns-6698b7748d-fd5g7 kubedns --namespace=kube-system
+</code></pre>
+<p>查看dns解析</p>
+<pre><code class="sh">kubectl get pod |grep &quot;test&quot;
+
+kubectl exec -it &quot;testxxx&quot; -- nslookup zhenzhen.com
 </code></pre>
 
           
@@ -1808,7 +1840,7 @@ alt+x load-file
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_LockFree/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/02_%E5%9B%BE%E8%A1%A8%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1827,7 +1859,7 @@ alt+x load-file
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/1/01_LockFree/" itemprop="url">01_LockFree.md</a></h2>
+                <a class="post-title-link" href="/1/02_%E5%9B%BE%E8%A1%A8%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" itemprop="url">02_图表相关问题.md</a></h2>
         
 
         <div class="post-meta">
@@ -1839,8 +1871,8 @@ alt+x load-file
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-12T10:19:20+08:00">
-                2021-08-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:19+08:00">
+                2021-08-27
               </time>
             
 
@@ -1901,16 +1933,10 @@ alt+x load-file
       
         
           
-            <h1 id="LockFree"><a href="#LockFree" class="headerlink" title="LockFree"></a>LockFree</h1><p>传统共享数据访问方式采用同步原语（<code>临界区</code>,<code>锁</code>,<code>条件变量</code>)等达到共享数据的安全访问，同步操作很容易成为并行程序中的瓶颈。</p>
-<ul>
-<li>同步原语是操作系统的内核对象，调用该原语会带来上下文切换（用户态换到内核态)</li>
-<li>杜绝并行操作，一个线程在访问共享数据的时候，其他多个线程必须在排队等待</li>
-</ul>
-<p>于是，人们开始研究对共享数据进行并发访问的数据结构和算法</p>
-<ul>
-<li>Transactional memory 事务性内存</li>
-<li>Fine-grained algorithms 细粒度苏阿案发</li>
-<li>Lock-free data structures 无锁数据结构</li>
+            <h1 id="图表相关问题"><a href="#图表相关问题" class="headerlink" title="图表相关问题"></a>图表相关问题</h1><ul>
+<li>draw.io</li>
+<li>maxdraph</li>
+<li><a href="https://jgraph.github.io/mxgraph/docs/manual_javavis.html">https://jgraph.github.io/mxgraph/docs/manual_javavis.html</a></li>
 </ul>
 
           
@@ -1951,7 +1977,7 @@ alt+x load-file
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">&gt;</a>
   </nav>
 
 
@@ -1997,7 +2023,7 @@ alt+x load-file
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">109</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2021,7 +2047,7 @@ alt+x load-file
     <h3 class="widget-title">不知所云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
       <canvas width="250" height="250" id="resCanvas" style="width:100%">
-        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usr/" rel="tag">usr</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/share/" rel="tag">share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crl/" rel="tag">crl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%A8%E6%88%B7/" rel="tag">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC/" rel="tag">文本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dna/" rel="tag">dna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/" rel="tag">pod</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svs/" rel="tag">svs</a><span class="tag-list-count">1</span></li></ul>
+        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/" rel="tag">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90/" rel="tag">资源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/" rel="tag">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ingress/" rel="tag">ingress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B3%E7%B3%BB/" rel="tag">关系</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%BD%93/" rel="tag">实体</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%92/" rel="tag">规划</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0/" rel="tag">函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%B9%E7%95%8C/" rel="tag">边界</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96/" rel="tag">决策</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E5%9E%8B/" rel="tag">类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E5%8F%B8/" rel="tag">公司</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koal123/" rel="tag">koal123</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%B7%E5%BE%B7/" rel="tag">康德</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idle/" rel="tag">idle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B3%E8%81%94/" rel="tag">关联</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%99/" rel="tag">规则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB/" rel="tag">新闻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%84%E5%88%86/" rel="tag">评分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%9B%E7%A8%8B/" rel="tag">赛程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dear/" rel="tag">dear</a><span class="tag-list-count">1</span></li></ul>
       </canvas>
     </div>
   </div>
@@ -2047,7 +2073,7 @@ alt+x load-file
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="2913408047@qq.com" target="_blank" title="E-Mail">
+                    <a href="mailto:2913408047@qq.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
@@ -2602,28 +2628,6 @@ alt+x load-file
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-
 
   
   <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
