@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,节点,public," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="java锁首先， java 的锁分为两类：  第一类是 synchronized 同步关键字，这个关键字属于隐式的锁，是 jvm 层面实现，使用的时候看不见； 第二类是在 jdk5 后增加的 Lock 接口以及对应的各种实现类，这属于显式的锁，就是我们能在代码层面看到锁这个对象，而这些个对象的方法实现，大都是直接依赖 CPU 指令的，无关 jvm 的实现。  接下来就从 synchronized">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java体系知识_java锁.md">
+<meta property="og:url" content="http://guoxiujun.com/root/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86_java%E9%94%81/index.html">
+<meta property="og:site_name" content="随笔">
+<meta property="og:description" content="java锁首先， java 的锁分为两类：  第一类是 synchronized 同步关键字，这个关键字属于隐式的锁，是 jvm 层面实现，使用的时候看不见； 第二类是在 jdk5 后增加的 Lock 接口以及对应的各种实现类，这属于显式的锁，就是我们能在代码层面看到锁这个对象，而这些个对象的方法实现，大都是直接依赖 CPU 指令的，无关 jvm 的实现。  接下来就从 synchronized">
+<meta property="og:locale">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917102953522-1935988312.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103220120-299838591.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103248903-813856932.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103329087-976062499.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103403142-1803338736.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103524576-1699706832.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103622168-1503992564.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103711993-795423729.png">
+<meta property="article:published_time" content="2021-09-08T02:48:32.000Z">
+<meta property="article:modified_time" content="2021-09-08T02:48:32.563Z">
+<meta property="article:author" content="guoxiujun">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="节点">
+<meta property="article:tag" content="public">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917102953522-1935988312.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://guoxiujun.com/root/java体系知识_java锁/"/>
+
+
+
+
+
+  <title>java体系知识_java锁.md | 随笔</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">随笔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">十七个面包人</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-university"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86_java%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">java体系知识_java锁.md</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:32+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/root/" itemprop="url" rel="index">
+                    <span itemprop="name">root</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="java锁"><a href="#java锁" class="headerlink" title="java锁"></a>java锁</h1><p>首先， java 的锁分为两类：</p>
+<ol>
+<li>第一类是 <strong>synchronized</strong> 同步关键字，这个关键字属于隐式的锁，是 jvm 层面实现，使用的时候看不见；</li>
+<li>第二类是在 jdk5 后增加的 <strong>Lock</strong> 接口以及对应的各种实现类，这属于显式的锁，就是我们能在代码层面看到锁这个对象，而这些个对象的方法实现，大都是直接依赖 CPU 指令的，无关 jvm 的实现。</li>
+</ol>
+<p>接下来就从 <strong>synchronized</strong> 和 <strong>Lock</strong> 两方面来讲。</p>
+<h2 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h2><ul>
+<li>如果修饰的是<code>具体对象</code>：锁的是<code>对象</code>；</li>
+<li>如果修饰的是<code>成员方法</code>：那锁的就是 <code>this</code> ；</li>
+<li>如果修饰的是<code>静态方法</code>：锁的就是这个<code>对象.class</code>。</li>
+</ul>
+<h2 id="java对象头和Monitor"><a href="#java对象头和Monitor" class="headerlink" title="java对象头和Monitor"></a>java对象头和Monitor</h2><ul>
+<li><p>首先， java 的锁分为两类：</p>
+<ol>
+<li>第一类是 <strong>synchronized</strong> 同步关键字，这个关键字属于隐式的锁，是 jvm 层面实现，使用的时候看不见；</li>
+<li>第二类是在 jdk5 后增加的 <strong>Lock</strong> 接口以及对应的各种实现类，这属于显式的锁，就是我们能在代码层面看到锁这个对象，而这些个对象的方法实现，大都是直接依赖 CPU 指令的，无关 jvm 的实现。</li>
+</ol>
+<p>接下来就从 <strong>synchronized</strong> 和 <strong>Lock</strong> 两方面来讲。</p>
+<p>*<strong>2*</strong>|***0***<strong>二、synchronized</strong></p>
+<p>*<strong>2*</strong>|***1***<strong>2.1 synchronized 的使用</strong></p>
+<ul>
+<li>如果修饰的是<code>具体对象</code>：锁的是<code>对象</code>；</li>
+<li>如果修饰的是<code>成员方法</code>：那锁的就是 <code>this</code> ；</li>
+<li>如果修饰的是<code>静态方法</code>：锁的就是这个<code>对象.class</code>。</li>
+</ul>
+<p>*<strong>2*</strong>|***2***<strong>2.2 Java的对象头和 Monitor</strong></p>
+<p>理解 synchronized 原理之前，我们需要补充一下 java 对象的知识。</p>
+<p>对象在内存中的布局分为三块区域：<strong>对象头、实例数据和对齐填充</strong>。</p>
+<ol>
+<li><strong>对象头</strong>。Hot Spot 虚拟机对象的对象头部分包括两类信息。第一类是用于存储对象自身的运行时数据，如哈希码( Hash Code)、GC分代年龄、<strong>锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳</strong>等，这部分数据的长度在32位和64位的虚拟机(未开启压缩指针)中分别为32个比特和64个比特，官方称它为“ Mark Word”。</li>
+</ol>
+<p><a href="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917102953522-1935988312.png"><img src="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917102953522-1935988312.png" alt="img"></a></p>
+<blockquote>
+<p>对象需要存储的运行时数据很多，其实已经超出了32、64位 Bitmap 结构所能记录的最大限度，但对象头里的信息是与对象自身定义的数据无关的额外存储成本，考虑到虚拟机的空间效率，Mark Word被设计成一个有着动态定义的数据结构，以便在极小的空间内存储尽量多的数据，根据对象的状态复用自己的存储空间。</p>
+</blockquote>
+<ol>
+<li><strong>实例数据</strong>。实例数据部分是对象真正存储的有效信息，即我们在程序代码里面所定义的各种类型的字段内容，无论是从父类继承下来的，还是在子类中定义的字段都必须记录起来。</li>
+</ol>
+<blockquote>
+<p>这部分的存储顺序会受到虚拟机分配策略参数 (-XX: Fields Allocation Style参数) 和字段在Java源码中定义顺序的影响。Hot Spot 虚拟机默认的分配顺序为 longs/doubles、ints、shorts/chars、bytes/booleans、oops( Ordinary Object Pointers，OOPs)，从以上默认的分配策略中可以看到，相同宽度的字段总是被分配到一起存放，在满足这个前提条件的情况下，在父类中定义的变量会出现在子类之前。如果 Hotspot 虚拟机的 XX: Compact Fields 参数值为 true(默认就为true)，那子类之中较窄的变量也允许插入父类变量的空隙之中，以节省出一点点空间。</p>
+</blockquote>
+<ol>
+<li><strong>对齐填充</strong>。并不是必然存在的，由于 Hotspot 虚拟机的自动内存管理系统要求对象起始地址必须是 8 字节的整数倍，如果对象实例数据部分没有对齐的话，就需要通过对齐填充来补全。</li>
+</ol>
+<p>介绍完了对象的内容，和锁相关的显然就是对象头里存储的那几个内容：</p>
+<ul>
+<li>其中的重量级锁也就是通常说 synchronized 的对象锁，其中指针指向的是 monitor 对象（也称为管程或监视器锁）的起始地址。每个对象都存在着一个 monitor 与之关联，monitor 是由ObjectMonitor 实现的，C++实现。</li>
+<li>注意到还有轻量级锁，这是在 jdk6 之后对 synchronized 关键字底层实现的改进。</li>
+</ul>
+<p>*<strong>2*</strong>|***3***<strong>2.3 synchronized 原理</strong></p>
+<p>我们已经知道 synchronized 和对象头里的指令有关，也就是我们以前大概的说法：</p>
+<pre><code>Java虚拟机可以支持方法级的同步和方法内部一段指令序列（代码块）的同步，这两种同步结构都是使用管程( Monitor，更常见的是直接将它称为“锁”) 来实现的。
+</code></pre>
+<p>现在我们讲讲原理。</p>
+<p>因为对于 synchronized 修饰方法（包括普通和静态方法）、修饰代码块，这两种用法的实现略有不同：</p>
+<h3 id="1-synchronized-修饰方法"><a href="#1-synchronized-修饰方法" class="headerlink" title="1.synchronized 修饰方法"></a>1.synchronized 修饰方法</h3><p>我们测试一个同步方法：</p>
+<pre><code>public class Tues &#123;
+    public static int i ;
+    public synchronized static void syncTask()&#123;
+        i++;
+    &#125;
+&#125;
+</code></pre>
+<p>然后反编译 class文件，可以看到：</p>
+<p><a href="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103220120-299838591.png"><img src="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103220120-299838591.png" alt="img"></a></p>
+<p>其中的方法标识：</p>
+<ul>
+<li><code>ACC_PUBLIC</code> 代表public修饰</li>
+<li><code>ACC_STATIC</code> 表示是静态方法</li>
+<li><code>ACC_SYNCHRONIZED</code> 指明该方法为同步方法。</li>
+</ul>
+<p>这个时候我们可以理解《深入理解java虚拟机》里，对于同步方法底层实现的描述如下：</p>
+<p><strong>方法级的同步是隐式的</strong>。 无须通过字节码指令来控制，它实现在方法调用和返回操作之中。虚拟机可以从方法常量池中的方法表结构中的 ACC_SYNCHRONIZED 访问标志得知一个方法是否被声明为同步方法。（静态方法也是如此）</p>
+<ul>
+<li>当方法调用时，调用指令将会检查方法的 ACC_SYNCHRONIZED 访问标志是否被设置，如果设置了，执行线程就要求先成功持有<strong>管程（Monitor）</strong>，然后才能执行方法，最后当方法完成 （无论是正常完成还是非正常完成）时释放管程。</li>
+<li>在方法执行期间，执行线程持有了管程，其他任何线程都无法再获取到同一个管程。</li>
+<li>如果一个同步方法执行期间抛出了异常，并且在方法内部无法处理此异常，那这个同步方法所持有的管程将在异常抛到同步方法边界之外时自动释放。</li>
+</ul>
+<h3 id="2-synchronized修饰代码块"><a href="#2-synchronized修饰代码块" class="headerlink" title="2.synchronized修饰代码块"></a>2.synchronized修饰代码块</h3><p>测试一段同步代码：</p>
+<pre><code>public class Tues &#123;
+   public int i;
+   public void syncTask()&#123;
+       synchronized (this)&#123;
+           i++;
+       &#125;
+   &#125;
+&#125;
+</code></pre>
+<p>然后反编译 class 文件：</p>
+<p><a href="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103248903-813856932.png"><img src="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103248903-813856932.png" alt="img"></a></p>
+<p>可以看到，在指令方面多了关于 Monitor 操作的指令，或者和上一种修饰方法的区别来看，是显式的用指令去操作管程（Monitor）了。</p>
+<p>同理，这个时候我们可以理解《深入理解java虚拟机》里的描述如下：</p>
+<p><strong>同步一段指令集序列的情况</strong>。Java虚拟机的指令集中有 monitorenter 和 monitorexit 两条指令来支持 synchronized 关键字的语义。（monitorenter 和 monitorexit 两条指令是 C 语言的实现）正确实现 synchronized 关键字需要 Javac 编译器与 Java 虚拟机两者共同协作支持。Monitor的实现基本都是 C++ 代码，通过JNI（java native interface）的操作，直接和cpu的交互编程。</p>
+<p>*<strong>2*</strong>|***4***<strong>2.4 早期 synchronized 的问题</strong></p>
+<p>关于操作 monitor 的具体实现，我们没有再深入，持有管程、计数、阻塞等等的思路和直接在 java 中显式的用 lock 是类似的。</p>
+<p>早期的 synchronized 的实现就是基于上面所讲的原理，因为监视器锁（monitor）是<strong>依赖于底层的操作系统的 Mutex Lock 来实现的</strong>，而<strong>操作系统</strong>实现线程之间的切换时需要<strong>从用户态转换到核心态</strong>，这个状态之间的转换需要相对比较长的时间，时间成本相对较高，这也是为什么早期的 synchronized 效率低的原因。</p>
+<blockquote>
+<p>更具体一些的开销，还涉及 java 的线程和操作系统内核线程的关系</p>
+</blockquote>
+<p>前面讲到对象头里存储的内容的时候我们也留了线索，那就是 jdk6 之后多出来轻量级的锁，来改进 synchronized 的实现。</p>
+<p>我的理解，这个改进就是：<strong>从加锁到最后变成以前的那种重量级锁的过程里，新实现出状态不同的锁作为过渡。</strong></p>
+<p>*<strong>2*</strong>|***5***<strong>2.5 改进后的各种锁</strong></p>
+<p><strong>偏向锁-&gt;自旋锁-&gt;轻量级锁-&gt;重量级锁</strong>。按照这个顺序，锁的重量依次增加。</p>
+<ul>
+<li><strong>偏向锁</strong>。他的意思是这个锁会偏向于第一个获得它的线程，当这个线程再次请求锁的时候不需要进行任何同步操作，从而提高性能。那么处于偏向锁模式的时候，对象头的Mark Word 的结构会变为偏向锁结构。</li>
+</ul>
+<blockquote>
+<p>研究发现，在大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，因此为了减少同一线程获取锁的代价而引入偏向锁。那么显然，一旦另一个线程尝试获得这个锁，那么偏向模式就会结束。另一方面，如果程序的大多数锁都是多个线程访问，那么偏向锁就是多余的。</p>
+</blockquote>
+<ul>
+<li><strong>轻量级锁</strong>。当偏向锁的条件不满足，亦即的确有多线程并发争抢同一锁对象时，但并发数不大时，优先使用轻量级锁。一般只有两个线程争抢锁标记时，优先使用轻量级锁。 此时，对象头的Mark Word 的结构会变为轻量级锁结构。</li>
+</ul>
+<blockquote>
+<p>轻量级锁是和传统的重量级锁相比较的，传统的锁使用的是操作系统的互斥量，而轻量级锁是虚拟机基于 CAS 操作进行更新，尝试比较并交换，根据情况决定要不要改为重量级锁。（这个动态过程也就是自旋锁的过程了）</p>
+</blockquote>
+<ul>
+<li><strong>重量级锁</strong>。重量级锁即为我们在上面探讨的<strong>具有完整Monitor功能的锁</strong>。</li>
+<li><strong>自旋锁</strong>。自旋锁是一个过渡锁，是从轻量级锁到重量级锁的过渡。也就是CAS。</li>
+</ul>
+<blockquote>
+<p>CAS，全称为Compare-And-Swap，是一条CPU的原子指令，其作用是让CPU比较后原子地更新某个位置的值，实现方式是基于硬件平台的汇编指令，就是说CAS是靠硬件实现的，JVM 只是封装了汇编调用，那些AtomicInteger类便是使用了这些封装后的接口。</p>
+</blockquote>
+<p>注意：Java中的各种锁对程序员来说是透明的: 在创建锁时，JVM 先创建最轻的锁，若不满足条件则将锁逐次升级.。这四种锁之间只能升级，不能降级。</p>
+<p>*<strong>2*</strong>|***6***<strong>2.6 其他锁的分类</strong></p>
+<p>上面说的锁都是基于 synchronized 关键字，以及底层的实现涉及到的锁的概念，还有一些别的角度的锁分类：</p>
+<h3 id="按照锁的特性分类："><a href="#按照锁的特性分类：" class="headerlink" title="按照锁的特性分类："></a>按照锁的特性分类：</h3><ol>
+<li><strong>悲观锁</strong>：独占锁，会导致其他所有需要所的线程都挂起，等待持有所的线程释放锁，就是说它的看法比较悲观，认为悲观锁认为对于同一个数据的并发操作，一定是会发生修改的。因此对于同一个数据的并发操作，悲观锁采取加锁的形式。比如前面讲过的，最传统的 synchronized 修饰的底层实现，或者重量级锁。（但是现在synchronized升级之后，已经不是单纯的悲观锁了）</li>
+<li><strong>乐观锁</strong>：每次不是加锁，而是假设没有冲突而去试探性的完成操作，如果因为冲突失败了就重试，直到成功。比如 CAS 自旋锁的操作，实际上并没有加锁。</li>
+</ol>
+<h3 id="按照锁的顺序分类："><a href="#按照锁的顺序分类：" class="headerlink" title="按照锁的顺序分类："></a>按照锁的顺序分类：</h3><ol>
+<li><strong>公平锁</strong>。公平锁是指多个线程按照申请锁的顺序来获取锁。java 里面可以通过 ReentrantLock 这个锁对象，然后指定是否公平</li>
+<li><strong>非公平锁</strong>。非公平锁是指多个线程获取锁的顺序并不是按照申请锁的顺序，有可能后申请的线程比先申请的线程优先获取锁。使用 synchronized 是无法指定公平与否的，他是不公平的。</li>
+</ol>
+<h3 id="独占锁（也叫排他锁）-共享锁："><a href="#独占锁（也叫排他锁）-共享锁：" class="headerlink" title="独占锁（也叫排他锁）/共享锁："></a>独占锁（也叫排他锁）/共享锁：</h3><ol>
+<li><strong>独占锁也叫排他锁</strong>，是指该锁一次只能被一个线程所持有。对 ReentrantLock 和 Sychronized 而言都是独占锁。</li>
+<li><strong>共享锁</strong>：是指该锁可被多个线程所持有。对 ReentrantReadWriteLock 而言，其读锁是共享锁，其写锁是独占锁。读锁的共享性可保证并发读是非常高效的，读写、写读、写写的过程都是互斥的。</li>
+</ol>
+<p>独占锁/共享锁是一种广义的说法，互斥锁/读写锁是java里具体的实现。</p>
+<p>*<strong>3*</strong>|***0***<strong>三、Java 里的 Lock</strong></p>
+<p>上面我们讲到了，synchronized 关键字下层的锁，是在 jvm 层面实现的，而后来在 jdk 5 之后，在 juc 包里有了<strong>显式的锁</strong>，Lock 完全用 Java 写成，在java这个层面是无关JVM实现的。虽然 Lock 缺少了 (通过 synchronized 块或者方法所提供的) 隐式获取释放锁的便捷性，但是却拥有了锁获取与释放的可操作性、可中断的获取锁以及超时获取锁等多种 synchronized 关键字所不具备的同步特性。</p>
+<p>Lock 是一个接口，实现类常见的有：</p>
+<ul>
+<li>重入锁（<code>ReentrantLock</code>）</li>
+<li>读锁（<code>ReadLock</code>）</li>
+<li>写锁（<code>WriteLock</code>）</li>
+</ul>
+<p>实现基本都是通过<strong>聚合</strong>了一个同步器（<code>AbstractQueuedSynchronizer</code> 缩写为 <code>AQS</code>）的子类来完成线程访问控制的。</p>
+<p>我们可以看看：</p>
+<p><a href="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103329087-976062499.png"><img src="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103329087-976062499.png" alt="img"></a></p>
+<p>这里面的各个锁实现了 Lock 接口，然后任意打开一个类，可以发现里面的实现，Lock 的操作借助于内部类 Sync，而 Sync 是继承了 AbstractQueuedSynchronizer类的，这个类就是很重要的一个 AQS 类。</p>
+<p><a href="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103403142-1803338736.png"><img src="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103403142-1803338736.png" alt="img"></a></p>
+<p>整体来看，这些类的关系还是挺复杂：</p>
+<p><a href="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103524576-1699706832.png"><img src="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103524576-1699706832.png" alt="img"></a></p>
+<p>不过一般的直接使用还是很简单，比如 new 一个锁，然后在需要的操作之前之后分别加锁和释放锁。</p>
+<pre><code>Lock lock = new ReentrantLock();
+lock.lock();//获取锁的过程不要写在 try 中，因为如果获取锁时发生了异常，异常抛出的同时也会导致锁释放
+try&#123;
+
+&#125;finally&#123;
+    lock.unlock();//finally块中释放锁，目的是保证获取到锁之后最后一定能释放锁。
+&#125;
+</code></pre>
+<p>在 Lock 接口里定义的方法有 6 个，他们的含义如下：</p>
+<p><a href="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103622168-1503992564.png"><img src="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103622168-1503992564.png" alt="img"></a></p>
+<p>接下来我们们就分步看看常用的各种类。</p>
+<p>*<strong>3*</strong>|***1***<strong>3.1 AbstractQueuedSynchronizer</strong></p>
+<p>队列同步器 AbstractQueuedSynchronizer(以下简称同步器或者 AQS)，是用来构建锁或者其他同步组件的基础框架，它使用了一个 int 成员变量表示同步状态，通过<strong>内置的 FIFO 队列</strong>来完成资源获取线程的排队工作。</p>
+<p>同步器的主要<strong>使用方式是继承</strong>，子类通过继承同步器并实现它的抽象方法来管理同步状态，在抽象方法的实现过程中免不了要对同步状态进行更改，这时就需要使用同步器提供的 3 个方法来进行操作，因为它们能够保证状态的改变是安全的。</p>
+<p>这三个方法分别是：</p>
+<ol>
+<li><code>protected final int getState()</code>，// 获取当前同步状态</li>
+<li><code>protected final void setState(int newState)</code>，// 设置当前同步状态</li>
+<li><code>protected final boolean compareAndSetState(int expect, int update)</code>，// 使用 CAS 设置当前状态，该方法能够保证状态设置的原子性</li>
+</ol>
+<p>子类推荐被定义为自定义同步组件的静态内部类，同步器自身没有实现任何同步接口，它仅仅是定义了若干同步状态获取和释放的方法来供自定义同步组件使用，同步器既可以支持独占式地获取同步状态，也可以支持共享式地获取同步状态，这样就可以方便实现不同类型的同步组件 (ReentrantLock、 ReentrantReadWriteLock 和 CountDownLatch 等)。</p>
+<p>AQS 定义的三类模板方法；</p>
+<ol>
+<li><strong>独占式</strong>同步状态获取与释放</li>
+<li><strong>共享式</strong>同步状态获取与释放</li>
+<li>同步状态和查询<strong>同步队列</strong>中的等待线程情况</li>
+</ol>
+<p>同步器的内置 FIFO 队列，从源码里可以看到，Node 就是<strong>保存着线程引用和线程状态的容器</strong>。</p>
+<ul>
+<li>每个线程对同步器的访问，都可以看做是队列中的一个节点（Node）。</li>
+<li>节点是构成同步队列的基础，同步器拥有首节点 (head) 和尾节点 (tail)；</li>
+<li>没有成功获取同步状态的线程将会成为节点加入该队列的尾部。</li>
+<li>首节点的线程在释放同步状态时，将会唤醒后继节点，而后继节点将会在获取同步状态成功时将自己设置为首节点。</li>
+</ul>
+<p>因为源码很多，这里暂且不去分析具体的实现。</p>
+<p>*<strong>3*</strong>|***2***<strong>3.2 重入锁 ReentrantLock</strong></p>
+<ul>
+<li>重入锁 ReentrantLock，就是支持重进入的锁，它表示该锁能够支持一个线程对资源的重复加锁。</li>
+<li>除此之外，该锁的还支持获取锁时的公平和非公平性选择。</li>
+</ul>
+<p>ReentrantLock 支持公平与非公平选择，内部实现机制为：</p>
+<ol>
+<li>内部基于 <code>AQS</code> 实现一个公平与非公平公共的父类 <code>Sync</code> ，（在代码里，Sync 是一个内部类，继承 AQS）用于管理同步状态；</li>
+<li><code>FairSync</code> 继承 <code>Sync</code> 用于处理公平问题；</li>
+<li><code>NonfairSync</code> 继承 <code>Sync</code> 用于处理非公平问题。</li>
+</ol>
+<p>*<strong>3*</strong>|***3***<strong>3.3 读写锁 ReentrantReadWriteLock</strong></p>
+<p>在上面讲 synchronized 的最后，提到了锁的其他维度的分类：</p>
+<p>独占锁（排他锁）/共享锁，具体实现层面就对应 java 里的<strong>互斥锁/读写锁</strong>。</p>
+<ul>
+<li>ReentrantLock、synchronized 都是排他锁；</li>
+<li>ReentrantReadWriteLock<br>里面维护了一个读锁、一个写锁，其中读锁是共享锁，写锁是排他锁。</li>
+</ul>
+<p><a href="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103711993-795423729.png"><img src="https://img2020.cnblogs.com/blog/2113020/202009/2113020-20200917103711993-795423729.png" alt="img"></a></p>
+<p>因为分了读写锁，ReentrantReadWriteLock 锁没有直接实现 Lock 接口，它的内部是这样的：</p>
+<ul>
+<li>基于 <code>AQS</code> 实现一个公平与非公平公共的父类 <code>Sync</code> ，用于管理同步状态；</li>
+<li><code>FairSync</code> 继承 <code>Sync</code> 用于处理公平问题；</li>
+<li><code>NonfairSync</code> 继承 <code>Sync</code> 用于处理非公平问题；</li>
+<li><code>ReadLock</code> 实现 <code>Lock</code> 接口，内部聚合 <code>Sync</code>；</li>
+<li><code>WriteLock</code> 实现 <code>Lock</code> 接口，内部聚合 <code>Sync</code>。</li>
+</ul>
+<p>*<strong>4*</strong>|***0***<strong>四、一些总结和对比</strong></p>
+<p>到这里我们知道了 java 的对象都有与之关联的一个锁，这个锁称为监视器锁或者内部锁，通过关键字 <code>synchronized</code> 声明来使用，实际是 jvm 层面实现的，向下则用到了 Monitor 类，再向下虚拟机的指令则是和 CPU 打交道，插入内存屏障等等操作。</p>
+<p>而 jdk 5 之后引入了<code>显式的锁</code>，以 <code>Lock</code> 接口为核心的各种实现类，他们完全由 java 实现逻辑，那么实现类还要基于 <code>AQS</code> 这个队列同步器，AQS 屏蔽了同步状态管理、线程排队与唤醒等底层操作，提供模板方法，聚合到 Lock 的实现类里去实现。</p>
+<p>这里我们对比一下隐式和显式锁：</p>
+<ol>
+<li>隐式锁基本没有灵活性可言，因为 synchronized 控制的代码块无法跨方法，修饰的范围很窄；而显示锁则本身就是一个对象，可以充分发挥面向对象的灵活性，完全可以在一个方法里获得锁，另一个方法里释放。</li>
+<li>隐式锁简单易用且不会导致内存泄漏；而显式锁的过程完全要程序员控制，容易导致锁泄露；</li>
+<li>隐式锁只是非公平锁；显示锁支持公平/非公平锁；</li>
+<li>隐式锁无法限制等待时间、无法对锁的信息进行监控；显示锁提供了足够多的方法来完成灵活的功能；</li>
+<li>一般来说，我们默认情况下使用隐式锁，只在需要显示锁的特性的时候才选用显式锁。</li>
+</ol>
+<p>对比完了 <code>synchronized</code> 和 <code>Lock</code> 两个<strong>锁</strong>。对于 java 的线程同步机制，往往还会提到的另外两个内容就是 <code>volatile</code> 关键字和 <code>CAS</code> 操作以及对应的原子类。</p>
+<p>因此这里再提一下：</p>
+<ul>
+<li><pre><code>volatile
+</code></pre>
+<p>关键字常被称为轻量级的 synchronized，实际上这两个完全不是一个东西。我们知道了 synchronized 通过的是 jvm 层面的管程隐式的加了锁。而 volatile 关键字则是另一个角度，jvm 也采用相应的手段，保证：</p>
+<ul>
+<li>被它修饰的变量的可见性：线程对变量进行修改后，要立刻写回主内存；</li>
+<li>线程对变量读取的时候，要从主内存读，而不是缓存；</li>
+<li>在它修饰变量上的操作禁止指令重排序。</li>
+</ul>
+</li>
+<li><p><code>CAS</code> 是一种 CPU 的指令，也不属于加锁，它通过假设没有冲突而去试探性的完成操作，如果因为冲突失败了就重试，直到成功。那么实际上我们很少直接使用 CAS ，但是 java 里提供了一些原子变量类，就是 juc 包里面的各种Atomicxxx类，这些类的底层实现直接使用了 CAS 操作来保证使用这些类型的变量的时候，操作都是原子操作，当使用他们作为共享变量的时候，也就不存在线程安全问题了。</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/upload/wechat-qcode.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>十七个面包人，扫描加我带回家</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>可爱的捐献者</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/upload/alipay.jpg" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    guoxiujun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://guoxiujun.com/root/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86_java%E9%94%81/" title="java体系知识_java锁.md">http://guoxiujun.com/root/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86_java%E9%94%81/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/%E8%8A%82%E7%82%B9/" rel="tag"># 节点</a>
+          
+            <a href="/tags/public/" rel="tag"># public</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/root/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/" rel="next" title="koal_临时记录.md">
+                <i class="fa fa-chevron-left"></i> koal_临时记录.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/root/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86_Arthas%20%E5%B7%A5%E7%A8%8B%E8%A7%A3%E6%9E%90/" rel="prev" title="java体系知识_Arthas 工程解析.md">
+                java体系知识_Arthas 工程解析.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+
+  <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+  <div class="widget-wrap">
+    <h3 class="widget-title">不知所云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+      <canvas width="250" height="250" id="resCanvas" style="width:100%">
+        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E7%B4%A0/" rel="tag">元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpio/" rel="tag">gpio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/id3/" rel="tag">id3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/char/" rel="tag">char</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6/" rel="tag">字符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F/" rel="tag">系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" rel="tag">命令行</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/share/" rel="tag">share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" rel="tag">输入输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpn/" rel="tag">rpn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A2%E5%85%B0/" rel="tag">波兰</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dear/" rel="tag">dear</a><span class="tag-list-count">1</span></li></ul>
+      </canvas>
+    </div>
+  </div>
+
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lubbock" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/sevenclear" target="_blank" title="GitEee">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitEee</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2913408047@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                好的博文
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://kheri.net/" title="Kheri" target="_blank">Kheri</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E9%94%81"><span class="nav-number">1.</span> <span class="nav-text">java锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized"><span class="nav-number">1.1.</span> <span class="nav-text">synchronized</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E5%AF%B9%E8%B1%A1%E5%A4%B4%E5%92%8CMonitor"><span class="nav-number">1.2.</span> <span class="nav-text">java对象头和Monitor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-synchronized-%E4%BF%AE%E9%A5%B0%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.synchronized 修饰方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-synchronized%E4%BF%AE%E9%A5%B0%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.synchronized修饰代码块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E7%85%A7%E9%94%81%E7%9A%84%E7%89%B9%E6%80%A7%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="nav-number">1.2.3.</span> <span class="nav-text">按照锁的特性分类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E7%85%A7%E9%94%81%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="nav-number">1.2.4.</span> <span class="nav-text">按照锁的顺序分类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E5%8D%A0%E9%94%81%EF%BC%88%E4%B9%9F%E5%8F%AB%E6%8E%92%E4%BB%96%E9%94%81%EF%BC%89-%E5%85%B1%E4%BA%AB%E9%94%81%EF%BC%9A"><span class="nav-number">1.2.5.</span> <span class="nav-text">独占锁（也叫排他锁）&#x2F;共享锁：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">guoxiujun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+  <script src='https://unpkg.com/mermaid@8.11.4/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize([object Object]);
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+   <script id="ribbon" size="300" alpha='0.5' zIndex="-3" src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+   <!-- <script type="text/javascript" color="85,85,85" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"> </script> -->
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/nito.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

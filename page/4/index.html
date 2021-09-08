@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_%E9%A2%86%E5%9F%9F%E5%AF%B9%E8%B1%A1/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -314,7 +314,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/root/koal_%E9%A2%86%E5%9F%9F%E5%AF%B9%E8%B1%A1/" itemprop="url">koal_领域对象.md</a></h2>
+                <a class="post-title-link" href="/1/01_NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB/" itemprop="url">01_NOSQL数据库分类.md</a></h2>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
-                2021-08-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:55+08:00">
+                2021-09-08
               </time>
             
 
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/root/" itemprop="url" rel="index">
-                    <span itemprop="name">root</span>
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
                   </a>
                 </span>
 
@@ -388,108 +388,43 @@
       
         
           
-            <h1 id="领域对象"><a href="#领域对象" class="headerlink" title="领域对象"></a>领域对象</h1><table>
+            <h1 id="NOSQL数据库分类"><a href="#NOSQL数据库分类" class="headerlink" title="NOSQL数据库分类"></a>NOSQL数据库分类</h1><table>
 <thead>
 <tr>
-<th>x</th>
-<th>y</th>
-<th>z</th>
+<th>类型</th>
+<th>部分代表</th>
+<th>特点</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>小霍</td>
-<td>反馈</td>
-<td></td>
+<td>列存储</td>
+<td>HbaseCassandraHypertable</td>
+<td>顾名思义，是按列存储数据的。最大的特点是方便存储结构化和半结构化数据，方便做数据压缩，对针对某一列或者某几列的查询有非常大的IO优势。</td>
 </tr>
 <tr>
-<td></td>
-<td>密码机</td>
-<td></td>
+<td>文档存储</td>
+<td>MongoDBCouchDB</td>
+<td>文档存储一般用类似json的格式存储，存储的内容是文档型的。这样也就有机会对某些字段建立索引，实现关系数据库的某些功能。</td>
 </tr>
 <tr>
-<td></td>
-<td>密钥</td>
-<td></td>
+<td>key-value存储</td>
+<td>Tokyo Cabinet / TyrantBerkeley DBMemcacheDBRedis</td>
+<td>可以通过key快速查询到其value。一般来说，存储不管value的格式，照单全收。（Redis包含了其他功能）</td>
 </tr>
 <tr>
-<td>史薪</td>
-<td>监控</td>
-<td></td>
+<td>图存储</td>
+<td>Neo4JFlockDB</td>
+<td>图形关系的最佳存储。使用传统关系数据库来解决的话性能低下，而且设计使用不方便。</td>
 </tr>
 <tr>
-<td></td>
-<td>运维报表</td>
-<td></td>
+<td>对象存储</td>
+<td>db4oVersant</td>
+<td>通过类似面向对象语言的语法操作数据库，通过对象的方式存取数据。</td>
 </tr>
 <tr>
-<td></td>
-<td>服务器相关</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>组件监控报错</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>tb_ak_key</td>
-<td>ak与密钥授权关系表,存储了系统ak和密钥索引，密码机组之间的关系</td>
-<td></td>
-</tr>
-<tr>
-<td>auth_key</td>
-<td>第三方应用表，存储了第三方应用和ak之间的关系</td>
-<td></td>
-</tr>
-<tr>
-<td>storage_srv_user_cache</td>
-<td>存储系统的用户表</td>
-<td></td>
-</tr>
-<tr>
-<td>vsmgroup_app_extra</td>
-<td>密码应用申请密码机的扩展表，存储了申请密码机之间关联</td>
-<td></td>
-</tr>
-<tr>
-<td>vsm_key_deliver_detail</td>
-<td>密码应用已经交付的密钥列表，一个密钥只能交付一个租户</td>
-<td></td>
-</tr>
-<tr>
-<td>vsm_key_require_detail</td>
-<td>密钥隔离下，密钥需求列表</td>
-<td></td>
-</tr>
-<tr>
-<td>tb_srv_param</td>
-<td>服务模板扩展参数</td>
-<td></td>
-</tr>
-<tr>
-<td>tb_srv_open_address</td>
-<td>服务对外开放地址，配置服务模板的管理页面，接口协议，服务表示</td>
-<td></td>
-</tr>
-<tr>
-<td>tb_srv_key</td>
-<td>服务模板需求密钥</td>
-<td></td>
-</tr>
-<tr>
-<td>sys_user_srv_inse_role</td>
-<td>密钥应用管理员，分配的密码应用角色</td>
-<td></td>
-</tr>
-<tr>
-<td>vsm_service_inse</td>
-<td>密码应用服务实例，在服务创建的时候生成的实例表</td>
-<td></td>
+<td>xml数据库</td>
+<td>Berkeley DB XMLBaseX</td>
+<td>高效的存储XML数据，并支持XML的内部查询语法，比如XQuery,Xpath。</td>
 </tr>
 </tbody></table>
 
@@ -540,7 +475,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_SVS/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_Python%20%E5%A5%BD%E7%94%A8%E7%9A%84%E5%8C%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -559,7 +494,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/root/koal_SVS/" itemprop="url">koal_SVS.md</a></h2>
+                <a class="post-title-link" href="/1/01_Python%20%E5%A5%BD%E7%94%A8%E7%9A%84%E5%8C%85/" itemprop="url">01_Python 好用的包.md</a></h2>
         
 
         <div class="post-meta">
@@ -571,8 +506,933 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
-                2021-08-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:55+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Python-好用的包"><a href="#Python-好用的包" class="headerlink" title="Python 好用的包"></a>Python 好用的包</h1><p> <strong>Dear PyGui</strong></p>
+<p>尽管如我们所见，终端应用程序可以很漂亮，但有时还不够，您需要一个真正的GUI。目前流行的<code>Dear ImGui</code> C ++项目（<code>https://github.com/ocornut/imgui</code>）的Python分支<code>Dear PyGui</code>正是为此而诞生。</p>
+<p><code>Dear PyGui</code>利用了在视频游戏中广为流行的即时模式范例(<code>immediate mode paradigm</code>)。这基本上意味着动态GUI是逐帧独立绘制的，无需保留任何数据。这使得该工具与其他Python GUI框架有着根本不同。它具有高性能，并使用计算机的GPU来促进高度动态界面的构建，这在工程，仿真，游戏或数据科学应用程序中经常用到</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_docx%E6%94%BB%E5%87%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_docx%E6%94%BB%E5%87%BB/" itemprop="url">01_docx攻击.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:55+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="docx攻击"><a href="#docx攻击" class="headerlink" title="docx攻击"></a>docx攻击</h1><ol>
+<li>生成一个正常的docx文件，内容根据实际需求进行编造，保存后将后缀改成zip</li>
+<li>将其解压，修改./word/_rels/下的settings.xml.rels文件，没有的话可以自己添加。</li>
+</ol>
+<p><img src="/images/01.assets/20191025172919941.png" alt="在这里插入图片描述"></p>
+<ol>
+<li><p><strong>修改内容如下：</strong></p>
+<pre><code class="txt">&lt;Relationship Id=&quot;rId6&quot; Type=&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate&quot; Target=&quot;fontTable.xml&quot;/&gt;&lt;/Relationships&gt;
+</code></pre>
+<p>包含带有<strong>attachmentTemplate</strong>的Type的Relationship标记，是告诉Word打开该.docx时从哪里加载模板的设置，我们可以将Target值修改为远程位置。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_emacs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_emacs/" itemprop="url">01_emacs.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:55+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="emacs"><a href="#emacs" class="headerlink" title="emacs"></a>emacs</h1><p>修改<code>init.el</code>不重启emacs</p>
+<pre><code class="sh">Alt+x eval-buffer
+alt+x load-file
+</code></pre>
+<h3 id="major-mode"><a href="#major-mode" class="headerlink" title="major mode"></a>major mode</h3><p>emacs编辑器模式</p>
+<ul>
+<li>程序语言 emacs-lisp-mode,python-mode,ruby-mode</li>
+<li>dired (file manager dired)</li>
+<li>image-mode view image file</li>
+<li>eww eww web browser</li>
+<li></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_CAP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_CAP/" itemprop="url">01_CAP.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:55+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h1><p>在计算机科学中, CAP定理（CAP theorem）, 又被称作 布鲁尔定理（Brewer’s theorem）, 它指出对于一个分布式计算系统来说，不可能同时满足以下三点:</p>
+<ul>
+<li><strong>一致性(Consistency)</strong> (所有节点在同一时间具有相同的数据)</li>
+<li><strong>可用性(Availability)</strong> (保证每个请求不管成功或者失败都有响应)</li>
+<li><strong>分隔容忍(Partition tolerance)</strong> (系统中任意信息的丢失或失败不会影响系统的继续运作)</li>
+</ul>
+<p>CAP理论的核心是：一个分布式系统不可能同时很好的满足一致性，可用性和分区容错性这三个需求，最多只能同时较好的满足两个。</p>
+<p>因此，根据 CAP 原理将 NoSQL 数据库分成了满足 CA 原则、满足 CP 原则和满足 AP 原则三 大类：</p>
+<ul>
+<li>CA - 单点集群，满足一致性，可用性的系统，通常在可扩展性上不太强大。</li>
+<li>CP - 满足一致性，分区容忍性的系统，通常性能不是特别高。</li>
+<li>AP - 满足可用性，分区容忍性的系统，通常可能对一致性要求低一些。</li>
+<li></li>
+</ul>
+<p><img src="/images/01.assets/cap-theoram-image.png" alt="img"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85/" itemprop="url">01_linux离线安装包.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:55+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="linux离线安装包"><a href="#linux离线安装包" class="headerlink" title="linux离线安装包"></a>linux离线安装包</h1><p><code>apt-get</code>离线安装包，apt-get install安装的软件包都在**/var/cache/apt/archives** 目录下，下载文件位置可以在**/etc/apt/source.list**下指定。</p>
+<p>也有可能在**/usr/share/doc<strong>和</strong>/usr/share/lintian/overides/**</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/1/01_nodejs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/1/01_nodejs/" itemprop="url">01_nodejs.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:55+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/1/" itemprop="url" rel="index">
+                    <span itemprop="name">1</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><h2 id="template"><a href="#template" class="headerlink" title="template"></a>template</h2><p><code>express-art-template语法</code></p>
+<pre><code class="sh">(1).表达式
+&#123;&#123; 与 &#125;&#125; 符号包裹起来的语句则为模板的逻辑表达式
+
+(2).输出表达式
+2.1对内容编码输出：&#123;&#123;content&#125;&#125;
+2.2不编码输出：&#123;&#123;#content&#125;&#125;
+
+(3).变量
+
+&#123;&#123;set temp = data.sub.content&#125;&#125;
+
+(4).条件表达式
+&#123;&#123;if admin&#125;&#125;
+        &lt;p&gt;admin&lt;/p&gt;
+&#123;&#123;else if code > 0&#125;&#125;
+       &lt;p&gt;master&lt;/p&gt;
+&#123;&#123;else&#125;&#125;
+        &lt;p&gt;error!&lt;/p&gt;
+&#123;&#123;/if&#125;&#125;
+
+(5).遍历表达式
+无论数组或者对象都可以用 each 进行遍历。
+&#123;&#123;each list as value index&#125;&#125;
+    &lt;li&gt;&#123;&#123;index&#125;&#125; - &#123;&#123;value.user&#125;&#125;&lt;/li&gt;
+&#123;&#123;/each&#125;&#125;
+亦可以被简写：
+&#123;&#123;each list&#125;&#125;
+     &lt;li&gt;&#123;&#123;$index&#125;&#125; - &#123;&#123;$value.user&#125;&#125;&lt;/li&gt;
+&#123;&#123;/each&#125;&#125;
+
+(6).子模板（模板包含表达式）
+a.用于嵌入子模板:
+&#123;&#123;include './header.art'&#125;&#125; 
+</code></pre>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/root/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E8%A7%84%E5%88%92/" itemprop="url">编程语言规划.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:52+08:00">
+                2021-09-08
               </time>
             
 
@@ -633,785 +1493,215 @@
       
         
           
-            <h1 id="SVS"><a href="#SVS" class="headerlink" title="SVS"></a>SVS</h1><p>性能看<strong>bss</strong>和svsd<strong>两块</strong>，bss接收http请求，查询证书数据，<strong>svsd</strong>负责计算</p>
-<p> <strong>crl</strong>就是个黑名单下载工具</p>
+            <h1 id="各编程语言学习目标"><a href="#各编程语言学习目标" class="headerlink" title="各编程语言学习目标"></a>各编程语言学习目标</h1><blockquote>
+<p>编程语言现在错综复杂，为了规避心思乱掉，这里基本描述下学习目标</p>
+</blockquote>
 <table>
 <thead>
 <tr>
-<th>服务</th>
-<th>配置最小</th>
-<th>最大limit</th>
-<th>测试limit</th>
+<th>编程语言</th>
+<th>计划目标描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>svs</td>
-<td></td>
-<td>8000m 18G</td>
-<td></td>
+<td>python</td>
+<td>胶水语言，熟练掌握</td>
 </tr>
 <tr>
-<td>svs-svsd</td>
-<td>cpu: 300m memory: 500Mi</td>
-<td>cpu: 4000m memory: 8000Mi</td>
-<td></td>
+<td>c,c++</td>
+<td>能简单使用</td>
 </tr>
 <tr>
-<td>svs-admin</td>
-<td>cpu: 300m memory: 500Mi</td>
-<td>cpu: 1000m memory: 2500Mi</td>
-<td></td>
+<td>js,css</td>
+<td>基本使用</td>
 </tr>
 <tr>
-<td>svs-bss</td>
-<td>cpu: 300m memory: 500Mi</td>
-<td>cpu: 1000m memory: 2500Mi</td>
-<td></td>
+<td>java</td>
+<td>精通</td>
 </tr>
 <tr>
-<td>svs-mongo</td>
-<td>cpu: 300m memory: 500Mi</td>
-<td>cpu: 1000m memory: 2500Mi</td>
-<td></td>
+<td>golang</td>
+<td>精通</td>
 </tr>
 <tr>
-<td>svs-crl</td>
-<td>cpu: 300m memory: 500Mi</td>
-<td>cpu: 1000m memory: 2500Mi</td>
-<td></td>
+<td>haskhell,list</td>
+<td>学起来玩</td>
 </tr>
 <tr>
-<td>tsa</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>svs-svsd</td>
-<td>cpu: 300m memory: 500Mi</td>
-<td>cpu: 4000m memory: 8000Mi</td>
-<td></td>
-</tr>
-<tr>
-<td>svs-crl</td>
-<td>cpu: 300m memory: 500Mi</td>
-<td>cpu: 1000m memory: 2500Mi</td>
-<td></td>
-</tr>
-<tr>
-<td>tsa-tss</td>
-<td>cpu: 300m memory: 500Mi</td>
-<td>cpu: 1000m memory: 2500Mi</td>
-<td></td>
-</tr>
-<tr>
-<td>tsa-admin</td>
-<td>cpu: 300m memory: 500Mi</td>
-<td>cpu: 1000m memory: 2500Mi</td>
-<td></td>
-</tr>
-<tr>
-<td>svs-mongo</td>
-<td>cpu: 300m memory: 500Mi</td>
-<td>cpu: 1000m memory: 2500Mi</td>
+<td>vue,js,nodejs,</td>
 <td></td>
 </tr>
 </tbody></table>
-<h2 id="svsapi"><a href="#svsapi" class="headerlink" title="svsapi"></a>svsapi</h2><table>
+<h2 id="golang"><a href="#golang" class="headerlink" title="golang"></a>golang</h2><p>etcd,k8s</p>
+<h3 id="k8s"><a href="#k8s" class="headerlink" title="k8s"></a>k8s</h3><h4 id="ingress"><a href="#ingress" class="headerlink" title="ingress"></a>ingress</h4><p>在本篇文章中你将会看到一些在其他地方被交叉使用的术语，为了防止产生歧义，我们首先来澄清下。</p>
+<ul>
+<li>节点：Kubernetes集群中的服务器；</li>
+<li>集群：Kubernetes管理的一组服务器集合；</li>
+<li>边界路由器：为局域网和Internet路由数据包的路由器，执行防火墙保护局域网络；</li>
+<li>集群网络：遵循Kubernetes<a href="https://kubernetes.io/docs/admin/networking/">网络模型</a>实现群集内的通信的具体实现，比如<a href="https://github.com/coreos/flannel#flannel">flannel</a> 和 <a href="https://kubernetes.io/docs/admin/ovs-networking/">OVS</a>。</li>
+<li>服务：使用标签选择器标识一组pod成为的Kubernetes <a href="https://kubernetes.io/docs/user-guide/services/">Service</a>。 除非另有说明，否则服务的虚拟IP仅可在集群内部访问。</li>
+</ul>
+<h5 id="什么是Ingress"><a href="#什么是Ingress" class="headerlink" title="什么是Ingress?"></a>什么是Ingress?</h5><p>通常情况下，service和pod的IP仅可在集群内部访问。集群外部的请求需要通过负载均衡转发到service在Node上暴露的NodePort上，然后再由kube-proxy将其转发给相关的Pod。</p>
+<p>而Ingress就是为进入集群的请求提供路由规则的集合，如下图所</p>
+<pre><code class="sh">    internet
+        |
+   [ Ingress ]
+   --|-----|--
+   [ Services ]
+</code></pre>
+<p>Ingress可以给service提供集群外部访问的URL、负载均衡、SSL终止、HTTP路由等。为了配置这些Ingress规则，集群管理员需要部署一个<a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-controllers">Ingress controller</a>，它监听Ingress和service的变化，并根据规则配置负载均衡并提供访问入口。</p>
+<h5 id="Ingress格式"><a href="#Ingress格式" class="headerlink" title="Ingress格式"></a>Ingress格式</h5><pre><code class="yaml">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+        backend:
+          serviceName: test
+          servicePort: 80
+</code></pre>
+<p>每个Ingress都需要配置rules，目前Kubernetes仅支持http规则。上面的示例表示请求/testpath时转发到服务test的80端口。</p>
+<p>根据Ingress Spec配置的不同，Ingress可以分为以下几种类型：</p>
+<h5 id="单服务Ingress"><a href="#单服务Ingress" class="headerlink" title="单服务Ingress"></a>单服务Ingress</h5><p>单服务Ingress即该Ingress仅指定一个没有任何规则的后端服务。</p>
+<pre><code class="yaml">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+spec:
+  backend:
+    serviceName: testsvc
+    servicePort: 80
+</code></pre>
+<blockquote>
+<p>注：单个服务还可以通过设置Service.Type=NodePort或者Service.Type=LoadBalancer来对外暴露。</p>
+</blockquote>
+<h5 id="路由到多服务的Ingress"><a href="#路由到多服务的Ingress" class="headerlink" title="路由到多服务的Ingress"></a>路由到多服务的Ingress</h5><p>路由到多服务的Ingress即根据请求路径的不同转发到不同的后端服务上，比如</p>
+<pre><code class="shell">foo.bar.com -&gt; 178.91.123.132 -&gt; / foo    s1:80
+                                 / bar    s2:80
+</code></pre>
+<p>可以通过下面的Ingress来定义：</p>
+<pre><code class="yaml">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test
+spec:
+  rules:
+  - host: foo.bar.com
+    http:
+      paths:
+      - path: /foo
+        backend:
+          serviceName: s1
+          servicePort: 80
+      - path: /bar
+        backend:
+          serviceName: s2
+          servicePort: 80
+</code></pre>
+<p>使用kubectl create -f创建完ingress后：</p>
+<pre><code class="shell">$ kubectl get ing
+NAME      RULE          BACKEND   ADDRESS
+test      -
+          foo.bar.com
+          /foo          s1:80
+          /bar          s2:80
+</code></pre>
+<h5 id="虚拟主机Ingress"><a href="#虚拟主机Ingress" class="headerlink" title="虚拟主机Ingress"></a>虚拟主机Ingress</h5><p>虚拟主机Ingress即根据名字的不同转发到不同的后端服务上，而他们共用同一个的IP地址，如下所示</p>
+<pre><code class="shell">foo.bar.com --|                 |-&gt; foo.bar.com s1:80
+              | 178.91.123.132  |
+bar.foo.com --|                 |-&gt; bar.foo.com s2:80
+</code></pre>
+<p>下面是一个基于<a href="https://tools.ietf.org/html/rfc7230#section-5.4">Host header</a>路由请求的Ingress：</p>
+<pre><code class="yaml">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test
+spec:
+  rules:
+  - host: foo.bar.com
+    http:
+      paths:
+      - backend:
+          serviceName: s1
+          servicePort: 80
+  - host: bar.foo.com
+    http:
+      paths:
+      - backend:
+          serviceName: s2
+          servicePort: 80
+</code></pre>
+<blockquote>
+<p>注：没有定义规则的后端服务称为默认后端服务，可以用来方便的处理404页面。</p>
+</blockquote>
+<h5 id="TLS-Ingress"><a href="#TLS-Ingress" class="headerlink" title="TLS Ingress"></a>TLS Ingress</h5><p>TLS Ingress通过Secret获取TLS私钥和证书(名为tls.crt和tls.key)，来执行TLS终止。如果Ingress中的TLS配置部分指定了不同的主机，则它们将根据通过SNI TLS扩展指定的主机名（假如Ingress controller支持SNI）在多个相同端口上进行复用。</p>
+<p>定义一个包含tls.crt和tls.key的secret：</p>
+<pre><code class="yaml">apiVersion: v1
+data:
+  tls.crt: base64 encoded cert
+  tls.key: base64 encoded key
+kind: Secret
+metadata:
+  name: testsecret
+  namespace: default
+type: Opaque
+</code></pre>
+<p>Ingress中引用secret：</p>
+<pre><code class="yaml">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: no-rules-map
+spec:
+  tls:
+    - secretName: testsecret
+  backend:
+    serviceName: s1
+    servicePort: 80
+</code></pre>
+<h3 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h3><blockquote>
+<p>容器是linux内核提供的技术，<code>Docker</code>只是个容器工具</p>
+</blockquote>
+<h4 id="什么是容器"><a href="#什么是容器" class="headerlink" title="什么是容器"></a>什么是容器</h4><h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><p>数据处理，基本图像处理，人工智能</p>
+<h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><p>java全系，包含<strong>jvm</strong>,<strong>kotlin</strong></p>
+<h3 id="netty"><a href="#netty" class="headerlink" title="netty"></a>netty</h3><table>
 <thead>
 <tr>
-<th>接口</th>
-<th>URL</th>
+<th>项目</th>
 <th>备注</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>数字签名</td>
-<td>/api/svs/bss/signData</td>
-<td></td>
+<td>netty-http代理</td>
+<td>https代理</td>
 </tr>
 <tr>
-<td>验证签名</td>
-<td>/api/svs/bss/verifySignedData</td>
-<td></td>
-</tr>
-<tr>
-<td>加密数据</td>
-<td>/api/svs/bss/encryptData</td>
-<td></td>
-</tr>
-<tr>
-<td>解密数据</td>
-<td>/api/svs/bss/decryptData</td>
-<td></td>
-</tr>
-<tr>
-<td>消息签名</td>
-<td>/api/svs/bss/signMessage</td>
-<td></td>
-</tr>
-<tr>
-<td>验证消息签名</td>
-<td>/api/svs/bss/verifySignedMessage</td>
-<td></td>
-</tr>
-<tr>
-<td>不带原文的消息签名</td>
-<td>/api/svs/bss/signMessageDetach</td>
-<td></td>
-</tr>
-<tr>
-<td>验证不带原文的消息签名</td>
-<td>/api/svs/bss/verifySignedMessageDetach</td>
-<td></td>
-</tr>
-<tr>
-<td>PKCS1加密数据</td>
-<td>/api/svs/bss/rawEncrypt</td>
-<td></td>
-</tr>
-<tr>
-<td>PKCS1解密数据</td>
-<td>/api/svs/bss/rawDecrypt</td>
-<td></td>
-</tr>
-<tr>
-<td>导出白名单证书</td>
-<td>/api/svs/bss/exportAllowListCert</td>
-<td></td>
-</tr>
-<tr>
-<td>导出我的证书</td>
-<td>/api/svs/bss/exportMyCert</td>
+<td>stunnel隧道</td>
 <td></td>
 </tr>
 </tbody></table>
-<h3 id="消息签名"><a href="#消息签名" class="headerlink" title="消息签名"></a>消息签名</h3><h4 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/signMessage?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-  &quot;b64OriginData&quot;: &quot;MTIz&quot;,
-  &quot;certAlias&quot;: &quot;RABizOper&quot;
-&#125;&#39;
-</code></pre>
-<h4 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: null,
-    &quot;b64SignedMessage&quot;: &quot;MIIFPQYJKoZIhvcNAQcCoIIFLjCCBSoCAQExDzANBglghkgBZQMEAgEFADASBgkqhkiG9w0BBwGgBQQDMTIzoIIDmTCCA5UwggJ9oAMCAQICDBsTAAAAAAAL5rDPaTANBgkqhkiG9w0BAQsFADAmMQswCQYDVQQGEwJDTjEXMBUGA1UEAwwOU3ViQ0FBZG1pblJvb3QwHhcNMTkwNzA5MTYwMDAwWhcNMjkwNzA3MTU1OTU5WjBiMQswCQYDVQQGEwJDTjENMAsGA1UECgwEa29hbDENMAsGA1UECwwEa29hbDEhMB8GCSqGSIb3DQEJARYSUkFCaXpPcGVyQGtvYWwuY29tMRIwEAYDVQQDDAlSQUJpek9wZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCIfV+LTlAVo0YE6EZsQP+tuiAblkTZT9oi29ospxoHJ12uFzP2RuGBEVxQtwJ1JbuRG9/4GqQG76G7wumv65iDlYG8XUZg5hLfZ8KFSU9p81POR9NqQoFmwIlQeXst2lHkaG9GlcEX9cQy/+17Pz8gIKTOqb0tEIsegKNkrE1CE7HRLCbFmPKTJRD19eU6GvzHd8huJ1htD3zUMvj0iHC/K+swz/YnJ5Rho/5UZhxkw/dXUoLTfTD8ORYCEwQt48qK5jFIpvjkL7XuCa1DvPMPga/b0bLbsYJmsU9WW2rlRcyfKoCXBwhp7L5rOhr/p7ReMsFloFuvmmUs6ZRid4QvAgMBAAGjgYYwgYMwDAYDVR0TBAUwAwEBADATBgNVHSUEDDAKBggrBgEFBQcDAjALBgNVHQ8EBAMCAMAwEQYJYIZIAYb4QgEBBAQDAgCAMB8GA1UdIwQYMBaAFMYFXCwPa9Arn0oHHCcuSPdqGupOMB0GA1UdDgQWBBQT0+5jHqs9XAFhJ7X8OdfdXfM5vzANBgkqhkiG9w0BAQsFAAOCAQEALOWDegXorC8CXpe0EXqAGJ+kqRo8dyn2tHeDC7eed76g8g2EYu4gf8Z9ECtnEbOLdp1PxDY2BzAuQ/DKaAsnIn7nhL79O51LBexuwfvF4MnoKHHEbWRTQ72ADgT3yHp882QlQg/sNt6xVSBViQ50bMUsSPSh2kmqs6+svyJ7lvuk4RAybXTqH+EEefIZ5cRdezuzcEDUtdOCBJNi55eGsinSANkl5NrdbJoGAaa3Z3b7RIbzSQUTiF3ZJOrGJfeZppekNS3b2O5KGlYHeI8xZtqhmlqsCqH/LQUHJFcW8HQBRC8BF36hf70YWPUA2MqpcOpOYQvy2I2WI41DwAqFBTGCAWEwggFdAgEBMDYwJjELMAkGA1UEBhMCQ04xFzAVBgNVBAMMDlN1YkNBQWRtaW5Sb290AgwbEwAAAAAAC+awz2kwDQYJYIZIAWUDBAIBBQAwDQYJKoZIhvcNAQEBBQAEggEADpGvyUaD5bPucK9jD4FmvGXQ3FguiSeCJFPqSd4/ySpK+sD/zrFfspWLRD0oyxz7QztKww2++ZKR0qgMJAMq7rnb8LZOnwl2YRkrzUtac3QfiphhUO6INQag4MLAB8WBXgEd17ET1CRafytw6yrEacpqgCmJOmi7PWUgVxoPR6cQhxJlA7Ijt2uE38+tL5vuKm1c/J1mk6IdzupOXV2vQV8cxRQE6h53E5qRA16arzXOB5g+ZT0AzqNSzBBSRa9Li8hzIoGDDWRIoCVOYua3QOrIKi9m4vxdxEpYYyAdKEA9I3O9Qo5/dzhdTbgsvpZ1T7/v+y/v41ecZc7OHgv2kA==&quot;
-&#125;
-</code></pre>
-<h3 id="验证消息签名"><a href="#验证消息签名" class="headerlink" title="验证消息签名"></a>验证消息签名</h3><h4 id="请求-1"><a href="#请求-1" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/verifySignedMessage?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-  &quot;b64SignedMessage&quot;: &quot;MIIFPQYJKoZIhvcNAQcCoIIFLjCCBSoCAQExDzANBglghkgBZQMEAgEFADASBgkqhkiG9w0BBwGgBQQDMTIzoIIDmTCCA5UwggJ9oAMCAQICDBsTAAAAAAAL5rDPaTANBgkqhkiG9w0BAQsFADAmMQswCQYDVQQGEwJDTjEXMBUGA1UEAwwOU3ViQ0FBZG1pblJvb3QwHhcNMTkwNzA5MTYwMDAwWhcNMjkwNzA3MTU1OTU5WjBiMQswCQYDVQQGEwJDTjENMAsGA1UECgwEa29hbDENMAsGA1UECwwEa29hbDEhMB8GCSqGSIb3DQEJARYSUkFCaXpPcGVyQGtvYWwuY29tMRIwEAYDVQQDDAlSQUJpek9wZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCIfV+LTlAVo0YE6EZsQP+tuiAblkTZT9oi29ospxoHJ12uFzP2RuGBEVxQtwJ1JbuRG9/4GqQG76G7wumv65iDlYG8XUZg5hLfZ8KFSU9p81POR9NqQoFmwIlQeXst2lHkaG9GlcEX9cQy/+17Pz8gIKTOqb0tEIsegKNkrE1CE7HRLCbFmPKTJRD19eU6GvzHd8huJ1htD3zUMvj0iHC/K+swz/YnJ5Rho/5UZhxkw/dXUoLTfTD8ORYCEwQt48qK5jFIpvjkL7XuCa1DvPMPga/b0bLbsYJmsU9WW2rlRcyfKoCXBwhp7L5rOhr/p7ReMsFloFuvmmUs6ZRid4QvAgMBAAGjgYYwgYMwDAYDVR0TBAUwAwEBADATBgNVHSUEDDAKBggrBgEFBQcDAjALBgNVHQ8EBAMCAMAwEQYJYIZIAYb4QgEBBAQDAgCAMB8GA1UdIwQYMBaAFMYFXCwPa9Arn0oHHCcuSPdqGupOMB0GA1UdDgQWBBQT0+5jHqs9XAFhJ7X8OdfdXfM5vzANBgkqhkiG9w0BAQsFAAOCAQEALOWDegXorC8CXpe0EXqAGJ+kqRo8dyn2tHeDC7eed76g8g2EYu4gf8Z9ECtnEbOLdp1PxDY2BzAuQ/DKaAsnIn7nhL79O51LBexuwfvF4MnoKHHEbWRTQ72ADgT3yHp882QlQg/sNt6xVSBViQ50bMUsSPSh2kmqs6+svyJ7lvuk4RAybXTqH+EEefIZ5cRdezuzcEDUtdOCBJNi55eGsinSANkl5NrdbJoGAaa3Z3b7RIbzSQUTiF3ZJOrGJfeZppekNS3b2O5KGlYHeI8xZtqhmlqsCqH/LQUHJFcW8HQBRC8BF36hf70YWPUA2MqpcOpOYQvy2I2WI41DwAqFBTGCAWEwggFdAgEBMDYwJjELMAkGA1UEBhMCQ04xFzAVBgNVBAMMDlN1YkNBQWRtaW5Sb290AgwbEwAAAAAAC+awz2kwDQYJYIZIAWUDBAIBBQAwDQYJKoZIhvcNAQEBBQAEggEADpGvyUaD5bPucK9jD4FmvGXQ3FguiSeCJFPqSd4/ySpK+sD/zrFfspWLRD0oyxz7QztKww2++ZKR0qgMJAMq7rnb8LZOnwl2YRkrzUtac3QfiphhUO6INQag4MLAB8WBXgEd17ET1CRafytw6yrEacpqgCmJOmi7PWUgVxoPR6cQhxJlA7Ijt2uE38+tL5vuKm1c/J1mk6IdzupOXV2vQV8cxRQE6h53E5qRA16arzXOB5g+ZT0AzqNSzBBSRa9Li8hzIoGDDWRIoCVOYua3QOrIKi9m4vxdxEpYYyAdKEA9I3O9Qo5/dzhdTbgsvpZ1T7/v+y/v41ecZc7OHgv2kA==&quot;,
-  &quot;clientVeriosn&quot;: &quot;&quot;,
-  &quot;hashType&quot;: &quot;&quot;,
-  &quot;serviceName&quot;: &quot;&quot;,
-  &quot;verifyCertOpt&quot;: &#123;
-    &quot;allowListFlag&quot;: true,
-    &quot;b64CertChain&quot;: [],
-    &quot;caName&quot;: &quot;&quot;,
-    &quot;certChainFlag&quot;: true,
-    &quot;certValidFlag&quot;: true,
-    &quot;crlFlag&quot;: true,
-    &quot;ocspUrl&quot;: &quot;&quot;,
-    &quot;verifyCertFlag&quot;: false
-  &#125;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-1"><a href="#响应-1" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: null
-&#125;
-</code></pre>
-<h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><h4 id="请求-2"><a href="#请求-2" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/signData?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-  &quot;b64OriginData&quot;: &quot;MTIz&quot;,
-  &quot;certAlias&quot;: &quot;RABizOper&quot;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-2"><a href="#响应-2" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: null,
-    &quot;b64SignedData&quot;: &quot;DpGvyUaD5bPucK9jD4FmvGXQ3FguiSeCJFPqSd4/ySpK+sD/zrFfspWLRD0oyxz7QztKww2++ZKR0qgMJAMq7rnb8LZOnwl2YRkrzUtac3QfiphhUO6INQag4MLAB8WBXgEd17ET1CRafytw6yrEacpqgCmJOmi7PWUgVxoPR6cQhxJlA7Ijt2uE38+tL5vuKm1c/J1mk6IdzupOXV2vQV8cxRQE6h53E5qRA16arzXOB5g+ZT0AzqNSzBBSRa9Li8hzIoGDDWRIoCVOYua3QOrIKi9m4vxdxEpYYyAdKEA9I3O9Qo5/dzhdTbgsvpZ1T7/v+y/v41ecZc7OHgv2kA==&quot;,
-    &quot;b64Cert&quot;: &quot;MIIDlTCCAn2gAwIBAgIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBCwUAMCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdDAeFw0xOTA3MDkxNjAwMDBaFw0yOTA3MDcxNTU5NTlaMGIxCzAJBgNVBAYTAkNOMQ0wCwYDVQQKDARrb2FsMQ0wCwYDVQQLDARrb2FsMSEwHwYJKoZIhvcNAQkBFhJSQUJpek9wZXJAa29hbC5jb20xEjAQBgNVBAMMCVJBQml6T3BlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIh9X4tOUBWjRgToRmxA/626IBuWRNlP2iLb2iynGgcnXa4XM/ZG4YERXFC3AnUlu5Eb3/gapAbvobvC6a/rmIOVgbxdRmDmEt9nwoVJT2nzU85H02pCgWbAiVB5ey3aUeRob0aVwRf1xDL/7Xs/PyAgpM6pvS0Qix6Ao2SsTUITsdEsJsWY8pMlEPX15Toa/Md3yG4nWG0PfNQy+PSIcL8r6zDP9icnlGGj/lRmHGTD91dSgtN9MPw5FgITBC3jyormMUim+OQvte4JrUO88w+Br9vRstuxgmaxT1ZbauVFzJ8qgJcHCGnsvms6Gv+ntF4ywWWgW6+aZSzplGJ3hC8CAwEAAaOBhjCBgzAMBgNVHRMEBTADAQEAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQEAwIAwDARBglghkgBhvhCAQEEBAMCAIAwHwYDVR0jBBgwFoAUxgVcLA9r0CufSgccJy5I92oa6k4wHQYDVR0OBBYEFBPT7mMeqz1cAWEntfw5191d8zm/MA0GCSqGSIb3DQEBCwUAA4IBAQAs5YN6BeisLwJel7QReoAYn6SpGjx3Kfa0d4MLt553vqDyDYRi7iB/xn0QK2cRs4t2nU/ENjYHMC5D8MpoCycifueEvv07nUsF7G7B+8XgyegoccRtZFNDvYAOBPfIenzzZCVCD+w23rFVIFWJDnRsxSxI9KHaSaqzr6y/InuW+6ThEDJtdOof4QR58hnlxF17O7NwQNS104IEk2Lnl4ayKdIA2SXk2t1smgYBprdndvtEhvNJBROIXdkk6sYl95mml6Q1LdvY7koaVgd4jzFm2qGaWqwKof8tBQckVxbwdAFELwEXfqF/vRhY9QDYyqlw6k5hC/LYjZYjjUPACoUF&quot;
-&#125;
-</code></pre>
-<h3 id="验证数字签名"><a href="#验证数字签名" class="headerlink" title="验证数字签名"></a>验证数字签名</h3><h4 id="请求-3"><a href="#请求-3" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/verifySignedData?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-  &quot;b64Cert&quot;: &quot;MIIDlTCCAn2gAwIBAgIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBCwUAMCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdDAeFw0xOTA3MDkxNjAwMDBaFw0yOTA3MDcxNTU5NTlaMGIxCzAJBgNVBAYTAkNOMQ0wCwYDVQQKDARrb2FsMQ0wCwYDVQQLDARrb2FsMSEwHwYJKoZIhvcNAQkBFhJSQUJpek9wZXJAa29hbC5jb20xEjAQBgNVBAMMCVJBQml6T3BlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIh9X4tOUBWjRgToRmxA/626IBuWRNlP2iLb2iynGgcnXa4XM/ZG4YERXFC3AnUlu5Eb3/gapAbvobvC6a/rmIOVgbxdRmDmEt9nwoVJT2nzU85H02pCgWbAiVB5ey3aUeRob0aVwRf1xDL/7Xs/PyAgpM6pvS0Qix6Ao2SsTUITsdEsJsWY8pMlEPX15Toa/Md3yG4nWG0PfNQy+PSIcL8r6zDP9icnlGGj/lRmHGTD91dSgtN9MPw5FgITBC3jyormMUim+OQvte4JrUO88w+Br9vRstuxgmaxT1ZbauVFzJ8qgJcHCGnsvms6Gv+ntF4ywWWgW6+aZSzplGJ3hC8CAwEAAaOBhjCBgzAMBgNVHRMEBTADAQEAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQEAwIAwDARBglghkgBhvhCAQEEBAMCAIAwHwYDVR0jBBgwFoAUxgVcLA9r0CufSgccJy5I92oa6k4wHQYDVR0OBBYEFBPT7mMeqz1cAWEntfw5191d8zm/MA0GCSqGSIb3DQEBCwUAA4IBAQAs5YN6BeisLwJel7QReoAYn6SpGjx3Kfa0d4MLt553vqDyDYRi7iB/xn0QK2cRs4t2nU/ENjYHMC5D8MpoCycifueEvv07nUsF7G7B+8XgyegoccRtZFNDvYAOBPfIenzzZCVCD+w23rFVIFWJDnRsxSxI9KHaSaqzr6y/InuW+6ThEDJtdOof4QR58hnlxF17O7NwQNS104IEk2Lnl4ayKdIA2SXk2t1smgYBprdndvtEhvNJBROIXdkk6sYl95mml6Q1LdvY7koaVgd4jzFm2qGaWqwKof8tBQckVxbwdAFELwEXfqF/vRhY9QDYyqlw6k5hC/LYjZYjjUPACoUF&quot;,
-  &quot;b64OriginData&quot;: &quot;MTIz&quot;,
-  &quot;b64SignedData&quot;: &quot;DpGvyUaD5bPucK9jD4FmvGXQ3FguiSeCJFPqSd4/ySpK+sD/zrFfspWLRD0oyxz7QztKww2++ZKR0qgMJAMq7rnb8LZOnwl2YRkrzUtac3QfiphhUO6INQag4MLAB8WBXgEd17ET1CRafytw6yrEacpqgCmJOmi7PWUgVxoPR6cQhxJlA7Ijt2uE38+tL5vuKm1c/J1mk6IdzupOXV2vQV8cxRQE6h53E5qRA16arzXOB5g+ZT0AzqNSzBBSRa9Li8hzIoGDDWRIoCVOYua3QOrIKi9m4vxdxEpYYyAdKEA9I3O9Qo5/dzhdTbgsvpZ1T7/v+y/v41ecZc7OHgv2kA==&quot;,
-  &quot;certAlias&quot;: &quot;&quot;,
-  &quot;certDn&quot;: &quot;&quot;,
-  &quot;certHexSn&quot;: &quot;&quot;,
-  &quot;clientVeriosn&quot;: &quot;&quot;,
-  &quot;hashType&quot;: &quot;&quot;,
-  &quot;serviceName&quot;: &quot;&quot;,
-  &quot;verifyCertOpt&quot;: &#123;
-    &quot;allowListFlag&quot;: true,
-    &quot;b64CertChain&quot;: [],
-    &quot;caName&quot;: &quot;&quot;,
-    &quot;certChainFlag&quot;: true,
-    &quot;certValidFlag&quot;: true,
-    &quot;crlFlag&quot;: true,
-    &quot;ocspUrl&quot;: &quot;&quot;,
-    &quot;verifyCertFlag&quot;: false
-  &#125;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-3"><a href="#响应-3" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: null
-&#125;
-</code></pre>
-<h3 id="加密数据"><a href="#加密数据" class="headerlink" title="加密数据"></a>加密数据</h3><h4 id="请求-4"><a href="#请求-4" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/encryptData?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-  &quot;b64Cert&quot;: &quot;MIIDlTCCAn2gAwIBAgIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBCwUAMCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdDAeFw0xOTA3MDkxNjAwMDBaFw0yOTA3MDcxNTU5NTlaMGIxCzAJBgNVBAYTAkNOMQ0wCwYDVQQKDARrb2FsMQ0wCwYDVQQLDARrb2FsMSEwHwYJKoZIhvcNAQkBFhJSQUJpek9wZXJAa29hbC5jb20xEjAQBgNVBAMMCVJBQml6T3BlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIh9X4tOUBWjRgToRmxA/626IBuWRNlP2iLb2iynGgcnXa4XM/ZG4YERXFC3AnUlu5Eb3/gapAbvobvC6a/rmIOVgbxdRmDmEt9nwoVJT2nzU85H02pCgWbAiVB5ey3aUeRob0aVwRf1xDL/7Xs/PyAgpM6pvS0Qix6Ao2SsTUITsdEsJsWY8pMlEPX15Toa/Md3yG4nWG0PfNQy+PSIcL8r6zDP9icnlGGj/lRmHGTD91dSgtN9MPw5FgITBC3jyormMUim+OQvte4JrUO88w+Br9vRstuxgmaxT1ZbauVFzJ8qgJcHCGnsvms6Gv+ntF4ywWWgW6+aZSzplGJ3hC8CAwEAAaOBhjCBgzAMBgNVHRMEBTADAQEAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQEAwIAwDARBglghkgBhvhCAQEEBAMCAIAwHwYDVR0jBBgwFoAUxgVcLA9r0CufSgccJy5I92oa6k4wHQYDVR0OBBYEFBPT7mMeqz1cAWEntfw5191d8zm/MA0GCSqGSIb3DQEBCwUAA4IBAQAs5YN6BeisLwJel7QReoAYn6SpGjx3Kfa0d4MLt553vqDyDYRi7iB/xn0QK2cRs4t2nU/ENjYHMC5D8MpoCycifueEvv07nUsF7G7B+8XgyegoccRtZFNDvYAOBPfIenzzZCVCD+w23rFVIFWJDnRsxSxI9KHaSaqzr6y/InuW+6ThEDJtdOof4QR58hnlxF17O7NwQNS104IEk2Lnl4ayKdIA2SXk2t1smgYBprdndvtEhvNJBROIXdkk6sYl95mml6Q1LdvY7koaVgd4jzFm2qGaWqwKof8tBQckVxbwdAFELwEXfqF/vRhY9QDYyqlw6k5hC/LYjZYjjUPACoUF&quot;,
-  &quot;b64OriginData&quot;: &quot;MTIz&quot;,
-  &quot;certAlias&quot;: &quot;&quot;,
-  &quot;certDn&quot;: &quot;&quot;,
-  &quot;certHexSn&quot;: &quot;&quot;,
-  &quot;clientVeriosn&quot;: &quot;&quot;,
-  &quot;hashType&quot;: &quot;&quot;,
-  &quot;serviceName&quot;: &quot;&quot;,
-  &quot;verifyCertOpt&quot;: &#123;
-    &quot;allowListFlag&quot;: true,
-    &quot;b64CertChain&quot;: [],
-    &quot;caName&quot;: &quot;&quot;,
-    &quot;certChainFlag&quot;: true,
-    &quot;certValidFlag&quot;: true,
-    &quot;crlFlag&quot;: true,
-    &quot;ocspUrl&quot;: &quot;&quot;,
-    &quot;verifyCertFlag&quot;: false
-  &#125;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-4"><a href="#响应-4" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: null,
-    &quot;b64EvpData&quot;: &quot;MIIBmAYJKoZIhvcNAQcDoIIBiTCCAYUCAQAxggFSMIIBTgIBADA2MCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdAIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBAQUABIIBAANk8isIrhIpeggcmUVzxdsc9qmGcUZtDh7DfRnX8N3hIGUpoTR0lasg8FC1lQI83P70dOwsjbDDGtXYkmeZf6vYw3AzCK0rrQviLq7zx1SIT86WrJUjVtAn4EdOZ9JxtAJlUDC/YAhcQp+E8TQobEMByRpoVeutnqin5mCPw7tcGxrKP3YI2LcPrZ8ZWA7QxF6Qxn+bK7OkEAm4gK/lUm9SGn+NuzP8BdbcFHXgFyBbJQWk24c0X3E21gpprtn2oFqZWETDMotmbiKFtaztdRZCxUVGO2v9X+j1PmPnsB2eJo2oXJvGWFiKvq92NpUKOVGQxll4UMYx0fxSx57QMtgwKgYJKoZIhvcNAQcBMAsGCWCGSAFlAwQBKYAQSA+2Y+a4OCdFG5zipXpEWg==&quot;
-&#125;
-</code></pre>
-<h3 id="解密数据"><a href="#解密数据" class="headerlink" title="解密数据"></a>解密数据</h3><h5 id="请求-5"><a href="#请求-5" class="headerlink" title="请求"></a>请求</h5><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/decryptData?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-    &quot;b64EvpData&quot;:&quot;MIIBmAYJKoZIhvcNAQcDoIIBiTCCAYUCAQAxggFSMIIBTgIBADA2MCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdAIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBAQUABIIBAANk8isIrhIpeggcmUVzxdsc9qmGcUZtDh7DfRnX8N3hIGUpoTR0lasg8FC1lQI83P70dOwsjbDDGtXYkmeZf6vYw3AzCK0rrQviLq7zx1SIT86WrJUjVtAn4EdOZ9JxtAJlUDC/YAhcQp+E8TQobEMByRpoVeutnqin5mCPw7tcGxrKP3YI2LcPrZ8ZWA7QxF6Qxn+bK7OkEAm4gK/lUm9SGn+NuzP8BdbcFHXgFyBbJQWk24c0X3E21gpprtn2oFqZWETDMotmbiKFtaztdRZCxUVGO2v9X+j1PmPnsB2eJo2oXJvGWFiKvq92NpUKOVGQxll4UMYx0fxSx57QMtgwKgYJKoZIhvcNAQcBMAsGCWCGSAFlAwQBKYAQSA+2Y+a4OCdFG5zipXpEWg==&quot;,
-    &quot;keyPin&quot;:&quot;&quot;,
-    &quot;serviceName&quot;:&quot;&quot;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-5"><a href="#响应-5" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: null,
-    &quot;b64OriginData&quot;: &quot;MTIz&quot;
-&#125;
-</code></pre>
-<h3 id="不带原文的消息签名"><a href="#不带原文的消息签名" class="headerlink" title="不带原文的消息签名"></a>不带原文的消息签名</h3><h4 id="请求-6"><a href="#请求-6" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/signMessageDetach?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-    &quot;b64OriginData&quot;:&quot;MTIz&quot;,
-    &quot;certAlias&quot;:&quot;RABizOper&quot;,
-    &quot;certHexSn&quot;:&quot;&quot;,
-    &quot;certDn&quot;:&quot;&quot;,
-    &quot;keyPin&quot;:&quot;&quot;,
-    &quot;hashType&quot;:&quot;&quot;,
-    &quot;serviceName&quot;:&quot;&quot;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-6"><a href="#响应-6" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: null,
-    &quot;b64SignedMessage&quot;: &quot;MIIFNgYJKoZIhvcNAQcCoIIFJzCCBSMCAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwGgggOZMIIDlTCCAn2gAwIBAgIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBCwUAMCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdDAeFw0xOTA3MDkxNjAwMDBaFw0yOTA3MDcxNTU5NTlaMGIxCzAJBgNVBAYTAkNOMQ0wCwYDVQQKDARrb2FsMQ0wCwYDVQQLDARrb2FsMSEwHwYJKoZIhvcNAQkBFhJSQUJpek9wZXJAa29hbC5jb20xEjAQBgNVBAMMCVJBQml6T3BlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIh9X4tOUBWjRgToRmxA/626IBuWRNlP2iLb2iynGgcnXa4XM/ZG4YERXFC3AnUlu5Eb3/gapAbvobvC6a/rmIOVgbxdRmDmEt9nwoVJT2nzU85H02pCgWbAiVB5ey3aUeRob0aVwRf1xDL/7Xs/PyAgpM6pvS0Qix6Ao2SsTUITsdEsJsWY8pMlEPX15Toa/Md3yG4nWG0PfNQy+PSIcL8r6zDP9icnlGGj/lRmHGTD91dSgtN9MPw5FgITBC3jyormMUim+OQvte4JrUO88w+Br9vRstuxgmaxT1ZbauVFzJ8qgJcHCGnsvms6Gv+ntF4ywWWgW6+aZSzplGJ3hC8CAwEAAaOBhjCBgzAMBgNVHRMEBTADAQEAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQEAwIAwDARBglghkgBhvhCAQEEBAMCAIAwHwYDVR0jBBgwFoAUxgVcLA9r0CufSgccJy5I92oa6k4wHQYDVR0OBBYEFBPT7mMeqz1cAWEntfw5191d8zm/MA0GCSqGSIb3DQEBCwUAA4IBAQAs5YN6BeisLwJel7QReoAYn6SpGjx3Kfa0d4MLt553vqDyDYRi7iB/xn0QK2cRs4t2nU/ENjYHMC5D8MpoCycifueEvv07nUsF7G7B+8XgyegoccRtZFNDvYAOBPfIenzzZCVCD+w23rFVIFWJDnRsxSxI9KHaSaqzr6y/InuW+6ThEDJtdOof4QR58hnlxF17O7NwQNS104IEk2Lnl4ayKdIA2SXk2t1smgYBprdndvtEhvNJBROIXdkk6sYl95mml6Q1LdvY7koaVgd4jzFm2qGaWqwKof8tBQckVxbwdAFELwEXfqF/vRhY9QDYyqlw6k5hC/LYjZYjjUPACoUFMYIBYTCCAV0CAQEwNjAmMQswCQYDVQQGEwJDTjEXMBUGA1UEAwwOU3ViQ0FBZG1pblJvb3QCDBsTAAAAAAAL5rDPaTANBglghkgBZQMEAgEFADANBgkqhkiG9w0BAQEFAASCAQAOka/JRoPls+5wr2MPgWa8ZdDcWC6JJ4IkU+pJ3j/JKkr6wP/OsV+ylYtEPSjLHPtDO0rDDb75kpHSqAwkAyruudvwtk6fCXZhGSvNS1pzdB+KmGFQ7og1BqDgwsAHxYFeAR3XsRPUJFp/K3DrKsRpymqAKYk6aLs9ZSBXGg9HpxCHEmUDsiO3a4Tfz60vm+4qbVz8nWaToh3O6k5dXa9BXxzFFATqHncTmpEDXpqvNc4HmD5lPQDOo1LMEFJFr0uLyHMigYMNZEigJU5i5rdA6sgqL2bi/F3ESlhjIB0oQD0jc71Cjn93OF1NuCy+lnVPv+/7L+/jV5xlzs4eC/aQ&quot;
-&#125;
-</code></pre>
-<h3 id="验证不带原文的消息签名"><a href="#验证不带原文的消息签名" class="headerlink" title="验证不带原文的消息签名"></a>验证不带原文的消息签名</h3><h4 id="请求-7"><a href="#请求-7" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/verifySignedMessageDetach?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-    &quot;b64OriginData&quot;:&quot;MTIz&quot;,
-    &quot;b64SignedMessage&quot;:&quot;MIIFNgYJKoZIhvcNAQcCoIIFJzCCBSMCAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwGgggOZMIIDlTCCAn2gAwIBAgIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBCwUAMCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdDAeFw0xOTA3MDkxNjAwMDBaFw0yOTA3MDcxNTU5NTlaMGIxCzAJBgNVBAYTAkNOMQ0wCwYDVQQKDARrb2FsMQ0wCwYDVQQLDARrb2FsMSEwHwYJKoZIhvcNAQkBFhJSQUJpek9wZXJAa29hbC5jb20xEjAQBgNVBAMMCVJBQml6T3BlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIh9X4tOUBWjRgToRmxA/626IBuWRNlP2iLb2iynGgcnXa4XM/ZG4YERXFC3AnUlu5Eb3/gapAbvobvC6a/rmIOVgbxdRmDmEt9nwoVJT2nzU85H02pCgWbAiVB5ey3aUeRob0aVwRf1xDL/7Xs/PyAgpM6pvS0Qix6Ao2SsTUITsdEsJsWY8pMlEPX15Toa/Md3yG4nWG0PfNQy+PSIcL8r6zDP9icnlGGj/lRmHGTD91dSgtN9MPw5FgITBC3jyormMUim+OQvte4JrUO88w+Br9vRstuxgmaxT1ZbauVFzJ8qgJcHCGnsvms6Gv+ntF4ywWWgW6+aZSzplGJ3hC8CAwEAAaOBhjCBgzAMBgNVHRMEBTADAQEAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQEAwIAwDARBglghkgBhvhCAQEEBAMCAIAwHwYDVR0jBBgwFoAUxgVcLA9r0CufSgccJy5I92oa6k4wHQYDVR0OBBYEFBPT7mMeqz1cAWEntfw5191d8zm/MA0GCSqGSIb3DQEBCwUAA4IBAQAs5YN6BeisLwJel7QReoAYn6SpGjx3Kfa0d4MLt553vqDyDYRi7iB/xn0QK2cRs4t2nU/ENjYHMC5D8MpoCycifueEvv07nUsF7G7B+8XgyegoccRtZFNDvYAOBPfIenzzZCVCD+w23rFVIFWJDnRsxSxI9KHaSaqzr6y/InuW+6ThEDJtdOof4QR58hnlxF17O7NwQNS104IEk2Lnl4ayKdIA2SXk2t1smgYBprdndvtEhvNJBROIXdkk6sYl95mml6Q1LdvY7koaVgd4jzFm2qGaWqwKof8tBQckVxbwdAFELwEXfqF/vRhY9QDYyqlw6k5hC/LYjZYjjUPACoUFMYIBYTCCAV0CAQEwNjAmMQswCQYDVQQGEwJDTjEXMBUGA1UEAwwOU3ViQ0FBZG1pblJvb3QCDBsTAAAAAAAL5rDPaTANBglghkgBZQMEAgEFADANBgkqhkiG9w0BAQEFAASCAQAOka/JRoPls+5wr2MPgWa8ZdDcWC6JJ4IkU+pJ3j/JKkr6wP/OsV+ylYtEPSjLHPtDO0rDDb75kpHSqAwkAyruudvwtk6fCXZhGSvNS1pzdB+KmGFQ7og1BqDgwsAHxYFeAR3XsRPUJFp/K3DrKsRpymqAKYk6aLs9ZSBXGg9HpxCHEmUDsiO3a4Tfz60vm+4qbVz8nWaToh3O6k5dXa9BXxzFFATqHncTmpEDXpqvNc4HmD5lPQDOo1LMEFJFr0uLyHMigYMNZEigJU5i5rdA6sgqL2bi/F3ESlhjIB0oQD0jc71Cjn93OF1NuCy+lnVPv+/7L+/jV5xlzs4eC/aQ&quot;,
-      &quot;certAlias&quot;: &quot;&quot;,
-  &quot;certDn&quot;: &quot;&quot;,
-  &quot;certHexSn&quot;: &quot;&quot;,
-  &quot;clientVeriosn&quot;: &quot;&quot;,
-  &quot;hashType&quot;: &quot;&quot;,
-  &quot;serviceName&quot;: &quot;&quot;,
-  &quot;verifyCertOpt&quot;: &#123;
-    &quot;allowListFlag&quot;: true,
-    &quot;b64CertChain&quot;: [],
-    &quot;caName&quot;: &quot;&quot;,
-    &quot;certChainFlag&quot;: true,
-    &quot;certValidFlag&quot;: true,
-    &quot;crlFlag&quot;: true,
-    &quot;ocspUrl&quot;: &quot;&quot;,
-    &quot;verifyCertFlag&quot;: false
-  &#125;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-7"><a href="#响应-7" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: null
-&#125;
-</code></pre>
-<h3 id="PKCS1加密数据"><a href="#PKCS1加密数据" class="headerlink" title="PKCS1加密数据"></a>PKCS1加密数据</h3><h4 id="请求-8"><a href="#请求-8" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/rawEncrypt?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-  &quot;b64Cert&quot;: &quot;MIIDlTCCAn2gAwIBAgIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBCwUAMCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdDAeFw0xOTA3MDkxNjAwMDBaFw0yOTA3MDcxNTU5NTlaMGIxCzAJBgNVBAYTAkNOMQ0wCwYDVQQKDARrb2FsMQ0wCwYDVQQLDARrb2FsMSEwHwYJKoZIhvcNAQkBFhJSQUJpek9wZXJAa29hbC5jb20xEjAQBgNVBAMMCVJBQml6T3BlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIh9X4tOUBWjRgToRmxA/626IBuWRNlP2iLb2iynGgcnXa4XM/ZG4YERXFC3AnUlu5Eb3/gapAbvobvC6a/rmIOVgbxdRmDmEt9nwoVJT2nzU85H02pCgWbAiVB5ey3aUeRob0aVwRf1xDL/7Xs/PyAgpM6pvS0Qix6Ao2SsTUITsdEsJsWY8pMlEPX15Toa/Md3yG4nWG0PfNQy+PSIcL8r6zDP9icnlGGj/lRmHGTD91dSgtN9MPw5FgITBC3jyormMUim+OQvte4JrUO88w+Br9vRstuxgmaxT1ZbauVFzJ8qgJcHCGnsvms6Gv+ntF4ywWWgW6+aZSzplGJ3hC8CAwEAAaOBhjCBgzAMBgNVHRMEBTADAQEAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQEAwIAwDARBglghkgBhvhCAQEEBAMCAIAwHwYDVR0jBBgwFoAUxgVcLA9r0CufSgccJy5I92oa6k4wHQYDVR0OBBYEFBPT7mMeqz1cAWEntfw5191d8zm/MA0GCSqGSIb3DQEBCwUAA4IBAQAs5YN6BeisLwJel7QReoAYn6SpGjx3Kfa0d4MLt553vqDyDYRi7iB/xn0QK2cRs4t2nU/ENjYHMC5D8MpoCycifueEvv07nUsF7G7B+8XgyegoccRtZFNDvYAOBPfIenzzZCVCD+w23rFVIFWJDnRsxSxI9KHaSaqzr6y/InuW+6ThEDJtdOof4QR58hnlxF17O7NwQNS104IEk2Lnl4ayKdIA2SXk2t1smgYBprdndvtEhvNJBROIXdkk6sYl95mml6Q1LdvY7koaVgd4jzFm2qGaWqwKof8tBQckVxbwdAFELwEXfqF/vRhY9QDYyqlw6k5hC/LYjZYjjUPACoUF&quot;,
-  &quot;b64OriginData&quot;: &quot;MTIz&quot;,
-  &quot;certAlias&quot;: &quot;&quot;,
-  &quot;certDn&quot;: &quot;&quot;,
-  &quot;certHexSn&quot;: &quot;&quot;,
-  &quot;clientVeriosn&quot;: &quot;&quot;,
-  &quot;hashType&quot;: &quot;&quot;,
-  &quot;serviceName&quot;: &quot;&quot;,
-  &quot;verifyCertOpt&quot;: &#123;
-    &quot;allowListFlag&quot;: true,
-    &quot;b64CertChain&quot;: [],
-    &quot;caName&quot;: &quot;&quot;,
-    &quot;certChainFlag&quot;: true,
-    &quot;certValidFlag&quot;: true,
-    &quot;crlFlag&quot;: true,
-    &quot;ocspUrl&quot;: &quot;&quot;,
-    &quot;verifyCertFlag&quot;: false
-  &#125;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-8"><a href="#响应-8" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: null,
-    &quot;b64EncData&quot;: &quot;L06xDt5XYGbikxCpMhrQk5l13jLnOJGBjYt7S+6TO34mXB+CdUobtOS3wEixjqqYQp5FJuNNK8QDcd2JNgJxzjk4AFzo1DtLzNbNfhC+Cxcka0+ptMsKzoq7Jvk6WIZJhcdFsSKZaXne5xNw1GsjOk/dBPk9OcDdhQJMAId3bWrwP6HaixmSTaOQ92H4CyL5+SzdkT0pTg6m3o11vTG7qmPCt/ibhN0HOMtEJ5LFdLxLselMr5jajdFXs2nq2nzqCUEBbFOBLydaVdOBTIWCs0wtc+9pPGzQw742kxsUFCc49rzLFPpYXUCnSdgo4e6ylT+YeWW2NeKKZaBHtAGn1g==&quot;,
-    &quot;b64Cert&quot;: &quot;MIIDlTCCAn2gAwIBAgIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBCwUAMCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdDAeFw0xOTA3MDkxNjAwMDBaFw0yOTA3MDcxNTU5NTlaMGIxCzAJBgNVBAYTAkNOMQ0wCwYDVQQKDARrb2FsMQ0wCwYDVQQLDARrb2FsMSEwHwYJKoZIhvcNAQkBFhJSQUJpek9wZXJAa29hbC5jb20xEjAQBgNVBAMMCVJBQml6T3BlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIh9X4tOUBWjRgToRmxA/626IBuWRNlP2iLb2iynGgcnXa4XM/ZG4YERXFC3AnUlu5Eb3/gapAbvobvC6a/rmIOVgbxdRmDmEt9nwoVJT2nzU85H02pCgWbAiVB5ey3aUeRob0aVwRf1xDL/7Xs/PyAgpM6pvS0Qix6Ao2SsTUITsdEsJsWY8pMlEPX15Toa/Md3yG4nWG0PfNQy+PSIcL8r6zDP9icnlGGj/lRmHGTD91dSgtN9MPw5FgITBC3jyormMUim+OQvte4JrUO88w+Br9vRstuxgmaxT1ZbauVFzJ8qgJcHCGnsvms6Gv+ntF4ywWWgW6+aZSzplGJ3hC8CAwEAAaOBhjCBgzAMBgNVHRMEBTADAQEAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQEAwIAwDARBglghkgBhvhCAQEEBAMCAIAwHwYDVR0jBBgwFoAUxgVcLA9r0CufSgccJy5I92oa6k4wHQYDVR0OBBYEFBPT7mMeqz1cAWEntfw5191d8zm/MA0GCSqGSIb3DQEBCwUAA4IBAQAs5YN6BeisLwJel7QReoAYn6SpGjx3Kfa0d4MLt553vqDyDYRi7iB/xn0QK2cRs4t2nU/ENjYHMC5D8MpoCycifueEvv07nUsF7G7B+8XgyegoccRtZFNDvYAOBPfIenzzZCVCD+w23rFVIFWJDnRsxSxI9KHaSaqzr6y/InuW+6ThEDJtdOof4QR58hnlxF17O7NwQNS104IEk2Lnl4ayKdIA2SXk2t1smgYBprdndvtEhvNJBROIXdkk6sYl95mml6Q1LdvY7koaVgd4jzFm2qGaWqwKof8tBQckVxbwdAFELwEXfqF/vRhY9QDYyqlw6k5hC/LYjZYjjUPACoUF&quot;
-&#125;
-</code></pre>
-<h3 id="PKCS1解密数据"><a href="#PKCS1解密数据" class="headerlink" title="PKCS1解密数据"></a>PKCS1解密数据</h3><h4 id="请求-9"><a href="#请求-9" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/rawDecrypt?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-    &quot;b64EncData&quot;:&quot;L06xDt5XYGbikxCpMhrQk5l13jLnOJGBjYt7S+6TO34mXB+CdUobtOS3wEixjqqYQp5FJuNNK8QDcd2JNgJxzjk4AFzo1DtLzNbNfhC+Cxcka0+ptMsKzoq7Jvk6WIZJhcdFsSKZaXne5xNw1GsjOk/dBPk9OcDdhQJMAId3bWrwP6HaixmSTaOQ92H4CyL5+SzdkT0pTg6m3o11vTG7qmPCt/ibhN0HOMtEJ5LFdLxLselMr5jajdFXs2nq2nzqCUEBbFOBLydaVdOBTIWCs0wtc+9pPGzQw742kxsUFCc49rzLFPpYXUCnSdgo4e6ylT+YeWW2NeKKZaBHtAGn1g==&quot;,
-    &quot;certAlias&quot;:&quot;RABizOper&quot;,
-    &quot;certHexSn&quot;:&quot;&quot;,
-    &quot;certDn&quot;: &quot;&quot;,
-  &quot;keyPin&quot;: &quot;&quot;,
-  &quot;serviceName&quot;: &quot;&quot;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-9"><a href="#响应-9" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: null,
-    &quot;b64OriginData&quot;: &quot;MTIz&quot;
-&#125;
-</code></pre>
-<h3 id="导出白名单证书"><a href="#导出白名单证书" class="headerlink" title="导出白名单证书"></a>导出白名单证书</h3><h4 id="请求-10"><a href="#请求-10" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/exportAllowListCert?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-    &quot;certAlias&quot;:&quot;RABizOper&quot;,
-    &quot;certHexSn&quot;:&quot;&quot;,
-    &quot;certDn&quot;: &quot;&quot;,
-  &quot;serviceName&quot;: &quot;&quot;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-10"><a href="#响应-10" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: &quot;&quot;,
-    &quot;b64Cert&quot;: &quot;MIIDlTCCAn2gAwIBAgIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBCwUAMCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdDAeFw0xOTA3MDkxNjAwMDBaFw0yOTA3MDcxNTU5NTlaMGIxCzAJBgNVBAYTAkNOMQ0wCwYDVQQKDARrb2FsMQ0wCwYDVQQLDARrb2FsMSEwHwYJKoZIhvcNAQkBFhJSQUJpek9wZXJAa29hbC5jb20xEjAQBgNVBAMMCVJBQml6T3BlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIh9X4tOUBWjRgToRmxA/626IBuWRNlP2iLb2iynGgcnXa4XM/ZG4YERXFC3AnUlu5Eb3/gapAbvobvC6a/rmIOVgbxdRmDmEt9nwoVJT2nzU85H02pCgWbAiVB5ey3aUeRob0aVwRf1xDL/7Xs/PyAgpM6pvS0Qix6Ao2SsTUITsdEsJsWY8pMlEPX15Toa/Md3yG4nWG0PfNQy+PSIcL8r6zDP9icnlGGj/lRmHGTD91dSgtN9MPw5FgITBC3jyormMUim+OQvte4JrUO88w+Br9vRstuxgmaxT1ZbauVFzJ8qgJcHCGnsvms6Gv+ntF4ywWWgW6+aZSzplGJ3hC8CAwEAAaOBhjCBgzAMBgNVHRMEBTADAQEAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQEAwIAwDARBglghkgBhvhCAQEEBAMCAIAwHwYDVR0jBBgwFoAUxgVcLA9r0CufSgccJy5I92oa6k4wHQYDVR0OBBYEFBPT7mMeqz1cAWEntfw5191d8zm/MA0GCSqGSIb3DQEBCwUAA4IBAQAs5YN6BeisLwJel7QReoAYn6SpGjx3Kfa0d4MLt553vqDyDYRi7iB/xn0QK2cRs4t2nU/ENjYHMC5D8MpoCycifueEvv07nUsF7G7B+8XgyegoccRtZFNDvYAOBPfIenzzZCVCD+w23rFVIFWJDnRsxSxI9KHaSaqzr6y/InuW+6ThEDJtdOof4QR58hnlxF17O7NwQNS104IEk2Lnl4ayKdIA2SXk2t1smgYBprdndvtEhvNJBROIXdkk6sYl95mml6Q1LdvY7koaVgd4jzFm2qGaWqwKof8tBQckVxbwdAFELwEXfqF/vRhY9QDYyqlw6k5hC/LYjZYjjUPACoUF&quot;
-&#125;
-</code></pre>
-<h3 id="导出我的证书"><a href="#导出我的证书" class="headerlink" title="导出我的证书"></a>导出我的证书</h3><h4 id="请求-11"><a href="#请求-11" class="headerlink" title="请求"></a>请求</h4><pre><code class="sh">curl --location --request POST &#39;http://10.0.130.232:32733/SVSAPI1.0/api/1178c532412938/api/svs/bss/exportMyCert?kid=7a83aa233867450e980ec46348bdb2641782530164950&#39; \
---header &#39;Content-Type: application/json&#39; \
---header &#39;Cookie: TSAADMINAPPID=1a09f940-d5f2-48c0-a991-c687464a7c66&#39; \
---data-raw &#39;&#123;
-    &quot;certAlias&quot;:&quot;RABizOper&quot;,
-    &quot;certHexSn&quot;:&quot;&quot;,
-    &quot;certDn&quot;: &quot;&quot;,
-  &quot;serviceName&quot;: &quot;&quot;
-&#125;&#39;
-</code></pre>
-<h4 id="响应-11"><a href="#响应-11" class="headerlink" title="响应"></a>响应</h4><pre><code class="json">&#123;
-    &quot;errorCode&quot;: 0,
-    &quot;message&quot;: &quot;&quot;,
-    &quot;b64Cert&quot;: &quot;MIIDlTCCAn2gAwIBAgIMGxMAAAAAAAvmsM9pMA0GCSqGSIb3DQEBCwUAMCYxCzAJBgNVBAYTAkNOMRcwFQYDVQQDDA5TdWJDQUFkbWluUm9vdDAeFw0xOTA3MDkxNjAwMDBaFw0yOTA3MDcxNTU5NTlaMGIxCzAJBgNVBAYTAkNOMQ0wCwYDVQQKDARrb2FsMQ0wCwYDVQQLDARrb2FsMSEwHwYJKoZIhvcNAQkBFhJSQUJpek9wZXJAa29hbC5jb20xEjAQBgNVBAMMCVJBQml6T3BlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIh9X4tOUBWjRgToRmxA/626IBuWRNlP2iLb2iynGgcnXa4XM/ZG4YERXFC3AnUlu5Eb3/gapAbvobvC6a/rmIOVgbxdRmDmEt9nwoVJT2nzU85H02pCgWbAiVB5ey3aUeRob0aVwRf1xDL/7Xs/PyAgpM6pvS0Qix6Ao2SsTUITsdEsJsWY8pMlEPX15Toa/Md3yG4nWG0PfNQy+PSIcL8r6zDP9icnlGGj/lRmHGTD91dSgtN9MPw5FgITBC3jyormMUim+OQvte4JrUO88w+Br9vRstuxgmaxT1ZbauVFzJ8qgJcHCGnsvms6Gv+ntF4ywWWgW6+aZSzplGJ3hC8CAwEAAaOBhjCBgzAMBgNVHRMEBTADAQEAMBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQEAwIAwDARBglghkgBhvhCAQEEBAMCAIAwHwYDVR0jBBgwFoAUxgVcLA9r0CufSgccJy5I92oa6k4wHQYDVR0OBBYEFBPT7mMeqz1cAWEntfw5191d8zm/MA0GCSqGSIb3DQEBCwUAA4IBAQAs5YN6BeisLwJel7QReoAYn6SpGjx3Kfa0d4MLt553vqDyDYRi7iB/xn0QK2cRs4t2nU/ENjYHMC5D8MpoCycifueEvv07nUsF7G7B+8XgyegoccRtZFNDvYAOBPfIenzzZCVCD+w23rFVIFWJDnRsxSxI9KHaSaqzr6y/InuW+6ThEDJtdOof4QR58hnlxF17O7NwQNS104IEk2Lnl4ayKdIA2SXk2t1smgYBprdndvtEhvNJBROIXdkk6sYl95mml6Q1LdvY7koaVgd4jzFm2qGaWqwKof8tBQckVxbwdAFELwEXfqF/vRhY9QDYyqlw6k5hC/LYjZYjjUPACoUF&quot;
-&#125;
-</code></pre>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/root/koal_%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="url">koal_部署服务出现的问题.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/root/" itemprop="url" rel="index">
-                    <span itemprop="name">root</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="部署服务出现的问题"><a href="#部署服务出现的问题" class="headerlink" title="部署服务出现的问题"></a>部署服务出现的问题</h1><ol>
-<li><p>pod找不到地址</p>
-<blockquote>
-<p>有节点不网络不正常， dns调度在网络不正常节点。使dns调度在正常节点</p>
-</blockquote>
-</li>
-<li><p>密码应用服务500</p>
-<blockquote>
-<p>检查traefit kubecheck 是否有日志，没日志检查配置文件authurl以及middleware kubecheck 两处地址是否正常 </p>
-</blockquote>
-</li>
-<li><p>服务503</p>
-<blockquote>
-<p>  代表服务未启动</p>
-</blockquote>
-</li>
-<li><p>镜像奇怪异常问题</p>
-<blockquote>
-<p> 重新上传镜像</p>
-</blockquote>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_%E7%BD%91%E4%BA%91%E9%A3%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/root/koal_%E7%BD%91%E4%BA%91%E9%A3%9E/" itemprop="url">koal_网云飞.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/root/" itemprop="url" rel="index">
-                    <span itemprop="name">root</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="网云飞"><a href="#网云飞" class="headerlink" title="网云飞"></a>网云飞</h1><h2 id="网云飞安全存储"><a href="#网云飞安全存储" class="headerlink" title="网云飞安全存储"></a>网云飞安全存储</h2><h3 id="网络拓扑"><a href="#网络拓扑" class="headerlink" title="网络拓扑"></a>网络拓扑</h3><p><img src="/images/koal.assets/image-20210727105424628.png" alt="image-20210727105424628"></p>
-<table>
+<p><code>HTTP</code> 模式很好的解决了大部分场景，但是解决不了<code>HTTPS</code>密文传输问题，代理服务器没有服务端密钥，无法模拟目标服务端对客户端进行<code>HTTPS</code>握手，更不能代替目标服务端响应客户端请求。</p>
+<p><code>HTTP 1.1</code>协议的<code>CONNECT</code>方法提供了一个解决思路，<code>CONNECT</code>方法给予一个目标地址，要求代理服务器建立一条到目标地址的隧道，之后的<code>SSL</code>握手和接下来的数据交换将在隧道中进行，传输的流量完全加密，代理服务器无法监控</p>
+<h3 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h3><table>
 <thead>
 <tr>
-<th>服务器</th>
-<th>相关信息</th>
+<th>项目</th>
+<th>备注</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>smdfs01</td>
-<td>10.0.100.123</td>
-</tr>
-<tr>
-<td>smdfs02</td>
-<td>10.0.100.124</td>
-</tr>
-<tr>
-<td>test,oa</td>
-<td>123456</td>
-</tr>
-<tr>
-<td>root</td>
-<td>qwer1234</td>
-</tr>
-<tr>
-<td>NN元数据存储目录</td>
-<td>/home/smdfs/nn(smdfs01)</td>
-</tr>
-<tr>
-<td>DN的数据存储目录</td>
-<td>/diskb/data/dn; /diskc/data/dn; /diskd/data/dn; /diske/data/dn; /diskf/data/dn;(smdfs01和smdfs02)</td>
-</tr>
-<tr>
-<td>Smdfs01</td>
-<td>操作系统，centos8，root/123123</td>
-</tr>
-<tr>
-<td>smdfs02</td>
-<td>操作系统，centos8，root/123123</td>
+<td>https代理实现</td>
+<td></td>
 </tr>
 </tbody></table>
-<p>普通用户可以使用存储系统，而管理员用户只能对普通用户进行管理，不能使用存储系统</p>
-<p>对文件数与容量都<strong>没有限制</strong></p>
-<p>问题：</p>
-<ol>
-<li>普通用户和管理员用户区别，管理员用户能访问接口吗？</li>
-<li>容量 CapacityUsedNonDFS 非集群使用容量是什么？</li>
-</ol>
-<p>接口</p>
-<ol>
-<li><p>修改管理员密码接口</p>
-</li>
-<li><p>修改普通用户密码接口</p>
-</li>
-<li><p>提供直接登陆存储系统的调用方案，比如登陆接口，传用户名密码，返回token,平台可以直接拿token登陆这种</p>
-</li>
-</ol>
-<p>服务详情页面要提供修改管理员密码这个功能，分配的租户下用户，给创建一个普通用户不能登陆，但是</p>
-<p>tip:</p>
-<p>租户管理员和租户下成员，只能看到存储服务</p>
-<p>在服务详情查看容量使用量，最大文件数</p>
-<p>租户管理员能看到自己和下面所以的</p>
-<p>租户内成员看到自己的</p>
-<p>解除授权时，不删除对应存储用户</p>
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>vue,js,nodejs</p>
+<h2 id="技术路线"><a href="#技术路线" class="headerlink" title="技术路线"></a>技术路线</h2><ul>
+<li>小程序开发</li>
+<li>web开发</li>
+<li>微信公众号，企业号开发</li>
+</ul>
 
           
         
@@ -1460,7 +1750,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%99%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%BA%B7%E5%BE%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1479,7 +1769,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/root/koal_%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%99%E6%B3%95/" itemprop="url">koal_简单的写法.md</a></h2>
+                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%BA%B7%E5%BE%B7/" itemprop="url">康德.md</a></h2>
         
 
         <div class="post-meta">
@@ -1491,8 +1781,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
-                2021-08-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:49+08:00">
+                2021-09-08
               </time>
             
 
@@ -1514,8 +1804,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/root/" itemprop="url" rel="index">
-                    <span itemprop="name">root</span>
+                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍源码</span>
                   </a>
                 </span>
 
@@ -1553,1678 +1843,557 @@
       
         
           
-            <h1 id="简单的写法"><a href="#简单的写法" class="headerlink" title="简单的写法"></a>简单的写法</h1><h2 id="监控项描述DSL"><a href="#监控项描述DSL" class="headerlink" title="监控项描述DSL"></a>监控项描述DSL</h2><p>为了应对监控的动态可配置，开发了一个小的dsl。虽然可以基于现有的jvm方言或者自定义解析器搞，但是时间不够，担心改不动bug目前简单解析了一下。</p>
-<h3 id="methodName"><a href="#methodName" class="headerlink" title="methodName"></a>methodName</h3><blockquote>
-<p>目前定义了，两种</p>
+            <h1 id="康德"><a href="#康德" class="headerlink" title="康德"></a>康德</h1><p><code>德国</code>古典哲学</p>
+<ul>
+<li>纯粹理性批判</li>
+</ul>
+<p><code>卢梭</code>改变了康德，虚幻的优越感</p>
+<p><code>二律背反</code> </p>
+<blockquote>
+<p> 知性 正反都能成立，违背逻辑</p>
 </blockquote>
 <ul>
-<li>yaml@:: 从配置文件中获取参数的方式</li>
-<li>form@:: 配置在监控面板的展示</li>
-<li>-&gt; 定义了配置对应的key</li>
+<li>时间有开端  时间没有开端</li>
+<li>世界有自由  反 世界没有自由只有因果</li>
+<li>世界有必然绝对存在 世界没有必然绝对存在</li>
 </ul>
-<p>语句之间用<code>;</code>分开</p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>那我来给大家举个例子，</p>
-<p><code>yaml@::</code> 定义了从配置文件的kube.nfs 捞取配置，监控使用的传输参数为ip,</p>
-<p><code>form@::</code> 定义了，在表单展示的名字为，NFSIP，不可编辑，传输到后端存的fieldName是nfsIp</p>
-<pre><code class="sh">yaml@::kube.nfs-&gt;ip;form@::NFSIP,false,nfsIp
+<p>传统形而上学错误的被提出，知性，理性有边界。自由是否存在，超出人的能力，人不能推理出来。解放了自由，揭示了自由有可能存在</p>
+<p><code>自由</code>是先验的设定，从本体意义上的人，无法通过理论证明，不是理论问题，是实践问题，</p>
+<p><strong>你认不认为自己是自由的？</strong></p>
+<p><code>自由</code>是信念，是生命的承诺，不是理论论证命题</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/root/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83/" itemprop="url">服务器环境.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:46+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/root/" itemprop="url" rel="index">
+                    <span itemprop="name">root</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="公司服务器环境"><a href="#公司服务器环境" class="headerlink" title="公司服务器环境"></a>公司服务器环境</h1><h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2><table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10.0.131.5</td>
+<td>root</td>
+<td>koal123.</td>
+<td></td>
+</tr>
+<tr>
+<td>master 10.0.131.56</td>
+<td>root</td>
+<td>koal123.</td>
+<td></td>
+</tr>
+<tr>
+<td>node 10.0.131.57 10.0.131.6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>redis</td>
+<td>10.0.131.5/30088</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>token</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<pre><code class="token">eyJhbGciOiJSUzI1NiIsImtpZCI6IjY4eExUWTc4Smtydy02Sm5BZUpEV2hUU1NLbS1wcnBYTVh0Nmx2aHVHV0EifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZC10b2tlbi1zcWdxbCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjliMDhmZWI1LWI4ZTItNGE2OS1iMTFhLTE4ZDVjMTE0NWFiNiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDprdWJlcm5ldGVzLWRhc2hib2FyZCJ9.T-Bhq0NoMSmpc5EOzjMSCjmZNqX2_3WsZDifhq6quwRunR90X0PdBQvMcHMX_5fHUPfxXQ7unQ5cKWvy5f4Or6J_X7DTM_RdRhIdurPpBYuqDS_MMRANdvBW4GZZBM4Eo2exnK0EOhH1bP_Ykq_R6-Ut_E3C3w_X_CFaXDGlBvYG-3cQLXAgm5YyOnLH_RknrNVPTu0U2YYQDas4rOxdMLd3AzWeyCjPkRPKHoEAaQ1HboBlGcYgKvbq9DeF2Oz7IenKAZgdHXYobqUjub1VeTCKDy9DL-bt6hDaGoA2gyAkhP_CtIimRhD8TZi8DX03REgzBhzE1nnQovda80HVzw
 </code></pre>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/root/koal_%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF/" itemprop="url">koal_相关信息.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/root/" itemprop="url" rel="index">
-                    <span itemprop="name">root</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="相关信息"><a href="#相关信息" class="headerlink" title="相关信息"></a>相关信息</h1><table>
-<thead>
-<tr>
-<th>信息</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>10.0.130.230:2999  k0a1root123</td>
-<td></td>
-</tr>
-<tr>
-<td>Lb@xg123</td>
-<td></td>
-</tr>
-<tr>
-<td>/v1/health</td>
-<td></td>
-</tr>
-<tr>
-<td>/v1/backups</td>
-<td></td>
-</tr>
-<tr>
-<td>/v1/recovery</td>
-<td></td>
-</tr>
-<tr>
-<td>/v1/roles</td>
-<td></td>
-</tr>
-<tr>
-<td>eyJhbGciOiJSUzI1NiIsImtpZCI6ImtMWm1NMmwyeVBRSjIxZjd6b1QzalViMGxKVWo2SXI1NUV6YUw0ajNRTjAifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZC10b2tlbi13eHdjOSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjA2NjNjMWM0LWIzMDUtNGFkZS1hNGY2LWM2MzVmNWM4MGQ5MyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDprdWJlcm5ldGVzLWRhc2hib2FyZCJ9.qcAdyE91v9YaiK5-pnJHHqSKd_NLgC3Zr6b-EpKz5BZqFHDPL0u2N48GWENx52z9u5-ttjnddzKVA1nQ36fZJrsxCf-HmFDnBs7kfc-Fy3faViskLx_YwSFHJrvs1vZcY_wIEBIinGnfg3NMtQKcsdxe1XOGuABJ3i4_KjIER7KgZqHfD20YH7rCbTNHKODBcmJvGXP-Dq-tL5tBiczRrJz4g79jkgMx-NB0mPhKRd1Mz0vkj16O6DC41JytXhizOOWgCJlTz8M2g53J69KWfAih6FzgwzqxD1Wa2SGtMe8h8rtN0yIiTkraSO0SLMroHbcYOJ4_umlszhByb4ox-A</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="http://10.0.1.8/mantis2/my_view_page.php?refresh=true">http://10.0.1.8/mantis2/my_view_page.php?refresh=true</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="http://10.0.130.232:8888/user/login?redirect=/">http://10.0.130.232:8888/user/login?redirect=%2F</a>   测试环境地址</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="http://10.0.130.234/">http://10.0.130.234/</a> admin Koal123456 harbor地址</td>
-<td></td>
-</tr>
-<tr>
-<td>开发环境<a href="http://10.0.130.232:3005/">http://10.0.130.232:3005</a></td>
-<td></td>
-</tr>
-<tr>
-<td>k8s地址 <a href="https://10.0.130.232:32000/">https://10.0.130.232:32000/</a></td>
-<td></td>
-</tr>
-<tr>
-<td>trafit 地址 <a href="http://10.0.130.232:32733/dashboard/#/">http://10.0.130.232:32733/dashboard/#/</a></td>
-<td></td>
-</tr>
-<tr>
-<td>\debian.koal.com\ubuntu\iso 公司软件共享存储服务器</td>
-<td></td>
-</tr>
-<tr>
-<td>相关yaml配置地址 <a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/k8s-deploy-test/-/tree/develop/src/main/resources/secapp">http://git.koal.com/hs/kcsp/kcsp-temp-research/k8s-deploy-test/-/tree/develop/src/main/resources/secapp</a></td>
-<td></td>
-</tr>
-<tr>
-<td>A Graduate Course in Applied Cryptography</td>
-<td></td>
-</tr>
-<tr>
-<td>10.0.130.64 123123</td>
-<td></td>
-</tr>
-</tbody></table>
-<h4 id="测试地址"><a href="#测试地址" class="headerlink" title="测试地址"></a>测试地址</h4><p><a href="http://10.0.1.8/mantis/view.php?id=56766">http://10.0.1.8/mantis/view.php?id=56766</a></p>
-<table>
-<thead>
-<tr>
-<th>备注A</th>
-<th>备注B</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>hubot token</td>
-<td>xoxb-1644982196691-1782627901201-K9COM3aX9teYlJRjfIx8dwu2</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>/home/lame/.jnotify/start_jnotify.sh</td>
-<td><a href="file:///home/lame/.jnotify/">文件同步</a></td>
-</tr>
-<tr>
-<td>/home/lame/disk/ftp</td>
-<td><a href="file:///home/lame/disk/ftp">文件上传服务</a></td>
-</tr>
-<tr>
-<td>/media/lame/0DD80F300DD80F30/koal/kcsp-admin</td>
-<td><a href="file:///media/lame/0DD80F300DD80F30/koal/kcsp-admin">kcsp 工作目录</a>|<a href="file:///media/lame/0DD80F300DD80F30/koal/kcsp-admin/kcsp-boot/kcsp-boot-module-system/src/main/resources/k8s_res">k8s_res</a></td>
-</tr>
-<tr>
-<td>/media/lame/0DD80F300DD80F30/code/jnotify</td>
-<td><a href="file:///media/lame/0DD80F300DD80F30/code/jnotify">文件同步工程</a></td>
-</tr>
-<tr>
-<td>/media/lame/0DD80F300DD80F30/document</td>
-<td><a href="file:///media/lame/0DD80F300DD80F30/document">文档本地存储目录</a></td>
-</tr>
-<tr>
-<td></td>
-<td>bpftop</td>
-</tr>
-<tr>
-<td>/media/lame/新加卷/code/script</td>
-<td><a href="file:///media/lame/新加卷/code/script">脚本</a></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>角色</th>
-<th>编码</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>系统管理员</td>
-<td></td>
-</tr>
-<tr>
-<td>运维管理员</td>
-<td>implementer-manager</td>
-</tr>
-<tr>
-<td>运营管理员</td>
-<td>operate-admin</td>
-</tr>
-<tr>
-<td>租户管理员</td>
-<td>tenant-manager</td>
-</tr>
-<tr>
-<td>审计员</td>
-<td>auditor</td>
-</tr>
-<tr>
-<td>安全管理员</td>
-<td>security-manager</td>
-</tr>
-<tr>
-<td>密钥管理员</td>
-<td>secretKey-manager</td>
-</tr>
-</tbody></table>
-<p>运维管理员  implementer-manager<br>运营管理员  operate-admin<br>租户管理员  tenant-manager<br>审计员    auditor<br>安全管理员  security-manager<br>密钥管理员  secretKey-manager</p>
-<h2 id="工作备忘"><a href="#工作备忘" class="headerlink" title="工作备忘"></a>工作备忘</h2><h5 id=""><a href="#" class="headerlink" title=""></a></h5><h2 id="KOAL-日计划"><a href="#KOAL-日计划" class="headerlink" title="KOAL-日计划"></a>KOAL-日计划</h2><p>20210119</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[ x ]密钥查询接口</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>[ x ]申请单密码机组过滤</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>[ x ]第二个服务无法打开</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>[ x ]密码应用ak修改</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210120</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>租户管理员添加租户</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210121</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>kms健康检查修改 /v1/health</td>
-<td>目前不具备开发条件，先定义好了开发位置和接口</td>
-</tr>
-<tr>
-<td>平台访问kms接口修改 +/v1</td>
-<td>目前不具备开发条件，先定义好了开发位置和接口</td>
-</tr>
-<tr>
-<td>模板设置管理页面和api地址修改</td>
-<td>增加api服务标识，完成</td>
-</tr>
-<tr>
-<td>登录返回信息加上roleInfo</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>kms服务开通增加额外参数查询kcspvsmip,scspport,kcspak</td>
-<td>完成（yaml正确替换）230挂了，服务不能部署其他未测试</td>
-</tr>
-<tr>
-<td>周启文接口问题了解</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>模板服务发布类型bug</td>
-<td>(增加相同字典表)完成</td>
-</tr>
-</tbody></table>
-<p>20210122</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>kms yaml学习</td>
-<td></td>
-</tr>
-<tr>
-<td>服务参数替换测试</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>下午保密培训</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>调试KMS，可在系统中部署，并看到管理界面</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>租户管理员添加用户（改成从表形似）</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>删除用户时候，要删掉这个从表对应的数据</td>
-<td></td>
-</tr>
-<tr>
-<td>kms token查询返回的rolecode 要从这里替换掉，增加额外判断</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>服务申请增加监控状态</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210125</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>kms 健康检查状态</td>
-<td>目前有token,暂时根据invalde 判读是否健康</td>
-</tr>
-<tr>
-<td>kcsp bug修改</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>kms用户对接</td>
-<td>完成，KMSv5缺少字段rolecode 与周启文沟通了</td>
-</tr>
-</tbody></table>
-<p>20210126</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CISAW培训</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>角色要分租户内角色和平台角色</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>同一个应用的同一个用户，统一角色智能分配一次</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>帮助中心和系统公告的界面</td>
-<td>系统公告有帮助中心没有</td>
-</tr>
-</tbody></table>
-<p>20210127</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CISAW培训</td>
-<td>未完成 没时间听</td>
-</tr>
-<tr>
-<td>服务扩容</td>
-<td>未完成 模板处基本完成，申请单的地方修改还没开始</td>
-</tr>
-<tr>
-<td>服务日志对接（目前详情接口日志错误）</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>aka去掉(服务)</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>aka家回来</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>扩容 admin path，kms模板 修改</td>
-<td>完成未测试</td>
-</tr>
-</tbody></table>
-<p>20210128</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CISAW培训</td>
-<td></td>
-</tr>
-<tr>
-<td>服务扩容</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>PV/PVC 修改</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>服务扩充adminpath,api path kms模板修改 测试</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210129</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>服务定义/服务商店</td>
-<td>接口完成，未定义</td>
-</tr>
-<tr>
-<td>释放流程开发</td>
-<td>完成待验证</td>
-</tr>
-<tr>
-<td>服务详情修改</td>
-<td>未完成，密钥列表有问题</td>
-</tr>
-<tr>
-<td>CISAW</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210130</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>服务详情修改</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>服务定义/服务商店</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>年会</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210201</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>系统访问记录</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>系统自测，bug修改</td>
-<td>未完成</td>
-</tr>
-<tr>
-<td>KMS日志和小huo对接</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>周启文，沟通接口镜像问题</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>租户内用户去掉部门选择</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>模板问题修改</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210202</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>扩容，释放增加按钮权限</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>kms服务实施，健康检查会被调用两次，触发时机排查</td>
-<td></td>
-</tr>
-<tr>
-<td>系统访问记录(增加批量推送接口)</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>业务窗口展示控制</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>系统自测，bug修改</td>
-<td></td>
-</tr>
-<tr>
-<td>租户内用户管理部门分配隐藏</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>帮助中心做成树形菜单</td>
-<td></td>
-</tr>
-<tr>
-<td>平台用户管理中工号，部门，工作量引擎去掉</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>登陆页面callback</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210203</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>登陆页面callback</td>
-<td></td>
-</tr>
-<tr>
-<td>帮助中心做成树形菜单</td>
-<td></td>
-</tr>
-<tr>
-<td>kms服务实施，健康检查会被调用两次，触发时机排查</td>
-<td></td>
-</tr>
-<tr>
-<td>系统自测，bug修改</td>
-<td></td>
-</tr>
-<tr>
-<td>服务定义接口地址管理地址匹配</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210204</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>登陆页面callback</td>
-<td>由前端配置跳转</td>
-</tr>
-<tr>
-<td>帮助中心做成树形菜单</td>
-<td></td>
-</tr>
-<tr>
-<td>kms服务实施，健康检查会被调用两次，触发时机排查</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>系统自测，bug修改</td>
-<td></td>
-</tr>
-<tr>
-<td>服务定义接口地址管理地址匹配</td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<p>20210205</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>租户内用户，菜单权限整理修改 1. 我的服务 2.密钥管理 3.我的应用</td>
-<td>完成</td>
-</tr>
-<tr>
-<td>bug修改</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>帮助中心后续对接还需要前端</td>
-</tr>
-<tr>
-<td></td>
-<td>系统登陆callback需要前端</td>
-</tr>
-</tbody></table>
-<p>20210206</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>密码服务平台接入网关</td>
-<td></td>
-</tr>
-<tr>
-<td>密码服务平台证书认证</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210219</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>密码服务平台证书认证 （用户字段，证书管理）</td>
-<td>完成</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>帮助中心接口调整</td>
-<td>50%</td>
-</tr>
-</tbody></table>
-<p>20210220</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>表备注</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>成员管理菜单</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>帮助中心</td>
-<td>初步100%</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>20210222</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>帮助中心问题修复</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>kms流程联调</td>
-<td>,管理页面陈li,请求参数加入header ，目前木有方案可以加入request header</td>
-</tr>
-<tr>
-<td>kms推送日志</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>我的服务健康检查问题-服务创建默认运行健康检查结果为准备就绪</td>
-<td>100% 但是实际上，服务这时候可能有模块还没有被拉起来，这个设置是不是有问题</td>
-</tr>
-<tr>
-<td>我的服务一些问题修正</td>
-<td>100%</td>
-</tr>
-</tbody></table>
-<p>20210223</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>运营人员查看服务详情，密钥列表显示问题</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>运维人员实施也没密钥列表问题重构</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>租户选择安全员审计员</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>我的服务密码机密码应用拆分</td>
-<td>100%</td>
-</tr>
-</tbody></table>
-<p>20210224</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>bug交叉检查</td>
-<td>30%</td>
-</tr>
-<tr>
-<td>租户内用户编辑角色</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>密码机健康检查问题调整</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>密码应用健康检查问题调整</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>下线后面改成上线</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>应用授权，脏数据，异常情况抛出</td>
-<td>100%</td>
-</tr>
-</tbody></table>
-<p>20210225</p>
-<table>
-<thead>
-<tr>
-<th>工作内容</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>新用户登陆，部门校验去掉</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>申请单，驳回之类的修改</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>通告单模糊查询</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>服务模板定义相关问题</td>
-<td>100%</td>
-</tr>
-</tbody></table>
-<h2 id="日计划结束标识"><a href="#日计划结束标识" class="headerlink" title="日计划结束标识"></a>日计划结束标识</h2><p>flag</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/root/koal/" itemprop="url">koal.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/root/" itemprop="url" rel="index">
-                    <span itemprop="name">root</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="周计划"><a href="#周计划" class="headerlink" title="周计划"></a>周计划</h1><h2 id="20210130"><a href="#20210130" class="headerlink" title="20210130"></a>20210130</h2><ul>
-<li>密码应用服务，用户，功能接口对接开发 100%</li>
-<li>密码服务平台角色扩展租户内角色，kms角色 100%</li>
-<li>密码应用服务扩容释放 100%</li>
-<li>kms服务编排对接和发布完成 100%</li>
-<li>服务定义上架功能重构100%</li>
-</ul>
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/root/koal_%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83/" itemprop="url">koal_服务发布.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/root/" itemprop="url" rel="index">
-                    <span itemprop="name">root</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="服务发布"><a href="#服务发布" class="headerlink" title="服务发布"></a>服务发布</h1><h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><table>
-<thead>
-<tr>
-<th>定时任务</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>kl.kcsp.modules.monitor.utils.SaveChsmMonitorInfo</td>
-<td>收集云密码机的数据</td>
-</tr>
-<tr>
-<td>kl.kcsp.modules.operationAudit.utils.InseLogSignJob</td>
-<td>日志添加签名</td>
-</tr>
-<tr>
-<td>kl.kcsp.modules.monitor.utils.SaveMonitorInfoJob</td>
-<td>收集k8s集群监控信息</td>
-</tr>
-<tr>
-<td>kl.kcsp.modules.srvinse.job.SrvKeySyncJob</td>
-<td>密钥自动同步</td>
-</tr>
-<tr>
-<td>kl.kcsp.modules.srvinse.job.InseMonitorJob</td>
-<td>服务健康检查</td>
-</tr>
-<tr>
-<td>kl.kcsp.modules.message.job.SendMsgJob</td>
-<td>消息发送</td>
-</tr>
-</tbody></table>
-<h2 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h2><h3 id="kcsp-yaml"><a href="#kcsp-yaml" class="headerlink" title="kcsp-yaml"></a>kcsp-yaml</h3><ul>
-<li><p>文件上传目录</p>
-</li>
-<li><p>k8s集群服务地址</p>
-<pre><code>kube:
+<p>application.yaml</p>
+<pre><code class="yaml">server:
+  port: 9080
+  tomcat:
+    max-swallow-size: -1
+  servlet:
+    context-path: /kcsp-boot
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types: application/javascript,application/json,application/xml,text/html,text/xml,text/plain,text/css,image/*
+  #https访问暂时不开启
+  #ssl:
+    #key-store: server.pfx
+    #key-store-password: 123456
+    #key-store-type: PKCS12
+    #enabled: true
+    #ciphers: TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics,httptrace
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mail:
+    host: smtp.163.com
+    username: jeecgos@163.com
+    password: ??
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  ## quartz定时任务,采用数据库方式
+  quartz:
+    job-store-type: jdbc
+    initialize-schema: embedded
+    #设置自动启动，默认为 true
+    auto-startup: true
+    #启动时更新己存在的Job
+    overwrite-existing-jobs: true
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: MyScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            misfireThreshold: 60000
+            clusterCheckinInterval: 10000
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+  #json 时间戳统一转换
+  jackson:
+    date-format:   yyyy-MM-dd HH:mm:ss
+    time-zone:   GMT+8
+  aop:
+    proxy-target-class: true
+  activiti:
+    check-process-definitions: false
+    #启用作业执行器
+    async-executor-activate: false
+    #启用异步执行器
+    job-executor-activate: false
+  jpa:
+    open-in-view: false
+  #配置freemarker
+  freemarker:
+    # 设置模板后缀名
+    suffix: .ftl
+    # 设置文档类型
+    content-type: text/html
+    # 设置页面编码格式
+    charset: UTF-8
+    # 设置页面缓存
+    cache: false
+    prefer-file-system-access: false
+    # 设置ftl文件路径
+    template-loader-path:
+      - classpath:/templates
+  # 设置静态文件路径，js,css等
+  mvc:
+    static-path-pattern: /**
+  resource:
+    static-locations: classpath:/static/,classpath:/public/
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  datasource:
+    druid:
+      stat-view-servlet:
+        enabled: true
+        loginUsername: admin
+        loginPassword: 123456
+        allow:
+      web-stat-filter:
+        enabled: true
+    dynamic:
+      druid: # 全局druid参数，绝大部分值和默认保持一致。(现已支持的参数如下,不清楚含义不要乱设置)
+        # 连接池的配置信息
+        # 初始化大小，最小，最大
+        initial-size: 5
+        min-idle: 5
+        maxActive: 20
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，&#39;wall&#39;用于防火墙
+        filters: stat,slf4j
+        # filters: stat,slf4j
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      datasource:
+        master:
+          url: jdbc:dm://10.0.131.5:30034?charCode=UTF-8
+          username: SYSDBA
+          password: SYSDBA
+          driver-class-name: dm.jdbc.driver.DmDriver
+          # 多数据源配置
+          #multi-datasource1:
+          #url: jdbc:mysql://localhost:3306/jeecg-boot2?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Shanghai
+          #username: root
+          #password: root
+          #driver-class-name: com.mysql.cj.jdbc.Driver
+  #redis 配置
+  redis:
+    database: 0
+    host: 10.0.131.5
+    lettuce:
+      pool:
+        max-active: 8   #最大连接数据库连接数,设 0 为没有限制
+        max-idle: 8     #最大等待连接中的数量,设 0 为没有限制
+        max-wait: -1ms  #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+        min-idle: 0     #最小等待连接中的数量,设 0 为没有限制
+      shutdown-timeout: 100ms
+    password: &#39;123456&#39;
+    port: 30088
+#mybatis plus 设置
+mybatis-plus:
+  mapper-locations: classpath*:kl/kcsp/modules/**/xml/*Mapper.xml,classpath*:org/jeecg/modules/**/xml/*Mapper.xml
+  global-config:
+    # 关闭MP3.0自带的banner
+    banner: false
+    db-config:
+      #主键类型  0:&quot;数据库ID自增&quot;,1:&quot;该类型为未设置主键类型&quot;, 2:&quot;用户输入ID&quot;,3:&quot;全局唯一ID (数字类型唯一ID)&quot;, 4:&quot;全局唯一ID UUID&quot;,5:&quot;字符串全局唯一ID (idWorker 的字符串表示)&quot;;
+      id-type: ASSIGN_ID
+      # 默认数据库表下划线命名
+      table-underline: true
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 返回类型为Map,显示null对应的字段
+    call-setters-on-nulls: true
+#jeecg专用配置
+jeecg :
+  # 本地：local\Minio：minio\阿里云：alioss
+  uploadType: local
+  path :
+    #文件上传根目录 设置
+    upload: /home/lame/temp
+    #webapp文件路径
+    webapp: /home/lame/temp
+    #备份文件位置
+    backup: /home/lame/backup
+    #spring配置文件位置
+    config: /data/service
+  #短信秘钥
+  sms:
+    accessKeyId: ??
+    accessKeySecret: ??
+  shiro:
+    excludeUrls: /test/jeecgDemo/demo3,/test/jeecgDemo/redisDemo/**,/category/**,/visual/**,/map/**,/jmreport/bigscreen2/**
+  #阿里云oss存储配置
+  oss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    accessKey: ??
+    secretKey: ??
+    bucketName: jeecgos
+    staticDomain: https://static.jeecg.com
+  # ElasticSearch 6设置
+  elasticsearch:
+    cluster-name: docker-cluster
+    cluster-nodes: 127.0.0.1:9200
+    check-enabled: false
+  # 表单设计器配置
+  desform:
+    # 主题颜色（仅支持 16进制颜色代码）
+    theme-color: &quot;#1890ff&quot;
+    # 文件、图片上传方式，可选项：qiniu（七牛云）、system（跟随系统配置）
+    upload-type: system
+  # 在线预览文件服务器地址配置
+  file-view-domain: http://fileview.jeecg.com
+  # minio文件上传
+  minio:
+    minio_url: http://minio.jeecg.com
+    minio_name: ??
+    minio_pass: ??
+    bucketName: otatest
+  #大屏报表参数设置
+  jmreport:
+    #是否需要校验token
+    is_verify_token: false
+    #必须校验方法
+    verify_methods: remove,delete,save,add,update
+  #Wps在线文档
+  wps:
+    domain: https://wwo.wps.cn/office/
+    appid: ??
+    appsecret: ??
+#Mybatis输出sql日志
+logging:
+  level:
+    org.jeecg.modules.system.mapper : debug
+#cas单点登录
+cas:
+  prefixUrl: http://cas.example.org:8443/cas
+#enable swagger
+swagger:
+  enable: true
+#k8s集群服务
+kube:
   # api server接口地址
-  url: 10.0.130.232:8080
-  ingressUrl: 10.0.130.232:32733
-  nfs: 10.0.130.232
+  url: 10.0.131.5:9081
+  ingressUrl: 10.0.131.56:32733
+  ingressHttpsUrl: 10.0.131.56:30039
+  nfs: 10.0.131.57
   # service资源暴露地址
-  serviceIp: 10.0.130.234
-</code></pre>
-</li>
-<li><p>后端服务的url 前端地址 授权地址 日志地址</p>
-</li>
-<li><pre><code>platform:
-  frontUrl: 10.0.130.209:3000
-  url: 10.0.130.209:9080
-  authUrl: http://10.0.130.232:9085/kcsp-kubecheck/thirdLogin/checkAkKubeSrv
-  logUrl: http://10.0.130.232:9084/kcsp-log/pushAccessLog
-</code></pre>
-</li>
-<li><p>密码机管理平台地址 </p>
-</li>
-</ul>
-<pre><code>mmj:
-  managepage: http://10.0.130.232:8070/SecCloudClient/jsp/login/login.jsp
+  serviceIp: 10.0.131.56
+
+#后端服务的url 前端地址 授权地址 日志地址
+platform:
+  frontUrl: 10.0.131.5:443
+  url: 10.0.131.5:9081
+  authUrl: http://10.0.131.5:9085/kcsp-kubecheck/thirdLogin/checkAkKubeSrv
+  monitorUrl: http://10.0.131.5:9083
+#prometheus地址
+prometheus:
+  server: http://10.0.131.56:30090/api/v1
+  alert:
+    server: 10.0.131.5:9080/
+
+koal:
+  cert:
+#    ;使用证书dn 中的哪一项作为唯一用户标识 CN O OU 等
+    certLoginIdentifierFromDn: CN
+#    ;证书链失效前多少天开始提醒
+    expireDaysOfCertChain: 30
+#    ;登录证书失效前多少天开始提醒
+    expireDaysOfLoginCert: 30
+
+vsm:
+  managepage: http://10.0.131.5:8070/SecCloudClient/jsp/login/login.jsp
 # 密码机组同步信息
 vsmgroup:
-  ip: 10.0.130.232
+  ip: 10.0.131.5
   port: 8070
   salt: 77945920c03f5931
 
 #系统登录类型，0代表密码登录，1代表证书登录，默认为0，先暂时存在配置文件中
 systemLogin:
   type: 0
+
 #harbor地址
 harbor:
-  ip: 10.0.130.234
+  ip: image.kcsp.koal
+systemconfig:
+  partion: 1
+resource:
+  limit: 0.8
+#0代表全部节点使用量是否超出，1代表任一节点使用量是否超出
+  kind: 0
 </code></pre>
-<ul>
-<li>申请单修改</li>
-</ul>
-<p>ServiceApplication  ServiceApplyOrder</p>
-<pre><code>SrvExpansionApply  VsmServiceExpansion
-SrvExpansionKubeConfig VsmServiceExpansionKubeConfig
-PwdMachineApplicationDetail VsmApplyDetail
-PwdSrvApplicationDetail VsmSrvApplyDetail
-PwdMachineExpansionApply VsmExpansionApply
-PwdMachineApplicationDetailCopy VsmApplyDetailCopy
-</code></pre>
-<p>// 归属于 BlockStatement</p>
-<ul>
-<li>​      int i = 1;  localVariableDeclarationStatement</li>
-</ul>
-<p>方法调用</p>
-<pre><code>methodInvocation
-</code></pre>
-<p><strong>方法内部</strong></p>
-<ul>
-<li>赋值语句</li>
-<li>方法调用语句</li>
-</ul>
-<p><strong>赋值</strong></p>
-<ul>
-<li>变量赋值</li>
-</ul>
-<p><strong>方法调用</strong></p>
-<ul>
-<li>日志</li>
-<li>异常信息</li>
-<li>变量</li>
-<li>警告信息</li>
-</ul>
-<blockquote>
-<p>异常信息，警告信息，日志，不抽取</p>
-</blockquote>
-<p>只抽取变量赋值和方法调用的变量</p>
-<ul>
-<li>密码机分为加密/非加密，目前sdk是加密的，但是kms那边支持非加密的，系统只提供了非加密的，没法测试</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/root/koal_%E4%B8%B4%E6%97%B6%E8%AE%B0%E5%BD%95/" itemprop="url">koal_临时记录.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/root/" itemprop="url" rel="index">
-                    <span itemprop="name">root</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="临时记录"><a href="#临时记录" class="headerlink" title="临时记录"></a>临时记录</h1><pre><code>roleKind（string类型） 角色类型/区分是否为管理员  1 是，0 否
-rule (角色排斥规则 string) 没有就不传
-http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda647732746559bb235cc5e590eea1786d0d076939&amp;token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY3NDQzODIsInVzZXJuYW1lIjoiemhhZG1pbiJ9.aBo6YzXqG0bfUgO2S-a0ro3cU0yGIRUG7TtG_B2gzLE
-1336203398069878785  
-</code></pre>
-<h2 id="工作任务"><a href="#工作任务" class="headerlink" title="工作任务"></a>工作任务</h2><ul>
-<li><p>密钥同一个租户能分配几次</p>
-<ul>
-<li><input disabled="" type="checkbox"> <table>
+<h2 id="ARM环境"><a href="#ARM环境" class="headerlink" title="ARM环境"></a>ARM环境</h2><table>
 <thead>
 <tr>
-<th><em><strong>*编号*</strong></em></th>
-<th><em><strong>*功能点*</strong></em></th>
+<th>x0</th>
+<th>x1</th>
+<th>x2</th>
+<th>z</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>1</td>
-<td>系统配置识别密钥隔离还是密码机隔离 1</td>
+<td>harbor</td>
+<td><a href="http://10.0.131.57/harbor/projects">http://10.0.131.57/harbor/projects</a></td>
+<td>admin Harbor12345</td>
+<td></td>
 </tr>
 <tr>
-<td>2</td>
-<td>系统启动初始化功能命令空间  \1**. 如果是密钥级别隔离，则调度服务放在公共命名空间中，在系统初始化时，初始化该公共命名空间。**</td>
+<td>token</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>3</td>
-<td>租户申请单中增加密钥列表</td>
+<td>redis</td>
+<td>10.0.131.5/30088</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>4</td>
-<td>运营、运维申请单中展示密钥详情</td>
+<td>数据库</td>
+<td>10.0.131.5/30034 SYSDBA/SYSDBA</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>5</td>
-<td>运维管理员交付密码机服务，包含填写密钥</td>
+<td>10.0.131.5</td>
+<td>root –&gt; koal123.</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>6</td>
-<td>增加密钥主管角色，密钥管理等</td>
+<td>k8s  master</td>
+<td>10.0.131.56   root –&gt; koal123.</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>7</td>
-<td>调用SDF接口时，应检查该应用是否有权限使用该密码机服务和密钥索引 <strong>怎么检查</strong></td>
-</tr>
-<tr>
-<td>8</td>
-<td>是密钥形式隔离，则新建密码机组时，不需要选择租户 <strong>不需要选择租户</strong></td>
+<td>node</td>
+<td>10.0.131.57 10.0.131.6   root –&gt; koal123.</td>
+<td></td>
+<td></td>
 </tr>
 </tbody></table>
-</li>
-</ul>
-</li>
-<li><p>增加额外数据库SYSGBA 123456789 （密钥隔离）</p>
-</li>
-<li></li>
-</ul>
-<h2 id="代码review"><a href="#代码review" class="headerlink" title="代码review"></a>代码review</h2><p>review commit</p>
-<ul>
-<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/00b75bfc535d35ff6a5b91929e4b21c238dacb85"> 00b75bfc</a> 使用通用工具累判断  <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
-<li><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/8f82d5255d0bf4524d14c373317d013b5220cfab"> 8f82d525</a> 存在npe问题，需要修正    <strong><a href="mailto:2448183487@qq.com">huoruilin</a></strong></li>
-</ul>
-<h2 id="24f56f35-小问题，常量命名，对象复用"><a href="#24f56f35-小问题，常量命名，对象复用" class="headerlink" title="24f56f35 小问题，常量命名，对象复用"></a><a href="http://git.koal.com/hs/kcsp/kcsp-temp-research/kcsp-admin/-/commit/24f56f356f818f34e42e84bc444998f518428505">24f56f35</a> 小问题，常量命名，对象复用</h2><p>kcsp-kubecheck</p>
+<pre><code>eyJhbGciOiJSUzI1NiIsImtpZCI6IjY4eExUWTc4Smtydy02Sm5BZUpEV2hUU1NLbS1wcnBYTVh0Nmx2aHVHV0EifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZC10b2tlbi1zcWdxbCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjliMDhmZWI1LWI4ZTItNGE2OS1iMTFhLTE4ZDVjMTE0NWFiNiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDprdWJlcm5ldGVzLWRhc2hib2FyZCJ9.T-Bhq0NoMSmpc5EOzjMSCjmZNqX2_3WsZDifhq6quwRunR90X0PdBQvMcHMX_5fHUPfxXQ7unQ5cKWvy5f4Or6J_X7DTM_RdRhIdurPpBYuqDS_MMRANdvBW4GZZBM4Eo2exnK0EOhH1bP_Ykq_R6-Ut_E3C3w_X_CFaXDGlBvYG-3cQLXAgm5YyOnLH_RknrNVPTu0U2YYQDas4rOxdMLd3AzWeyCjPkRPKHoEAaQ1HboBlGcYgKvbq9DeF2Oz7IenKAZgdHXYobqUjub1VeTCKDy9DL-bt6hDaGoA2gyAkhP_CtIimRhD8TZi8DX03REgzBhzE1nnQovda80HVzw
+</code></pre>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/koal_trafit%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1%20/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/root/koal_trafit%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1%20/" itemprop="url">koal_trafit测试，动态添加路由 .md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:39:00+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/root/" itemprop="url" rel="index">
-                    <span itemprop="name">root</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="trafit测试，动态添加路由"><a href="#trafit测试，动态添加路由" class="headerlink" title="trafit测试，动态添加路由"></a>trafit测试，动态添加路由</h1>
           
         
       
@@ -3263,7 +2432,7 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">&gt;</a>
   </nav>
 
 
@@ -3309,7 +2478,7 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3320,7 +2489,7 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -3333,7 +2502,7 @@ http://10.0.130.232:31761/TSA1.0/admin/11786d0d077026/convertToken?ak=caeda64773
     <h3 class="widget-title">不知所云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
       <canvas width="250" height="250" id="resCanvas" style="width:100%">
-        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/" rel="tag">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90/" rel="tag">资源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/" rel="tag">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ingress/" rel="tag">ingress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B3%E7%B3%BB/" rel="tag">关系</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%BD%93/" rel="tag">实体</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%92/" rel="tag">规划</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0/" rel="tag">函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%B9%E7%95%8C/" rel="tag">边界</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96/" rel="tag">决策</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E5%9E%8B/" rel="tag">类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E5%8F%B8/" rel="tag">公司</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koal123/" rel="tag">koal123</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%B7%E5%BE%B7/" rel="tag">康德</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idle/" rel="tag">idle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B3%E8%81%94/" rel="tag">关联</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%99/" rel="tag">规则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB/" rel="tag">新闻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%84%E5%88%86/" rel="tag">评分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%9B%E7%A8%8B/" rel="tag">赛程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dear/" rel="tag">dear</a><span class="tag-list-count">1</span></li></ul>
+        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E7%B4%A0/" rel="tag">元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpio/" rel="tag">gpio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/id3/" rel="tag">id3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/char/" rel="tag">char</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6/" rel="tag">字符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F/" rel="tag">系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" rel="tag">命令行</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/share/" rel="tag">share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" rel="tag">输入输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpn/" rel="tag">rpn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A2%E5%85%B0/" rel="tag">波兰</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dear/" rel="tag">dear</a><span class="tag-list-count">1</span></li></ul>
       </canvas>
     </div>
   </div>

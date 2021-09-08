@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86_%E6%B5%8B%E8%AF%95echart/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%B0%8F%E7%9F%A5%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -314,7 +314,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/root/java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86_%E6%B5%8B%E8%AF%95echart/" itemprop="url">java体系知识_测试echart.md</a></h2>
+                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%B0%8F%E7%9F%A5%E8%AF%86/" itemprop="url">小知识.md</a></h2>
         
 
         <div class="post-meta">
@@ -326,865 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:10+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/root/" itemprop="url" rel="index">
-                    <span itemprop="name">root</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="测试echart"><a href="#测试echart" class="headerlink" title="测试echart"></a>测试echart</h1><div id="echarts2495" style="width: 100%;height: 600px;margin: 0 auto"></div>
-<script type="text/javascript" src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.min.js"></script>
-<script type="text/javascript" src="https://www.makeapie.com/dep/echarts/map/js/china.js"></script>
-<script type="text/javascript">
-  // 基于准备好的dom，初始化echarts实例
-  var myChart = echarts.init(document.getElementById('echarts2495'));
-  // 指定图表的配置项和数据
-  option = {
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'cross',
-            crossStyle: {
-                color: '#999'
-            }
-        }
-    },
-    toolbox: {
-        feature: {
-            dataView: {show: true, readOnly: false},
-            magicType: {show: true, type: ['line', 'bar']},
-            restore: {show: true},
-            saveAsImage: {show: true}
-        }
-    },
-    legend: {
-        data: ['蒸发量', '降水量', '平均温度']
-    },
-    xAxis: [
-        {
-            type: 'category',
-            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-            axisPointer: {
-                type: 'shadow'
-            }
-        }
-    ],
-    yAxis: [
-        {
-            type: 'value',
-            name: '水量',
-            min: 0,
-            max: 250,
-            interval: 50,
-            axisLabel: {
-                formatter: '{value} ml'
-            }
-        },
-        {
-            type: 'value',
-            name: '温度',
-            min: 0,
-            max: 25,
-            interval: 5,
-            axisLabel: {
-                formatter: '{value} °C'
-            }
-        }
-    ],
-    series: [
-        {
-            name: '蒸发量',
-            type: 'bar',
-            data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-        },
-        {
-            name: '降水量',
-            type: 'bar',
-            data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-        },
-        {
-            name: '平均温度',
-            type: 'line',
-            yAxisIndex: 1,
-            data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
-        }
-    ]
-};
-  // 使用刚指定的配置项和数据显示图表。
-  myChart.setOption(option);
-</script>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/hubot/hubot/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/hubot/hubot/" itemprop="url">hubot.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:08+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hubot/" itemprop="url" rel="index">
-                    <span itemprop="name">hubot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Hubot"><a href="#Hubot" class="headerlink" title="Hubot"></a>Hubot</h1><blockquote>
-<p>nodejs聊天机器人，提供了多种聊天工具的结合</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>常用命令</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>robot.hear</td>
-<td>聊天中匹配到任何信息，触发回调函数</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/" itemprop="url">工程记录.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:06+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index">
-                    <span itemprop="name">工程记录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <table>
-<thead>
-<tr>
-<th>工程</th>
-<th>概念描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>openrasp</td>
-<td>类似动态脱敏的一个系统</td>
-</tr>
-<tr>
-<td><code>Rhino</code></td>
-<td>基于java的js实现</td>
-</tr>
-<tr>
-<td><code>Nashorn</code></td>
-<td></td>
-</tr>
-<tr>
-<td>数字孪生</td>
-<td></td>
-</tr>
-<tr>
-<td>广告过滤</td>
-<td>目前广告越來越多，为了实现广告自动过滤，考虑使用<code>正向代理</code>，拦截网页响应请求，自动识别广告组件。阻断js等功能</td>
-</tr>
-<tr>
-<td>按钮监听</td>
-<td>w -s 比较idle 时间 linux监听事件文件， 对比 idle 时间</td>
-</tr>
-<tr>
-<td>文件加密搜索</td>
-<td></td>
-</tr>
-<tr>
-<td>hatake-git</td>
-<td>git 初版，java实现</td>
-</tr>
-<tr>
-<td>jnotify</td>
-<td>文件监控</td>
-</tr>
-</tbody></table>
-<h2 id="数字孪生"><a href="#数字孪生" class="headerlink" title="数字孪生"></a>数字孪生</h2><p>全匹配  https://<em>/</em></p>
-<p>因此，在运行调试之前，稚晖君借助 Unity 引擎工具实现了一个虚拟的物理环境，在赋给自行车正式的质量、重力后，将控制算法的计算结果可视化显示出来。</p>
-<p>其次，通过 Sim2Real，将仿真结果迁移到现实环境中。当然在被诸多不定性因素包裹的现实世界中，其调试过程也并非想象中那么容易，正如稚晖君在视频中细数的点滴，如：</p>
-<h2 id="广告过滤"><a href="#广告过滤" class="headerlink" title="广告过滤"></a>广告过滤</h2><h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><pre><code class="golang">
-import (
-    &quot;fmt&quot;
-    &quot;io/ioutil&quot;
-    &quot;net&quot;
-    &quot;net/http&quot;
-    &quot;strings&quot;
-)
-
-//正想代理
-
-type Pxy struct &#123;
-&#125;
-
-func (p *Pxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) &#123;
-    fmt.Printf(&quot;Received request %s %s %s\n&quot;, req.Method, req.Host, req.RemoteAddr)
-    transport := http.DefaultTransport
-    outReq := new(http.Request)
-    *outReq = *req
-    if clientIP, _, err := net.SplitHostPort(req.RemoteAddr); err == nil &#123;
-        if prior, ok := outReq.Header[&quot;X-Forwarded-For&quot;]; ok &#123;
-            clientIP = strings.Join(prior, &quot;, &quot;) + &quot;, &quot; + clientIP
-        &#125;
-        outReq.Header.Set(&quot;X-Forwarded-For&quot;, clientIP)
-    &#125;
-    res, err := transport.RoundTrip(outReq)
-    if err != nil &#123;
-        rw.WriteHeader(http.StatusBadGateway)
-        return
-    &#125;
-    for key, value := range res.Header &#123;
-        for _, v := range value &#123;
-            rw.Header().Add(key, v)
-        &#125;
-    &#125;
-    rw.WriteHeader(res.StatusCode)
-    s, _ := ioutil.ReadAll(res.Body)
-    if strings.Contains(req.RequestURI, &quot;html&quot;) &#123;
-        fmt.Println(req.RequestURI)
-    &#125;
-
-    //if req.RequestURI &#123;
-    //
-    //&#125;
-    //fmt.Println(string(s))
-    //io.Copy(rw, res.Body)
-    //x:=[]byte&#123;&#39;1&#39;, &#39;2&#39;,&#39;3&#39;&#125;
-    rw.Write(s)
-    res.Body.Close()
-&#125;
-
-func main() &#123;
-    fmt.Printf(&quot;proxy on :8080&quot;)
-    http.Handle(&quot;/&quot;, &amp;Pxy&#123;&#125;)
-    http.ListenAndServe(&quot;0.0.0.0:8080&quot;, nil)
-&#125;
-</code></pre>
-<h2 id="按钮监听"><a href="#按钮监听" class="headerlink" title="按钮监听"></a>按钮监听</h2><p>w -s 比较idle 时间</p>
-<p>linux监听事件文件， 对比 idle 时间</p>
-<h2 id="文件加密搜索"><a href="#文件加密搜索" class="headerlink" title="文件加密搜索"></a>文件加密搜索</h2><ul>
-<li>hook用户粘帖版 复制内容，分析加密后上报后台</li>
-<li>后台获取加密数据，在文档内部搜素，存储复制内容 时间，所属文档，复制人，复制时间</li>
-<li>数据泄密时，拿泄密数据搜索得到，所属文档，复制内容，复制人，复制时间 比对追责</li>
-</ul>
-<h3 id="如何hook"><a href="#如何hook" class="headerlink" title="如何hook"></a>如何hook</h3><p>需要某种方式，在用户电脑装软件，统一推送？利用宏漏洞，自动执行安装（杀毒软件处理）？</p>
-<p>强制安装软件</p>
-<h2 id="hatake-git"><a href="#hatake-git" class="headerlink" title="hatake-git"></a>hatake-git</h2><p><code>Git</code>的java版本实现</p>
-<h3 id="java描述"><a href="#java描述" class="headerlink" title="java描述"></a>java描述</h3><h4 id="字节描述"><a href="#字节描述" class="headerlink" title="字节描述"></a>字节描述</h4><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>字节长度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>byte</td>
-<td>1</td>
-</tr>
-<tr>
-<td>short</td>
-<td>2</td>
-</tr>
-<tr>
-<td>int</td>
-<td>4</td>
-</tr>
-<tr>
-<td>float</td>
-<td>4</td>
-</tr>
-<tr>
-<td>double</td>
-<td>8</td>
-</tr>
-<tr>
-<td>long</td>
-<td>8</td>
-</tr>
-<tr>
-<td>char</td>
-<td>2</td>
-</tr>
-</tbody></table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/2021/secraft2/code/%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%A0%B7%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/secraft2/code/%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%A0%B7%E5%BC%8F/" itemprop="url">流程图样式.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:04+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021/" itemprop="url" rel="index">
-                    <span itemprop="name">2021</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021/secraft2/" itemprop="url" rel="index">
-                    <span itemprop="name">secraft2</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021/secraft2/code/" itemprop="url" rel="index">
-                    <span itemprop="name">code</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="证书对接"><a href="#证书对接" class="headerlink" title="证书对接"></a>证书对接</h1><pre><code class="flow">st=&gt;start: start
-on=&gt;operation: content
-cn=&gt;condition: sure?
-e=&gt;end: end
-st-&gt;on-&gt;cn(yes)-&gt;e
-cn(no)-&gt;on
-</code></pre>
-<pre><code class="sequence">李泪 -&gt; 菡妹妹:&quot;hello how are you?&quot;
-Note right of 菡妹妹:&quot;hhhh&quot;
-菡妹妹 --&gt; 李泪:&quot;滚&quot;
-</code></pre>
-<pre class="mermaid">gantt
-    dateFormat YYYYMMDD
-    title 时序图
-    section 傻子才学习
-    睡早觉 :done,des1,20200101,2d
-    睡午觉 :done,des2,20200103,1d
-    section 具体内容
-    打游戏 :crit,done,20200101,71h</pre>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/2021/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/2021/" itemprop="url">2021.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:38:02+08:00">
-                2021-08-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:22+08:00">
+                2021-09-08
               </time>
             
 
@@ -1245,753 +388,660 @@ Note right of 菡妹妹:&quot;hhhh&quot;
       
         
           
-            <h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><ul>
-<li><input disabled="" type="checkbox"> 预测算法 具身智能如何应对不确定性</li>
-<li><input checked="" disabled="" type="checkbox"> 应用密码安全性评估</li>
-<li><input checked="" disabled="" type="checkbox"> CISAW</li>
+            <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="二元分类"><a href="#二元分类" class="headerlink" title="二元分类"></a>二元分类</h2><p>线性回归，做二元分类，通常效果不好，因为会受极值影响较大</p>
+<p>决策边界</p>
+<p>决策边界是假设函数的属性</p>
+<p>使用数据集推测O</p>
+<h2 id="算法选择"><a href="#算法选择" class="headerlink" title="算法选择"></a>算法选择</h2><p><img src="/images/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.assets/v2-7f81a81d5d05bab99dff24b67c34a072_720w.jpg" alt="img"></p>
+<p><img src="/images/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.assets/v2-e2f9eabbce380282f2b242a93651d879_720w.jpg" alt="img"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%B0%8F%E7%9F%A5%E8%AF%86_%E5%85%B3%E8%81%94%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/%E5%B0%8F%E7%9F%A5%E8%AF%86_%E5%85%B3%E8%81%94%E5%88%86%E6%9E%90/" itemprop="url">小知识_关联分析.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:22+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关联分析"><a href="#关联分析" class="headerlink" title="关联分析"></a>关联分析</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>关联分析： 在大规模数据集中寻找有趣的关系</li>
+<li>频繁项集：经常在一起出现的物品集合</li>
+<li>支持度：数据集中包含该项集的记录所占的比例</li>
+<li>置信度（Confidence）：出现某些物品时，另外一些物品必定出现的概率，针对规则而言。</li>
+<li>关联规则（Association Rules）：暗示两个物品之间可能存在很强的关系。形如A-&gt;B的表达式，规则A-&gt;B的度量包括支持度和置信度</li>
+<li>项集支持度：一个项集出现的次数与数据集所有事物数的百分比称为项集的支持度</li>
+<li>项集置信度：包含A的数据集中包含B的百分比</li>
 </ul>
-<hr>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
-<li><input disabled="" type="checkbox"> spring</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/py%E5%9F%BA%E7%A1%80%E5%BA%93_py%E6%A1%86%E6%9E%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/py%E5%9F%BA%E7%A1%80%E5%BA%93_py%E6%A1%86%E6%9E%B6/" itemprop="url">py基础库_py框架.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:37:59+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021/" itemprop="url" rel="index">
-                    <span itemprop="name">2021</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">常用框架</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="py框架"><a href="#py框架" class="headerlink" title="py框架"></a>py框架</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/py%E5%9F%BA%E7%A1%80%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/py%E5%9F%BA%E7%A1%80%E5%BA%93/" itemprop="url">py基础库.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:37:59+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021/" itemprop="url" rel="index">
-                    <span itemprop="name">2021</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">常用框架</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="py基础库"><a href="#py基础库" class="headerlink" title="py基础库"></a>py基础库</h1><h2 id="终端编程"><a href="#终端编程" class="headerlink" title="终端编程"></a>终端编程</h2><h3 id="pty"><a href="#pty" class="headerlink" title="pty"></a>pty</h3><p><a href="https://docs.python.org/zh-cn/3.7/library/pty.html">pty</a>定义了伪终端概念，启动另一个进程，并且以程序方式控制终端进行读写</p>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>下面例子，作用类似于<code>Unix</code>命令<code>script(1)</code>,使用一个伪终端记录一个<code>typescript</code>重大进程的所有输入和输出</p>
-<pre><code class="python">import argparse
-import os
-import pty
-import sys
-import time
-
-parser = argparse.ArgumentParser()
-parser.add_argument(&#39;-a&#39;, dest=&#39;append&#39;, action=&#39;store_true&#39;)
-parser.add_argument(&#39;-p&#39;, dest=&#39;use_python&#39;, action=&#39;store_true&#39;)
-parser.add_argument(&#39;filename&#39;, nargs=&#39;?&#39;, default=&#39;typescript&#39;)
-options = parser.parse_args()
-
-shell = sys.executable if options.use_python else os.environ.get(&#39;SHELL&#39;, &#39;sh&#39;)
-filename = options.filename
-mode = &#39;ab&#39; if options.append else &#39;wb&#39;
-
-with open(filename, mode) as script:
-    def read(fd):
-        data = os.read(fd, 1024)
-        script.write(data)
-        return data
-
-    print(&#39;Script started, file is&#39;, filename)
-    script.write((&#39;Script started on %s\n&#39; % time.asctime()).encode())
-
-    pty.spawn(shell, read)
-
-    script.write((&#39;Script done on %s\n&#39; % time.asctime()).encode())
-    print(&#39;Script done, file is&#39;, filename)
-</code></pre>
-<h3 id="termios"><a href="#termios" class="headerlink" title="termios"></a>termios</h3><p><code>POSIX</code>风格的tty控制sasdad</p>
-<h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><pre><code class="python">def getpass(prompt=&quot;Password: &quot;):
-    import termios, sys
-    fd = sys.stdin.fileno()
-    old = termios.tcgetattr(fd)
-    new = termios.tcgetattr(fd)
-    new[3] = new[3] &amp; ~termios.ECHO          # lflags
-    try:
-        termios.tcsetattr(fd, termios.TCSADRAIN, new)
-        passwd = input(prompt)
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old)
-    return passwd
-</code></pre>
-<h3 id="python-prompt-toolkit"><a href="#python-prompt-toolkit" class="headerlink" title="python-prompt-toolkit"></a>python-prompt-toolkit</h3><p><code>prompt-toolkit</code>python下一个非常不错的命令行框架，开源项目<code>mycli</code>可以非常简单的实现wordcomplte 和绘制全屏终端应用。</p>
-<p>绘制样式等等</p>
-<p><a href="https://python-prompt-toolkit.readthedocs.io/en/stable/pages/asking_for_input.html#a-custom-completer">官方网站</a></p>
-<p>例子</p>
-<pre><code class="python">import sys
-import sqlite3
-
-from prompt_toolkit import PromptSession
-from prompt_toolkit.completion import WordCompleter
-from prompt_toolkit.lexers import PygmentsLexer
-from prompt_toolkit.styles import Style
-from pygments.lexers.sql import PostgresLexer
-
-sql_completer = WordCompleter([
-    &#39;abort&#39;, &#39;action&#39;, &#39;add&#39;, &#39;after&#39;, &#39;all&#39;, &#39;alter&#39;, &#39;analyze&#39;, &#39;and&#39;,
-    &#39;as&#39;, &#39;asc&#39;, &#39;attach&#39;, &#39;autoincrement&#39;, &#39;before&#39;, &#39;begin&#39;, &#39;between&#39;,
-    &#39;by&#39;, &#39;cascade&#39;, &#39;case&#39;, &#39;cast&#39;, &#39;check&#39;, &#39;collate&#39;, &#39;column&#39;,
-    &#39;commit&#39;, &#39;conflict&#39;, &#39;constraint&#39;, &#39;create&#39;, &#39;cross&#39;, &#39;current_date&#39;,
-    &#39;current_time&#39;, &#39;current_timestamp&#39;, &#39;database&#39;, &#39;default&#39;,
-    &#39;deferrable&#39;, &#39;deferred&#39;, &#39;delete&#39;, &#39;desc&#39;, &#39;detach&#39;, &#39;distinct&#39;,
-    &#39;drop&#39;, &#39;each&#39;, &#39;else&#39;, &#39;end&#39;, &#39;escape&#39;, &#39;except&#39;, &#39;exclusive&#39;,
-    &#39;exists&#39;, &#39;explain&#39;, &#39;fail&#39;, &#39;for&#39;, &#39;foreign&#39;, &#39;from&#39;, &#39;full&#39;, &#39;glob&#39;,
-    &#39;group&#39;, &#39;having&#39;, &#39;if&#39;, &#39;ignore&#39;, &#39;immediate&#39;, &#39;in&#39;, &#39;index&#39;,
-    &#39;indexed&#39;, &#39;initially&#39;, &#39;inner&#39;, &#39;insert&#39;, &#39;instead&#39;, &#39;intersect&#39;,
-    &#39;into&#39;, &#39;is&#39;, &#39;isnull&#39;, &#39;join&#39;, &#39;key&#39;, &#39;left&#39;, &#39;like&#39;, &#39;limit&#39;,
-    &#39;match&#39;, &#39;natural&#39;, &#39;no&#39;, &#39;not&#39;, &#39;notnull&#39;, &#39;null&#39;, &#39;of&#39;, &#39;offset&#39;,
-    &#39;on&#39;, &#39;or&#39;, &#39;order&#39;, &#39;outer&#39;, &#39;plan&#39;, &#39;pragma&#39;, &#39;primary&#39;, &#39;query&#39;,
-    &#39;raise&#39;, &#39;recursive&#39;, &#39;references&#39;, &#39;regexp&#39;, &#39;reindex&#39;, &#39;release&#39;,
-    &#39;rename&#39;, &#39;replace&#39;, &#39;restrict&#39;, &#39;right&#39;, &#39;rollback&#39;, &#39;row&#39;,
-    &#39;savepoint&#39;, &#39;select&#39;, &#39;set&#39;, &#39;table&#39;, &#39;temp&#39;, &#39;temporary&#39;, &#39;then&#39;,
-    &#39;to&#39;, &#39;transaction&#39;, &#39;trigger&#39;, &#39;union&#39;, &#39;unique&#39;, &#39;update&#39;, &#39;using&#39;,
-    &#39;vacuum&#39;, &#39;values&#39;, &#39;view&#39;, &#39;virtual&#39;, &#39;when&#39;, &#39;where&#39;, &#39;with&#39;,
-    &#39;without&#39;], ignore_case=True)
-
-style = Style.from_dict(&#123;
-    &#39;completion-menu.completion&#39;: &#39;bg:#008888 #ffffff&#39;,
-    &#39;completion-menu.completion.current&#39;: &#39;bg:#00aaaa #000000&#39;,
-    &#39;scrollbar.background&#39;: &#39;bg:#88aaaa&#39;,
-    &#39;scrollbar.button&#39;: &#39;bg:#222222&#39;,
-&#125;)
-
-
-def main(database):
-    connection = sqlite3.connect(database)
-    session = PromptSession(
-        lexer=PygmentsLexer(PostgresLexer), completer=sql_completer, style=style)
-
-    while True:
-        try:
-            text = session.prompt(&#39;&gt; &#39;)
-        except KeyboardInterrupt:
-            continue  # Control-C pressed. Try again.
-        except EOFError:
-            break  # Control-D pressed.
-
-        with connection:
-            try:
-                messages = connection.execute(text)
-            except Exception as e:
-                print(repr(e))
-            else:
-                for message in messages:
-                    print(message)
-
-    print(&#39;GoodBye!&#39;)
-
-
-if __name__ == &#39;__main__&#39;:
-    if len(sys.argv) &lt; 2:
-        db = &#39;:memory:&#39;
-    else:
-        db = sys.argv[1]
-
-    main(db)
-</code></pre>
-<pre><code class="python">import getpass
-
-from prompt_toolkit import prompt, HTML
-from prompt_toolkit.completion import NestedCompleter
-from prompt_toolkit.validation import Validator, ValidationError
-from prompt_toolkit import prompt
-from prompt_toolkit.styles import Style
-from prompt_toolkit.shortcuts import message_dialog
-message_dialog(
-    title=&#39;Example dialog window&#39;,
-    text=&#39;Do you want to continue?\nPress ENTER to quit.&#39;).run()
-class NumberValidator(Validator):
-    def validate(self, document):
-        text = document.text
-
-        if text and not text.isdigit():
-            i = 0
-
-            # Get index of first non numeric character.
-            # We want to move the cursor here.
-            for i, c in enumerate(text):
-                if not c.isdigit():
-                    break
-
-            raise ValidationError(message=&#39;This input contains non-numeric characters&#39;,
-                                  cursor_position=i)
-
-
-number = int(prompt(&#39;Give a number: &#39;, validator=NumberValidator()))
-print(&#39;You said: %i&#39; % number)
-
-
-def is_number(text):
-    return text.isdigit()
-
-
-def bottom_toolbar():
-    return HTML(&#39;This is a &lt;b&gt;&lt;style bg=&quot;ansired&quot;&gt;Toolbar&lt;/style&gt;&lt;/b&gt;!&#39;)
-
-
-text = prompt(&#39;&gt; &#39;, bottom_toolbar=bottom_toolbar)
-print(&#39;You said: %s&#39; % text)
-
-validator = Validator.from_callable(
-    is_number,
-    error_message=&#39;This input contains non-numeric characters&#39;,
-    move_cursor_to_end=True)
-
-example_style = Style.from_dict(&#123;
-    &#39;rprompt&#39;: &#39;bg:#ff0066 #ffffff&#39;,
-&#125;)
-prompt(&#39;What is your name: &#39;, default=&#39;%s&#39; % getpass.getuser())
-
-def get_rprompt():
-    return &#39;&lt;rprompt&gt;&#39;
-
-
-def prompt_continuation(width, line_number, is_soft_wrap):
-    return &#39;.&#39; * width
-    # Or: return [(&#39;&#39;, &#39;.&#39; * width)]
-prompt(&#39;Enter password: &#39;, is_password=True)
-prompt(&#39;What is your name: &#39;, mouse_support=True)
-# prompt(&#39;multiline input&gt; &#39;, multiline=True,
-#        prompt_continuation=prompt_continuation)
-answer = prompt(&#39;&gt; &#39;, rprompt=get_rprompt, style=example_style)
-if __name__ == &#39;__main__&#39;:
-    json = &#123;
-        &#39;show&#39;: &#123;
-            &#39;version&#39;: print,
-            &#39;clock&#39;: None,
-            &#39;ip&#39;: &#123;
-                &#39;interface&#39;: &#123;&#39;brief&#39;&#125;
-            &#125;
-        &#125;,
-        &#39;exit&#39;: None,
-    &#125;
-
-    completer = NestedCompleter.from_nested_dict(&#123;
-        &#39;show&#39;: &#123;
-            &#39;version&#39;: None,
-            &#39;clock&#39;: None,
-            &#39;ip&#39;: &#123;
-                &#39;interface&#39;: &#123;&#39;brief&#39;&#125;
-            &#125;
-        &#125;,
-        &#39;exit&#39;: None,
-    &#125;)
-
-    text = prompt(&#39;# &#39;, completer=completer)
-    print(&#39;You said: %s&#39; % text)
-</code></pre>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/java/" itemprop="url">java.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T16:37:57+08:00">
-                2021-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" itemprop="url" rel="index">
-                    <span itemprop="name">代码片段</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="代码片段收集"><a href="#代码片段收集" class="headerlink" title="代码片段收集"></a>代码片段收集</h1><blockquote>
-<p>收集平常好用的代码片段</p>
+<h2 id="关联分析步骤"><a href="#关联分析步骤" class="headerlink" title="关联分析步骤"></a>关联分析步骤</h2><ol>
+<li>发现频繁项集，即计算所有可能组合数的支持度，找出不少于人为设定的最小支持度的集合。</li>
+<li>发现关联规则，即计算不小于人为设定的最小支持度的集合的置信度，找到不小于认为设定的最小置信度规则。</li>
+</ol>
+<h3 id="简单关联关系"><a href="#简单关联关系" class="headerlink" title="简单关联关系"></a>简单关联关系</h3><p>​        简单关联关系可以从经典的购物中进行分析，购买面包的顾客80%都会购买牛奶，由于面包和牛奶是早餐搭配的必需品，二者搭配构成了早餐的组成部分，这就是一种简单的关联关系。</p>
+<h3 id="序列关联关系"><a href="#序列关联关系" class="headerlink" title="序列关联关系"></a>序列关联关系</h3><p>​        当购买一款新手机后，就会考虑去购买手机膜等手机配件，这就是一种序列关系，不会先买手机膜再买手机的，先后关系是非常明显的，这种关系是一种顺序性的关系，也就是一种序列关联关系。</p>
+<blockquote>
+<p>关联规则：规则就是一种衡量事物的标准，也就是一个算法。</p>
 </blockquote>
-<h2 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h2><h3 id="jpa拼接脚本"><a href="#jpa拼接脚本" class="headerlink" title="jpa拼接脚本"></a>jpa拼接脚本</h3><pre><code class="java">    @Select(&quot;&lt;script&gt; &quot; +
-            &quot; select v.* from tb_srv_inse t left join vsm_apply_detail p &quot; +
-            &quot; on t.application_id = p.application_id left join tb_vsm_group v &quot; +
-            &quot; on p.hsm_group_id = v.id &quot; +
-            &quot; &lt;where&gt; v.id is not null &quot; +
-            &quot; &lt;if test=&#39;tenantId != null&#39;&gt;&quot; +
-            &quot;    and t.srv_inse_tenant_id = #&#123;tenantId&#125;&quot; +
-            &quot; &lt;/if&gt;&quot; +
-            &quot; &lt;/where&gt; &quot; +
-            &quot; &lt;/script&gt; &quot;)
-</code></pre>
-<h3 id="动态查询"><a href="#动态查询" class="headerlink" title="动态查询"></a>动态查询</h3><pre><code class="java">    @Select(&quot;&lt;script&gt; select t.* from tb_srv_inse t where t.srv_inse_type != 3 and t.id &quot; +
-            &quot;in (select s.tb_srv_inse_id from sys_user_srv_inse_role s where s.user_id=#&#123;userId&#125; &quot; +
-            &quot; &lt;if test=&#39;tbSrvInse.srvInseName !=null and tbSrvInse.srvInseName !=\&quot;\&quot;&#39;&gt; &quot; +
-            &quot;and t.srv_inse_name like &#39;%$&#123;tbSrvInse.srvInseName&#125;%&#39;&quot; +
-            &quot;&lt;/if&gt;&quot; +
-            &quot;) &lt;/script&gt;&quot;)
-    IPage&lt;TbSrvInse&gt; queryInlineUserMMyyTbSrvInse(Page&lt;TbSrvInse&gt; page, @Param(&quot;userId&quot;) String userId, @Param(&quot;tbSrvInse&quot;) TbSrvInse tbSrvInse);
-</code></pre>
-<h2 id="常用业务代码"><a href="#常用业务代码" class="headerlink" title="常用业务代码"></a>常用业务代码</h2><pre><code class="java">    items = JSON.parseObject(shget, new TypeReference&lt;List&lt;SysUserSrvInseRole&gt;&gt;() &#123;
-                &#125;.getType());
-</code></pre>
-<h3 id="区间合成"><a href="#区间合成" class="headerlink" title="区间合成"></a>区间合成</h3><p>先找到区间开始的索引，在拉出区间</p>
-<pre><code class="java">private static String toRange(List&lt;Integer&gt; waitMerge) &#123;
-        List&lt;Integer&gt; heads = new ArrayList&lt;&gt;();
-        for (int i = 0; i &lt; waitMerge.size(); i++) &#123;
-            if (i == 0) &#123;
-                heads.add(0);
-                continue;
-            &#125;
-            int beforeNode = i - 1;
-            if ((waitMerge.get(beforeNode)+1) != waitMerge.get(i)) &#123;
-                heads.add(i);
-            &#125;
-        &#125;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i &lt; heads.size(); i++) &#123;
-            int nextHead = i + 1;
-            if (nextHead &gt;= heads.size()) &#123;
-                Integer i1 = heads.get(i);
-                if (i1 == (waitMerge.size() - 1)) &#123;
-                    sb.append(&quot;,&quot;);
-                    sb.append(waitMerge.get(i1));
-                &#125;else &#123;
-                    sb.append(&quot;,&quot;);
-                    sb.append(waitMerge.get(i1));
-                    sb.append(&quot;-&quot;);
-                    sb.append(waitMerge.get(waitMerge.size() - 1));
-                &#125;
-            &#125;else &#123;
-                Integer nb = heads.get(nextHead);
-                Integer ls = heads.get(i);
-                if (ls == (nb - 1)) &#123;
-                    sb.append(&quot;,&quot;);
-                    sb.append(waitMerge.get(ls));
-                &#125;else &#123;
-                    sb.append(&quot;,&quot;);
-                    sb.append(waitMerge.get(ls));
-                    sb.append(&quot;-&quot;);
-                    sb.append(waitMerge.get(nb - 1));
-                &#125;
-            &#125;
-        &#125;
-        return sb.toString();
-    &#125;
-</code></pre>
-<pre><code>sys_quartz_job
-</code></pre>
-<p>delete qrtz_job_details where JOB_NAME=’kl.kcsp.modules.srvinse.job.TbSrvInseValidMonitorJob’</p>
-<p>1391576778795036674    admin    2021-05-10 10:12:13    0    admin    2021-05-10 10:12:24    kl.kcsp.modules.srvinse.job.TbSrvInseValidMonitorJob    0 1 1 * * ? *    NULL    服务过期检查    -1</p>
-<pre><code>INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.bakrec.job.AutoBkJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.bakrec.job.AutoBkJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.chsm.job.CheckChsmStatusJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.chsm.job.CheckChsmStatusJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.message.job.SendMsgJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.message.job.SendMsgJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.monitor.utils.SaveChsmMonitorInfo&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.monitor.utils.SaveChsmMonitorInfo&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.srvinse.job.InseMonitorJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.srvinse.job.InseMonitorJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.srvinse.job.SrvKeySyncJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.srvinse.job.SrvKeySyncJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
+<h2 id="简单关联规则算法"><a href="#简单关联规则算法" class="headerlink" title="简单关联规则算法"></a>简单关联规则算法</h2><h3 id="算法思想基础"><a href="#算法思想基础" class="headerlink" title="算法思想基础"></a>算法思想基础</h3><blockquote>
+<p>如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
+</blockquote>
+<p>​        简单关联规则是无指导的学习方法，着重探索内部结构。简单关联规则也是使用最多的技术，主要算法包括：Apriori、GRI、Carma，其中Apriori和Carma主要是如何提高关联规则的分析效率，而GRI注重如何将单一概念层次的关联推广到更多概念层次的关联，进而揭示事物内在结构。</p>
+<p>简单关联规则的数据存储形式：一种是交易数据格式，一种是表格数据格式。</p>
+<h2 id="序列关联规则算法"><a href="#序列关联规则算法" class="headerlink" title="序列关联规则算法"></a>序列关联规则算法</h2><p>​        序列关联规则的核心就是找到事物发展的前后关联性，研究序列关联可以来推测事物未来的发展情况，并根据预测的发展情况进行事物的分配和安排。</p>
+<h2 id="如何设定合理的支持度和置信度？"><a href="#如何设定合理的支持度和置信度？" class="headerlink" title="如何设定合理的支持度和置信度？"></a>如何设定合理的支持度和置信度？</h2><p>对于某条规则：（A=a）−&gt;（B=b）</p>
+<p>（support=30%,confident=60%）；其中support=30%表示在所有的数据记录中，同时出现A=a和B=b的概率为30%；confident=60%表示在所有的数据记录中，在出现A=a的情况下出现B=b的概率为60%，也就是条件概率。支持度揭示了A=a和B=b同时出现的概率，置信度揭示了当A=a出现时，B=b是否会一定出现的概率。</p>
+<p>（1）如果支持度和置信度闭值设置的过高，虽然可以减少挖掘时间，但是容易造成一些隐含在数据中非频繁特征项被忽略掉，难以发现足够有用的规则；</p>
+<p>（2）如果支持度和置信度闭值设置的过低，又有可能产生过多的规则，甚至产生大量冗余和无效的规则，同时由于算法存在的固有问题，会导致高负荷的计算量，大大增加挖掘时间。</p>
+<h2 id="关联分析的应用"><a href="#关联分析的应用" class="headerlink" title="关联分析的应用"></a>关联分析的应用</h2><p>(1)：购物篮分析，通过查看那些商品经常在一起出售，可以帮助商店了解用户的购物行为，这种从数据的海洋中抽取只是可以用于商品定价、市场促销、存货管理等环节</p>
+<p>(2)：在Twitter源中发现一些公共词。对于给定的搜索词，发现推文中频繁出现的单词集合</p>
+<p>(3)：从新闻网站点击流中挖掘新闻流行趋势，挖掘哪些新闻广泛被用户浏览到</p>
+<p>(4)：搜索引擎推荐，在用户输入查询时推荐同时相关的查询词项</p>
+<p>(5)：发现毒蘑菇的相似特征。这里只对包含某个特征元素（有毒素）的项集感兴趣，从中寻找毒蘑菇中的一些公共特征，利用这些特征来避免迟到哪些有毒的蘑菇</p>
+<p>(6)：图书馆信息的书籍推荐，对于学生的借书信息，不同专业学生的借书情况，来挖掘不同学生的借书情况，进行数目的推荐。</p>
+<p>(7)：校园网新闻通知信息的推荐，在对校园网新闻通知信息进行挖掘的过程中，分析不同部门，不同学院的新闻信息的不同，在进行新闻信息浏览的过程中进行新闻的推荐。</p>
+<h2 id="Apriori算法"><a href="#Apriori算法" class="headerlink" title="Apriori算法"></a>Apriori算法</h2><p>假设我们有一家经营着4种商品（商品0，商品1，商品2和商品3）的杂货店，2图显示了所有商品之间所有的可能组合：</p>
+<p>对于单个项集的支持度，我们可以通过遍历每条记录并检查该记录是否包含该项集来计算。对于包含N中物品的数据集共有2N−1种项集组合，重复上述计算过程是不现实的。</p>
+<p>研究人员发现一种所谓的Apriori原理，可以帮助我们减少计算量。Apriori原理是说如果某个项集是频繁的，那么它的所有子集也是频繁的。更常用的是它的逆否命题，即如果一个项集是非频繁的，那么它的所有超集也是非频繁的。</p>
+<p>注意：这里的子集不是传统数学中的子集，而是子项的项集。例如一个频繁项集包含3个项，则这三个项的子集组成的项集一定是频繁项集。</p>
+<p>在图3中，已知阴影项集{2,3}是非频繁的。利用这个知识，我们就知道项集{0,2,3}，{1,2,3}以及{0,1,2,3}也是非频繁的。也就是说，一旦计算出了{2,3}的支持度，知道它是非频繁的后，就可以紧接着排除{0,2,3}、{1,2,3}和{0,1,2,3}。</p>
+<p>Apriori算法是发现频繁项集的一种方法。</p>
+<p>Apriori算法的两个输入参数分别是最小支持度和数据集。该算法首先会生成所有单个元素的项集列表。接着扫描数据集来查看哪些项集满足最小支持度要求，那些不满足最小支持度的集合会被去掉。然后，对剩下来的集合进行组合以生成包含两个元素的项集。接下来，再重新扫描交易记录，去掉不满足最小支持度的项集。该过程重复进行直到所有项集都被去掉。</p>
+<p>该算法需要不断寻找候选集，然后剪枝即去掉非频繁子集的候选集，时间复杂度由暴力枚举所有子集的指数级别O（n2）将为多项式级别，多项式具体系数是底层实现情况而定的。<br>Ariori算法有两个主要步骤：</p>
+<p>1、连接：（将项集进行两两连接形成新的候选集）利用已经找到的k个项的频繁项集Lk，通过两两连接得出候选集Ck+1，注意进行连接的Lk[i]，Lk[j]，必须有k-1个属性值相同，然后另外两个不同的分别分布Lk[i]，Lk[j]，这样的求出的Ck+1为Lk+1的候选集。</p>
+<p>2、<strong>剪枝</strong>：（去掉非频繁项集）候选集 Ck+1中的并不都是频繁项集，必须剪枝去掉，越早越好以防止所处理的数据无效项越来越多。只有当子集都是频繁集的候选集才是频繁集，这是剪枝的依据。</p>
 
-INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.vsm.job.CheckVsmStatusJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.vsm.job.CheckVsmStatusJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/Antlr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/Antlr/" itemprop="url">Antlr.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:18+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index">
+                    <span itemprop="name">工程记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Antlr的使用"><a href="#Antlr的使用" class="headerlink" title="Antlr的使用"></a>Antlr的使用</h1><p>为了应对无休止的规范开发的项目<a href="https://gitee.com/sevenclear/sb-constant.git">SBConstant</a></p>
+<p>使用Antlr </p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>下载<strong>java</strong>词法文件</li>
+<li>开始解析</li>
+</ol>
+<h3 id="核心类"><a href="#核心类" class="headerlink" title="核心类"></a>核心类</h3><p><strong>TokenStreamRewriter</strong>提供了antlr4的流修改能力</p>
+<ul>
+<li>访问器模式</li>
+<li>监听摸索</li>
+</ul>
+<p>antlr 解析出<strong>tokenStream</strong>后通过listener,visit可以访问完整的数</p>
+<p>然后根据java语法，编写对应的识别抽取代码，</p>
+<p>第一遍遍历抽出想要的数据</p>
+<p>第二遍开始修改流，插入想要的数据</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/code_Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/code_Python/" itemprop="url">code_Python.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:15+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><h2 id="prompt-toolkit"><a href="#prompt-toolkit" class="headerlink" title="prompt_toolkit"></a>prompt_toolkit</h2><p><code> prompt_toolkit</code>用于在<strong>Python</strong>中构建功能强大的交互式命令行和终端应用程序的库，它可以是<strong>GNU readline</strong>的高级替代品.</p>
+<ul>
+<li>键入时语法高亮显示输入。（例如，使用Pygments词法分析器。）</li>
+<li>多行输入编辑。</li>
+<li>高级代码自动完成。</li>
+<li>选择要复制/粘贴的文本。（Emacs和Vi风格。）</li>
+<li>鼠标支持光标定位和滚动。</li>
+<li>自动建议。（像<a href="http://fishshell.com/">fish shell</a>。）</li>
+<li>没有global状态。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/code_kotlin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/code_kotlin/" itemprop="url">code_kotlin.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:15+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍源码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="kotlin"><a href="#kotlin" class="headerlink" title="kotlin"></a>kotlin</h1><p><code>kotlin</code>while语句的使用</p>
+<pre><code>        while (it.readLine().also &#123; li-&gt; line = li &#125; != null) &#123;
+
+        &#125;
+</code></pre>
+<p>核心在<code>also</code>的使用，also 可用于不更改对象的其他操作，例如记录或打印调试信息。通常，您可以在不破坏程序逻辑的情况下从调用链中删除也是调用。通过这个关键字在原本不允许赋值的while中加入了赋值语句。</p>
+<p>与<code>also</code>经常出现的一个关键字是<code>apply</code>。<code>apply</code>主要用于对象赋值操作.<code>apply</code>自带了应用上下文</p>
+<pre><code class="kotlin">val numbers = mutableListOf(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;)
+numbers.also &#123; println(&quot;The list elements before adding new one: $it&quot;) &#125;
+    .add(&quot;four&quot;)
+val adam = Person(&quot;Adam&quot;).apply &#123;
+    age = 32
+    city = &quot;London&quot;        
+&#125;
 </code></pre>
 
           
@@ -2041,7 +1091,7 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/golang/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -2060,7 +1110,7 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/golang/" itemprop="url">golang.md</a></h2>
+                <a class="post-title-link" href="/%E4%B9%A6%E7%B1%8D%E6%BA%90%E7%A0%81/code/" itemprop="url">code.md</a></h2>
         
 
         <div class="post-meta">
@@ -2072,8 +1122,8 @@ INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-25T17:13:12+08:00">
-                2021-08-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:15+08:00">
+                2021-09-08
               </time>
             
 
@@ -2303,7 +1353,7 @@ fmt.Println(err)
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/2021/linux/common0_/">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/java/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -2322,7 +1372,7 @@ fmt.Println(err)
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/linux/common0_/" itemprop="url">common0_.md</a></h2>
+                <a class="post-title-link" href="/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/java/" itemprop="url">java.md</a></h2>
         
 
         <div class="post-meta">
@@ -2334,8 +1384,8 @@ fmt.Println(err)
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-13T17:56:06+08:00">
-                2021-08-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:13+08:00">
+                2021-09-08
               </time>
             
 
@@ -2357,19 +1407,8 @@ fmt.Println(err)
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021/" itemprop="url" rel="index">
-                    <span itemprop="name">2021</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" itemprop="url" rel="index">
+                    <span itemprop="name">代码片段</span>
                   </a>
                 </span>
 
@@ -2407,25 +1446,544 @@ fmt.Println(err)
       
         
           
-            <h1 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h1><blockquote>
-<p>日常使用经常会用到一些命令，下面是命令的记录</p>
+            <h1 id="代码片段收集"><a href="#代码片段收集" class="headerlink" title="代码片段收集"></a>代码片段收集</h1><blockquote>
+<p>收集平常好用的代码片段</p>
 </blockquote>
-<p>[toc]</p>
-<h2 id="系统资源"><a href="#系统资源" class="headerlink" title="系统资源"></a>系统资源</h2><h3 id="top"><a href="#top" class="headerlink" title="top"></a>top</h3><p><code>top</code>命令用于实时机显示process动态</p>
-<pre><code class="bash">top [-] [d delay] [q] [c] [S] [i] [n] [b]
+<h2 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h2><h3 id="jpa拼接脚本"><a href="#jpa拼接脚本" class="headerlink" title="jpa拼接脚本"></a>jpa拼接脚本</h3><pre><code class="java">    @Select(&quot;&lt;script&gt; &quot; +
+            &quot; select v.* from tb_srv_inse t left join vsm_apply_detail p &quot; +
+            &quot; on t.application_id = p.application_id left join tb_vsm_group v &quot; +
+            &quot; on p.hsm_group_id = v.id &quot; +
+            &quot; &lt;where&gt; v.id is not null &quot; +
+            &quot; &lt;if test=&#39;tenantId != null&#39;&gt;&quot; +
+            &quot;    and t.srv_inse_tenant_id = #&#123;tenantId&#125;&quot; +
+            &quot; &lt;/if&gt;&quot; +
+            &quot; &lt;/where&gt; &quot; +
+            &quot; &lt;/script&gt; &quot;)
 </code></pre>
-<p><code>参数说明</code>：</p>
-<ul>
-<li>d: 改变现实的更新速度，或是在交谈指令列</li>
-<li>q: 没有任何延迟的显示</li>
-<li>p: 制定pid</li>
-</ul>
-<p>进入<code>top</code>后使用，M可以按照内存占用排序</p>
-<p>跳转到</p>
-<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><h3 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h3><p>查看进程查看了哪些文件</p>
-<pre><code class="sh">lsof -p
+<h3 id="动态查询"><a href="#动态查询" class="headerlink" title="动态查询"></a>动态查询</h3><pre><code class="java">    @Select(&quot;&lt;script&gt; select t.* from tb_srv_inse t where t.srv_inse_type != 3 and t.id &quot; +
+            &quot;in (select s.tb_srv_inse_id from sys_user_srv_inse_role s where s.user_id=#&#123;userId&#125; &quot; +
+            &quot; &lt;if test=&#39;tbSrvInse.srvInseName !=null and tbSrvInse.srvInseName !=\&quot;\&quot;&#39;&gt; &quot; +
+            &quot;and t.srv_inse_name like &#39;%$&#123;tbSrvInse.srvInseName&#125;%&#39;&quot; +
+            &quot;&lt;/if&gt;&quot; +
+            &quot;) &lt;/script&gt;&quot;)
+    IPage&lt;TbSrvInse&gt; queryInlineUserMMyyTbSrvInse(Page&lt;TbSrvInse&gt; page, @Param(&quot;userId&quot;) String userId, @Param(&quot;tbSrvInse&quot;) TbSrvInse tbSrvInse);
 </code></pre>
-<h2 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h2>
+<h2 id="常用业务代码"><a href="#常用业务代码" class="headerlink" title="常用业务代码"></a>常用业务代码</h2><pre><code class="java">    items = JSON.parseObject(shget, new TypeReference&lt;List&lt;SysUserSrvInseRole&gt;&gt;() &#123;
+                &#125;.getType());
+</code></pre>
+<h3 id="区间合成"><a href="#区间合成" class="headerlink" title="区间合成"></a>区间合成</h3><p>先找到区间开始的索引，在拉出区间</p>
+<pre><code class="java">private static String toRange(List&lt;Integer&gt; waitMerge) &#123;
+        List&lt;Integer&gt; heads = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; waitMerge.size(); i++) &#123;
+            if (i == 0) &#123;
+                heads.add(0);
+                continue;
+            &#125;
+            int beforeNode = i - 1;
+            if ((waitMerge.get(beforeNode)+1) != waitMerge.get(i)) &#123;
+                heads.add(i);
+            &#125;
+        &#125;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i &lt; heads.size(); i++) &#123;
+            int nextHead = i + 1;
+            if (nextHead &gt;= heads.size()) &#123;
+                Integer i1 = heads.get(i);
+                if (i1 == (waitMerge.size() - 1)) &#123;
+                    sb.append(&quot;,&quot;);
+                    sb.append(waitMerge.get(i1));
+                &#125;else &#123;
+                    sb.append(&quot;,&quot;);
+                    sb.append(waitMerge.get(i1));
+                    sb.append(&quot;-&quot;);
+                    sb.append(waitMerge.get(waitMerge.size() - 1));
+                &#125;
+            &#125;else &#123;
+                Integer nb = heads.get(nextHead);
+                Integer ls = heads.get(i);
+                if (ls == (nb - 1)) &#123;
+                    sb.append(&quot;,&quot;);
+                    sb.append(waitMerge.get(ls));
+                &#125;else &#123;
+                    sb.append(&quot;,&quot;);
+                    sb.append(waitMerge.get(ls));
+                    sb.append(&quot;-&quot;);
+                    sb.append(waitMerge.get(nb - 1));
+                &#125;
+            &#125;
+        &#125;
+        return sb.toString();
+    &#125;
+</code></pre>
+<pre><code>sys_quartz_job
+</code></pre>
+<p>delete qrtz_job_details where JOB_NAME=’kl.kcsp.modules.srvinse.job.TbSrvInseValidMonitorJob’</p>
+<p>1391576778795036674    admin    2021-05-10 10:12:13    0    admin    2021-05-10 10:12:24    kl.kcsp.modules.srvinse.job.TbSrvInseValidMonitorJob    0 1 1 * * ? *    NULL    服务过期检查    -1</p>
+<pre><code>INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.bakrec.job.AutoBkJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.bakrec.job.AutoBkJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
+INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.chsm.job.CheckChsmStatusJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.chsm.job.CheckChsmStatusJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
+INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.message.job.SendMsgJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.message.job.SendMsgJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
+INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.monitor.utils.SaveChsmMonitorInfo&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.monitor.utils.SaveChsmMonitorInfo&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
+INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.srvinse.job.InseMonitorJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.srvinse.job.InseMonitorJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
+INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.srvinse.job.SrvKeySyncJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.srvinse.job.SrvKeySyncJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
+
+INSERT INTO  &quot;qrtz_job_details&quot;(&quot;SCHED_NAME&quot;,&quot;JOB_NAME&quot;,&quot;JOB_GROUP&quot;,&quot;DESCRIPTION&quot;,&quot;JOB_CLASS_NAME&quot;,&quot;IS_DURABLE&quot;,&quot;IS_NONCONCURRENT&quot;,&quot;IS_UPDATE_DATA&quot;,&quot;REQUESTS_RECOVERY&quot;,&quot;JOB_DATA&quot;) VALUES(&#39;MyScheduler&#39;,&#39;kl.kcsp.modules.vsm.job.CheckVsmStatusJob&#39;,&#39;DEFAULT&#39;,null,&#39;kl.kcsp.modules.vsm.job.CheckVsmStatusJob&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
+</code></pre>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify_Jnotify-2.0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify_Jnotify-2.0/" itemprop="url">jnotify_Jnotify-2.0.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:11+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index">
+                    <span itemprop="name">工程记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Jnotify-2-0"><a href="#Jnotify-2-0" class="headerlink" title="Jnotify-2.0"></a>Jnotify-2.0</h1><h2 id="改造需求"><a href="#改造需求" class="headerlink" title="改造需求"></a>改造需求</h2><ol>
+<li>兼容windows,linux</li>
+<li>单进程管理多git 多仓库</li>
+<li>增加同步文件夹配置管理方案</li>
+<li>优化<code>jnotify</code>安装方式</li>
+</ol>
+<h2 id="改造方案-v0-01"><a href="#改造方案-v0-01" class="headerlink" title="改造方案 v0.01"></a>改造方案 v0.01</h2><ol>
+<li>项目分析</li>
+</ol>
+<p>原始部署模式</p>
+<pre class="mermaid">flowchart TB
+subgraph jnotify1
+    monitor1 --> 1同步目录1...n
+    sync1 --> 1同步目录1..n
+end
+subgraph jnotify2
+    monitor2 --> 2同步目录1...n
+    sync2 --> 2同步目录1..n
+end
+subgraph jnotifyn
+    monitorn --> n同步目录1...n
+    syncn --> n同步目录1..n
+end
+subgraph 用户1
+end
+subgraph 用户2
+end
+subgraph 用户n
+end
+用户1 --> jnotify1
+用户2 --> jnotify2
+用户n --> jnotifyn</pre>
+
+<p>修改部署模式</p>
+<pre class="mermaid">flowchart LR
+subgraph jnotify1
+    monitor1 --> 1同步目录1...n
+    sync1 --> 1同步目录1..n
+end
+
+subgraph 用户1
+end
+subgraph 用户2
+end
+subgraph 用户n
+end
+用户1 --> jnotify1
+用户2 --> jnotify1
+用户n --> jnotify1</pre>
+
+<h2 id="改造方案-v0-02"><a href="#改造方案-v0-02" class="headerlink" title="改造方案 v0.02"></a>改造方案 v0.02</h2><p>目前<code>jnotify</code>问题集中在使用较为复杂，0.01方案，没有优化到用户的使用体验。</p>
+<table>
+<thead>
+<tr>
+<th>现状</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用需要手动修改配置文件</td>
+<td>目前虽然提供了简单的修改配置文件方式，修改项目监控，仍然需要手动同步</td>
+</tr>
+<tr>
+<td>使用java file listenere 监控文件移动</td>
+<td>有些文件变更，并没有同步。容易出现文件丢失等各种难以掌握的异常情况</td>
+</tr>
+<tr>
+<td>单进程调控</td>
+<td></td>
+</tr>
+<tr>
+<td>telnet 端工程控制较弱</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>优化方案</strong></p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>难点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用rsync 来接管文件同步操作</td>
+<td>（这个地方能不能嵌入加密）</td>
+</tr>
+<tr>
+<td>扩展socket端，进程调控能力</td>
+<td></td>
+</tr>
+<tr>
+<td>jnotify 由之前，单进程多个git仓库，调整为，弱化git仓库概念，更加强调文件夹同步</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<pre class="mermaid">flowchart TB
+subgraph jnotify1
+    monitor1 --> 1同步目录1...n
+    sync1 --> 1同步目录1..n
+end
+subgraph jnotify2
+    monitor2 --> 2同步目录1...n
+    sync2 --> 2同步目录1..n
+end
+subgraph jnotifyn
+    monitorn --> n同步目录1...n
+    syncn --> n同步目录1..n
+end
+subgraph 用户1
+end
+subgraph 用户2
+end
+subgraph 用户n
+end
+用户1 --> jnotify1
+用户2 --> jnotify2
+用户n --> jnotifyn</pre>
+
+<p>优化后方案</p>
+<pre class="mermaid">flowchart TB
+subgraph internal
+    git仓库
+    rsync文件自动同步
+    git仓库自动同步推送
+end
+subgraph publicJnotify
+    目录调控端
+    文件同步
+end
+subgraph jnotify
+internal
+publicJnotify
+end
+subgraph 用户1
+end
+subgraph 用户2
+end
+
+用户1 --> publicJnotify
+用户2 --> publicJnotify</pre>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/jnotify/" itemprop="url">jnotify.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-08T10:48:11+08:00">
+                2021-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index">
+                    <span itemprop="name">工程记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Jnotify-1-0"><a href="#Jnotify-1-0" class="headerlink" title="Jnotify-1.0"></a>Jnotify-1.0</h1><p>最近一直在致力于搭建个人的文档笔记系统。最后选中了<code>typora</code>,<code>typora</code>本身是一个优秀的markdown工具，同时支持三平台的书写。但是不支持云端同步，为了解决这个问题，我写出了<code>jnotify</code></p>
+<blockquote>
+<p><code>Jnotify</code>一个基于<code>git</code>的文档同步系统</p>
+</blockquote>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li><code>jnotify</code> 基于git技术，将文档自动同步到云端，同时提供手动从云端同步功能。</li>
+<li><code>jnotify</code>选用<code>java</code>作为开发语言，方便修改</li>
+<li>免费</li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
+<li>不支持大文件，视频，大的压缩包，所以目前场景定位在文档同步</li>
+<li>文档的安全性基于远端的私仓</li>
+</ol>
+<h2 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h2><blockquote>
+<p>目前在linux 环境测试通过</p>
+</blockquote>
+<ol>
+<li><p>下载发布包，解压</p>
+<p><img src="/images/jnotify.assets/image-20210309103151127.png" alt="image-20210309103151127"></p>
+</li>
+</ol>
+<p>其中<code>jnotify.properties</code>描述了，项目云端的配置，包括云端同步地址，用户名密码</p>
+<p>,仓库在本地的存储地址等等.</p>
+<p><code>project</code>配置了需要同步到云端的地址,书写格式为<span style="color:#f50"> 存储地址</span>，<span style="color:#f50">待同步文档地址</span></p>
+<pre><code class="sh">~/.jnotify/pkg/workmd,/home/lame/workmd
+</code></pre>
+<p>配置文件修改完成后，执行install.sh,程序安装完成，执行start.sh 开始运行</p>
+
           
         
       
@@ -2464,7 +2022,7 @@ fmt.Println(err)
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span>
   </nav>
 
 
@@ -2510,7 +2068,7 @@ fmt.Println(err)
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2521,7 +2079,7 @@ fmt.Println(err)
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2534,7 +2092,7 @@ fmt.Println(err)
     <h3 class="widget-title">不知所云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
       <canvas width="250" height="250" id="resCanvas" style="width:100%">
-        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/" rel="tag">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/no/" rel="tag">no</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90/" rel="tag">资源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/" rel="tag">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ingress/" rel="tag">ingress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B3%E7%B3%BB/" rel="tag">关系</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%BD%93/" rel="tag">实体</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%92/" rel="tag">规划</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0/" rel="tag">函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%B9%E7%95%8C/" rel="tag">边界</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96/" rel="tag">决策</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E5%9E%8B/" rel="tag">类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E5%8F%B8/" rel="tag">公司</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koal123/" rel="tag">koal123</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%B7%E5%BE%B7/" rel="tag">康德</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idle/" rel="tag">idle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B3%E8%81%94/" rel="tag">关联</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%99/" rel="tag">规则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB/" rel="tag">新闻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%84%E5%88%86/" rel="tag">评分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%9B%E7%A8%8B/" rel="tag">赛程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dear/" rel="tag">dear</a><span class="tag-list-count">1</span></li></ul>
+        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E7%B4%A0/" rel="tag">元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpio/" rel="tag">gpio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/id3/" rel="tag">id3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/" rel="tag">emacs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mode/" rel="tag">mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dired/" rel="tag">dired</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/char/" rel="tag">char</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6/" rel="tag">字符</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/art/" rel="tag">art</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F/" rel="tag">系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" rel="tag">命令行</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/share/" rel="tag">share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" rel="tag">输入输出</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docx/" rel="tag">docx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpn/" rel="tag">rpn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A2%E5%85%B0/" rel="tag">波兰</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dear/" rel="tag">dear</a><span class="tag-list-count">1</span></li></ul>
       </canvas>
     </div>
   </div>
