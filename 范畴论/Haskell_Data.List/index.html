@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="list,函数,元素," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Data.List显而易见，Data.List 是关于 List 操作的模块，它提供了一组非常有用的 List 处理函数。在前面我们已经见过了其中的几个函数(如 map 和 filter)，这是 Prelude 模块出于方便起见，导出了几个 Data.List 里的函数。因为这几个函数是直接引用自 Data.List，所以就无需使用 qualified import。在下面，我们来看看几个以前没见">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Haskell_Data.List.md">
+<meta property="og:url" content="http://guoxiujun.com/%E8%8C%83%E7%95%B4%E8%AE%BA/Haskell_Data.List/index.html">
+<meta property="og:site_name" content="随笔">
+<meta property="og:description" content="Data.List显而易见，Data.List 是关于 List 操作的模块，它提供了一组非常有用的 List 处理函数。在前面我们已经见过了其中的几个函数(如 map 和 filter)，这是 Prelude 模块出于方便起见，导出了几个 Data.List 里的函数。因为这几个函数是直接引用自 Data.List，所以就无需使用 qualified import。在下面，我们来看看几个以前没见">
+<meta property="og:locale">
+<meta property="og:image" content="https://gblobscdn.gitbook.com/assets%2F-LjUmp_4rLaEvLYs4D0h%2Fsync%2Fd19ecafb5b59a25008d9316d601d8040013f6973.png?alt=media">
+<meta property="article:published_time" content="2021-09-10T10:29:01.000Z">
+<meta property="article:modified_time" content="2021-09-10T10:29:01.283Z">
+<meta property="article:author" content="guoxiujun">
+<meta property="article:tag" content="list">
+<meta property="article:tag" content="函数">
+<meta property="article:tag" content="元素">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gblobscdn.gitbook.com/assets%2F-LjUmp_4rLaEvLYs4D0h%2Fsync%2Fd19ecafb5b59a25008d9316d601d8040013f6973.png?alt=media">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://guoxiujun.com/范畴论/Haskell_Data.List/"/>
+
+
+
+
+
+  <title>Haskell_Data.List.md | 随笔</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">随笔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">十七个面包人</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-university"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/%E8%8C%83%E7%95%B4%E8%AE%BA/Haskell_Data.List/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Haskell_Data.List.md</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-10T18:29:01+08:00">
+                2021-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%8C%83%E7%95%B4%E8%AE%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">范畴论</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Data-List"><a href="#Data-List" class="headerlink" title="Data.List"></a>Data.List</h1><p>显而易见，<code>Data.List</code> 是关于 List 操作的模块，它提供了一组非常有用的 List 处理函数。在前面我们已经见过了其中的几个函数(如 <code>map</code> 和 <code>filter</code>)，这是 <code>Prelude</code> 模块出于方便起见，导出了几个 <code>Data.List</code> 里的函数。因为这几个函数是直接引用自 <code>Data.List</code>，所以就无需使用 <code>qualified import</code>。在下面，我们来看看几个以前没见过的函数:</p>
+<p><strong>intersperse</strong> 取一个元素与 List 作参数，并将该元素置于 List 中每对元素的中间。如下是个例子:</p>
+<pre><code>ghci&gt; intersperse &#39;.&#39; &quot;MONKEY&quot;  
+&quot;M.O.N.K.E.Y&quot;  
+ghci&gt; intersperse 0 [1,2,3,4,5,6]  
+[1,0,2,0,3,0,4,0,5,0,6]
+</code></pre>
+<p><strong>intercalate</strong> 取两个 List 作参数。它会将第一个 List 交叉插入第二个 List 中间，并返回一个 List.</p>
+<pre><code>ghci&gt; intercalate &quot; &quot; [&quot;hey&quot;,&quot;there&quot;,&quot;guys&quot;]  
+&quot;hey there guys&quot;  
+ghci&gt; intercalate [0,0,0] [[1,2,3],[4,5,6],[7,8,9]]  
+[1,2,3,0,0,0,4,5,6,0,0,0,7,8,9]
+</code></pre>
+<p><strong>transpose</strong> 函数可以反转一组 List 的 List。你若把一组 List 的 List 看作是个 2D 的矩阵，那 <code>transpose</code> 的操作就是将其列为行。</p>
+<pre><code>ghci&gt; transpose [[1,2,3],[4,5,6],[7,8,9]]  
+[[1,4,7],[2,5,8],[3,6,9]]  
+ghci&gt; transpose [&quot;hey&quot;,&quot;there&quot;,&quot;guys&quot;]  
+[&quot;htg&quot;,&quot;ehu&quot;,&quot;yey&quot;,&quot;rs&quot;,&quot;e&quot;]
+</code></pre>
+<p>假如有两个多项式 <code>3x&lt;sup&gt;2&lt;/sup&gt; + 5x + 9</code>，<code>10x&lt;sup&gt;3&lt;/sup&gt; + 9</code> 和 <code>8x&lt;sup&gt;3&lt;/sup&gt; + 5x&lt;sup&gt;2&lt;/sup&gt; + x - 1</code>，将其相加，我们可以列三个 List: <code>[0,3,5,9]</code>，<code>[10,0,0,9]</code> 和 <code>[8,5,1,-1]</code> 来表示。再用如下的方法取得结果.</p>
+<pre><code>ghci&gt; map sum $ transpose [[0,3,5,9],[10,0,0,9],[8,5,1,-1]]  
+[18,8,6,17]
+</code></pre>
+<p><img src="https://gblobscdn.gitbook.com/assets%2F-LjUmp_4rLaEvLYs4D0h%2Fsync%2Fd19ecafb5b59a25008d9316d601d8040013f6973.png?alt=media" alt="img"></p>
+<p>使用 <code>transpose</code> 处理这三个 List 之后，三次幂就到了第一行，二次幂到了第二行，以此类推。在用 <code>sum</code> 函数将其映射，即可得到正确的结果。</p>
+<p><strong>foldl’</strong> 和 <strong>foldl1’</strong> 是它们各自惰性实现的严格版本。在用 <code>fold</code> 处理较大的 List 时，经常会遇到堆栈溢出的问题。而这罪魁祸首就是 <code>fold</code> 的惰性: 在执行 <code>fold</code> 时，累加器的值并不会被立即更新，而是做一个”在必要时会取得所需的结果”的承诺。每过一遍累加器，这一行为就重复一次。而所有的这堆”承诺”最终就会塞满你的堆栈。严格的 <code>fold</code> 就不会有这一问题，它们不会作”承诺”，而是直接计算中间值的结果并继续执行下去。如果用惰性 <code>fold</code> 时经常遇到溢出错误，就应换用它们的严格版。</p>
+<p><strong>concat</strong> 把一组 List 连接为一个 List。</p>
+<pre><code>ghci&gt; concat [&quot;foo&quot;,&quot;bar&quot;,&quot;car&quot;]  
+&quot;foobarcar&quot;  
+ghci&gt; concat [[3,4,5],[2,3,4],[2,1,1]]  
+[3,4,5,2,3,4,2,1,1]
+</code></pre>
+<p>它相当于移除一级嵌套。若要彻底地连接其中的元素，你得 <code>concat</code> 它两次才行.</p>
+<p><strong>concatMap</strong> 函数与 <code>map</code> 一个 List 之后再 <code>concat</code> 它等价.</p>
+<pre><code>ghci&gt; concatMap (replicate 4) [1..3]  
+[1,1,1,1,2,2,2,2,3,3,3,3]
+</code></pre>
+<p><strong>and</strong> 取一组布林值 List 作参数。只有其中的值全为 <code>True</code> 的情况下才会返回 <code>True</code>。</p>
+<pre><code>ghci&gt; and $ map (&gt;4) [5,6,7,8]  
+True  
+ghci&gt; and $ map (==4) [4,4,4,3,4]  
+False
+</code></pre>
+<p><strong>or</strong> 与 <code>and</code> 相似，一组布林值 List 中若存在一个 <code>True</code> 它就返回 <code>True</code>.</p>
+<pre><code>ghci&gt; or $ map (==4) [2,3,4,5,6,1]  
+True  
+ghci&gt; or $ map (&gt;4) [1,2,3]  
+False
+</code></pre>
+<p><strong>any</strong> 和 <strong>all</strong> 取一个限制条件和一组布林值 List 作参数，检查是否该 List 的某个元素或每个元素都符合该条件。通常较 <code>map</code> 一个 List 到 <code>and</code> 或 <code>or</code> 而言，使用 <code>any</code> 或 <code>all</code> 会更多些。</p>
+<pre><code>ghci&gt; any (==4) [2,3,5,6,1,4]  
+True  
+ghci&gt; all (&gt;4) [6,9,10]  
+True  
+ghci&gt; all (`elem` [&#39;A&#39;..&#39;Z&#39;]) &quot;HEYGUYSwhatsup&quot;  
+False  
+ghci&gt; any (`elem` [&#39;A&#39;..&#39;Z&#39;]) &quot;HEYGUYSwhatsup&quot;  
+True
+</code></pre>
+<p><strong>iterate</strong> 取一个函数和一个值作参数。它会用该值去调用该函数并用所得的结果再次调用该函数，产生一个无限的 List.</p>
+<pre><code>ghci&gt; take 10 $ iterate (*2) 1  
+[1,2,4,8,16,32,64,128,256,512]  
+ghci&gt; take 3 $ iterate (++ &quot;haha&quot;) &quot;haha&quot;  
+[&quot;haha&quot;,&quot;hahahaha&quot;,&quot;hahahahahaha&quot;]
+</code></pre>
+<p><strong>splitAt</strong> 取一个 List 和数值作参数，将该 List 在特定的位置断开。返回一个包含两个 List 的二元组.</p>
+<pre><code>ghci&gt; splitAt 3 &quot;heyman&quot;  
+(&quot;hey&quot;,&quot;man&quot;)  
+ghci&gt; splitAt 100 &quot;heyman&quot;  
+(&quot;heyman&quot;,&quot;&quot;)  
+ghci&gt; splitAt (-3) &quot;heyman&quot;  
+(&quot;&quot;,&quot;heyman&quot;)  
+ghci&gt; let (a,b) = splitAt 3 &quot;foobar&quot; in b ++ a  
+&quot;barfoo&quot;
+</code></pre>
+<p><strong>takeWhile</strong> 这一函数十分的实用。它从一个 List 中取元素，一旦遇到不符合条件的某元素就停止.</p>
+<pre><code>ghci&gt; takeWhile (&gt;3) [6,5,4,3,2,1,2,3,4,5,4,3,2,1]  
+[6,5,4]  
+ghci&gt; takeWhile (/=&#39; &#39;) &quot;This is a sentence&quot;  
+&quot;This&quot;
+</code></pre>
+<p>如果要求所有三次方小于 10000 的数的和，用 <code>filter</code> 来过滤 <code>map (^3) [1..]</code> 所得结果中所有小于 10000 的数是不行的。因为对无限 List 执行的 <code>filter</code> 永远都不会停止。你已经知道了这个 List 是单增的，但 Haskell 不知道。所以应该这样：</p>
+<pre><code>ghci&gt; sum $ takeWhile (&lt;10000) $ map (^3) [1..]  
+53361
+</code></pre>
+<p>用 <code>(^3)</code> 处理一个无限 List，而一旦出现了大于等于 10000 的元素这个 List 就被切断了，sum 到一起也就轻而易举.</p>
+<p><strong>dropWhile</strong> 与此相似，不过它是扔掉符合条件的元素。一旦限制条件返回 <code>False</code>，它就返回 List 的余下部分。方便实用!</p>
+<pre><code>ghci&gt; dropWhile (/=&#39; &#39;) &quot;This is a sentence&quot;  
+&quot; is a sentence&quot;  
+ghci&gt; dropWhile (&lt;3) [1,2,2,2,3,4,5,4,3,2,1]  
+[3,4,5,4,3,2,1]
+</code></pre>
+<p>给一 <code>Tuple</code> 组成的 List，这 Tuple 的首项表示股票价格，第二三四项分别表示年,月,日。我们想知道它是在哪天首次突破 $1000 的!</p>
+<pre><code>ghci&gt; let stock = [(994.4,2008,9,1),(995.2,2008,9,2),(999.2,2008,9,3),(1001.4,2008,9,4),(998.3,2008,9,5)]  
+ghci&gt; head (dropWhile (\(val,y,m,d) -&gt; val &lt; 1000) stock)  
+(1001.4,2008,9,4)
+</code></pre>
+<p><strong>span</strong> 与 <code>takeWhile</code> 有点像，只是它返回两个 List。第一个 List 与同参数调用 <code>takeWhile</code> 所得的结果相同，第二个 List 就是原 List 中余下的部分。</p>
+<pre><code>ghci&gt; let (fw，rest) = span (/=&#39; &#39;) &quot;This is a sentence&quot; in &quot;First word:&quot; ++ fw ++ &quot;，the rest:&quot; ++ rest  
+&quot;First word: This，the rest: is a sentence&quot;
+</code></pre>
+<p><strong>span</strong> 是在条件首次为 <code>False</code> 时断开 List，而 <code>break</code> 则是在条件首次为 <code>True</code> 时断开 <code>List</code>。<code>break p</code> 与 <code>span (not . p)</code> 是等价的.</p>
+<pre><code>ghci&gt; break (==4) [1,2,3,4,5,6,7]  
+([1,2,3],[4,5,6,7])  
+ghci&gt; span (/=4) [1,2,3,4,5,6,7]  
+([1,2,3],[4,5,6,7])
+</code></pre>
+<p><strong>break</strong> 返回的第二个 List 就会以第一个符合条件的元素开头。</p>
+<p><strong>sort</strong> 可以排序一个 List，因为只有能够作比较的元素才可以被排序，所以这一 List 的元素必须是 Ord 型别类的实例型别。</p>
+<pre><code>ghci&gt; sort [8,5,3,2,1,6,4,2]  
+[1,2,2,3,4,5,6,8]  
+ghci&gt; sort &quot;This will be sorted soon&quot;  
+&quot; Tbdeehiillnooorssstw&quot;
+</code></pre>
+<p><strong>group</strong> 取一个 List 作参数，并将其中相邻并相等的元素各自归类，组成一个个子 List.</p>
+<pre><code>ghci&gt; group [1,1,1,1,2,2,2,2,3,3,2,2,2,5,6,7]  
+[[1,1,1,1],[2,2,2,2],[3,3],[2,2,2],[5],[6],[7]]
+</code></pre>
+<p>若在 <code>group</code> 一个 List 之前给它排序就可以得到每个元素在该 List 中的出现次数。</p>
+<pre><code>ghci&gt; map (\l@(x:xs) -&gt; (x,length l)) . group . sort $ [1,1,1,1,2,2,2,2,3,3,2,2,2,5,6,7]  
+[(1,4),(2,7),(3,2),(5,1),(6,1),(7,1)]
+</code></pre>
+<p><strong>inits</strong> 和 <strong>tails</strong> 与 <code>init</code> 和 <code>tail</code> 相似，只是它们会递归地调用自身直到什么都不剩，看:</p>
+<pre><code>ghci&gt; inits &quot;w00t&quot;  
+[&quot;&quot;,&quot;w&quot;,&quot;w0&quot;,&quot;w00&quot;,&quot;w00t&quot;]  
+ghci&gt; tails &quot;w00t&quot;  
+[&quot;w00t&quot;,&quot;00t&quot;,&quot;0t&quot;,&quot;t&quot;,&quot;&quot;]  
+ghci&gt; let w = &quot;w00t&quot; in zip (inits w) (tails w)  
+[(&quot;&quot;,&quot;w00t&quot;),(&quot;w&quot;,&quot;00t&quot;),(&quot;w0&quot;,&quot;0t&quot;),(&quot;w00&quot;,&quot;t&quot;),(&quot;w00t&quot;,&quot;&quot;)]
+</code></pre>
+<p>我们用 <code>fold</code> 实现一个搜索子 List 的函数:</p>
+<pre><code>search :: (Eq a) =&gt; [a] -&gt; [a] -&gt; Bool  
+search needle haystack =  
+  let nlen = length needle  
+  in foldl (\acc x -&gt; if take nlen x == needle then True else acc) False (tails haystack)
+</code></pre>
+<p>首先，对搜索的 List 调用 <code>tails</code>，然后遍历每个 List 来检查它是不是我们想要的.</p>
+<p>由此我们便实现了一个类似 <strong>isInfixOf</strong> 的函数，<strong>isInfixOf</strong> 从一个 List 中搜索一个子 List，若该 List 包含子 List，则返回 <code>True</code>.</p>
+<pre><code>ghci&gt; &quot;cat&quot; `isInfixOf` &quot;im a cat burglar&quot;  
+True  
+ghci&gt; &quot;Cat&quot; `isInfixOf` &quot;im a cat burglar&quot;  
+False  
+ghci&gt; &quot;cats&quot; `isInfixOf` &quot;im a cat burglar&quot;  
+False
+</code></pre>
+<p><strong>isPrefixOf</strong> 与 <strong>isSuffixOf</strong> 分别检查一个 List 是否以某子 List 开头或者结尾.</p>
+<pre><code>ghci&gt; &quot;hey&quot; `isPrefixOf` &quot;hey there!&quot;  
+True  
+ghci&gt; &quot;hey&quot; `isPrefixOf` &quot;oh hey there!&quot;  
+False  
+ghci&gt; &quot;there!&quot; `isSuffixOf` &quot;oh hey there!&quot;  
+True  
+ghci&gt; &quot;there!&quot; `isSuffixOf` &quot;oh hey there&quot;  
+False
+</code></pre>
+<p><strong>elem</strong> 与 <strong>notElem</strong> 检查一个 List 是否包含某元素.</p>
+<p><strong>partition</strong> 取一个限制条件和 List 作参数，返回两个 List，第一个 List 中包含所有符合条件的元素，而第二个 List 中包含余下的.</p>
+<pre><code>ghci&gt; partition (`elem` [&#39;A&#39;..&#39;Z&#39;]) &quot;BOBsidneyMORGANeddy&quot;  
+(&quot;BOBMORGAN&quot;,&quot;sidneyeddy&quot;)  
+ghci&gt; partition (&gt;3) [1,3,5,6,3,2,1,0,3,7]  
+([5,6,7],[1,3,3,2,1,0,3])
+</code></pre>
+<p>了解这个与 <code>span</code> 和 <code>break</code> 的差异是很重要的.</p>
+<pre><code>ghci&gt; span (`elem` [&#39;A&#39;..&#39;Z&#39;]) &quot;BOBsidneyMORGANeddy&quot;  
+(&quot;BOB&quot;,&quot;sidneyMORGANeddy&quot;)
+</code></pre>
+<p><code>span</code> 和 <code>break</code> 会在遇到第一个符合或不符合条件的元素处断开，而 <code>partition</code> 则会遍历整个 List。</p>
+<p><strong>find</strong> 取一个 List 和限制条件作参数，并返回首个符合该条件的元素，而这个元素是个 <code>Maybe</code> 值。在下章，我们将深入地探讨相关的算法和数据结构，但在这里你只需了解 <code>Maybe</code> 值是 <code>Just something</code> 或 <code>Nothing</code> 就够了。与一个 List 可以为空也可以包含多个元素相似，一个 <code>Maybe</code> 可以为空，也可以是单一元素。同样与 List 类似，一个 Int 型的 List 可以写作 <code>[Int]</code>，<code>Maybe</code>有个 Int 型可以写作 <code>Maybe Int</code>。先试一下 <code>find</code> 函数再说.</p>
+<pre><code>ghci&gt; find (&gt;4) [1,2,3,4,5,6]  
+Just 5  
+ghci&gt; find (&gt;9) [1,2,3,4,5,6]  
+Nothing  
+ghci&gt; :t find  
+find :: (a -&gt; Bool) -&gt; [a] -&gt; Maybe a
+</code></pre>
+<p>注意一下 <code>find</code> 的型别，它的返回结果为 <code>Maybe a</code>，这与 <code>[a]</code> 的写法有点像，只是 <code>Maybe</code> 型的值只能为空或者单一元素，而 List 可以为空,一个元素，也可以是多个元素.</p>
+<p>想想前面那段找股票的代码，<code>head (dropWhile (\(val,y,m,d) -&gt; val &lt; 1000) stock)</code> 。但 <code>head</code> 并不安全! 如果我们的股票没涨过 $1000 会怎样? <code>dropWhile</code> 会返回一个空 List，而对空 List 取 <code>head</code> 就会引发一个错误。把它改成 <code>find (\(val,y,m,d) -&gt; val &gt; 1000) stock</code> 就安全多啦，若存在合适的结果就得到它, 像 <code>Just (1001.4,2008,9,4)</code>，若不存在合适的元素(即我们的股票没有涨到过 $1000)，就会得到一个 <code>Nothing</code>.</p>
+<p><strong>elemIndex</strong> 与 <code>elem</code> 相似，只是它返回的不是布林值，它只是’可能’ (Maybe)返回我们找的元素的索引，若这一元素不存在，就返回 <code>Nothing</code>。</p>
+<pre><code>ghci&gt; :t elemIndex  
+elemIndex :: (Eq a) =&gt; a -&gt; [a] -&gt; Maybe Int  
+ghci&gt; 4 `elemIndex` [1,2,3,4,5,6]  
+Just 3  
+ghci&gt; 10 `elemIndex` [1,2,3,4,5,6]  
+Nothing
+</code></pre>
+<p><strong>elemIndices</strong> 与 <code>elemIndex</code> 相似，只不过它返回的是 List，就不需要 <code>Maybe</code> 了。因为不存在用空 List 就可以表示，这就与 <code>Nothing</code> 相似了.</p>
+<pre><code>ghci&gt; &#39; &#39; `elemIndices` &quot;Where are the spaces?&quot;  
+[5,9,13]
+</code></pre>
+<p><strong>findIndex</strong> 与 <code>find</code> 相似，但它返回的是可能存在的首个符合该条件元素的索引。<strong>findIndices</strong> 会返回所有符合条件的索引.</p>
+<pre><code>ghci&gt; findIndex (==4) [5,3,2,1,6,4]  
+Just 5  
+ghci&gt; findIndex (==7) [5,3,2,1,6,4]  
+Nothing  
+ghci&gt; findIndices (`elem` [&#39;A&#39;..&#39;Z&#39;]) &quot;Where Are The Caps?&quot;  
+[0,6,10,14]
+</code></pre>
+<p>在前面，我们讲过了 <code>zip</code> 和 <code>zipWith</code>，它们只能将两个 List 组到一个二元组数或二参函数中，但若要组三个 List 该怎么办? 好说~ 有 <code>zip3</code>,<code>zip4</code>…,和 <code>zipWith3</code>, <code>zipWith4</code>…直到 7。这看起来像是个 hack，但工作良好。连着组 8 个 List 的情况很少遇到。还有个聪明办法可以组起无限多个 List，但限于我们目前的水平，就先不谈了.</p>
+<pre><code>ghci&gt; zipWith3 (\x y z -&gt; x + y + z) [1,2,3] [4,5,2,2] [2,2,3]  
+[7,9,8]  
+ghci&gt; zip4 [2,3,3] [2,2,2] [5,5,3] [2,2,2]  
+[(2,2,5,2),(3,2,5,2),(3,2,3,2)]
+</code></pre>
+<p>与普通的 <code>zip</code> 操作相似，以返回的 List 中长度最短的那个为准.</p>
+<p>在处理来自文件或其它地方的输入时，<strong>lines</strong> 会非常有用。它取一个字串作参数。并返回由其中的每一行组成的 List.</p>
+<pre><code>ghci&gt; lines &quot;first line\nsecond line\nthird line&quot;  
+[&quot;first line&quot;,&quot;second line&quot;,&quot;third line&quot;]
+</code></pre>
+<p><code>&#39;\n&#39;</code> 表示unix下的换行符，在 Haskell 的字符中，反斜杠表示特殊字符.</p>
+<p><strong>unlines</strong> 是 <code>lines</code> 的反函数，它取一组字串的 List，并将其通过 <code>&#39;\n&#39;</code>合并到一块.</p>
+<pre><code>ghci&gt; unlines [&quot;first line&quot;，&quot;second line&quot;，&quot;third line&quot;]  
+&quot;first line\nsecond line\nthird line\n&quot;
+</code></pre>
+<p><strong>words</strong> 和 <strong>unwords</strong> 可以把一个字串分为一组单词或执行相反的操作，很有用.</p>
+<pre><code>ghci&gt; words &quot;hey these are the words in this sentence&quot;  
+[&quot;hey&quot;,&quot;these&quot;,&quot;are&quot;,&quot;the&quot;,&quot;words&quot;,&quot;in&quot;,&quot;this&quot;,&quot;sentence&quot;]  
+ghci&gt; words &quot;hey these are the words in this\nsentence&quot;  
+[&quot;hey&quot;,&quot;these&quot;,&quot;are&quot;,&quot;the&quot;,&quot;words&quot;,&quot;in&quot;,&quot;this&quot;,&quot;sentence&quot;]  
+ghci&gt; unwords [&quot;hey&quot;,&quot;there&quot;,&quot;mate&quot;]  
+&quot;hey there mate&quot;
+</code></pre>
+<p>我们前面讲到了 <strong>nub</strong>，它可以将一个 List 中的重复元素全部筛掉，使该 List 的每个元素都如雪花般独一无二，’nub’ 的含义就是’一小块’或’一部分’，用在这里觉得很古怪。我觉得，在函数的命名上应该用更确切的词语，而避免使用老掉牙的过时词汇.</p>
+<pre><code>ghci&gt; nub [1,2,3,4,3,2,1,2,3,4,3,2,1]  
+[1,2,3,4]  
+ghci&gt; nub &quot;Lots of words and stuff&quot;  
+&quot;Lots fwrdanu&quot;
+</code></pre>
+<p><strong>delete</strong> 取一个元素和 List 作参数，会删掉该 List 中首次出现的这一元素.</p>
+<pre><code>ghci&gt; delete &#39;h&#39; &quot;hey there ghang!&quot;  
+&quot;ey there ghang!&quot;  
+ghci&gt; delete &#39;h&#39; . delete &#39;h&#39; $ &quot;hey there ghang!&quot;  
+&quot;ey tere ghang!&quot;  
+ghci&gt; delete &#39;h&#39; . delete &#39;h&#39; . delete &#39;h&#39; $ &quot;hey there ghang!&quot;  
+&quot;ey tere gang!&quot;
+</code></pre>
+<p>*<em>*</em> 表示 List 的差集操作，这与集合的差集很相似，它会从左边 List 中的元素扣除存在于右边 List 中的元素一次.</p>
+<pre><code>ghci&gt; [1..10] \\ [2,5,9]  
+[1,3,4,6,7,8,10]  
+ghci&gt; &quot;Im a big baby&quot; \\ &quot;big&quot;  
+&quot;Im a  baby&quot;
+</code></pre>
+<p><strong>union</strong> 与集合的并集也是很相似，它返回两个 List 的并集，即遍历第二个 List 若存在某元素不属于第一个 List，则追加到第一个 List。看，第二个 List 中的重复元素就都没了!</p>
+<pre><code>ghci&gt; &quot;hey man&quot; `union` &quot;man what&#39;s up&quot;  
+&quot;hey manwt&#39;sup&quot;  
+ghci&gt; [1..7] `union` [5..10]  
+[1,2,3,4,5,6,7,8,9,10]
+</code></pre>
+<p><strong>intersect</strong> 相当于集合的交集。它返回两个 List 的相同部分.</p>
+<pre><code>ghci&gt; [1..7] `intersect` [5..10]  
+[5,6,7]
+</code></pre>
+<p><strong>insert</strong> 可以将一个元素插入一个可排序的 List，并将其置于首个大于等于它的元素之前，如果使用 <code>insert</code> 来给一个排过序的 List 插入元素，返回的结果依然是排序的.</p>
+<pre><code>ghci&gt; insert 4 [1,2,3,5,6,7]  
+[1,2,3,4,5,6,7]  
+ghci&gt; insert &#39;g&#39; $ [&#39;a&#39;..&#39;f&#39;] ++ [&#39;h&#39;..&#39;z&#39;]  
+&quot;abcdefghijklmnopqrstuvwxyz&quot;  
+ghci&gt; insert 3 [1,2,4,3,2,1]  
+[1,2,3,4,3,2,1]
+</code></pre>
+<p><code>length</code>，<code>take</code>，<code>drop</code>，<code>splitAt</code>，<code>!!</code> 和 <code>replicate</code> 之类的函数有个共同点。那就是它们的参数中都有个 Int 值（或者返回Int值），我觉得使用 Intergal 或 Num 型别类会更好，但出于历史原因，修改这些会破坏掉许多既有的代码。在 <code>Data.List</code> 中包含了更通用的替代版，如: <code>genericLength，genericTake，genericDrop，genericSplitAt，genericIndex</code> 和 <code>genericReplicate</code>。<code>length</code> 的型别声明为 <code>length :: [a] -&gt; Int</code>，而我们若要像这样求它的平均值，<code>let xs = [1..6] in sum xs / length xs</code> ，就会得到一个型别错误，因为 <code>/</code> 运算符不能对 Int 型使用! 而 <code>genericLength</code> 的型别声明则为 <code>genericLength :: (Num a) =&gt; [b] -&gt; a</code>，Num 既可以是整数又可以是浮点数，<code>let xs = [1..6] in sum xs / genericLength xs</code> 这样再求平均数就不会有问题了.</p>
+<p><code>nub</code>, <code>delete</code>, <code>union</code>, <code>intsect</code> 和 <code>group</code> 函数也有各自的通用替代版 <code>nubBy</code>，<code>deleteBy</code>，<code>unionBy</code>，<code>intersectBy</code> 和 <code>groupBy</code>，它们的区别就是前一组函数使用 <code>(==)</code> 来测试是否相等，而带 <code>By</code> 的那组则取一个函数作参数来判定相等性，<code>group</code> 就与 <code>groupBy (==)</code> 等价.</p>
+<p>假如有个记录某函数在每秒的值的 List，而我们要按照它小于零或者大于零的交界处将其分为一组子 List。如果用 <code>group</code>，它只能将相邻并相等的元素组到一起，而在这里我们的标准是它们是否互为相反数。<code>groupBy</code> 登场! 它取一个含两个参数的函数作为参数来判定相等性.</p>
+<pre><code>ghci&gt; let values = [-4.3,-2.4,-1.2,0.4,2.3,5.9,10.5,29.1,5.3,-2.4,-14.5,2.9,2.3]  
+ghci&gt; groupBy (\x y -&gt; (x &gt; 0) == (y &gt; 0)) values  
+[[-4.3,-2.4,-1.2],[0.4,2.3,5.9,10.5,29.1,5.3],[-2.4,-14.5],[2.9,2.3]]
+</code></pre>
+<p>这样一来我们就可以很清楚地看出哪部分是正数，哪部分是负数，这个判断相等性的函数会在两个元素同时大于零或同时小于零时返回 <code>True</code>。也可以写作 <code>\x y -&gt; (x &gt; 0) &amp;&amp; (y &gt; 0) || (x &lt;= 0) &amp;&amp; (y &lt;= 0)</code>。但我觉得第一个写法的可读性更高。<code>Data.Function</code> 中还有个 <code>on</code> 函数可以让它的表达更清晰，其定义如下:</p>
+<pre><code>on :: (b -&gt; b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; a -&gt; c  
+f `on` g = \x y -&gt; f (g x) (g y)
+</code></pre>
+<p>执行 <code>(==) </code>on<code> (&gt; 0)</code> 得到的函数就与 <code>\x y -&gt; (x &gt; 0) == (y &gt; 0)</code> 基本等价。<code>on</code> 与带 <code>By</code> 的函数在一起会非常好用，你可以这样写:</p>
+<pre><code>ghci&gt; groupBy ((==) `on` (&gt; 0)) values  
+[[-4.3,-2.4,-1.2],[0.4,2.3,5.9,10.5,29.1,5.3],[-2.4,-14.5],[2.9,2.3]]
+</code></pre>
+<p>可读性很高! 你可以大声念出来: 按照元素是否大于零，给它分类！</p>
+<p>同样，<code>sort</code>，<code>insert</code>，<code>maximum</code> 和 <code>min</code> 都有各自的通用版本。如 <code>groupBy</code> 类似，<strong>sortBy</strong>，<strong>insertBy</strong>，<strong>maximumBy</strong> 和 <strong>minimumBy</strong> 都取一个函数来比较两个元素的大小。像 <code>sortBy</code> 的型别声明为: <code>sortBy :: (a -&gt; a -&gt; Ordering) -&gt; [a] -&gt; [a]</code>。前面提过，<code>Ordering</code> 型别可以有三个值,<code>LT</code>，<code>EQ</code> 和 <code>GT</code>。<code>compare</code> 取两个 <code>Ord</code> 型别类的元素作参数，所以 <code>sort</code> 与 <code>sortBy compare</code> 等价.</p>
+<p>List 是可以比较大小的，且比较的依据就是其中元素的大小。如果按照其子 List 的长度为标准当如何? 很好，你可能已经猜到了，<code>sortBy</code> 函数.</p>
+<pre><code>ghci&gt; let xs = [[5,4,5,4,4],[1,2,3],[3,5,4,3],[],[2],[2,2]]  
+ghci&gt; sortBy (compare `on` length) xs  
+[[],[2],[2,2],[1,2,3],[3,5,4,3],[5,4,5,4,4]]
+</code></pre>
+<p>太绝了! <code>compare </code>on<code> length</code>，乖乖，这简直就是英文! 如果你搞不清楚 <code>on</code> 在这里的原理，就可以认为它与 <code>\x y -&gt; length x </code>compare<code> length y</code> 等价。通常，与带 <code>By</code> 的函数打交道时，若要判断相等性，则 <code>(==) </code>on<code> something</code>。若要判定大小，则 <code>compare </code>on<code> something</code>.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/upload/wechat-qcode.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>十七个面包人，扫描加我带回家</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>可爱的捐献者</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/upload/alipay.jpg" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    guoxiujun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://guoxiujun.com/%E8%8C%83%E7%95%B4%E8%AE%BA/Haskell_Data.List/" title="Haskell_Data.List.md">http://guoxiujun.com/%E8%8C%83%E7%95%B4%E8%AE%BA/Haskell_Data.List/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/list/" rel="tag"># list</a>
+          
+            <a href="/tags/%E5%87%BD%E6%95%B0/" rel="tag"># 函数</a>
+          
+            <a href="/tags/%E5%85%83%E7%B4%A0/" rel="tag"># 元素</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/%E8%8C%83%E7%95%B4%E8%AE%BA/Haskell_%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" rel="next" title="Haskell_输入输出.md">
+                <i class="fa fa-chevron-left"></i> Haskell_输入输出.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/%E8%8C%83%E7%95%B4%E8%AE%BA/Haskell_Data.Char/" rel="prev" title="Haskell_**Data.Char**.md">
+                Haskell_**Data.Char**.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">84</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+
+  <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+  <div class="widget-wrap">
+    <h3 class="widget-title">不知所云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+      <canvas width="250" height="250" id="resCanvas" style="width:100%">
+        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/functors/" rel="tag">functors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A3%E5%AF%86/" rel="tag">解密</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" rel="tag">配置文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E4%BB%A3%E7%A0%81/" rel="tag">源代码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE/" rel="tag">垃圾</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/" rel="tag">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clojure/" rel="tag">clojure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/" rel="tag">sed</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" rel="tag">文字处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F/" rel="tag">系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag">可用性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl/" rel="tag">dsl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpl/" rel="tag">gpl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E9%9B%86%E5%99%A8/" rel="tag">收集器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/haskell/" rel="tag">haskell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/" rel="tag">stack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9D%E5%A7%8B%E5%8C%96/" rel="tag">初始化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8A%E5%A4%A9/" rel="tag">聊天</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hubot/" rel="tag">hubot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crl/" rel="tag">crl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/" rel="tag">nosql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svs/" rel="tag">svs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lockfree/" rel="tag">lockfree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fine/" rel="tag">fine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/limit/" rel="tag">limit</a><span class="tag-list-count">1</span></li></ul>
+      </canvas>
+    </div>
+  </div>
+
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lubbock" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/sevenclear" target="_blank" title="GitEee">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitEee</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2913408047@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                好的博文
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://kheri.net/" title="Kheri" target="_blank">Kheri</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-List"><span class="nav-number">1.</span> <span class="nav-text">Data.List</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">guoxiujun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+  <script src='https://unpkg.com/mermaid@8.11.4/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize([object Object]);
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+   <script id="ribbon" size="300" alpha='0.5' zIndex="-3" src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+   <!-- <script type="text/javascript" color="85,85,85" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"> </script> -->
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/nito.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
