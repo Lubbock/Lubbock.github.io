@@ -295,6 +295,274 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/kcsp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/root/kcsp/" itemprop="url">kcsp.md</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-10T11:32:28+08:00">
+                2021-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/root/" itemprop="url" rel="index">
+                    <span itemprop="name">root</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="编程比赛"><a href="#编程比赛" class="headerlink" title="编程比赛"></a>编程比赛</h1><p>主要使用编程语言是<code>kotlin </code>,简单涉及了<code>图像处理</code></p>
+<h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><ol>
+<li><p>在家连的vpn ping 了47.103.87.108 10.99.0.23 不通</p>
+</li>
+<li><p>下载nmap 进行 端口扫描</p>
+</li>
+<li><p>扫出三个端口，用了第一个 ssh登录成功，wget gitlab 成功</p>
+</li>
+<li><p>根据题目描述，用ssh做端口转发，发现用户名密码不对，进不了 gitlab 服务</p>
+</li>
+<li><p>考虑了正向代理和直接接口访问 （环境搞起来麻烦，同时发现之前有几个端口不知道做啥的，用其他端口试了下 gitlab登录成功，完成剩下步骤 （按今天说法此处使用了其他队伍建好的nginx代理）</p>
+<h3 id="克服问题"><a href="#克服问题" class="headerlink" title="克服问题"></a>克服问题</h3><p>ssh密码过长，cmd不好复制采用powershell<br>nmap扫描命令查询，ssh端口转发命令查询<br>成员分工： 郭修军 - 1 2 3 4 5 6， 孙哲和杨毅，在客户现场和项目加班，未参与</p>
+</li>
+</ol>
+<h2 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h2><p>找出图片的隐藏信息，</p>
+<p>扫描二维码，得到一个地址，base64 后，发现信息如下</p>
+<pre><code class="sh">你所需要的所有信息在图片上
+</code></pre>
+<p>由题意大致知道在文件里写了信息，找个<strong>png</strong>图片,在图片末尾发现不正常字段，大部都是×*X *X,base64 转码，得知图片里9个二维码条。</p>
+<p><img src="http://10.0.130.209:7778/%E4%BA%8C%E7%BB%B4%E7%A0%81.png" alt="解密后的二维码"></p>
+<p>使用ps 获得最头的其实像素位置，然后以此类推，使用<strong>kotlin</strong> 读取像素，写入文件，得到9个二维码条。</p>
+<p>观察二维码得，二维码满足3个定位点+ 定位点四周为空白通道。将获得的9个二维码条，取他的蓝色通道，然后根据特征，推测出其中5张图片位置。剩下的使用<code>google</code>的<strong>zxing</strong>做排列组合，自动扫码得唯一密文。</p>
+<h3 id="下面是错误时间"><a href="#下面是错误时间" class="headerlink" title="下面是错误时间"></a>下面是错误时间</h3><p>密文，结合密钥加偏移索引，由于我是直接找到的密文，导致我丢失了关键信息</p>
+<blockquote>
+<p> <code>附加信息</code>以asn.1 存储，同时指明了密钥，偏移量所在位置。</p>
+</blockquote>
+<p>我直接将时间戳拆成了密钥+偏移量。然后一顿转换想得到能识别的信息，都已失败告终。最后发现二维码描述了s盒变化，执行s盒变化，仍是失败得不到有用信息。第二轮败北。</p>
+<h3 id="下面是正确时间"><a href="#下面是正确时间" class="headerlink" title="下面是正确时间"></a>下面是正确时间</h3><p>从文件头获取base64的comment,得到附加数据加密和存储位置，用asn.1 转换，得到解码要求所有信息，</p>
+<h2 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h2><p>第三题为开放题，给日志得到有效分析结果。很明显有几个方向</p>
+<ul>
+<li>web安全</li>
+<li>人物肖像绘制</li>
+<li>公司肖像绘制</li>
+</ul>
+<p>由于能力问题，简单的进行了一些分析，并且得到了简易的结果</p>
+<p> 使用sql</p>
+<pre><code class="sql">select user_id,http_host,count(*),date_format (date, &#39;%Y-%m-%d&#39;) from r3_log group by user_id,http_host,date_format (date, &#39;%Y-%m-%d&#39;);
+</code></pre>
+<p>得到简易的数据信息，然后通过计算不同用户的访问次数的标准差，得到标准差访问信息20条，结合数据库得到明显异常访问数据</p>
+<pre><code class="sh">&quot;user_id&quot;,&quot;http_host&quot;,&quot;count(*)&quot;,&quot;date_format (date, &#39;%Y-%m-%d&#39;)&quot;
+&quot;317f61dde4a20b66605fdc3bb833dfd3&quot;,&quot;oa.koal.com&quot;,&quot;604&quot;,&quot;2020-11-30&quot;
+&quot;317f61dde4a20b66605fdc3bb833dfd3&quot;,&quot;oa.koal.com&quot;,&quot;6651&quot;,&quot;2020-12-01&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;doc.koal.com&quot;,&quot;7310&quot;,&quot;2020-11-24&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;doc.koal.com&quot;,&quot;1990&quot;,&quot;2020-11-25&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;186&quot;,&quot;2020-11-24&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;507&quot;,&quot;2020-11-25&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;349&quot;,&quot;2020-11-26&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;390&quot;,&quot;2020-11-27&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;149&quot;,&quot;2020-11-30&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;401&quot;,&quot;2020-12-01&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;286&quot;,&quot;2020-12-02&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;126&quot;,&quot;2020-11-20&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;251&quot;,&quot;2020-11-23&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;26&quot;,&quot;2020-11-24&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;257&quot;,&quot;2020-11-25&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;151&quot;,&quot;2020-11-26&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;179&quot;,&quot;2020-11-27&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;194&quot;,&quot;2020-11-30&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;245&quot;,&quot;2020-12-01&quot;
+&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;153&quot;,&quot;2020-12-02&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;3112&quot;,&quot;2020-11-17&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;10089&quot;,&quot;2020-11-18&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;2611&quot;,&quot;2020-11-19&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;2835&quot;,&quot;2020-11-20&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;3223&quot;,&quot;2020-11-21&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;1156&quot;,&quot;2020-11-22&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;262&quot;,&quot;2020-11-23&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;170&quot;,&quot;2020-11-24&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;159&quot;,&quot;2020-11-25&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;919&quot;,&quot;2020-12-01&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;227&quot;,&quot;2020-12-02&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;177&quot;,&quot;2020-11-24&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;120&quot;,&quot;2020-11-25&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;119&quot;,&quot;2020-11-26&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;266&quot;,&quot;2020-11-27&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;70&quot;,&quot;2020-11-28&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;120&quot;,&quot;2020-11-29&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;202&quot;,&quot;2020-11-30&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;80&quot;,&quot;2020-12-01&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;89&quot;,&quot;2020-12-02&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;oa.koal.com&quot;,&quot;32&quot;,&quot;2020-11-27&quot;
+&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;oa.koal.com&quot;,&quot;75&quot;,&quot;2020-12-01&quot;
+&quot;6cee293782567037b5a20e93b5641c1e&quot;,&quot;mail.koal.com&quot;,&quot;96&quot;,&quot;2020-11-27&quot;
+&quot;6cee293782567037b5a20e93b5641c1e&quot;,&quot;oa.koal.com&quot;,&quot;23&quot;,&quot;2020-11-20&quot;
+&quot;6cee293782567037b5a20e93b5641c1e&quot;,&quot;oa.koal.com&quot;,&quot;5&quot;,&quot;2020-11-24&quot;
+&quot;6cee293782567037b5a20e93b5641c1e&quot;,&quot;oa.koal.com&quot;,&quot;11262&quot;,&quot;2020-11-27&quot;
+</code></pre>
+<p>明显访问异常数据如下</p>
+<pre><code class="sh">Visit(userId=49449f79caad9975ed66e06b9c0fd38f, host=doc.koal.com, visitNum=4650, date=, variance=2660.0)
+Visit(userId=5cb796c3b9cdc5b61db916d5bbd403dd, host=doc.koal.com, visitNum=2251, date=, variance=2752.254877203583)
+Visit(userId=317f61dde4a20b66605fdc3bb833dfd3, host=oa.koal.com, visitNum=3627, date=, variance=3023.5000413428143)
+Visit(userId=6cee293782567037b5a20e93b5641c1e, host=oa.koal.com, visitNum=3763, date=, variance=5302.36315240667)
+</code></pre>
+<p><img src="/images/kcsp.assets/doc%E5%BC%82%E5%B8%B8%E7%94%A8%E6%88%B7.png" alt="分析1"></p>
+<p><img src="/images/kcsp.assets/oa.koal.com%E5%BC%82%E5%B8%B8%E7%94%A8%E6%88%B7.png" alt="分析2"></p>
+<p>得出第一个结论，</p>
+<blockquote>
+<p>49449f79caad9975ed66e06b9c0fd38f，5cb796c3b9cdc5b61db916d5bbd403dd 存在异常文件下载。</p>
+<p>6cee293782567037b5a20e93b5641c1e，317f61dde4a20b66605fdc3bb833dfd3 可能存在密码泄密</p>
+</blockquote>
+<h3 id="结论2"><a href="#结论2" class="headerlink" title="结论2"></a>结论2</h3><p>根据日常观察，做出论断，经常访问邮箱的人可能更有价值，是<strong>领导</strong>或者<strong>和用户交流的人</strong>，适合被盗号和分析</p>
+<p>根据结论1 中的数据，使用<code>kotlin</code>处理,得到帐号侧写。</p>
+<pre><code class="txt">************浏览邮箱最多的人
+这些人可能更有价值：领导，或者和用户交流的人，适合被盗号和分析
+EmailAvgVisit(userId=1865ef21ee7c4b065c2f507f755df60c, visitNum=1244)
+EmailAvgVisit(userId=d87fcc379e0853ad4dd7ae50fb82a825, visitNum=1020)
+EmailAvgVisit(userId=d8d172831153ea9c3ba32132b4acc98c, visitNum=1018)
+EmailAvgVisit(userId=1a4463c424d3260abf8ce9e870f8523a, visitNum=973)
+EmailAvgVisit(userId=004911830ef6a60347d630ff5ce2a1bf, visitNum=811)
+EmailAvgVisit(userId=6623c288b54d611b2a0b324e316fd161, visitNum=709)
+EmailAvgVisit(userId=10322da519bba59e112e228b401a26cd, visitNum=661)
+EmailAvgVisit(userId=7b5e5af6d605e4c1d0efd7621920e3e3, visitNum=658)
+EmailAvgVisit(userId=3704234ea06bcba173781a3a7a10d820, visitNum=644)
+EmailAvgVisit(userId=a69e1cf3e5fd246627a14fc21a263b3c, visitNum=620)
+EmailAvgVisit(userId=f63b1336559f1768dbb514a159a8d1ee, visitNum=567)
+EmailAvgVisit(userId=3aec6a16a05eb4c756cd454fa8074b98, visitNum=564)
+EmailAvgVisit(userId=0b376d3fedad6aa0ddc2fb28b6bdf863, visitNum=555)
+EmailAvgVisit(userId=4c2266d85cfdbcd6e29a76fc80233020, visitNum=552)
+EmailAvgVisit(userId=7da1643f0028b417277330c93b278798, visitNum=547)
+EmailAvgVisit(userId=0336bf52b737389851f6c2b5b0d53199, visitNum=530)
+EmailAvgVisit(userId=cfdad1bc7137af8c804c3ea9b13e44b0, visitNum=528)
+EmailAvgVisit(userId=1981a47bc8997466f3907ebf4f1fd56a, visitNum=493)
+EmailAvgVisit(userId=93eb74409fab5980f9c2984112dc5c7b, visitNum=491)
+EmailAvgVisit(userId=3017eacfd39a18380819c8bbc38747dd, visitNum=468)
+</code></pre>
+<p>web安全方向，</p>
+<p>理论上，需要对path进行处理，然后找些开源的url上的攻击<em>sql注入</em>，<em>xss</em>等因为时间和人员关系，并没有来得及处理。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/kcsp-%E8%A7%A3%E9%A2%98%E6%8A%80%E6%9C%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -886,274 +1154,6 @@ fun main() &#123;
     sbyte()
 &#125;
 </code></pre>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guoxiujun.com/root/kcsp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/root/kcsp/" itemprop="url">kcsp.md</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-10T09:48:11+08:00">
-                2021-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/root/" itemprop="url" rel="index">
-                    <span itemprop="name">root</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="编程比赛"><a href="#编程比赛" class="headerlink" title="编程比赛"></a>编程比赛</h1><p>主要使用编程语言是<code>kotlin </code>,简单涉及了<code>图像处理</code></p>
-<h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><ol>
-<li><p>在家连的vpn ping 了47.103.87.108 10.99.0.23 不通</p>
-</li>
-<li><p>下载nmap 进行 端口扫描</p>
-</li>
-<li><p>扫出三个端口，用了第一个 ssh登录成功，wget gitlab 成功</p>
-</li>
-<li><p>根据题目描述，用ssh做端口转发，发现用户名密码不对，进不了 gitlab 服务</p>
-</li>
-<li><p>考虑了正向代理和直接接口访问 （环境搞起来麻烦，同时发现之前有几个端口不知道做啥的，用其他端口试了下 gitlab登录成功，完成剩下步骤 （按今天说法此处使用了其他队伍建好的nginx代理）</p>
-<h3 id="克服问题"><a href="#克服问题" class="headerlink" title="克服问题"></a>克服问题</h3><p>ssh密码过长，cmd不好复制采用powershell<br>nmap扫描命令查询，ssh端口转发命令查询<br>成员分工： 郭修军 - 1 2 3 4 5 6， 孙哲和杨毅，在客户现场和项目加班，未参与</p>
-</li>
-</ol>
-<h2 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h2><p>找出图片的隐藏信息，</p>
-<p>扫描二维码，得到一个地址，base64 后，发现信息如下</p>
-<pre><code class="sh">你所需要的所有信息在图片上
-</code></pre>
-<p>由题意大致知道在文件里写了信息，找个<strong>png</strong>图片,在图片末尾发现不正常字段，大部都是×*X *X,base64 转码，得知图片里9个二纬码条。</p>
-<p><img src="http://10.0.130.209:7778/%E4%BA%8C%E7%BB%B4%E7%A0%81.png" alt="解密后的二维码"></p>
-<p>使用ps 获得最头的其实像素位置，然后以此类推，使用<strong>kotlin</strong> 读取像素，写入文件，得到9个二维码条。</p>
-<p>观察二维码得，二维码满足3个定位点+ 定位点四周为空白通道。将获得的9个二维码条，取他的蓝色通道，然后根据特征，推测出其中5张图片位置。剩下的使用<code>google</code>的<strong>zxing</strong>做排列组合，自动扫码得唯一密文。</p>
-<h3 id="下面是错误时间"><a href="#下面是错误时间" class="headerlink" title="下面是错误时间"></a>下面是错误时间</h3><p>密文，结合密钥加偏移索引，由于我是直接找到的密文，导致我丢失了关键信息</p>
-<blockquote>
-<p> <code>附加信息</code>以asn.1 存储，同时指明了密钥，偏移量所在位置。</p>
-</blockquote>
-<p>我直接将时间戳拆成了密钥+偏移量。然后一顿转换想得到能识别的信息，都已失败告终。最后发现二维码描述了s盒变化，执行s盒变化，仍是失败得不到有用信息。第二轮败北。</p>
-<h3 id="下面是正确时间"><a href="#下面是正确时间" class="headerlink" title="下面是正确时间"></a>下面是正确时间</h3><p>从文件头获取base64的comment,得到附加数据加密和存储位置，用asn.1 转换，得到解码要求所有信息，</p>
-<h2 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h2><p>第三题为开放题，给日志得到有效分析结果。很明显有几个方向</p>
-<ul>
-<li>web安全</li>
-<li>人物肖像绘制</li>
-<li>公司肖像绘制</li>
-</ul>
-<p>由于能力问题，简单的进行了一些分析，并且得到了简易的结果</p>
-<p> 使用sql</p>
-<pre><code class="sql">select user_id,http_host,count(*),date_format (date, &#39;%Y-%m-%d&#39;) from r3_log group by user_id,http_host,date_format (date, &#39;%Y-%m-%d&#39;);
-</code></pre>
-<p>得到简易的数据信息，然后通过计算不同用户的访问次数的标准差，得到标准差访问信息20条，结合数据库得到明显异常访问数据</p>
-<pre><code class="sh">&quot;user_id&quot;,&quot;http_host&quot;,&quot;count(*)&quot;,&quot;date_format (date, &#39;%Y-%m-%d&#39;)&quot;
-&quot;317f61dde4a20b66605fdc3bb833dfd3&quot;,&quot;oa.koal.com&quot;,&quot;604&quot;,&quot;2020-11-30&quot;
-&quot;317f61dde4a20b66605fdc3bb833dfd3&quot;,&quot;oa.koal.com&quot;,&quot;6651&quot;,&quot;2020-12-01&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;doc.koal.com&quot;,&quot;7310&quot;,&quot;2020-11-24&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;doc.koal.com&quot;,&quot;1990&quot;,&quot;2020-11-25&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;186&quot;,&quot;2020-11-24&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;507&quot;,&quot;2020-11-25&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;349&quot;,&quot;2020-11-26&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;390&quot;,&quot;2020-11-27&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;149&quot;,&quot;2020-11-30&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;401&quot;,&quot;2020-12-01&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;mail.koal.com&quot;,&quot;286&quot;,&quot;2020-12-02&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;126&quot;,&quot;2020-11-20&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;251&quot;,&quot;2020-11-23&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;26&quot;,&quot;2020-11-24&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;257&quot;,&quot;2020-11-25&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;151&quot;,&quot;2020-11-26&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;179&quot;,&quot;2020-11-27&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;194&quot;,&quot;2020-11-30&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;245&quot;,&quot;2020-12-01&quot;
-&quot;49449f79caad9975ed66e06b9c0fd38f&quot;,&quot;oa.koal.com&quot;,&quot;153&quot;,&quot;2020-12-02&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;3112&quot;,&quot;2020-11-17&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;10089&quot;,&quot;2020-11-18&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;2611&quot;,&quot;2020-11-19&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;2835&quot;,&quot;2020-11-20&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;3223&quot;,&quot;2020-11-21&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;1156&quot;,&quot;2020-11-22&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;262&quot;,&quot;2020-11-23&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;170&quot;,&quot;2020-11-24&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;159&quot;,&quot;2020-11-25&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;919&quot;,&quot;2020-12-01&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;doc.koal.com&quot;,&quot;227&quot;,&quot;2020-12-02&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;177&quot;,&quot;2020-11-24&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;120&quot;,&quot;2020-11-25&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;119&quot;,&quot;2020-11-26&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;266&quot;,&quot;2020-11-27&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;70&quot;,&quot;2020-11-28&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;120&quot;,&quot;2020-11-29&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;202&quot;,&quot;2020-11-30&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;80&quot;,&quot;2020-12-01&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;mail.koal.com&quot;,&quot;89&quot;,&quot;2020-12-02&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;oa.koal.com&quot;,&quot;32&quot;,&quot;2020-11-27&quot;
-&quot;5cb796c3b9cdc5b61db916d5bbd403dd&quot;,&quot;oa.koal.com&quot;,&quot;75&quot;,&quot;2020-12-01&quot;
-&quot;6cee293782567037b5a20e93b5641c1e&quot;,&quot;mail.koal.com&quot;,&quot;96&quot;,&quot;2020-11-27&quot;
-&quot;6cee293782567037b5a20e93b5641c1e&quot;,&quot;oa.koal.com&quot;,&quot;23&quot;,&quot;2020-11-20&quot;
-&quot;6cee293782567037b5a20e93b5641c1e&quot;,&quot;oa.koal.com&quot;,&quot;5&quot;,&quot;2020-11-24&quot;
-&quot;6cee293782567037b5a20e93b5641c1e&quot;,&quot;oa.koal.com&quot;,&quot;11262&quot;,&quot;2020-11-27&quot;
-</code></pre>
-<p>明显访问异常数据如下</p>
-<pre><code class="sh">Visit(userId=49449f79caad9975ed66e06b9c0fd38f, host=doc.koal.com, visitNum=4650, date=, variance=2660.0)
-Visit(userId=5cb796c3b9cdc5b61db916d5bbd403dd, host=doc.koal.com, visitNum=2251, date=, variance=2752.254877203583)
-Visit(userId=317f61dde4a20b66605fdc3bb833dfd3, host=oa.koal.com, visitNum=3627, date=, variance=3023.5000413428143)
-Visit(userId=6cee293782567037b5a20e93b5641c1e, host=oa.koal.com, visitNum=3763, date=, variance=5302.36315240667)
-</code></pre>
-<p><img src="/images/kcsp.assets/doc%E5%BC%82%E5%B8%B8%E7%94%A8%E6%88%B7.png" alt="分析1"></p>
-<p><img src="/images/kcsp.assets/oa.koal.com%E5%BC%82%E5%B8%B8%E7%94%A8%E6%88%B7.png" alt="分析2"></p>
-<p>得出第一个结论，</p>
-<blockquote>
-<p>49449f79caad9975ed66e06b9c0fd38f，5cb796c3b9cdc5b61db916d5bbd403dd 存在异常文件下载。</p>
-<p>6cee293782567037b5a20e93b5641c1e，317f61dde4a20b66605fdc3bb833dfd3 可能存在密码泄密</p>
-</blockquote>
-<h3 id="结论2"><a href="#结论2" class="headerlink" title="结论2"></a>结论2</h3><p>根据日常观察，做出论断，经常访问邮箱的人可能更有价值，是<strong>领导</strong>或者<strong>和用户交流的人</strong>，适合被盗号和分析</p>
-<p>根据结论1 中的数据，使用<code>kotlin</code>处理,得到帐号侧写。</p>
-<pre><code class="txt">************浏览邮箱最多的人
-这些人可能更有价值：领导，或者和用户交流的人，适合被盗号和分析
-EmailAvgVisit(userId=1865ef21ee7c4b065c2f507f755df60c, visitNum=1244)
-EmailAvgVisit(userId=d87fcc379e0853ad4dd7ae50fb82a825, visitNum=1020)
-EmailAvgVisit(userId=d8d172831153ea9c3ba32132b4acc98c, visitNum=1018)
-EmailAvgVisit(userId=1a4463c424d3260abf8ce9e870f8523a, visitNum=973)
-EmailAvgVisit(userId=004911830ef6a60347d630ff5ce2a1bf, visitNum=811)
-EmailAvgVisit(userId=6623c288b54d611b2a0b324e316fd161, visitNum=709)
-EmailAvgVisit(userId=10322da519bba59e112e228b401a26cd, visitNum=661)
-EmailAvgVisit(userId=7b5e5af6d605e4c1d0efd7621920e3e3, visitNum=658)
-EmailAvgVisit(userId=3704234ea06bcba173781a3a7a10d820, visitNum=644)
-EmailAvgVisit(userId=a69e1cf3e5fd246627a14fc21a263b3c, visitNum=620)
-EmailAvgVisit(userId=f63b1336559f1768dbb514a159a8d1ee, visitNum=567)
-EmailAvgVisit(userId=3aec6a16a05eb4c756cd454fa8074b98, visitNum=564)
-EmailAvgVisit(userId=0b376d3fedad6aa0ddc2fb28b6bdf863, visitNum=555)
-EmailAvgVisit(userId=4c2266d85cfdbcd6e29a76fc80233020, visitNum=552)
-EmailAvgVisit(userId=7da1643f0028b417277330c93b278798, visitNum=547)
-EmailAvgVisit(userId=0336bf52b737389851f6c2b5b0d53199, visitNum=530)
-EmailAvgVisit(userId=cfdad1bc7137af8c804c3ea9b13e44b0, visitNum=528)
-EmailAvgVisit(userId=1981a47bc8997466f3907ebf4f1fd56a, visitNum=493)
-EmailAvgVisit(userId=93eb74409fab5980f9c2984112dc5c7b, visitNum=491)
-EmailAvgVisit(userId=3017eacfd39a18380819c8bbc38747dd, visitNum=468)
-</code></pre>
-<p>web安全方向，</p>
-<p>理论上，需要对path进行处理，然后找些开源的url上的攻击<em>sql注入</em>，<em>xss</em>等因为时间和人员关系，并没有来得急处理。</p>
 
           
         
