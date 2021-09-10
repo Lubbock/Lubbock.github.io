@@ -105,6 +105,7 @@ data class TagScore(val nodeId: String, val score: Double, val linkCount: Int)
 <pre><code class="sh">你所需要的所有信息在图片上
 </code></pre>
 <p>由题意大致知道在文件里写了信息，找个<strong>png</strong>图片,在图片末尾发现不正常字段，大部都是×*X *X,base64 转码，得知图片里9个二纬码条。</p>
+<p><img src="http://10.0.130.209:7778/%E4%BA%8C%E7%BB%B4%E7%A0%81.png" alt="解密后的二维码"></p>
 <p>使用ps 获得最头的其实像素位置，然后以此类推，使用<strong>kotlin</strong> 读取像素，写入文件，得到9个二维码条。</p>
 <p>观察二维码得，二维码满足3个定位点+ 定位点四周为空白通道。将获得的9个二维码条，取他的蓝色通道，然后根据特征，推测出其中5张图片位置。剩下的使用<code>google</code>的<strong>zxing</strong>做排列组合，自动扫码得唯一密文。</p>
 <h3 id="下面是错误时间"><a href="#下面是错误时间" class="headerlink" title="下面是错误时间"></a>下面是错误时间</h3><p>密文，结合密钥加偏移索引，由于我是直接找到的密文，导致我丢失了关键信息</p>
@@ -220,6 +221,305 @@ EmailAvgVisit(userId=3017eacfd39a18380819c8bbc38747dd, visitNum=468)
         <tag>密码</tag>
         <tag>图片</tag>
         <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kcsp-解题技术_kcsp-第二题源代码.md</title>
+    <url>/root/kcsp-%E8%A7%A3%E9%A2%98%E6%8A%80%E6%9C%AF_kcsp-%E7%AC%AC%E4%BA%8C%E9%A2%98%E6%BA%90%E4%BB%A3%E7%A0%81/</url>
+    <content><![CDATA[<h1 id="kcsp-第二题源代码"><a href="#kcsp-第二题源代码" class="headerlink" title="kcsp-第二题源代码"></a>kcsp-第二题源代码</h1><p>这是第二题源代码</p>
+<pre><code class="kotlin">import com.google.zxing.BinaryBitmap
+import com.google.zxing.MultiFormatReader
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource
+import com.google.zxing.common.HybridBinarizer
+
+import java.awt.image.BufferedImage
+import java.io.File
+import java.io.RandomAccessFile
+import java.util.*
+import javax.imageio.ImageIO
+import kotlin.collections.ArrayList
+import kotlin.collections.MutableMap
+import kotlin.collections.arrayListOf
+import kotlin.collections.filter
+import kotlin.collections.forEach
+import kotlin.collections.forEachIndexed
+import kotlin.collections.set
+import kotlin.collections.toList
+
+
+fun getLogInfo() &#123;
+    val s = &quot;E4XBBX94XE7XBBX86XE7X9CX8BX4CX6FX67X6FXE4XB8XADXE5XB7XA6XE4XBEXA7XE8XA1XA8XE6XA0XBCXE7X9AX84XE5X8FXB3XE8XBEXB9XE7XBAXBFXEFXBCX8CXE6X9CX89X39XE4XB8XAAX34X78X33X32XE7X9AX84XE7XABX96XE6X9DXA1XEFXBCX8CXE9X80X89XE5X8FX96XE5X85XB6XE4XB8XADX38XE4XB8XAAXE5X8FXAFXE4XBBXA5XE6X8BXBCXE6X88X90XE4XB8X80XE4XB8XAAX33X32X78X33X32XE7X9AX84XE4XBAX8CXE7XBBXB4XE7XA0X81&quot;
+    val chars = s.split(&quot;X&quot;).toList()
+    RandomAccessFile(File(&quot;D:/x.txt&quot;), &quot;rw&quot;).use &#123;
+        chars.forEach &#123; c-&gt;
+            it.writeByte(c.toInt(16))
+        &#125;
+    &#125;
+&#125;
+
+fun writeLog() &#123;
+    RandomAccessFile(File(&quot;D:/y.txt&quot;), &quot;rw&quot;).use &#123;
+        val s1= &quot;F9 96 BA 3A CC 99 C6 0E  FC F5 41 40 8B A5 80 54 &quot;
+        val s2=&quot;A5 F5 C7 CC 25 86 8D 09  43 EC C8 4F 3C 8A 64 F1 &quot;
+        val sk1 = s1.split(&quot; &quot;).filter &#123; it.isNotBlank() &#125;.toList()
+        val sk2 = s2.split(&quot; &quot;).filter &#123; it.isNotBlank() &#125;.toList()
+        val k = &quot;40&quot;.toInt(16)-&quot;4F&quot;.toInt(16)
+        sk1.forEachIndexed &#123; index, c -&gt;
+            var jg = c.toInt(16) - sk2[index].toInt(16)
+            var sum = c.toInt(16)-jg
+            it.writeByte(sum)
+            println(Integer.toHexString(sum))
+        &#125;
+        println(k)
+    &#125;
+&#125;
+
+data class Point(val x: Int, val y: Int)
+data class Rect(
+    val nx:Int,
+    val ny:Int,
+    val p1: Point, val p2: Point, val p3: Point, val p4: Point)
+
+fun getRect(x: Int, y: Int):Rect &#123;
+    val x_step = 32 // 886 就是1
+    val y_step = 3
+    return Rect(
+        x + x_step + 2, y,
+        Point(x, y), Point(x, y + y_step), Point(x + x_step, y), Point(x + x_step, y + y_step))
+&#125;
+fun clopImage() :ArrayList&lt;Rect&gt;&#123;
+    val y_step = 31 // 886 就是1
+    val x_step = 3
+    var x = 884
+    var y = 971
+    val rects =ArrayList&lt;Rect&gt;()
+    for (i in 0..8) &#123;
+        val rect = getRect(x, y)
+        rects.add(rect)
+        x = rect.nx
+        y = rect.ny
+    &#125;
+    return rects
+&#125;
+
+fun colorToRGB(red: Int, green: Int, blue: Int): Int &#123;
+    var newPixel = 0
+    newPixel = newPixel shl 8
+    newPixel += red
+    newPixel = newPixel shl 8
+    newPixel += green
+    newPixel shl 8
+    newPixel += blue
+    return newPixel
+&#125;
+
+//position in [0..9]
+fun writeImage(source: BufferedImage, rect: Rect,np: BufferedImage, position: Int) &#123;
+    var startX = 0
+    var startY = 0 + 4 * position
+    println(&quot;$startX \t $startY&quot;)
+//    val jg = rect.p1.x - startX
+    val tnp = BufferedImage(36, 32, BufferedImage.TYPE_INT_RGB)
+    for (x in 0..31) &#123;
+        for (y in 0..3) &#123;
+            val rgb = source.getRGB(rect.p1.y + y, rect.p1.x + x)
+            val r = (rgb shr 16) and 0xf
+            val g = (rgb shr 8) and 0xff
+            val b = rgb and 0xff
+//            val ncolor = if((0.3*r + 0.59*g + 0.11*b)&gt;140)&#123;colorToRGB(255, 255, 255)&#125;else&#123;
+//                colorToRGB(0,0,0)&#125;
+            np.setRGB(startY + y,startX + x , rgb)
+            tnp.setRGB(startY + y,startX + x , rgb)
+        &#125;
+    &#125;
+    ImageIO.write(tnp, &quot;png&quot;, File(&quot;D://x$position.png&quot;))
+&#125;
+fun readImg(imgX: Int, imgY: Int) &#123;
+    val read = ImageIO.read(File(&quot;D:\\code\\ok-pdf\\p2.jpg&quot;))
+    val np = BufferedImage(36, 32, BufferedImage.TYPE_INT_RGB)
+    val clopImages = clopImage()
+    //3 5 4
+    //3 5
+    var sortImage = arrayListOf(clopImages[0], clopImages[1], clopImages[6],
+        clopImages[imgX], clopImages[imgY],
+        clopImages[2], clopImages[7], clopImages[8])
+
+    for (i in 0..7) &#123;
+        writeImage(read, sortImage[i], np, i)
+    &#125;
+    val x = &quot;$&#123;System.currentTimeMillis()&#125;&quot;
+//    jzSUbILnPOZeBRlUtKR2Qi8zj7eqLqygsKDuwVfGMdQ=
+    ImageIO.write(np, &quot;png&quot;, File(&quot;D://$x.png&quot;))
+    scanQR(&quot;D://$x.png&quot;)
+&#125;
+
+fun scanQR(fp: String) &#123;
+    try &#123;
+        val formatReader = MultiFormatReader()
+        //读取指定的二维码文件
+        //读取指定的二维码文件
+        val bufferedImage: BufferedImage = ImageIO.read(File(fp))
+        val binaryBitmap = BinaryBitmap(HybridBinarizer(BufferedImageLuminanceSource(bufferedImage)))
+        //定义二维码参数
+        //定义二维码参数
+//    val hints = HashMap&lt;Any, Any&gt;()
+//    hints[EncodeHintType.CHARACTER_SET] = &quot;utf-8&quot;
+        val result: com.google.zxing.Result = formatReader.decode(binaryBitmap)
+        //输出相关的二维码信息
+        //输出相关的二维码信息
+        println(&quot;文件路径: $fp&quot;)
+        println(&quot;解析结果：&quot; + result.toString())
+        println(&quot;二维码格式类型：&quot; + result.getBarcodeFormat())
+        println(&quot;二维码文本内容：&quot; + result.getText())
+    &#125; catch (throwable: Throwable) &#123;
+        println(&quot;$fp scan error&quot;)
+    &#125;
+&#125;
+
+//5omA5pyJ6ZyA6KaB55qE5L+h5oGv6YO95Zyo6L+Z5byg5Zu+54mH5Lit
+//5omA5pyJ6ZyA6KaB55qE5L+h5oGv6YO95Zyo6L+Z5byg5Zu+54mH5Lit
+//    jzSUbILnPOZeBRlUtKR2Qi8zj7eqLqygsKDuwVfGMdQ=
+//170428000000 0800
+//F9 96 BA 3A CC 99 C6 0E FC F5 41 40 8B A5 80 54
+//
+//A5 F5 C7 CC 25 86 8D 09 43 EC C8 4F 3C 8A 64 F1
+
+
+//2 这个应该是对的，直接填字符串会被截断
+//37 67 38 1D D8 E8 93 10  49 98 B3 CD 25 BA 24 B7
+//71 45 B9 E8 E5 56 85 4A  18 2A 59 61 A9 F5 69 04
+
+fun writeLog2() &#123;
+    RandomAccessFile(File(&quot;D:/y.txt&quot;), &quot;rw&quot;).use &#123;
+        val s1=&quot;37 67 38 1D D8 E8 93 10 49 98 B3 CD 25 BA 24 B7 &quot;
+        val s2=&quot;71 45 B9 E8 E5 56 85 4A 18 2A 59 61 A9 F5 69 04 &quot;
+        val sk1 = s1.split(&quot; &quot;).filter &#123; it.isNotBlank() &#125;.toList()
+        val sk2 = s2.split(&quot; &quot;).filter &#123; it.isNotBlank() &#125;.toList()
+        val k = &quot;CD&quot;.toInt(16) - &quot;61&quot;.toInt(16)
+        println(k)
+        sk1.forEachIndexed &#123; index, c -&gt;
+            var jg = c.toInt(16) - sk2[index].toInt(16)
+            var sum = c.toInt(16)-jg
+//            it.writeByte(sum)
+        &#125;
+        val s3 = &quot;5omA5pyJ6ZyA6KaB55qE5L+h5oGv6YO95Zyo6L+Z5byg5Zu+54mH5Lit&quot;
+        s3.toByteArray().forEach &#123;c -&gt;
+            val a = c - k
+            it.writeByte(a)
+            println(Integer.toHexString(a))
+        &#125;
+    &#125;
+&#125;
+
+fun writeLog3() &#123;
+    RandomAccessFile(File(&quot;D:/y.txt&quot;), &quot;rw&quot;).use &#123;
+        val s1=&quot;26 22 85 9E E4 A1 65 E2  09 D3 6B 45 C5 02 77 AF &quot;
+        val s2=&quot;F4 78 7A C4 11 99 09 7D  78 B1 11 0D 55 A0 4D BB &quot;
+        val sk1 = s1.split(&quot; &quot;).filter &#123; it.isNotBlank() &#125;.toList()
+        val sk2 = s2.split(&quot; &quot;).filter &#123; it.isNotBlank() &#125;.toList()
+        val b = &quot;45&quot;.toInt(16) - &quot;D&quot;.toInt(16)
+        sk1.forEachIndexed &#123; index, c -&gt;
+            var jg = c.toInt(16) - sk2[index].toInt(16)
+            it.writeByte(jg)
+//            it.writeByte(sum)
+        &#125;
+//        sk1.forEachIndexed &#123; index, c -&gt;
+//            it.writeByte(c.toInt(16))
+//        &#125;
+//        sk2.forEachIndexed &#123; index, c -&gt;
+//            it.writeByte(c.toInt(16))
+//        &#125;
+    &#125;
+&#125;
+
+/**
+ * 遍历所有情况查找二维码 唯一符合
+ * 文件路径: D://1630112560545.png
+ * 解析结果：jzSUbILnPOZeBRlUtKR2Qi8zj7eqLqygsKDuwVfGMdQ=
+ * 二维码格式类型：QR_CODE
+ * 二维码文本内容：jzSUbILnPOZeBRlUtKR2Qi8zj7eqLqygsKDuwVfGMdQ=
+ * */
+fun randImage() &#123;
+    val pool = arrayOf(3, 5, 4)
+    pool.forEach &#123;i1-&gt;
+        pool.forEach &#123; i2-&gt;
+            if (i1 != i2) &#123;
+                readImg(i1, i2)
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+fun sbyte() &#123;
+    val sbox = arrayOf(
+        0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
+        0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0,
+        0xb7, 0xfd, 0x93, 0x26, 0x36, 0x3f, 0xf7, 0xcc, 0x34, 0xa5, 0xe5, 0xf1, 0x71, 0xd8, 0x31, 0x15,
+        0x04, 0xc7, 0x23, 0xc3, 0x18, 0x96, 0x05, 0x9a, 0x07, 0x12, 0x80, 0xe2, 0xeb, 0x27, 0xb2, 0x75,
+        0x09, 0x83, 0x2c, 0x1a, 0x1b, 0x6e, 0x5a, 0xa0, 0x52, 0x3b, 0xd6, 0xb3, 0x29, 0xe3, 0x2f, 0x84,
+        0x53, 0xd1, 0x00, 0xed, 0x20, 0xfc, 0xb1, 0x5b, 0x6a, 0xcb, 0xbe, 0x39, 0x4a, 0x4c, 0x58, 0xcf,
+        0xd0, 0xef, 0xaa, 0xfb, 0x43, 0x4d, 0x33, 0x85, 0x45, 0xf9, 0x02, 0x7f, 0x50, 0x3c, 0x9f, 0xa8,
+        0x51, 0xa3, 0x40, 0x8f, 0x92, 0x9d, 0x38, 0xf5, 0xbc, 0xb6, 0xda, 0x21, 0x10, 0xff, 0xf3, 0xd2,
+        0xcd, 0x0c, 0x13, 0xec, 0x5f, 0x97, 0x44, 0x17, 0xc4, 0xa7, 0x7e, 0x3d, 0x64, 0x5d, 0x19, 0x73,
+        0x60, 0x81, 0x4f, 0xdc, 0x22, 0x2a, 0x90, 0x88, 0x46, 0xee, 0xb8, 0x14, 0xde, 0x5e, 0x0b, 0xdb,
+        0xe0, 0x32, 0x3a, 0x0a, 0x49, 0x06, 0x24, 0x5c, 0xc2, 0xd3, 0xac, 0x62, 0x91, 0x95, 0xe4, 0x79,
+        0xe7, 0xc8, 0x37, 0x6d, 0x8d, 0xd5, 0x4e, 0xa9, 0x6c, 0x56, 0xf4, 0xea, 0x65, 0x7a, 0xae, 0x08,
+        0xba, 0x78, 0x25, 0x2e, 0x1c, 0xa6, 0xb4, 0xc6, 0xe8, 0xdd, 0x74, 0x1f, 0x4b, 0xbd, 0x8b, 0x8a,
+        0x70, 0x3e, 0xb5, 0x66, 0x48, 0x03, 0xf6, 0x0e, 0x61, 0x35, 0x57, 0xb9, 0x86, 0xc1, 0x1d, 0x9e,
+        0xe1, 0xf8, 0x98, 0x11, 0x69, 0xd9, 0x8e, 0x94, 0x9b, 0x1e, 0x87, 0xe9, 0xce, 0x55, 0x28, 0xdf,
+        0x8c, 0xa1, 0x89, 0x0d, 0xbf, 0xe6, 0x42, 0x68, 0x41, 0x99, 0x2d, 0x0f, 0xb0, 0x54, 0xbb, 0x16,
+    )
+    val isbox= arrayOf(
+        0x52, 0x09, 0x6a, 0xd5, 0x30, 0x36, 0xa5, 0x38, 0xbf, 0x40, 0xa3, 0x9e, 0x81, 0xf3, 0xd7, 0xfb,
+        0x7c, 0xe3, 0x39, 0x82, 0x9b, 0x2f, 0xff, 0x87, 0x34, 0x8e, 0x43, 0x44, 0xc4, 0xde, 0xe9, 0xcb,
+        0x54, 0x7b, 0x94, 0x32, 0xa6, 0xc2, 0x23, 0x3d, 0xee, 0x4c, 0x95, 0x0b, 0x42, 0xfa, 0xc3, 0x4e,
+        0x08, 0x2e, 0xa1, 0x66, 0x28, 0xd9, 0x24, 0xb2, 0x76, 0x5b, 0xa2, 0x49, 0x6d, 0x8b, 0xd1, 0x25,
+        0x72, 0xf8, 0xf6, 0x64, 0x86, 0x68, 0x98, 0x16, 0xd4, 0xa4, 0x5c, 0xcc, 0x5d, 0x65, 0xb6, 0x92,
+        0x6c, 0x70, 0x48, 0x50, 0xfd, 0xed, 0xb9, 0xda, 0x5e, 0x15, 0x46, 0x57, 0xa7, 0x8d, 0x9d, 0x84,
+        0x90, 0xd8, 0xab, 0x00, 0x8c, 0xbc, 0xd3, 0x0a, 0xf7, 0xe4, 0x58, 0x05, 0xb8, 0xb3, 0x45, 0x06,
+        0xd0, 0x2c, 0x1e, 0x8f, 0xca, 0x3f, 0x0f, 0x02, 0xc1, 0xaf, 0xbd, 0x03, 0x01, 0x13, 0x8a, 0x6b,
+        0x3a, 0x91, 0x11, 0x41, 0x4f, 0x67, 0xdc, 0xea, 0x97, 0xf2, 0xcf, 0xce, 0xf0, 0xb4, 0xe6, 0x73,
+        0x96, 0xac, 0x74, 0x22, 0xe7, 0xad, 0x35, 0x85, 0xe2, 0xf9, 0x37, 0xe8, 0x1c, 0x75, 0xdf, 0x6e,
+        0x47, 0xf1, 0x1a, 0x71, 0x1d, 0x29, 0xc5, 0x89, 0x6f, 0xb7, 0x62, 0x0e, 0xaa, 0x18, 0xbe, 0x1b,
+        0xfc, 0x56, 0x3e, 0x4b, 0xc6, 0xd2, 0x79, 0x20, 0x9a, 0xdb, 0xc0, 0xfe, 0x78, 0xcd, 0x5a, 0xf4,
+        0x1f, 0xdd, 0xa8, 0x33, 0x88, 0x07, 0xc7, 0x31, 0xb1, 0x12, 0x10, 0x59, 0x27, 0x80, 0xec, 0x5f,
+        0x60, 0x51, 0x7f, 0xa9, 0x19, 0xb5, 0x4a, 0x0d, 0x2d, 0xe5, 0x7a, 0x9f, 0x93, 0xc9, 0x9c, 0xef,
+        0xa0, 0xe0, 0x3b, 0x4d, 0xae, 0x2a, 0xf5, 0xb0, 0xc8, 0xeb, 0xbb, 0x3c, 0x83, 0x53, 0x99, 0x61,
+        0x17, 0x2b, 0x04, 0x7e, 0xba, 0x77, 0xd6, 0x26, 0xe1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0c, 0x7d,
+    )
+    RandomAccessFile(File(&quot;D:/y.txt&quot;), &quot;rw&quot;).use &#123;
+        val s1=&quot;26 22 85 9E E4 A1 65 E2  09 D3 6B 45 C5 02 77 AF &quot;
+        val s2=&quot;F4 78 7A C4 11 99 09 7D  78 B1 11 0D 55 A0 4D BB &quot;
+        //37 67 38 1D D8 E8 93 10  49 98 B3 CD 25 BA 24 B7
+//71 45 B9 E8 E5 56 85 4A  18 2A 59 61 A9 F5 69 04
+        val sk1 = s1.split(&quot; &quot;).filter &#123; it.isNotBlank() &#125;.toList()
+        val sk2 = s2.split(&quot; &quot;).filter &#123; it.isNotBlank() &#125;.toList()
+        sk1.forEach &#123;c-&gt;
+            val toInt = c.toInt(16)
+            val m = (toInt and 0xf0) shr 4
+            val n =(toInt and 0x0f)
+            it.writeByte(sbox[16 * m + n])
+        &#125;
+        sk2.forEach &#123;c-&gt;
+            val toInt = c.toInt(16)
+            val m = (toInt and 0xf0) shr 4
+            val n =(toInt and 0x0f)
+            it.writeByte(sbox[16 * m + n])
+        &#125;
+    &#125;
+&#125;
+
+fun main() &#123;
+    sbyte()
+&#125;
+</code></pre>
+]]></content>
+      <categories>
+        <category>root</category>
+      </categories>
+      <tags>
+        <tag>kcsp</tag>
+        <tag>源代码</tag>
       </tags>
   </entry>
 </search>
