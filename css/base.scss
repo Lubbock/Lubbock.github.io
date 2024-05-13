@@ -363,7 +363,9 @@ code {
 }
 
 /* BLOG HEADER AND DESCRIPTION */
-
+.blog-description-margin{
+  margin-top: 1.2rem;
+}
 .blog-header {
   padding-bottom: 1.25rem;
 }
@@ -376,6 +378,9 @@ code {
 .blog-description {
   font-size: 1.25rem;
   color: #999;
+}
+.nav-link-white {
+  color: white !important;
 }
 
 /* BLOG */
