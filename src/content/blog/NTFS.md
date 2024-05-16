@@ -12,7 +12,7 @@ description: this is auto generate
 
 NTFS（New Technology File System）是微软1993年推出的用于Windows系统的文件系统，用于代替原来的FAT文件系统，从而提高性能。NTFS自推出以来经历了多个版本的更新，更新历史
 一个NTFS分区的结构如下图所示
-![ntfs分区结构](ntfs数据结构.webp)
+<!-- ![ntfs分区结构](ntfs数据结构.webp) -->
 整个分区主要分为三大区域：
 
 1. VBR（Volume Boot Record）：非常重要，存储跟引导相关的数据，大小为16个扇区；
@@ -28,7 +28,7 @@ NTFS（New Technology File System）是微软1993年推出的用于Windows系统
 **元数据文件**
 
 任何文件系统都会有元数据用于描述文件信息，信息有如名称、大小、修改时间、存放位置等等，注意的是NTFS元数据也用文件表示，总有16个元数据文件，这些文件的名称都是以$开头，属于隐藏文件。
-![ntfs属性.webp](ntfs属性.webp)
+<!-- ![ntfs属性.webp](ntfs属性.webp) -->
 ## USN
 
 >**USN Journal**相当于NTFS的秘书，记录改动的一切，并存储为USN_RECORD的格式。

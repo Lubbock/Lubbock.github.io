@@ -47,7 +47,7 @@ throws CertificateException
 　　返回受信任的X509证书数组。
 
 自己实现了信任管理器类，如何使用呢？类HttpsURLConnection似乎并没有提供方法设置信任管理器。其 实，HttpsURLConnection通过SSLSocket来建立与HTTPS的安全连接，SSLSocket对象是由 SSLSocketFactory生成的。HttpsURLConnection提供了方法 setSSLSocketFactory(SSLSocketFactory)设置它使用的SSLSocketFactory对象。 SSLSocketFactory通过SSLContext对象来获得，在初始化SSLContext对象时，可指定信任管理器对象。下面用一个图简单表 示这几个JSSE类的关系：
-![JSEE](./JSSE%E7%B1%BB%E5%9B%BE1.svg)
+<!-- ![JSEE](./JSSE%E7%B1%BB%E5%9B%BE1.svg) -->
 图1 部分JSSE类的关系图
 　　假设自己实现的X509TrustManager类的类名为：MyX509TrustManager，下面的代码片断说明了如何使用MyX509TrustManager
 

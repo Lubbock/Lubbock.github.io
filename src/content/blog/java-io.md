@@ -63,7 +63,7 @@ Java提供了一个叫作NIO(New I/O)的第二个I/O系统，NIO提供了与标�
 - Non-blocking I/O
     - 提供非阻塞I/O功能，应用程序立即返回任何可用得数据，应用程序应该有池化机制，用来判断是否有更多数据准备就绪
 
-![No block Io](../img/nio-block.drawio.svg)
+<!-- ![No block Io](../img/nio-block.drawio.svg) -->
 
 ### Channel
 NIO种主要使用得channel
@@ -88,10 +88,10 @@ NIO种主要使用得channel
 
 ### Selector
  NIO提供选择器概念，可以用于监视多个通道得对象。如应用程序有多通道打开，每个连接流量很低可以使用
- ![selector](../img/nio-selector.drawio.svg)
+ <!-- ![selector](../img/nio-selector.drawio.svg) -->
  
 ## NIO类
-![nio class](../img/nio-class.png)
+<!-- ![nio class](../img/nio-class.png) -->
 
 - java.nio
 > 它是NIO系统的顶级包，NIO系统封装了各种类型的缓冲区。

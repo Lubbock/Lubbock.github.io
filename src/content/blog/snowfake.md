@@ -29,4 +29,4 @@ description: this is auto generate
 3. 工作机器id,占用10bit，其中高位5bit是数据中心ID，低位5bit是工作节点ID，做多可以容纳1024个节点
 4. 序列号 占用12bit，每个节点每毫秒0开始不断累加，最多可以累加到4095，一共可以产生4096个ID
 
-![snowfake](./snowfake64bit.jfif)
+<!-- ![snowfake](./snowfake64bit.jfif) -->
