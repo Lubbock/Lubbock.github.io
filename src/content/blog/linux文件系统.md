@@ -12,9 +12,9 @@ description: this is auto generate
 
 **/proc**文件系统
 
-![image-20211009152504581](image-20211009152504581.png)
+![img40](@assets/images/img40.png)
 
-![image-20211009152522664](image-20211009152522664.png)
+![img41](@assets/images/img41.png)
 
 ### /proc/pid
 

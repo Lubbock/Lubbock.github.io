@@ -35,7 +35,7 @@ Sometimes when iterating a stream of bytes, it is not enough to look at each byt
 To solve this problem I will develop a RollingBufferInputStream class which keeps at least N bytes available in a buffer. The bytes are read from another InputStream. At the end of this text there is a full code listing of RollingBufferInputStream which you can copy, so yo don't have to develop this yourself.
 
 Here is a simple illustration of the problem described above:
-![iterating a stream while keepin N byte a available from it in a buffer](./img/buffer-stream.png)
+![img28](@assets/images/img28.png)
 As you progress through the stream, you basically read data into the end of the buffer, and take data out of the top of the buffer. Actually, you don't take data out of the top of the buffer. You just move up the data later down the buffer. Then you read new data from the stream into the end of the buffer.
 
 Basically you carry out two operations:
@@ -65,7 +65,7 @@ For instance, if block size is 1024 and buffer size is 2048, then you can proces
 Since compaction of the buffer can be expensive, the fewer compactions of the buffer that are necessary, the better. Therefore, the larger the buffer is, the better. Of course you have to weigh the size of the buffer against what else you need memory for in your application. An application that starts swapping on the hard disk because it consumes too much memory, loses a lot of performance too. Often, a buffer size of 2 to 4 times block size will be fine.
 
 Here is an illustration of block size, buffer size and stream iteration principle:
-![A buffer size which is larger than the needed block size](./img/block-buffer-stream.png)
+![img29](@assets/images/img29.png)
 
 # The Rolling Buffer Input Stream
 

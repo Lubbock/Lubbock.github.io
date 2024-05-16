@@ -30,4 +30,4 @@ jmeter，一个测试工具。支持协议:
 - - - - JsonPath #抽取json得请求变量
 
 jmeter基础用法如下
-![基础用法](jmeter.drawio.svg)
+![img49](@assets/images/img49.svg)

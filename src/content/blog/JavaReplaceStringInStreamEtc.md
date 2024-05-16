@@ -51,7 +51,7 @@ The ITokenResolver is an interface which you can implement yourself. Thus your o
 The TokenReplacingReader is itself a subclass of java.io.Reader, so any class that can use a Reader, can use a TokenReplacingReader.
 
 Here is a diagram showing how the TokenReplacingReader works:
-![TokenReplacingReader,capable of replacing string tokens in character streams](./img/string-replacing-reader.png)
+![img31](@assets/images/img31.png)
 ## A Token ReplacingReader Usage Example
 Here is an example of how to use the TokenReplacingReader:
 ```java

@@ -101,7 +101,7 @@ Float.MAX_VALUE>Int.MAX_VALUE
 
 根据java1.7版本的虚拟机规范，java虚拟机包括一下几个运行时数据区
 
-![img](v2-54cecabcb2335eea4ad22a46e2918169_720w.jpg)
+![img17](@assets/images/img17.jpg)
 
 ### 程序计数器
 
@@ -224,11 +224,11 @@ HotSpot虚拟机的对象头包括两部分信息：
 
 - 使用句柄访问的话，Java堆中会单独划分一部分区域作为句柄池，reference中存储的就是对象的句柄地址，而句柄中包含了对象实例数据和类型数据各自的具体地址信息。
 
-![img](v2-901ce255f32521e512f196fa6e6ad096_720w.jpg)
+![img18](@assets/images/img18.jpg)
 
 - 如果使用直接指针访问，那么Java对对象的布局中就必须考虑如何放置访问类型数据的相关信息，而reference中存储的直接就是对象地址。
 
-  ![img](v2-e6b117caa9a9c20be42e6113aac5d2c4_720w.jpg)
+  ![img19](@assets/images/img19.jpg)
 
 这两种方式各有优势，使用句柄的好处是reference中存储的是稳定的句柄地址，在对象被移动时只会改变句柄中的实例数据指针，而reference本身不需要修改。
 
@@ -331,7 +331,7 @@ HotSpot虚拟机的对象头包括两部分信息：
 
 常见的垃圾收集器有以下几种：
 
-![img](v2-8c5e658539d6d60fa54e5aedbebe1854_720w.jpg)
+![img20](@assets/images/img20.jpg)
 
 他们分别适用于不同分代，连线说明可以配合使用。
 
@@ -1017,7 +1017,7 @@ telnet 客户端，没搞懂干嘛用的，感觉是接了一下远程arthas.依
 
 # ansti颜色
 
-![在这里插入图片描述](20200620203309997.png)
+![img21](@assets/images/img21.png)
 
 ```kotlin
  println("\u001b[0;94;103mUnrecognized command $k \u001b[0m")

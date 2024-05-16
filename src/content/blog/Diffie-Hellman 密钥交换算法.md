@@ -53,9 +53,7 @@ Secret Key K K = Ya^Xb mod p
 +-------------------------------------------------------------------+
 
 
-<!-- ![Diffie-Hellmab.png](Diffie-Hellmab.png) -->
-
-![Diffie-Hellmab](@assets/images/Diffie-Hellmab.png)
+![img51](@assets/images/img51.png)
 下面证明，A 和 B 计算出来的密钥 K 相同。
 
 
@@ -69,8 +67,8 @@ K = Yb^Xa mod p = (a^Xb mod p)^Xa mod p = a^(Xa * Xb) mod p
     
 -   非公开数：Xa, Xb, K
 
-<!-- ![求模公式](./求模公式.png) -->
-![求模公式](@assets/images/求模公式.png)
+![img52](@assets/images/img52.png)
+
 ## 应用
 **DH在TLS中的应用**
 

@@ -61,7 +61,7 @@ arthmetic function in haskell
 - div
 - mod  取模
 
-![image-20210729111850382](Haskell.assets/image-20210729111850382.png)
+![img13](@assets/images/img13.png)
 
 取模取余运算区别
 
@@ -100,7 +100,7 @@ ps. 我没看懂
 - 不能存放不同类型
 - [1,2] !! 0 获取列表第0个元素
 
-![image-20210730114744364](Haskell.assets/image-20210730114744364.png)
+![img14](@assets/images/img14.png)
 
 head,tail,init,last
 
@@ -147,7 +147,7 @@ firstLetter all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
 
 ## guard where
 
-![image-20210805104930741](Haskell.assets/image-20210805104930741.png)
+![img15](@assets/images/img15.png)
 
 ## LEt it be
 
@@ -2199,4 +2199,4 @@ class Monad m where
 
 
 
-![img](Haskell.assets/1023733-27c30ca1b9b1af69.png)
+![img16](@assets/images/img16.png)

@@ -315,4 +315,4 @@ Nginx RSA双向认证与国密双向认证不同，国密双向认证还不清�
 2. ssl_verify_client on 客户端认证打开
 
 成功开启后，浏览器会弹出一个端口 让用户选择证书
-![nginx](nginx.rsa.verify.jpg)
+![img50](@assets/images/img50.jpg)

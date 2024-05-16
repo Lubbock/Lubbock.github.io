@@ -40,13 +40,13 @@ A singlethreaded, synchronous Java web crawler is a simple component. It carries
 
 These actions are illustrated as a time line in this diagram:
 
-![The actions of a singlethreaded Java web crawler shown on a time line](./img/java-web-crawler-singlethreaded-time-line.png)
+![img32](@assets/images/img32.png)
 
 The orange time slot is spent downloading the HTML page. The three blue time slots are spent parsing the HTML page and extracting the necessary info and URL's.
 
 Here is a diagram illustrating the time line for crawling multiple pages synchronously:
 
-![Two page processed by a singlethreaded Java web crawler](./img/java-web-crawler-singlethreaded-time-line-2.png)
+![img33](@assets/images/img33.png)
 
 
 This fully synchronous design is of course not very efficient. Imagine if the connection to the server which the page is downloaded from is slow. In that case the parsing of the HTML page has to wait a long time before the whole page is downloaded. New pages cannot be downloaded until the first HTML page is fully downloaded, parsed and the links extracted.
@@ -54,14 +54,14 @@ This fully synchronous design is of course not very efficient. Imagine if the co
 ## Parsing While Downloading
 A better design is to parse the HTML page while it is being downloaded, and extract the info and links from the page at the same time. That way, the downloading of the second page may start before the first page is fully downloaded and parsed. This will utilize the bandwidth and CPU of the crawler's computer better. Here is a diagram illustrating that:
 
-![Singlethreaded web crawler parsing the page while it is being downloaded](./img/java-web-crawler-singlethreaded-time-line-3.png)
+![img34](@assets/images/img34.png)
 
 
 As you can see, the parsing etc. starts as soon as the page starts downloading. It does not wait until the page is fully downloaded. The CPU of the crawling computer is not used much during the download, so it has plenty of extra CPU time (cycles) to parse the page while downloading it.
 
 Additionally, the full HTML page does not have to be downloaded in order to find links in it. Subsequent pages can start downloading as soon as links to them are found in the first page during parsing. Here is a diagram illustrating that:
 
-![Singlethreaded web crawler parsing multiple pages while they are being downloaded](./img/java-web-crawler-singlethreaded-time-line-4.png)
+![img35](@assets/images/img35.png)
 
 
 In order to actually implement this design which starts the second download before the first is fully finished, you will need either a singlethreaded NIO based design, or a multithreaded IO based design. I will get into more detail about both possibilities in the following sections.
@@ -71,13 +71,13 @@ A Java NIO based web crawler can download multiple pages using a single thread, 
 
 A Java NIO based web crawler would use NIO's channels and selectors to open connections, and manage multiple open connections using a single thread. Here is a diagram illustrating a Java web crawler design based on NIO:
 
-![Singlethrreaded web crawler based on java NIO](./img/java-web-crawler-nio-1.png)
+![img36](@assets/images/img36.png)
 
 Each open connection (channel) is registered with a selector. The thread polls the selector for channels that have data ready for reading. The thread then reads and processes the data, and polls the selector for the next channel with data ready for reading. Thus a single thread can download multiple pages, and process them.
 
 The data available from a channel (connetion) may not be the full page. It may just be part of the page that is ready for reading. Therefore the thread parsing the data must be able to parse a partial page, and leave the data in a partially parsed state, waiting for when the the rest of the page data arrives. Here is a diagram illustrating that:
 
-![Singlethread web crawler based on Java NIO,keeping data and parser state separately for each connection](./img/java-web-crawler-nio-2.png)
+![img37](@assets/images/img37.png)
 
 The diagram only shows the data and parser state for a single connection, but it would have to keep data and parser state separately for every connection.
 
@@ -90,7 +90,7 @@ It is simpler to implement a multithreaded IO based design, in which each thread
 
 Here is a diagram illustrating a multithreaded Java web crawler:
 
-![Multithreaded Java web crawler,with a coordinating thread passing URL's to process to worker threads](./img/java-web-crawler-multithreaded-1.png)
+![img38](@assets/images/img38.png)
 
 A coordinating thread passes URL's to process to worker threads (processing threads in the diagram). The worker threads download the HTML pages, parse them, and extract information and links from the page. The link URL's are given back to the coordinating thread. The coordinating thread wraps the URL's in a crawl job, and passes the crawl job to a worker thread.
 
