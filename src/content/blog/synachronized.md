@@ -5,18 +5,16 @@ title: synachronized
 featured: false
 draft: false
 tags:
- - 面试
- - 并发
- - java
+  - 面试
+  - 并发
+  - java
 description: java关键字
 ---
+
 ```mermaid
-graph LR
-  A-->B
-  B-->C  
-  C-->D  
-  D-->E
+线程A -> 本地内存 -> 主内存
 ```
+
 1. 线程A获取到共享变量X的值，此时本地内存A中没有X的值，所以加载主内存中的X值并缓存到本地内存A中，线程A修改X的值为1，并将X的值刷新到主内存中，这时主内存及本地内存中的X的值都为1。
 2. 线程B需要获取共享变量X的值，此时本地内存B中没有X的值，加载主内存中的X值并缓存到本地内存B中，此时X的值为1。线程B修改X的值为2，并刷新到主内存中，此时主内存及本地内存B中的X值为2，本地内存A中的X值为1。
 3. 线程A再次获取共享变量X的值，此时本地内存中存在X的值，所以直接从本地内存中A获取到了X为1的值，但此时主内存中X的值为2，到此出现了所谓内存不可见的问题。
@@ -24,15 +22,18 @@ graph LR
 该问题Java内存模型是通过`synchronized`关键字和`volatile`关键字就可以解决，那么`synchronized`关键字是如何解决的呢，其实进入`synchronized`块就是把在`synchronized`块内使用到的变量从线程的本地内存中擦除，这样在`synchronized`块中再次使用到该变量就不能从本地内存中获取了，需要从主内存中获取，解决了内存不可见问题。
 
 ## synchronized三大特性
+
 - 原子性：一个或多个操作要么全部执行成功，要么全部执行失败。`synchronized`关键字可以保证只有一个线程拿到锁，访问共享资源。
 - 可见性：当一个线程对共享变量进行修改后，其他线程可以立刻看到。执行`synchronized`时，会对应执行 `lock`、`unlock`原子操作，保证可见性。
 - 有序性：程序的执行顺序会按照代码的先后顺序执行
+
 ## **synchronized和volatile的区别？**
 
 - `volatile`主要是保证内存的可见性，即变量在寄存器中的内存是不确定的，需要从主存中读取。`synchronized`主要是解决多个线程访问资源的同步性。
 - `volatile`作用于变量，`synchronized`作用于代码块或者方法。
 - `volatile`仅可以保证数据的可见性，不能保证数据的原子性。`synchronized`可以保证数据的可见性和原子性。
 - `volatile`不会造成线程的阻塞，`synchronized`会造成线程的阻塞。
+
 ## synchronized和lock区别
 
 - Lock是显示锁，需要手动开启和关闭。synchronized是隐士锁，可以自动释放锁。
@@ -60,8 +61,6 @@ graph LR
 ### **Mark Word**
 
 在运行期间，Mark Word中存储的数据会随着锁标志位的变化而变化，在32位虚拟机中，不同状态下的组成如下：
-
-  
 
 其中线程ID表示持有偏向锁线程的ID，Epoch表示偏向锁的时间戳，偏向锁和轻量级锁是在jdk1.6中引入的。
 
