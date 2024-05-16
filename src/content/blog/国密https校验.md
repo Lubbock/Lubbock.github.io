@@ -8,7 +8,7 @@ tags:
  - https
  - java
  - 国密
-description: this is auto generate
+description: java调用国密接口，https免校验
 ---
 ## 信任证书
 
