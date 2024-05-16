@@ -1,29 +1,20 @@
 ---
-author: Cobo
-pubDatetime: 2024-05-13T15:22:00Z
-modDatetime: 2024-05-13T15:22:00Z
+author: cobo
+pubDatetime: 2023-01-30T15:57:52.737Z
 title: top
-slug: top-init
-featured: true
+featured: false
 draft: false
 tags:
- - linux
- - command
-description:
-  top参数解析
+ - robot
+description: this is auto generate
 ---
-
 # Top
 
-```sh
 top - 11:47:22 up  1:00,  2 users,  load average: 3.39, 1.58, 1.19
 Tasks: 324 total,   1 running, 323 sleeping,   0 stopped,   0 zombie
 %Cpu(s): 56.0 us,  2.5 sy,  0.0 ni, 31.4 id,  9.5 wa,  0.5 hi,  0.2 si,  0.0 st
 MiB Mem :  15144.7 total,   2225.3 free,   7962.3 used,   4957.1 buff/cache
 MiB Swap:      0.0 total,      0.0 free,      0.0 used.   6817.3 avail Mem
-
-```
-## Table of contents
 
 
 参数解释:
