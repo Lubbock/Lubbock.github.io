@@ -29,7 +29,7 @@ export const SITE = {
   title: "AstroPaper",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true, // true by default
-  postPerPage: 3,
+  postPerPage: 10,
 };
 ```
 
