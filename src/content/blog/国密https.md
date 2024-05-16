@@ -1,12 +1,14 @@
 ---
 author: cobo
 pubDatetime: 2023-01-30T15:57:52.737Z
-title: apache-https
+title: 国密https
 featured: false
 draft: false
 tags:
- - robot
-description: this is auto generate
+ - 国密
+ - https
+ - java
+description: java使用国密免https校验
 ---
 #java #https
 ## 信任证书
