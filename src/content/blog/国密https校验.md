@@ -1,14 +1,15 @@
 ---
 author: cobo
 pubDatetime: 2023-01-30T15:57:52.737Z
-title: apache-https
+title: 国密https校验
 featured: false
 draft: false
 tags:
- - robot
+ - https
+ - java
+ - 国密
 description: this is auto generate
 ---
-#java #https
 ## 信任证书
 
 跟证书用了sm2算法，普通校验过不去，注入的trustmanager换成X509ExtendedTrustManager 可以绕过去
