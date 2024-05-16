@@ -11,19 +11,19 @@ import { SITE } from "@config";
 export interface Props {
   currentPage: number;
   totalPages: number;
-  paginatedPosts: CollectionEntry<"blog">[];
+  paginatedPosts: CollectionEntry<"tutorial">[];
 }
 
 const { currentPage, totalPages, paginatedPosts } = Astro.props;
 ---
 
-<Layout title={`Posts | ${SITE.title}`}>
-  <Header activeNav="posts" />
-  <Main pageTitle="博客" pageDesc="我所有的博客.">
+<Layout title={`Tutorial | ${SITE.title}`}>
+  <Header activeNav="tutorial" />
+  <Main pageTitle="教程" pageDesc="知识是人类进步的阶梯">
     <ul>
       {
         paginatedPosts.map(({ data, slug }) => (
-          <Card href={`/posts/${slug}/`} frontmatter={data} />
+          <Card href={`/tutorial/${slug}/`} frontmatter={data} />
         ))
       }
     </ul>
@@ -32,8 +32,8 @@ const { currentPage, totalPages, paginatedPosts } = Astro.props;
   <Pagination
     {currentPage}
     {totalPages}
-    prevUrl={`/posts${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
-    nextUrl={`/posts/${currentPage + 1}/`}
+    prevUrl={`/tutorial${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+    nextUrl={`/tutorial/${currentPage + 1}/`}
   />
 
   <Footer noMarginTop={totalPages > 1} />

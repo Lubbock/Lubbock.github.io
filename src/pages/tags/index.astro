@@ -6,19 +6,32 @@ import Layout from "@layouts/Layout.astro";
 import Main from "@layouts/Main.astro";
 import Tag from "@components/Tag.astro";
 import getUniqueTags from "@utils/getUniqueTags";
+import getUniqueTutorialTags from "@utils/getUniqueTutorialTags"
 import { SITE } from "@config";
 
 const posts = await getCollection("blog");
 
 let tags = getUniqueTags(posts);
+
+const tutorial = await getCollection("tutorial");
+let tutorialTag = getUniqueTutorialTags(tutorial);
 ---
 
 <Layout title={`Tags | ${SITE.title}`}>
   <Header activeNav="tags" />
   <Main pageTitle="标签" pageDesc="所有的标签分类.">
+    <!-- <h1>
+      博客标签
+    </h1> -->
     <ul>
       {tags.map(({ tag }) => <Tag {tag} size="lg" />)}
     </ul>
+    <!-- <h1>
+      教程标签
+    </h1>
+    <ul>
+      {tutorialTag.map(({ tag }) => <Tag {tag} size="lg" />)}
+    </ul> -->
   </Main>
   <Footer />
 </Layout>

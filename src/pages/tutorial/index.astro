@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import Tutorial from "@layouts/Tutorial.astro";
+import getSortedTutorial from "@utils/getSortedTutorial";
+import getPagination from "@utils/getPagination";
+
+const posts = await getCollection("tutorial");
+
+const sortedPosts = getSortedTutorial(posts);
+
+const pagination = getPagination({
+  posts: sortedPosts,
+  page: 1,
+  isIndex: true,
+});
+---
+
+<Tutorial {...pagination} />
