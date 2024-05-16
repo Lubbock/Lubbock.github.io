@@ -5,8 +5,9 @@ title: redis面试题
 featured: false
 draft: false
 tags:
- - robot
-description: this is auto generate
+ - redis
+ - 面试
+description: redis常见的面试题
 ---
 ## redis
 ### 缓存一致性

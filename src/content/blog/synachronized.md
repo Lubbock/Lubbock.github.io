@@ -5,11 +5,17 @@ title: synachronized
 featured: false
 draft: false
 tags:
- - robot
-description: this is auto generate
+ - 面试
+ - 并发
+ - java
+description: java关键字
 ---
-```merimaid
-线程A -> 本地内存 -> 主内存
+```mermaid
+graph LR
+  A-->B
+  B-->C  
+  C-->D  
+  D-->E
 ```
 1. 线程A获取到共享变量X的值，此时本地内存A中没有X的值，所以加载主内存中的X值并缓存到本地内存A中，线程A修改X的值为1，并将X的值刷新到主内存中，这时主内存及本地内存中的X的值都为1。
 2. 线程B需要获取共享变量X的值，此时本地内存B中没有X的值，加载主内存中的X值并缓存到本地内存B中，此时X的值为1。线程B修改X的值为2，并刷新到主内存中，此时主内存及本地内存B中的X值为2，本地内存A中的X值为1。
