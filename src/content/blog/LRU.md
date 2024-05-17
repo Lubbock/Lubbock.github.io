@@ -5,7 +5,7 @@ title: LRU
 featured: false
 draft: false
 tags:
- - robot
+ - 算法
 description: this is auto generate
 ---
 
