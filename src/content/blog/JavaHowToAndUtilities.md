@@ -5,8 +5,8 @@ title: JavaHowToAndUtilities
 featured: false
 draft: false
 tags:
- - robot
-description: this is auto generate
+ - java
+description: JavaHowToAndUtilities
 ---
 #java
 [Java How to and Utilities](http://tutorials.jenkov.com/java-howto/iterating-streams-using-buffers.html)包含了一些java IO工具如，替换流数据中的字符串，使用缓冲来反复处理流数据。

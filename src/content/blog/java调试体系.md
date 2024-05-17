@@ -5,8 +5,8 @@ title: java调试体系
 featured: false
 draft: false
 tags:
- - robot
-description: this is auto generate
+ - java
+description: java远程调试
 ---
 #java 
 java远程调试的原理是两个VM之间通过`debug`

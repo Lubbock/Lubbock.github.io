@@ -5,8 +5,8 @@ title: JavaReplaceStringInStreamEtc
 featured: false
 draft: false
 tags:
- - robot
-description: this is auto generate
+ - java
+description: JavaReplaceStringInStreamEtc
 ---
 #java 
 

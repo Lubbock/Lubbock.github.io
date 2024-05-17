@@ -1,14 +1,15 @@
 ---
 author: cobo
 pubDatetime: 2023-01-30T15:57:52.737Z
-title: JAVA函数式编程技巧
+title: 函数式编程技巧
 featured: false
 draft: false
 tags:
- - robot
-description: this is auto generate
+ - java
+ - function
+description: 函数式编程技巧
 ---
-#java
+
 > 函数与过程之间的矛盾，不过是在描述一件事情得特征，与描述如何去做这件事情之间得普遍性差异得一个具体反映。换一种说法，人们有时也将它说成是`说明性知识`与`行动性得知识`之间得差异。在数学里，人们通常关心得是说明性描述（是什么）,而在计算机科学里，人们则通常关心行动性得描述（怎么做）。
 
 函数式编程属于`结构化编程`得一种，主要思想是吧运算过程尽量写成一系列函数得调用。
