@@ -5,9 +5,10 @@ title: mermaid
 featured: false
 draft: false
 tags:
- - mermaid
+  - mermaid
 description: mermaid例子
 ---
+
 #java
 [流程图](https://mermaid-js.github.io/mermaid/#/classDiagram)
 当然，以下是一些使用Mermaid的实际案例：
@@ -15,7 +16,6 @@ description: mermaid例子
 ### 1. 流程图案例
 
 **描述一个用户注册流程**
-
 
 ```mermaid
 graph TB
@@ -26,10 +26,10 @@ graph TB
     D -- 否 --> F[提示错误信息]
     F --> B
 ```
+
 ### 2. 序列图案例
 
 **描述一个用户与系统的交互**
-
 
 ```mermaid
 sequenceDiagram
@@ -40,10 +40,10 @@ sequenceDiagram
     System-->>System: 验证成功
     System->>User: 返回登录成功消息
 ```
+
 ### 3. 甘特图案例
 
 **描述一个项目的进度**
-
 
 ```mermaid
 gantt
@@ -56,12 +56,12 @@ gantt
     任务3       :2023-09-12, 12d
     任务4       :after 任务3, 5d
 ```
+
 ### 4. 类图案例
 
 **描述一个简单的类结构**
 
 注意：Mermaid的原生语法并不直接支持类图，但可以通过流程图或其他方式模拟。以下是一个简化的模拟示例：
-
 
 ```mermaid
 graph TB
@@ -72,10 +72,10 @@ graph TB
     methodA1("public methodA1()") --> classA
     methodA2("protected methodA2()") --> classA
 ```
+
 ### 5. 饼图案例（通过模拟）
 
 虽然Mermaid不直接支持饼图，但可以通过流程图或其他方式模拟。以下是一个简化的模拟示例：
-
 
 ```mermaid
 graph TB
@@ -90,6 +90,7 @@ graph TB
     style B fill:#ccf,stroke:#333,stroke-width:2px
     style C fill:#cfc,stroke:#333,stroke-width:2px
 ```
+
 注意：这只是一个简化的模拟，并不是真正的饼图。如果你需要绘制饼图，建议使用其他专门的图表库。
 
 这些案例应该能帮助你更好地理解Mermaid的语法和用法。记得查阅Mermaid的官方文档以获取更多详细信息和示例。
