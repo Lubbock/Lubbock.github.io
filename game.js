@@ -33,6 +33,8 @@ const ui = {
   hud: $('hud'), menu: $('menu'),
   vignette: $('vignette'), breathCue: $('breath-cue'), breathDot: $('breath-dot'), breathText: $('breath-text'),
   timeNum: $('time-num'), waveNum: $('wave-num'), musicVol: $('music-vol'),
+  sumOv: $('summary'), sumTime: $('sum-time'), sumGen: $('sum-gen'),
+  sumSeeds: $('sum-seeds'), sumKills: $('sum-kills'), sumHoles: $('sum-holes'),
   banner: $('banner'),
   skDash: $('skill-dash'), skNova: $('skill-nova'), skField: $('skill-field'), skHole: $('skill-hole'),
   btnStart: $('btn-start'),
@@ -107,6 +109,7 @@ const Sfx = {
   holeBoom(){ this.noise({ f0: 420, f1: 90, dur: 0.6, vol: 0.2 }); this.tone({ f0: 110, f1: 45, dur: 0.6, vol: 0.18 }); },
   // fade() 已删除：0.6s 一代的消散太频繁，棋盘闪光本身就是反馈
   flip()     { this.tone({ type: 'triangle', f0: 480, f1: 720, dur: 0.1, vol: 0.045 }); },
+  bell()     { this.tone({ type: 'sine', f0: 261.63, dur: 2.5, vol: 0.02, a: 0.05 }); this.tone({ type: 'sine', f0: 392.0, dur: 2.2, vol: 0.012, a: 0.05 }); },
 };
 
 /* ---------------- 冥想配乐（WebAudio 合成，随呼吸涨落） ----------------
@@ -170,7 +173,7 @@ const Music = {
   tick() {
     if (!this.started || !this.padGain) return;
     const x = (performance.now() / 1000) % 14;
-    if (x < this.prevX) this.playChord();                 // 新一轮吸气 → 换和弦
+    if (x < this.prevX) { this.playChord(); Sfx.bell(); }  // 新一轮吸气 → 换和弦 + 一声轻钟
     else if (this.prevX < 8 && x >= 8) this.chime();      // 呼气开始 → 风铃一声
     this.prevX = x;
     this.update(breath.v);
@@ -214,6 +217,9 @@ window.addEventListener('keydown', (e) => {
       break;
     case 'KeyP': case 'Escape':
       if (state === 'playing') toggleRest();
+      break;
+    case 'KeyO':
+      if (state === 'playing') toggleSummary();
       break;
     case 'KeyM':
       Sfx.muted = !Sfx.muted;
@@ -339,7 +345,7 @@ function drawShape(t, x, y, r, ang, fill, stroke, lw, glowCol, glowA) {
 /* ---------------- 全局状态 ---------------- */
 let state = 'menu';           // menu | playing | paused
 let freeze = 0;
-let kills = 0, playTime = 0;
+let kills = 0, playTime = 0, seedsPlanted = 0, mapHolesSpawned = 0;
 let resting = false;                                   // 小憩：只隐去界面，世界照常演变
 let boss = null;
 let flashW = 0;
@@ -819,7 +825,7 @@ function lifeStep() {
     }
   }
   // 气候压力：宜居区的空格（有邻居即可）缓缓长出新细胞
-  let climateBirths = 0, scarBirths = 0;
+  let climateBirths = 0, scarBirths = 0, auraBirths = 0;
   for (let gy = 0; gy < rows; gy++) for (let gx = 0; gx < cols; gx++) {
     if (counts[gy * cols + gx] > 0) continue;
     const sx = (gx + 0.5) * LIFE.cell, sy = (gy + 0.5) * LIFE.cell;
@@ -830,6 +836,16 @@ function lifeStep() {
         spawnEnemy(LIFE.pool[randInt(0, LIFE.pool.length - 1)], 1,
           sx + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2), sy + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2));
         scarBirths++; changes++;
+      }
+      continue;
+    }
+    // 玩家沃土光环：你的所在之处是一片沃土 —— 生命无需邻居也会向你周围生长
+    const dp = dist(sx, sy, player.x, player.y);
+    if (dp < 200) {
+      if (auraBirths < 8 && Math.random() < 0.45) {
+        spawnEnemy(LIFE.pool[randInt(0, LIFE.pool.length - 1)], 1,
+          sx + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2), sy + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2));
+        auraBirths++; changes++;
       }
       continue;
     }
@@ -911,6 +927,7 @@ function updateSeeds(dt) {
     // 已被占用的格子跳过：同格堆叠会把稳定图案挤成拥挤死
     if (enemies.some(e => !e.dead && e.hx === cx && e.hy === cy)) continue;
     spawnEnemy(s.type, s.level, cx, cy);
+    seedsPlanted++;
   }
   for (let i = enemies.length - 1; i >= 0; i--) {
     if (enemies[i].dead) enemies.splice(i, 1);
@@ -926,7 +943,7 @@ function startGame() {
   p.r = 16;
   p.dashT = 0; p.fieldT = 0; p.ghostT = 0; p.thrT = 0;
   for (const k in skills) skills[k].t = 0;
-  kills = 0; playTime = 0;
+  kills = 0; playTime = 0; seedsPlanted = 0; mapHolesSpawned = 0;
   generation = 0; lifeTimer = 2.5;
   boss = null; freeze = 0; flashW = 0;
   resting = false;
@@ -941,6 +958,21 @@ function startGame() {
   showBanner('世界 #' + lifeSeed, '#9db4d0');
   Music.start();   // 冥想配乐随呼吸响起
 }
+// 静坐总结：一张安静的卡片，痕迹一览（游戏不暂停）
+function toggleSummary() {
+  ui.sumOv.classList.toggle('hidden');
+  updateSummary();
+}
+function updateSummary() {
+  if (ui.sumOv.classList.contains('hidden')) return;
+  const t = Math.floor(playTime);
+  ui.sumTime.textContent = `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`;
+  ui.sumGen.textContent = generation;
+  ui.sumSeeds.textContent = seedsPlanted;
+  ui.sumKills.textContent = kills;
+  ui.sumHoles.textContent = mapHolesSpawned;
+}
+
 // 小憩：不暂停世界 —— 只隐去界面，杂念按生命规则继续演变
 function toggleRest() {
   resting = !resting;
@@ -985,6 +1017,7 @@ function update(dt, realDt) {
   if (mapHoleTimer <= 0) {
     mapHoleTimer = rand(6, 10);
     holes.push({ x: rand(80, WORLD.w - 80), y: rand(80, WORLD.h - 80), t: 2.0, tick: 0, spin: rand(0, TAU), dmg: 8, boomDmg: 60, scale: 0.6, map: true });
+    mapHolesSpawned++;
   }
   updateHoles(dt);
   updateParts(dt);
@@ -1316,6 +1349,7 @@ function frame(now) {
   Music.tick();            // 配乐调度（和弦轮换 / 呼吸涨落 / 风铃）
   render();
   if (state === 'playing' && !resting) syncHud();
+  updateSummary();
 }
 requestAnimationFrame(frame);
 
@@ -1327,6 +1361,7 @@ window.__game = {
   get generation() { return generation; },
   get seed() { return lifeSeed; },
   get kills() { return kills; },
+  get stats() { return { time: playTime, gen: generation, seeds: seedsPlanted, kills, holes: mapHolesSpawned }; },
   player, enemies, bullets, holes, scars, texts, parts,
   cam, mouse, keys: () => ({ ...keys }), Music, skills,
   spawnEnemyAt: (type, lvl, x, y) => spawnEnemy(type, lvl, x, y),
