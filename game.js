@@ -1,0 +1,1368 @@
+'use strict';
+/* ============================================================
+   圈圈冥想 · Circle Calm
+   玩家(圆)与漂浮的几何"杂念"：圆形 / 三角 / 方块 / 五边 / 六边巨核
+   没有失败与终点 —— 杂念按"生命游戏"的规则自行生灭演变：
+   孤独或拥挤会消散，恰好相聚会长出新的；玩家不攻击，
+   只用 E 绽放播下新芽、F 归心收拢一片，其余交给世界自己。
+   一切随冥想呼吸节律（吸气4s·屏息4s·呼气6s）同相起伏，
+   配乐亦随呼吸涨落，引导玩的人放松。
+   技能：流步Q / 绽放E / 止水空格 / 归心F
+   ============================================================ */
+
+/* ---------------- 错误捕获（供自动化测试） ---------------- */
+window.__errors = [];
+
+/* ---------------- 工具 ---------------- */
+const TAU = Math.PI * 2;
+const rand = (a, b) => a + Math.random() * (b - a);
+const randInt = (a, b) => Math.floor(rand(a, b + 1));
+const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+const lerp = (a, b, t) => a + (b - a) * t;
+const dist = (x1, y1, x2, y2) => Math.hypot(x2 - x1, y2 - y1);
+function hexA(hex, a) {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+}
+function hash(n) { const s = Math.sin(n) * 43758.5453; return s - Math.floor(s); }
+
+/* ---------------- DOM / 画布 ---------------- */
+const $ = (id) => document.getElementById(id);
+const cvs = $('game'), ctx = cvs.getContext('2d');
+const ui = {
+  hud: $('hud'), menu: $('menu'),
+  vignette: $('vignette'), breathCue: $('breath-cue'), breathDot: $('breath-dot'), breathText: $('breath-text'),
+  timeNum: $('time-num'), waveNum: $('wave-num'), musicVol: $('music-vol'),
+  banner: $('banner'),
+  skDash: $('skill-dash'), skNova: $('skill-nova'), skField: $('skill-field'), skHole: $('skill-hole'),
+  btnStart: $('btn-start'),
+};
+let W = 0, H = 0, DPR = 1;
+function resize() {
+  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  W = window.innerWidth; H = window.innerHeight;
+  cvs.width = Math.round(W * DPR); cvs.height = Math.round(H * DPR);
+}
+window.addEventListener('resize', resize);
+resize();
+
+/* ---------------- 世界常量 ---------------- */
+const WORLD = { w: 1280, h: 720 };    // 棋盘 = 整个窗口（syncWorld 随窗口尺寸刷新）
+
+/* ---------------- 音效（WebAudio 合成，无外部资源） ---------------- */
+const Sfx = {
+  ctx: null, gain: null, nbuf: null, muted: false,
+  ensure() {
+    if (!this.ctx) {
+      try {
+        this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        this.gain = this.ctx.createGain();
+        this.gain.gain.value = 0.5;
+        this.gain.connect(this.ctx.destination);
+        const len = this.ctx.sampleRate;
+        this.nbuf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+        const d = this.nbuf.getChannelData(0);
+        for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      } catch (e) { /* 忽略音频不可用 */ }
+    }
+    if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+  },
+  tone(o, dest) {
+    if (!this.ctx || this.muted) return;
+    const t = this.ctx.currentTime + (o.delay || 0);
+    const dur = o.dur || 0.2;
+    const osc = this.ctx.createOscillator();
+    const g = this.ctx.createGain();
+    osc.type = o.type || 'sine';
+    osc.frequency.setValueAtTime(Math.max(1, o.f0 || 440), t);
+    if (o.f1) osc.frequency.exponentialRampToValueAtTime(Math.max(1, o.f1), t + dur);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(o.vol || 0.2, t + (o.a || 0.006));
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    osc.connect(g); g.connect(dest || this.gain);
+    osc.start(t); osc.stop(t + dur + 0.05);
+  },
+  noise(o) {
+    if (!this.ctx || this.muted) return;
+    const t = this.ctx.currentTime + (o.delay || 0);
+    const dur = o.dur || 0.2;
+    const src = this.ctx.createBufferSource();
+    src.buffer = this.nbuf; src.loop = true;
+    const f = this.ctx.createBiquadFilter();
+    f.type = o.ftype || 'bandpass';
+    f.frequency.setValueAtTime(Math.max(10, o.f0 || 1000), t);
+    if (o.f1) f.frequency.exponentialRampToValueAtTime(Math.max(10, o.f1), t + dur);
+    f.Q.value = o.q || 0.8;
+    const g = this.ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(o.vol || 0.2, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    src.connect(f); f.connect(g); g.connect(this.gain);
+    src.start(t); src.stop(t + dur + 0.05);
+  },
+  dash()    { this.noise({ ftype: 'highpass', f0: 2200, f1: 500, dur: 0.2, vol: 0.1 }); },
+  nova()    { this.tone({ f0: 220, f1: 110, dur: 0.5, vol: 0.14 }); this.noise({ f0: 1000, f1: 300, dur: 0.4, vol: 0.08 }); },
+  field()   { this.tone({ type: 'triangle', f0: 640, f1: 320, dur: 0.6, vol: 0.1 }); },
+  hole()    { this.tone({ f0: 98, f1: 55, dur: 1, vol: 0.12 }); },
+  holeBoom(){ this.noise({ f0: 420, f1: 90, dur: 0.6, vol: 0.2 }); this.tone({ f0: 110, f1: 45, dur: 0.6, vol: 0.18 }); },
+  // fade() 已删除：0.6s 一代的消散太频繁，棋盘闪光本身就是反馈
+  flip()     { this.tone({ type: 'triangle', f0: 480, f1: 720, dur: 0.1, vol: 0.045 }); },
+};
+
+/* ---------------- 冥想配乐（WebAudio 合成，随呼吸涨落） ----------------
+   每 14s（=一个呼吸周期）换一次和弦的柔和 pad；音量随呼吸值涨落；
+   呼气开始时点缀一声风铃。音量由左上角滑杆调节（Music.vol，记忆到本地）。
+   走真实时钟，与呼吸节律严格同步。 */
+const Music = {
+  chords: [
+    [110.0, 220.0, 261.63, 329.63],   // A2 A3 C4 E4
+    [87.31, 174.61, 261.63, 329.63],  // F2 F3 C4 E4
+    [98.0, 196.0, 246.94, 293.66],    // G2 G3 B3 D4
+    [130.81, 196.0, 261.63, 392.0],   // C3 G3 C4 G4
+  ],
+  idx: 0, started: false, padGain: null, prevX: 0,
+  vol: (() => { try { return clamp(+(localStorage.getItem('circle-music-vol') || 0.85), 0, 1.5); } catch (e) { return 0.85; } })(),
+  start() {
+    if (this.started) return;
+    Sfx.ensure();
+    if (!Sfx.ctx) return;
+    this.started = true;
+    this.padGain = this.ctx().createGain();
+    this.padGain.gain.value = 0;
+    this.padGain.connect(Sfx.gain);
+    this.prevX = (performance.now() / 1000) % 14;
+    this.playChord();
+  },
+  ctx() { return Sfx.ctx; },
+  playChord() {
+    if (!this.ctx() || !this.padGain) return;
+    const t = this.ctx().currentTime;
+    const dur = 14.4;
+    const notes = this.chords[this.idx % this.chords.length];
+    this.idx++;
+    for (const f of notes) {
+      for (const [type, mult, det, vol] of [['sine', 1, 0, 1], ['triangle', 2, 5, 0.32], ['sine', 3.01, -4, 0.14]]) {
+        const osc = this.ctx().createOscillator();
+        const g = this.ctx().createGain();
+        osc.type = type;
+        osc.frequency.value = f * mult;
+        osc.detune.value = det;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.linearRampToValueAtTime(0.085 * vol, t + 2.8);         // 缓起
+        g.gain.setValueAtTime(0.085 * vol, t + dur - 3.6);
+        g.gain.linearRampToValueAtTime(0.0001, t + dur);              // 缓落
+        osc.connect(g); g.connect(this.padGain);
+        osc.start(t); osc.stop(t + dur + 0.1);
+      }
+    }
+  },
+  update(bv) {
+    if (!this.padGain) return;
+    const target = Sfx.muted ? 0 : this.vol * (0.55 + 0.45 * bv);   // 吸气渐强、呼气渐弱
+    this.padGain.gain.setTargetAtTime(target, this.ctx().currentTime, 0.3);
+  },
+  chime() {
+    if (!this.ctx() || Sfx.muted) return;
+    const base = [1318.5, 1567.98, 1975.5, 2637.02][randInt(0, 3)];
+    // 风铃挂在配乐总线：音量跟随滑杆、随呼吸涨落
+    [1, 1.5, 2.76].forEach((m, i) => Sfx.tone({ f0: base * m, dur: 2.6 + i * 0.5, vol: 0.028 - i * 0.008, delay: i * 0.04 }, this.padGain));
+  },
+  tick() {
+    if (!this.started || !this.padGain) return;
+    const x = (performance.now() / 1000) % 14;
+    if (x < this.prevX) this.playChord();                 // 新一轮吸气 → 换和弦
+    else if (this.prevX < 8 && x >= 8) this.chime();      // 呼气开始 → 风铃一声
+    this.prevX = x;
+    this.update(breath.v);
+  },
+};
+
+/* ---------------- 输入 ---------------- */
+const keys = {};
+const mouse = { x: innerWidth / 2, y: innerHeight / 2, wx: 0, wy: 0 };
+window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+window.addEventListener('mousedown', (ev) => { Sfx.ensure(); if (ev.target === cvs) mutateCellAtMouse(); });
+
+// 点按格子：其中的细胞随机变形成另一种形状（保证与当前不同），并续上 2.5s 生根期 ——
+// 规则与形状无关，稳定子变形后依旧稳定；你点过的细胞会被"护住"，不会转瞬即逝
+function mutateCellAtMouse() {
+  if (state !== 'playing') return;
+  const wx = mouse.x - W / 2 + cam.x, wy = mouse.y - H / 2 + cam.y;
+  const gx = clamp(Math.floor(wx / LIFE.cell), 0, lifeCols() - 1);
+  const gy = clamp(Math.floor(wy / LIFE.cell), 0, lifeRows() - 1);
+  const cx = (gx + 0.5) * LIFE.cell, cy = (gy + 0.5) * LIFE.cell;
+  const occupants = enemies.filter(e => !e.dead && e.hx === cx && e.hy === cy);
+  if (!occupants.length) return;
+  for (const e of occupants) {
+    const others = LIFE.pool.filter(t => t !== e.type);
+    e.type = others[randInt(0, others.length - 1)];
+    e.def = ENEMY_DEFS[e.type];
+    const st = enemyStats(e.type, e.level);
+    e.r = st.r; e.hp = e.maxHp = st.hp; e.xp = st.xp;
+  }
+  Sfx.flip();
+}
+window.addEventListener('contextmenu', (e) => e.preventDefault());
+window.addEventListener('keydown', (e) => {
+  Sfx.ensure();
+  if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) e.preventDefault();
+  keys[e.code] = true;
+  if (e.repeat) return;
+  switch (e.code) {
+    case 'Enter':
+      if (state === 'menu') startGame();
+      break;
+    case 'KeyP': case 'Escape':
+      if (state === 'playing') toggleRest();
+      break;
+    case 'KeyM':
+      Sfx.muted = !Sfx.muted;
+      showBanner(Sfx.muted ? '静音' : '声音开启', '#9db4d4', true);
+      break;
+    case 'KeyB':
+      breathOn = !breathOn;
+      showBanner(breathOn ? '呼吸引导 开' : '呼吸引导 关', '#ffd9a8', true);
+      break;
+    case 'KeyQ': case 'ShiftLeft': case 'ShiftRight': tryDash(); break;
+    case 'KeyE': tryNova(); break;
+    case 'Space': tryField(); break;
+    case 'KeyF': tryHole(); break;
+  }
+});
+window.addEventListener('keyup', (e) => { keys[e.code] = false; });
+window.addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
+
+/* ---------------- 摄像机 / 震屏 ---------------- */
+const cam = { x: WORLD.w / 2, y: WORLD.h / 2, trauma: 0 };
+const addShake = (v) => { cam.trauma = Math.min(1, cam.trauma + v); };
+
+/* ---------------- 冥想呼吸节律（吸气4s · 屏息4s · 呼气6s） ----------------
+   所有角色与星空按同一相位呼吸，用于引导玩家跟随节奏放松；
+   走真实时钟，暂停 / 慢动作时呼吸也不停止。按 B 可开关。 */
+const BREATH = { inhale: 4, hold: 4, exhale: 6 };
+let breathOn = true;
+let breath = { stage: '吸气', v: 0.5 };
+function breathInfo() {
+  const ease = (p) => 0.5 - 0.5 * Math.cos(Math.PI * clamp(p, 0, 1));
+  const x = (performance.now() / 1000) % (BREATH.inhale + BREATH.hold + BREATH.exhale);
+  if (x < BREATH.inhale) return { stage: '吸气', v: ease(x / BREATH.inhale) };
+  if (x < BREATH.inhale + BREATH.hold) return { stage: '屏息', v: 1 };
+  const p = (x - BREATH.inhale - BREATH.hold) / BREATH.exhale;
+  return { stage: '呼气', v: 1 - ease(p) };
+}
+function updateBreathDom() {
+  if (!breathOn) {
+    ui.breathCue.classList.add('hidden');
+    ui.vignette.style.opacity = '';
+    return;
+  }
+  ui.breathCue.classList.remove('hidden');
+  const c = breath.stage === '吸气' ? '#ffd9a8' : breath.stage === '屏息' ? '#fff2dc' : '#b39ae0';
+  const s = 0.55 + 0.85 * breath.v;
+  ui.breathDot.style.transform = `scale(${s.toFixed(3)})`;
+  ui.breathDot.style.background = c;
+  ui.breathDot.style.boxShadow = `0 0 ${Math.round(6 + 12 * breath.v)}px ${c}`;
+  if (ui.breathText.textContent !== breath.stage) ui.breathText.textContent = breath.stage;
+  ui.breathText.style.color = c;
+  ui.vignette.style.opacity = (0.7 + 0.3 * breath.v).toFixed(3);
+}
+
+/* ---------------- 呼吸光晕颜色 ---------------- */
+// 角色光晕阶段色与顶部提示一致（吸气金 / 屏息白 / 呼气紫），阶段切换时 ~0.55s 交叉淡入
+const BREATH_HEX = { '吸气': '#ffd9a8', '屏息': '#fff2dc', '呼气': '#b39ae0' };
+const BREATH_RGB = { '吸气': [255, 217, 168], '屏息': [255, 242, 220], '呼气': [179, 154, 224] };
+let haloFrom = '吸气', haloTo = '吸气', haloT = 1;
+function updateHaloColor(dt) {
+  if (breath.stage !== haloTo) { haloFrom = haloTo; haloTo = breath.stage; haloT = 0; }
+  haloT = Math.min(1, haloT + dt / 0.55);
+}
+const rgbaA = (rgb, a) => `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${a})`;
+function haloRGB() {
+  const a = BREATH_RGB[haloFrom], b = BREATH_RGB[haloTo];
+  return [lerp(a[0], b[0], haloT), lerp(a[1], b[1], haloT), lerp(a[2], b[2], haloT)];
+}
+// 呼吸光晕（玩家 / 杂念几何共用）：颜色随阶段金→白→紫交叉淡入，大小明暗由调用方按呼吸值传入
+function drawBreathGlow(x, y, r, alpha) {
+  if (haloT >= 1) drawGlow(x, y, r, BREATH_HEX[haloTo], alpha);
+  else {
+    drawGlow(x, y, r, BREATH_HEX[haloFrom], alpha * (1 - haloT));
+    drawGlow(x, y, r, BREATH_HEX[haloTo], alpha * haloT);
+  }
+}
+
+/* ---------------- 辉光精灵缓存 ---------------- */
+const glowCache = {};
+function glowSprite(color) {
+  let s = glowCache[color];
+  if (!s) {
+    s = document.createElement('canvas');
+    s.width = s.height = 64;
+    const g = s.getContext('2d');
+    const grad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, hexA(color, 0.85));
+    grad.addColorStop(0.35, hexA(color, 0.26));
+    grad.addColorStop(1, hexA(color, 0));
+    g.fillStyle = grad;
+    g.fillRect(0, 0, 64, 64);
+    glowCache[color] = s;
+  }
+  return s;
+}
+function drawGlow(x, y, r, color, alpha = 1) {
+  const s = glowSprite(color);
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.globalAlpha = alpha;
+  ctx.drawImage(s, x - r * 2, y - r * 2, r * 4, r * 4);
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+/* ---------------- 几何绘制 ---------------- */
+function shapePath(t, x, y, r, ang) {
+  ctx.beginPath();
+  if (t === 'circle') { ctx.arc(x, y, r, 0, TAU); return; }
+  const n = t === 'triangle' ? 3 : t === 'square' ? 4 : t === 'pentagon' ? 5 : 6;
+  for (let i = 0; i < n; i++) {
+    const a = ang + (i / n) * TAU - Math.PI / 2;
+    const px = x + Math.cos(a) * r, py = y + Math.sin(a) * r;
+    i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+  }
+  ctx.closePath();
+}
+function drawShape(t, x, y, r, ang, fill, stroke, lw, glowCol, glowA) {
+  if (glowCol) drawGlow(x, y, r * 1.7, glowCol, glowA == null ? 0.5 : glowA);
+  shapePath(t, x, y, r, ang);
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.lineWidth = lw || 2; ctx.strokeStyle = stroke; ctx.stroke(); }
+}
+
+/* ---------------- 全局状态 ---------------- */
+let state = 'menu';           // menu | playing | paused
+let freeze = 0;
+let kills = 0, playTime = 0;
+let resting = false;                                   // 小憩：只隐去界面，世界照常演变
+let boss = null;
+let flashW = 0;
+
+const enemies = [], bullets = [], parts = [], texts = [], holes = [];
+
+/* ---------------- 玩家 ---------------- */
+const player = {
+  x: WORLD.w / 2, y: WORLD.h / 2, vx: 0, vy: 0,
+  r: 16,
+  dashT: 0, dashVx: 0, dashVy: 0, ghostT: 0, thrT: 0,
+  fieldT: 0,
+};
+
+const skills = {
+  dash:  { cd: 2.4, t: 0 },
+  nova:  { cd: 7,   t: 0 },
+  field: { cd: 14,  t: 0 },
+  hole:  { cd: 18,  t: 0 },
+};
+
+/* ---------------- 粒子 / 飘字 ---------------- */
+function addPart(p) { if (parts.length < 650) parts.push(p); }
+function addText(x, y, txt, color, size) {
+  if (texts.length > 80) texts.shift();
+  texts.push({ x, y, txt, color, size: size || 14, life: 0.78, maxLife: 0.78, vy: -54, vx: rand(-14, 14) });
+}
+function sparks(x, y, color, n, spd) {
+  for (let i = 0; i < n; i++) {
+    const a = rand(0, TAU), s = rand(0.3, 1) * (spd || 240);
+    addPart({ kind: 'dot', x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: rand(0.2, 0.45), maxLife: 0.45, size: rand(1.5, 3.2), color, drag: 4 });
+  }
+}
+function ringFx(x, y, color, vr, lw, life) {
+  addPart({ kind: 'ring', x, y, r: 6, vr: vr || 480, life: life || 0.45, maxLife: life || 0.45, color, lw: lw || 3 });
+}
+function shards(x, y, shape, color, n) {
+  for (let i = 0; i < n; i++) {
+    const a = rand(0, TAU), s = rand(90, 330);
+    addPart({ kind: 'shard', shape, x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, ang: rand(0, TAU), spin: rand(-9, 9), life: rand(0.4, 0.8), maxLife: 0.8, size: rand(4, 9), color, drag: 3 });
+  }
+}
+function explosionFx(x, y, r, color, shape) {
+  sparks(x, y, color, Math.min(26, 8 + r * 0.5), 320);
+  shards(x, y, shape || 'circle', color, Math.min(12, 5 + r * 0.12));
+  ringFx(x, y, color, 560, 3.5, 0.4);
+  addPart({ kind: 'flash', x, y, life: 0.16, maxLife: 0.16, size: r * 2.4, color });
+}
+function ghostFx(x, y, r, ang) {
+  addPart({ kind: 'ghost', shape: 'circle', x, y, r, ang, life: 0.35, maxLife: 0.35 });
+}
+function updateParts(dt) {
+  for (let i = parts.length - 1; i >= 0; i--) {
+    const p = parts[i];
+    p.life -= dt;
+    if (p.life <= 0) { parts[i] = parts[parts.length - 1]; parts.pop(); continue; }
+    if (p.vx != null) {
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      if (p.drag) { const k = Math.exp(-p.drag * dt); p.vx *= k; p.vy *= k; }
+    }
+    if (p.vr) p.r += p.vr * dt;
+    if (p.spin) p.ang += p.spin * dt;
+  }
+  for (let i = texts.length - 1; i >= 0; i--) {
+    const t = texts[i];
+    t.life -= dt;
+    if (t.life <= 0) { texts[i] = texts[texts.length - 1]; texts.pop(); continue; }
+    t.x += t.vx * dt; t.y += t.vy * dt;
+  }
+}
+
+/* ---------------- 漂浮杂念定义（低饱和禅意色） ---------------- */
+const ENEMY_DEFS = {
+  chaser:  { shape: 'circle',   color: '#e89aa8' },  // 淡玫瑰
+  dasher:  { shape: 'triangle', color: '#e8b28a' },  // 杏橙
+  shooter: { shape: 'square',   color: '#b39ae0' },  // 薰衣草
+  elite:   { shape: 'pentagon', color: '#e8d59a' },  // 淡金
+  boss:    { shape: 'hexagon',  color: '#a88ae0' },  // 紫罗兰
+};
+function enemyStats(type, level) {
+  // 体型收小到"棋盘上的细胞"：一眼读整体图案，而非单个怪物
+  let r, hp, xp, dmg;
+  if (type === 'chaser')  { r = 6 + level * 0.8;  hp = 22 * Math.pow(level, 1.15); xp = 10 + 6 * level;  dmg = 10 + 2 * level; }
+  if (type === 'dasher')  { r = 5.5 + level * 0.7; hp = 16 * Math.pow(level, 1.10); xp = 14 + 8 * level;  dmg = 12 + 2.5 * level; }
+  if (type === 'shooter') { r = 6 + level * 0.8;  hp = 26 * Math.pow(level, 1.15); xp = 18 + 10 * level; dmg = 8 + 2 * level; }
+  if (type === 'elite')   { r = 8 + level * 0.6;  hp = 95 * Math.pow(level, 1.30); xp = 85 + 22 * level; dmg = 16 + 3 * level; }
+  if (type === 'boss')    { r = 20;               hp = 900 + 800 * Math.floor(generation / 5); xp = 420 + 40 * generation; dmg = 26; }
+  return { r, hp, xp, dmg };
+}
+function spawnEnemy(type, level, x, y) {
+  const d = ENEMY_DEFS[type];
+  if (!d) return null;   // 未知类型直接拒绝（防止测试钩子喂进脏类型污染场景）
+  const { r, hp, xp, dmg } = enemyStats(type, level);
+  const e = {
+    type, def: d, x, y, vx: 0, vy: 0, r, level,
+    hp, maxHp: hp, xp, dmg: 0,
+    angle: rand(0, TAU), spin: rand(-0.5, 0.5),
+    touchCd: 0, atkCd: 0, tele: 0,
+    hitFlash: 0, spawnT: 0.35, dead: false,
+  };
+  // 细胞钉死在自己格子的中心：生灭皆在原地，图案才留得住
+  const gx = clamp(Math.floor(x / LIFE.cell), 0, lifeCols() - 1);
+  const gy = clamp(Math.floor(y / LIFE.cell), 0, lifeRows() - 1);
+  e.hx = (gx + 0.5) * LIFE.cell;
+  e.hy = (gy + 0.5) * LIFE.cell;
+  e.x = e.hx; e.y = e.hy;
+  // 新生儿不再自动带生根期：规则本身就是裁决（孤独不死已由存活集保证，
+  // 落地即过挤的细胞下一代自然消散）。保护期只授予明确意图：点按、E 播种、求生方块。
+  enemies.push(e);
+  return e;
+}
+
+/* ---------------- 细胞静止（生灭皆在原地） ---------------- */
+function updateEnemy(e, dt) {
+  e.angle += e.spin * dt;
+  e.hitFlash = Math.max(0, e.hitFlash - dt);
+  if (e.spawnT > 0) e.spawnT -= dt;
+  if (e.dying) { e.fadeT -= dt; if (e.fadeT <= 0) e.dead = true; }
+  // 平滑滑向自己格子的中心：迁徙一格时呈现 ~0.3s 的顺滑滑步，而非瞬间跳跃
+  const k = clamp(dt * 10, 0, 1);
+  e.x += (e.hx - e.x) * k;
+  e.y += (e.hy - e.y) * k;
+}
+
+/* ---------------- 伤害 / 击杀 ---------------- */
+function damageEnemy(e, dmg, opts) {
+  if (e.dead || e.dying || e.spawnT > 0.15) return;
+  const crit = !(opts && opts.noCrit) && Math.random() < 0.1;
+  const val = crit ? dmg * 2.1 : dmg;
+  e.hp -= val;
+  e.hitFlash = 0.12;
+  addText(e.x + rand(-e.r, e.r) * 0.4, e.y - e.r - 4, Math.round(val), crit ? '#ffe6c2' : '#ffffff', crit ? 19 : 13);
+  sparks(opts && opts.sx != null ? opts.sx : e.x, opts && opts.sy != null ? opts.sy : e.y, '#ffffff', 3, 200);
+  if (e.hp <= 0) killEnemy(e);
+}
+function killEnemy(e) {
+  if (e.dead || e.dying) return;
+  kills++;
+  // 死亡 = 安静的渐隐（与自然消散一致），不爆散、不震屏
+  e.dying = true;
+  e.fadeT = 0.4;
+  if (e.type === 'boss') boss = null;
+}
+
+
+/* ---------------- 玩家更新 ---------------- */
+function updatePlayer(dt) {
+  const p = player;
+  p.fieldT = Math.max(0, p.fieldT - dt);
+
+  // 缓慢游走
+  let ix = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
+  let iy = (keys.KeyS || keys.ArrowDown ? 1 : 0) - (keys.KeyW || keys.ArrowUp ? 1 : 0);
+  const il = Math.hypot(ix, iy);
+  if (il > 0) { ix /= il; iy /= il; }
+  const speed = 225;
+  if (p.dashT > 0) {
+    p.dashT -= dt;
+    p.vx = p.dashVx; p.vy = p.dashVy;
+    if ((p.ghostT -= dt) <= 0) { p.ghostT = 0.028; ghostFx(p.x, p.y, p.r, Math.atan2(p.dashVy, p.dashVx)); }
+  } else {
+    const k = 1 - Math.exp(-5 * dt);   // 更柔的加减速，像在水里
+    p.vx += (ix * speed - p.vx) * k;
+    p.vy += (iy * speed - p.vy) * k;
+  }
+  p.x = clamp(p.x + p.vx * dt, p.r, WORLD.w - p.r);
+  p.y = clamp(p.y + p.vy * dt, p.r, WORLD.h - p.r);
+
+  // 游动尾光
+  const spd2 = Math.hypot(p.vx, p.vy);
+  if (spd2 > 60 && (p.thrT -= dt) <= 0) {
+    p.thrT = 0.05;
+    const a = Math.atan2(-p.vy, -p.vx) + rand(-0.5, 0.5);
+    addPart({ kind: 'dot', x: p.x + Math.cos(a) * p.r, y: p.y + Math.sin(a) * p.r, vx: Math.cos(a) * rand(30, 90), vy: Math.sin(a) * rand(30, 90), life: rand(0.4, 0.8), maxLife: 0.8, size: rand(1.5, 3), color: '#ffd9a8', drag: 2 });
+  }
+}
+
+/* ---------------- 技能 ---------------- */
+function tryDash() {
+  if (state !== 'playing' || skills.dash.t > 0) return;
+  skills.dash.t = skills.dash.cd;
+  const p = player;
+  let dx = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
+  let dy = (keys.KeyS || keys.ArrowDown ? 1 : 0) - (keys.KeyW || keys.ArrowUp ? 1 : 0);
+  let a = Math.hypot(dx, dy) > 0 ? Math.atan2(dy, dx) : Math.atan2(mouse.wy - p.y, mouse.wx - p.x);
+  p.dashT = 0.16;
+  p.dashVx = Math.cos(a) * 1400; p.dashVy = Math.sin(a) * 1400;
+  ringFx(p.x, p.y, '#ffe6c2', 380, 2, 0.35);
+  for (let i = 0; i < 8; i++) {
+    const aa = a + Math.PI + rand(-0.5, 0.5);
+    addPart({ kind: 'streak', x: p.x, y: p.y, vx: Math.cos(aa) * rand(180, 380), vy: Math.sin(aa) * rand(180, 380), life: 0.26, maxLife: 0.26, size: rand(8, 18), color: '#ffd9a8' });
+  }
+  Sfx.dash();
+}
+function tryNova() {
+  if (state !== 'playing' || skills.nova.t > 0) return;
+  skills.nova.t = skills.nova.cd;
+  const p = player;
+  // 温柔的波环（纯视觉，无伤害）：推开是唯一的"力"
+  const n = 18;
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * TAU;
+    bullets.push({ x: p.x + Math.cos(a) * (p.r + 8), y: p.y + Math.sin(a) * (p.r + 8), vx: Math.cos(a) * 420, vy: Math.sin(a) * 420, r: 6, life: 0.95, color: '#ffe6c2' });
+  }
+  for (const e of enemies) {
+    if (e.dead) continue;
+    const d = dist(e.x, e.y, p.x, p.y);
+    if (d < 290) {
+      const a = Math.atan2(e.y - p.y, e.x - p.x);
+      e.vx += Math.cos(a) * 420; e.vy += Math.sin(a) * 420;
+    }
+  }
+  // 波缘播种：随机落下一枚拼块，命运各不相同 ——
+  //   O/L 落定为稳定子、T 化作"红绿灯"振荡、I/S 消散于虚空，
+  //   偶尔是一枚五格滑翔机（G），它会斜着飞过整张棋盘
+  {
+    const names = ['O', 'I', 'T', 'L', 'S', 'G'];
+    const name = names[randInt(0, names.length - 1)];
+    const offsets = {
+      O: [[0, 0], [1, 0], [0, 1], [1, 1]],
+      I: [[0, 0], [1, 0], [2, 0], [3, 0]],
+      T: [[1, 0], [0, 1], [1, 1], [2, 1]],
+      L: [[0, 0], [0, 1], [0, 2], [1, 2]],
+      S: [[1, 0], [2, 0], [0, 1], [1, 1]],
+      G: [[1, 0], [2, 1], [0, 2], [1, 2], [2, 2]],
+    }[name];
+    const a = rand(0, TAU), r = rand(150, 340);
+    const gx0 = clamp(Math.floor((p.x + Math.cos(a) * r) / LIFE.cell), 0, lifeCols() - 4);
+    const gy0 = clamp(Math.floor((p.y + Math.sin(a) * r) / LIFE.cell), 0, lifeRows() - 3);
+    const cellType = LIFE.pool[randInt(0, LIFE.pool.length - 1)];
+    for (const [dx, dy] of offsets) {
+      pendingSeeds.push({ t: (r + rand(-20, 20)) / 420, gx: gx0 + dx, gy: gy0 + dy, type: cellType, level: randInt(1, 2) });
+    }
+  }
+  ringFx(p.x, p.y, '#ffd9a8', 780, 6, 0.55);
+  ringFx(p.x, p.y, '#ffffff', 560, 3, 0.4);
+  flashW = 0.14; addShake(0.22);
+  Sfx.nova();
+}
+function tryField() {
+  if (state !== 'playing' || skills.field.t > 0) return;
+  skills.field.t = skills.field.cd;
+  player.fieldT = 4;
+  ringFx(player.x, player.y, '#b39ae0', 680, 5, 0.7);
+  addText(player.x, player.y - player.r - 24, '止水', '#cbb8f0', 19);
+  Sfx.field();
+}
+function tryHole() {
+  if (state !== 'playing' || skills.hole.t > 0) return;
+  skills.hole.t = skills.hole.cd;
+  holes.push({
+    x: clamp(mouse.wx, 60, WORLD.w - 60), y: clamp(mouse.wy, 60, WORLD.h - 60),
+    t: 2.6, tick: 0, spin: rand(0, TAU), dmg: 12,
+  });
+  Sfx.hole();
+}
+function updateHoles(dt) {
+  for (let i = holes.length - 1; i >= 0; i--) {
+    const h = holes[i];
+    const sc = h.scale || 1;                        // 地图随机黑洞更小、更温和
+    h.t -= dt; h.spin += dt * 6; h.tick -= dt;
+    // 吸引
+    const pullR = 480 * sc;
+    for (const e of enemies) {
+      if (e.dead || e.type === 'boss') continue;
+      const d = dist(e.x, e.y, h.x, h.y);
+      if (d < pullR && d > 1) {
+        const f = (1 - d / pullR) * 1000;
+        e.vx += ((h.x - e.x) / d) * f * dt;
+        e.vy += ((h.y - e.y) / d) * f * dt;
+      }
+    }
+    // 持续伤害
+    if (h.tick <= 0) {
+      h.tick = 0.28;
+      for (const e of enemies) {
+        if (!e.dead && dist(e.x, e.y, h.x, h.y) < 260 * sc) damageEnemy(e, h.dmg, { noCrit: true });
+      }
+    }
+    // 旋涡粒子
+    for (let j = 0; j < 2; j++) {
+      const a = rand(0, TAU), rr = rand(180, 300) * sc;
+      addPart({ kind: 'dot', x: h.x + Math.cos(a) * rr, y: h.y + Math.sin(a) * rr, vx: -Math.cos(a) * 260, vy: -Math.sin(a) * 260, life: rand(0.3, 0.6), maxLife: 0.6, size: rand(1.5, 3), color: j ? '#a88ae0' : '#ffe6c2', drag: 0 });
+    }
+    if (h.t <= 0) {
+      holes.splice(i, 1);
+      const boomR = 330 * sc;
+      for (const e of enemies) {
+        if (!e.dead && dist(e.x, e.y, h.x, h.y) < boomR) damageEnemy(e, h.boomDmg || 118, { noCrit: true });
+      }
+      ringFx(h.x, h.y, '#a88ae0', 1000 * sc, 6, 0.7);
+      ringFx(h.x, h.y, '#ffffff', 720 * sc, 3, 0.45);
+      Sfx.holeBoom();
+      // 疤痕：黑洞过境之地留下沃土（18s），生命总会再生
+      scars.push({ x: h.x, y: h.y, r: boomR + 40, until: playTime + 18 });
+    }
+  }
+  for (let i = scars.length - 1; i >= 0; i--) if (scars[i].until <= playTime) scars.splice(i, 1);
+}
+
+/* ---------------- 波环视觉 / 光尘 ---------------- */
+function updateBullets(dt) {
+  for (let i = bullets.length - 1; i >= 0; i--) {
+    const b = bullets[i];
+    b.life -= dt;
+    if (b.life <= 0) { bullets.splice(i, 1); continue; }
+    b.x += b.vx * dt;
+    b.y += b.vy * dt;
+    if (b.x < -80 || b.x > WORLD.w + 80 || b.y < -80 || b.y > WORLD.h + 80) { bullets.splice(i, 1); continue; }
+    // 拖尾
+    if (Math.random() < 0.5) {
+      addPart({ kind: 'dot', x: b.x, y: b.y, vx: rand(-15, 15), vy: rand(-15, 15), life: 0.18, maxLife: 0.18, size: b.r * 0.5, color: b.color, drag: 2 });
+    }
+  }
+}
+/* ---------------- 生命游戏 · 杂念的自然演变 ----------------
+   生命不灭 · 过挤消散规则：细网格 + 细胞钉死在格中生灭 ——
+   · 存活：单一、成对、小群落（8 邻域同伴数 ≤ 4）都不灭
+   · 过挤：同伴数 ≥ 5 即消散
+   · 诞生：空格的 8 邻域同伴数 ∈ {3,6,7,8}
+   · 地图会随机浮现小型黑洞，消灭过密处的一部分生命；
+     黑洞过境之地留下沃土，生命总会再生 —— 生态由此循环。
+   邻居沿棋盘边界环绕（环面拓扑）；细胞永不移动。
+   玩家不攻击：E 绽放播下随机拼块（偶得滑翔机），F 归心消散一片，
+   点按细胞随机变形，止水让演化变慢，其余交给世界自己。 */
+const LIFE = {
+  cell: 24,           // 棋盘格边长（世界 = 窗口尺寸）
+  tick: 0.6,          // 每代间隔：0.6s 一代（2 倍速），演化如流水
+  maxEnemies: 800,    // 世界细胞总数上限（硬顶）
+  target: 300,        // 种群自稳目标：气候压力随数量反向伸缩，棋盘恒保生态活力
+  birthsPerTick: 300, // 单代诞生上限（昼夜规则稠密均衡下自然诞生位很多，不可掐死）
+  rescueMin: 12,      // 求生底线：低于此数放宽诞生补种（测试可关）
+  mutations: 2,       // 每代随机轻拨的格子数：灰烬再点燃，稳定态不会永久持续
+  noise: {            // 气候噪声层（仿 Minecraft 地形）：宜居区缓缓生长
+    scale: 0.06,      // 噪声采样尺度（特征区约 17 格 ≈ 400px）
+    drift: 0.02,      // 每代气候漂移步长（噪声空间）
+    fertile: 0.18,    // 宜居阈值（实测 fbm 范围约 ±0.38）：高于此的空格有邻居时以 birthP 概率生长
+    birthP: 0.3,
+    cap: 12,          // 每代宜居诞生不超过这么多（温和压力）
+  },
+  pool: ['chaser', 'dasher', 'shooter', 'elite'],
+  // 规则集：生命不灭 · 过挤消散 —— 单身、成对、小群落（≤4 邻）都不灭，
+  // 5 邻及以上即为过挤，全部消散；诞生仍看 B3678
+  rule: { name: '生命不灭 · 过挤消散', b: [3, 6, 7, 8], s: [0, 1, 2, 3, 4] },
+};
+let lifeTimer = 0, generation = 0, lifeSeed = 0;
+const pendingSeeds = [];   // 绽放播下的种子（随波扩散到半径后落地）
+const scars = [];          // 黑洞疤痕：过境之地留下沃土，生命总会再生
+let mapHoleTimer = 4;      // 地图随机黑洞的浮现计时
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+// Perlin 噪声（种子化）+ 三倍频 fBm —— 仿 Minecraft 地形生成的连续随机场，输出约 [-1, 1]
+function makeNoise(seed) {
+  const rng = mulberry32(seed);
+  const perm = new Uint8Array(512), p = [];
+  for (let i = 0; i < 256; i++) p.push(i);
+  for (let i = 255; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [p[i], p[j]] = [p[j], p[i]]; }
+  for (let i = 0; i < 512; i++) perm[i] = p[i & 255];
+  const fade = (t) => t * t * t * (t * (t * 6 - 15) + 10);
+  const grad = (h, x, y) => {
+    switch (h & 7) {
+      case 0: return x + y; case 1: return -x + y; case 2: return x - y; case 3: return -x - y;
+      case 4: return x; case 5: return -x; case 6: return y; default: return -y;
+    }
+  };
+  function perlin2(x, y) {
+    const X = Math.floor(x) & 255, Y = Math.floor(y) & 255;
+    x -= Math.floor(x); y -= Math.floor(y);
+    const u = fade(x), v = fade(y);
+    const aa = perm[perm[X] + Y], ab = perm[perm[X] + Y + 1];
+    const ba = perm[perm[X + 1] + Y], bb = perm[perm[X + 1] + Y + 1];
+    return lerp(
+      lerp(grad(aa, x, y), grad(ba, x - 1, y), u),
+      lerp(grad(ab, x, y - 1), grad(bb, x - 1, y - 1), u), v) * 0.7;
+  }
+  return (x, y) => (perlin2(x, y) + perlin2(x * 2.13 + 5.2, y * 2.13 + 1.3) * 0.5 + perlin2(x * 4.41 + 9.1, y * 4.41 + 3.7) * 0.25) / 1.75;
+}
+function lifeCols() { return Math.ceil(WORLD.w / LIFE.cell); }
+function lifeRows() { return Math.ceil(WORLD.h / LIFE.cell); }
+function lifeCellOf(e, cols, rows) {
+  return { gx: clamp(Math.floor(e.x / LIFE.cell), 0, cols - 1), gy: clamp(Math.floor(e.y / LIFE.cell), 0, rows - 1) };
+}
+// 初始种群：随机种子 → 经典"随机汤"开局（约 11%~15% 密度），每局图案都不同
+function seedWorld(rng) {
+  const cols = lifeCols(), rows = lifeRows(), all = [];
+  for (let gy = 0; gy < rows; gy++) for (let gx = 0; gx < cols; gx++) all.push([gx, gy]);
+  // 噪声地形开局：宜居带成片生长、严酷带留白，图案如大陆般有机
+  const fbm = makeNoise(Math.floor(rng() * 1e9));
+  for (const [gx, gy] of all) {
+    const v = fbm((gx - climate.dx) * LIFE.noise.scale, (gy - climate.dy) * LIFE.noise.scale);
+    if (v > 0.12 - (rng() - 0.5) * 0.24 && enemies.length < LIFE.maxEnemies) {   // 宜居带为主，边缘带随机
+      spawnEnemy(LIFE.pool[Math.floor(rng() * LIFE.pool.length)], 1 + Math.floor(rng() * 2),
+        (gx + 0.5) * LIFE.cell, (gy + 0.5) * LIFE.cell);
+    }
+  }
+}
+let climate = null;                                          // 当前世界气候场（噪声 + 漂移）
+function initClimate(seed) {
+  climate = { fbm: makeNoise(seed ^ 0x9E37), dx: rand(0, 100), dy: rand(0, 100), dir: rand(0, TAU), cycle: -1 };
+}
+function lifeStep() {
+  const cols = lifeCols(), rows = lifeRows();
+  // 气候：噪声场缓慢漂移；每个呼吸周期"换季"——随机改变漂移方向并跳进一步，图案随之重刷
+  const cyc = Math.floor(playTime / 14);
+  if (cyc !== climate.cycle) {
+    climate.cycle = cyc;
+    climate.dir = rand(0, TAU);
+    climate.dx += rand(-0.35, 0.35); climate.dy += rand(-0.35, 0.35);
+  }
+  climate.dx += Math.cos(climate.dir) * LIFE.noise.drift;
+  climate.dy += Math.sin(climate.dir) * LIFE.noise.drift;
+  // 每格气候采样（宜居 + / 严酷 -），一遍算好全程复用
+  const noiseV = new Float32Array(cols * rows);
+  for (let gy = 0; gy < rows; gy++) for (let gx = 0; gx < cols; gx++) {
+    noiseV[gy * cols + gx] = climate.fbm((gx - climate.dx) * LIFE.noise.scale, (gy - climate.dy) * LIFE.noise.scale);
+  }
+  const counts = new Uint8Array(cols * rows);
+  const cells = new Map();                                   // 格子 → 该格杂念列表
+  let liveTotal = 0;
+  for (const e of enemies) {
+    if (e.dead || e.dying) continue;                         // 渐隐中的细胞不再参与规则
+    liveTotal++;
+    const { gx, gy } = lifeCellOf(e, cols, rows);
+    counts[gy * cols + gx]++;
+    const key = gy * cols + gx;
+    if (!cells.has(key)) cells.set(key, []);
+    cells.get(key).push(e);
+  }
+  // 环面拓扑：邻居跨边界环绕（生命游戏标准做法），边缘格不再天然稀少
+  const n8 = (gx, gy) => {
+    let s = 0;
+    for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+      if (!dx && !dy) continue;
+      const x = (gx + dx + cols) % cols, y = (gy + dy + rows) % rows;
+      s += counts[y * cols + x];
+    }
+    return s;
+  };
+  // 规则集驱动：存活看 rule.s、诞生看 rule.b（环面拓扑），对所有细胞一视同仁
+  const bset = new Set(LIFE.rule.b), sset = new Set(LIFE.rule.s);
+  let changes = 0;
+  for (const e of enemies) {
+    if (e.dead || e.dying) continue;
+    const { gx, gy } = lifeCellOf(e, cols, rows);
+    const n = counts[gy * cols + gx] - 1 + n8(gx, gy);
+    if (!sset.has(n)) { e.dying = true; e.fadeT = 0.4; changes++; }   // 安静渐隐，不闪光
+  }
+  // 气候不再直接杀生 —— 死亡只来自过挤（恰 5 邻）、黑洞与归心
+  // 诞生 —— 空格邻居数命中诞生集；形状随邻居多数，等级随邻居平均
+  // 种群自稳：高于目标 → 气候诞生率降低；低于目标 → 风调雨顺
+  const pressure = clamp(liveTotal / LIFE.target, 0.4, 2.2);
+  let births = 0;
+  for (let gy = 0; gy < rows && births < LIFE.birthsPerTick && enemies.length < LIFE.maxEnemies; gy++) {
+    for (let gx = 0; gx < cols; gx++) {
+      if (births >= LIFE.birthsPerTick || enemies.length >= LIFE.maxEnemies) break;
+      if (counts[gy * cols + gx] > 0) continue;
+      if (!bset.has(n8(gx, gy))) continue;
+      const near = [];
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        if (!dx && !dy) continue;
+        const list = cells.get(((gy + dy + rows) % rows) * cols + ((gx + dx + cols) % cols));
+        if (list) near.push(...list);
+      }
+      if (!near.length) continue;
+      const tally = {};
+      let lv = 0;
+      for (const e of near) { tally[e.type] = (tally[e.type] || 0) + 1; lv += e.level; }
+      let shape = LIFE.pool[0], best = 0;
+      for (const t of LIFE.pool) if ((tally[t] || 0) > best) { best = tally[t]; shape = t; }
+      spawnEnemy(shape, clamp(Math.round(lv / near.length) + randInt(-1, 1), 1, 14),
+        (gx + 0.5) * LIFE.cell + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2),
+        (gy + 0.5) * LIFE.cell + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2));
+      births++; changes++;
+    }
+  }
+  // 气候压力：宜居区的空格（有邻居即可）缓缓长出新细胞
+  let climateBirths = 0, scarBirths = 0;
+  for (let gy = 0; gy < rows; gy++) for (let gx = 0; gx < cols; gx++) {
+    if (counts[gy * cols + gx] > 0) continue;
+    const sx = (gx + 0.5) * LIFE.cell, sy = (gy + 0.5) * LIFE.cell;
+    const inScar = scars.some(sc => dist(sx, sy, sc.x, sc.y) < sc.r);
+    // 疤痕沃土：不受总数上限与气候限制，生命总会再生（独立配额 10/代）
+    if (inScar) {
+      if (scarBirths < 10 && Math.random() < 0.45) {
+        spawnEnemy(LIFE.pool[randInt(0, LIFE.pool.length - 1)], 1,
+          sx + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2), sy + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2));
+        scarBirths++; changes++;
+      }
+      continue;
+    }
+    // 宜居生长：受总数上限与种群压力调节
+    if (climateBirths >= LIFE.noise.cap || enemies.length >= LIFE.maxEnemies) continue;
+    if (noiseV[gy * cols + gx] > LIFE.noise.fertile && n8(gx, gy) >= 1 && Math.random() < LIFE.noise.birthP * clamp(2.2 - pressure, 0.4, 2.2)) {
+      spawnEnemy(LIFE.pool[randInt(0, LIFE.pool.length - 1)], 1,
+        sx + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2), sy + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2));
+      climateBirths++; changes++;
+    }
+  }
+  // 单一细胞迁徙：完全孤立的细胞每代朝玩家方向挪一格（目标格必须为空）——
+  // 孤独的生命会缓缓向你聚拢；抵达你附近有了同伴，便不再迁徙
+  const pgx = clamp(Math.floor(player.x / LIFE.cell), 0, cols - 1);
+  const pgy = clamp(Math.floor(player.y / LIFE.cell), 0, rows - 1);
+  for (const e of enemies) {
+    if (e.dead || e.dying) continue;
+    const { gx, gy } = lifeCellOf(e, cols, rows);
+    const key = gy * cols + gx;
+    if (counts[key] !== 1 || n8(gx, gy) !== 0) continue;        // 只迁徙完全孤立的细胞
+    const dx = Math.sign(pgx - gx), dy = Math.sign(pgy - gy);
+    if (!dx && !dy) continue;                                   // 已与玩家同格
+    const tries = dx && dy ? [[dx, dy], [dx, 0], [0, dy]] : [[dx, dy]];
+    for (const [mx, my] of tries) {
+      const nx = gx + mx, ny = gy + my;
+      if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+      const nk = ny * cols + nx;
+      if (counts[nk] > 0) continue;                             // 目标格必须为空
+      counts[key]--; counts[nk]++;
+      e.hx = (nx + 0.5) * LIFE.cell;
+      e.hy = (ny + 0.5) * LIFE.cell;
+      break;
+    }
+  }
+  if (changes) generation++;
+  // 求生底线：种群过低时种下 2×2 方块（各规则下皆稳定）—— 生命自会找到出路，棋盘不会走向空寂
+  if (enemies.length < LIFE.rescueMin) {
+    let rescue = 0;
+    for (let gy = 0; gy < rows - 1 && rescue < 2; gy++) for (let gx = 0; gx < cols - 1; gx++) {
+      if (rescue >= 2) break;
+      const quad = [[gx, gy], [gx + 1, gy], [gx, gy + 1], [gx + 1, gy + 1]];
+      if (quad.some(([qx, qy]) => counts[qy * cols + qx] > 0)) continue;
+      if (n8(gx, gy) < 1) continue;
+      const shape = LIFE.pool[randInt(0, LIFE.pool.length - 1)];
+      for (const [qx, qy] of quad) {
+        spawnEnemy(shape, 1, (qx + 0.5) * LIFE.cell, (qy + 0.5) * LIFE.cell);
+      }
+      rescue++; changes++;
+    }
+  }
+  // 变异：每代轻拨几个格子 —— 经典规则的宿命是落定成"灰烬"（全是稳定子），
+  // 一点点随机扰动会重新点燃灰烬、引发新的级联，棋盘因此永不冷却
+  for (let m = 0; m < LIFE.mutations; m++) {
+    const gx = randInt(0, cols - 1), gy = randInt(0, rows - 1);
+    const occupants = (cells.get(gy * cols + gx) || []).filter(e => !e.dead && !e.dying);
+    if (occupants.length) {
+      for (const e of occupants) { e.dying = true; e.fadeT = 0.4; }
+    } else if (enemies.length < LIFE.maxEnemies) {
+      spawnEnemy(LIFE.pool[randInt(0, LIFE.pool.length - 1)], 1,
+        (gx + 0.5) * LIFE.cell, (gy + 0.5) * LIFE.cell);
+    }
+    changes++;
+  }
+  if (changes) generation++;
+  for (let i = enemies.length - 1; i >= 0; i--) if (enemies[i].dead) enemies.splice(i, 1);
+}
+
+/* ---------------- 播种落地 / 清理消散 ---------------- */
+function updateSeeds(dt) {
+  for (let i = pendingSeeds.length - 1; i >= 0; i--) {
+    const s = pendingSeeds[i];
+    s.t -= dt;
+    if (s.t > 0) continue;
+    pendingSeeds.splice(i, 1);
+    if (state !== 'playing') continue;   // 播种不受总数上限约束：玩家主动行为优先落地
+    const cx = (s.gx + 0.5) * LIFE.cell, cy = (s.gy + 0.5) * LIFE.cell;
+    // 已被占用的格子跳过：同格堆叠会把稳定图案挤成拥挤死
+    if (enemies.some(e => !e.dead && e.hx === cx && e.hy === cy)) continue;
+    spawnEnemy(s.type, s.level, cx, cy);
+  }
+  for (let i = enemies.length - 1; i >= 0; i--) {
+    if (enemies[i].dead) enemies.splice(i, 1);
+  }
+}
+
+/* ---------------- 开始 / 小憩 ---------------- */
+function startGame() {
+  enemies.length = 0; bullets.length = 0; parts.length = 0; texts.length = 0; holes.length = 0;
+  pendingSeeds.length = 0; scars.length = 0; mapHoleTimer = 4;
+  const p = player;
+  p.x = WORLD.w / 2; p.y = WORLD.h / 2; p.vx = p.vy = 0;
+  p.r = 16;
+  p.dashT = 0; p.fieldT = 0; p.ghostT = 0; p.thrT = 0;
+  for (const k in skills) skills[k].t = 0;
+  kills = 0; playTime = 0;
+  generation = 0; lifeTimer = 2.5;
+  boss = null; freeze = 0; flashW = 0;
+  resting = false;
+  ui.menu.classList.add('hidden');
+  ui.hud.classList.remove('hidden');
+  cam.x = p.x; cam.y = p.y; cam.trauma = 0;
+  state = 'playing';
+  // 本局世界：随机种子长出初始种群，之后全交给生命规则
+  lifeSeed = 10000 + Math.floor(Math.random() * 89999);
+  initClimate(lifeSeed);
+  seedWorld(mulberry32(lifeSeed));
+  showBanner('世界 #' + lifeSeed, '#9db4d0');
+  Music.start();   // 冥想配乐随呼吸响起
+}
+// 小憩：不暂停世界 —— 只隐去界面，杂念按生命规则继续演变
+function toggleRest() {
+  resting = !resting;
+  ui.hud.classList.toggle('hidden', resting);
+  showBanner(resting ? '小憩 · 世界继续演变' : '回来 · 一切照常呼吸', '#9db4d0', true);
+}
+
+/* ---------------- 横幅 ---------------- */
+function showBanner(txt, color, small) {
+  ui.banner.textContent = txt;
+  ui.banner.style.color = color || '#fff';
+  ui.banner.style.fontSize = small ? '30px' : '44px';
+  ui.banner.classList.remove('show');
+  void ui.banner.offsetWidth;
+  ui.banner.classList.add('show');
+}
+
+/* ---------------- 主更新 ---------------- */
+function update(dt, realDt) {
+  playTime += realDt;
+  cam.trauma = Math.max(0, cam.trauma - 1.7 * realDt);
+  flashW = Math.max(0, flashW - realDt * 2.6);
+  // 技能冷却倒数（另有开局重置与光尘拾取缩短）
+  for (const k in skills) skills[k].t = Math.max(0, skills[k].t - dt);
+
+  // 鼠标世界坐标
+  mouse.wx = mouse.x - W / 2 + cam.x;
+  mouse.wy = mouse.y - H / 2 + cam.y;
+
+  if (state === 'playing') {
+    updatePlayer(dt);
+    // 生命演化：每代间隔走游戏时钟，小憩时世界照常运转；止水让演化变慢
+    lifeTimer -= dt * (player.fieldT > 0 ? 0.2 : 1);
+    if (lifeTimer <= 0) { lifeTimer += LIFE.tick; lifeStep(); }
+  }
+  for (const e of enemies) if (!e.dead) updateEnemy(e, dt);
+  updateBullets(dt);
+  updateSeeds(dt);
+  // 地图黑洞：随机浮现的小型归心 —— 消灭过密处的一部分生命，过境留下沃土
+  mapHoleTimer -= dt;
+  if (mapHoleTimer <= 0) {
+    mapHoleTimer = rand(6, 10);
+    holes.push({ x: rand(80, WORLD.w - 80), y: rand(80, WORLD.h - 80), t: 2.0, tick: 0, spin: rand(0, TAU), dmg: 8, boomDmg: 60, scale: 0.6, map: true });
+  }
+  updateHoles(dt);
+  updateParts(dt);
+
+  // 摄像机跟随 + 朝鼠标偏移
+  const k = 1 - Math.exp(-6 * dt);
+  cam.x = lerp(cam.x, player.x + (mouse.x - W / 2) * 0.12, k);
+  cam.y = lerp(cam.y, player.y + (mouse.y - H / 2) * 0.12, k);
+  cam.x = WORLD.w < W ? WORLD.w / 2 : clamp(cam.x, W / 2, WORLD.w - W / 2);
+  cam.y = WORLD.h < H ? WORLD.h / 2 : clamp(cam.y, H / 2, WORLD.h - H / 2);
+}
+
+/* ---------------- 渲染 ---------------- */
+function render() {
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  // 背景
+  ctx.fillStyle = '#131022';
+  ctx.fillRect(0, 0, W, H);
+
+  // 星空（两层视差，屏幕空间）—— 亮度随呼吸起伏
+  const dim = breathOn ? 0.72 + 0.28 * breath.v : 1;
+  drawStars(0.25, 170, 1.4, 0.3 * dim);
+  drawStars(0.5, 120, 2, 0.45 * dim);
+
+  // 世界坐标
+  const sh = cam.trauma * cam.trauma * 16;
+  const sx = rand(-1, 1) * sh, sy = rand(-1, 1) * sh;
+  ctx.save();
+  ctx.translate(W / 2 - cam.x + sx, H / 2 - cam.y + sy);
+
+  drawGrid();
+  // 世界边界
+  const ga = breathOn ? 0.24 * (0.7 + 0.3 * breath.v) : 0.24;
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = `rgba(255,217,168,${ga.toFixed(3)})`;
+  ctx.strokeRect(0, 0, WORLD.w, WORLD.h);
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = `rgba(255,217,168,${(ga * 0.22).toFixed(3)})`;
+  ctx.strokeRect(0, 0, WORLD.w, WORLD.h);
+
+  drawHoles();
+  for (const e of enemies) drawEnemy(e);
+  drawBullets();
+  if (state === 'playing') drawPlayer();
+  drawParts();
+  drawTexts();
+
+  ctx.restore();
+
+  // 屏幕空间特效
+  if (player.fieldT > 0 && state !== 'menu') {
+    ctx.fillStyle = 'rgba(70,150,255,0.06)';
+    ctx.fillRect(0, 0, W, H);
+  }
+  if (flashW > 0) { ctx.fillStyle = `rgba(255,242,220,${(flashW * 0.55).toFixed(3)})`; ctx.fillRect(0, 0, W, H); }
+  drawIndicators();
+  updateBreathDom();
+}
+function drawStars(f, spacing, size, alpha) {
+  const ox = cam.x * f, oy = cam.y * f;
+  const x0 = Math.floor((ox - W / 2) / spacing) - 1, x1 = Math.ceil((ox + W / 2) / spacing) + 1;
+  const y0 = Math.floor((oy - H / 2) / spacing) - 1, y1 = Math.ceil((oy + H / 2) / spacing) + 1;
+  ctx.fillStyle = `rgba(235,220,255,${alpha})`;
+  for (let gx = x0; gx <= x1; gx++) {
+    for (let gy = y0; gy <= y1; gy++) {
+      const h = hash(gx * 374761 + gy * 668265);
+      if (h > 0.4) continue;
+      const px = gx * spacing + hash(gx * 127 + gy) * spacing - ox + W / 2;
+      const py = gy * spacing + hash(gx - gy * 311) * spacing - oy + H / 2;
+      ctx.fillRect(px, py, size, size);
+    }
+  }
+}
+function drawGrid() {
+  const step = LIFE.cell;   // 可见网格 = 生命棋盘本身（24px 细格）
+  const x0 = Math.max(0, Math.floor((cam.x - W / 2) / step) * step);
+  const x1 = Math.min(WORLD.w, cam.x + W / 2);
+  const y0 = Math.max(0, Math.floor((cam.y - H / 2) / step) * step);
+  const y1 = Math.min(WORLD.h, cam.y + H / 2);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(180,160,230,0.075)';
+  ctx.beginPath();
+  for (let x = x0; x <= x1; x += step) { ctx.moveTo(x, Math.max(0, cam.y - H / 2)); ctx.lineTo(x, Math.min(WORLD.h, cam.y + H / 2)); }
+  for (let y = y0; y <= y1; y += step) { ctx.moveTo(Math.max(0, cam.x - W / 2), y); ctx.lineTo(Math.min(WORLD.w, cam.x + W / 2), y); }
+  ctx.stroke();
+}
+function drawHoles() {
+  for (const h of holes) {
+    const sc = h.scale || 1;
+    drawGlow(h.x, h.y, 90 * sc * (1 + Math.sin(h.spin * 2) * 0.05), '#a88ae0', 0.4);
+    ctx.save();
+    ctx.translate(h.x, h.y);
+    ctx.rotate(h.spin);
+    for (let i = 0; i < 3; i++) {
+      ctx.beginPath();
+      ctx.arc(0, 0, (34 + i * 16) * sc, i * 2.1, i * 2.1 + 3.6);
+      ctx.lineWidth = (2.5 - i * 0.5);
+      ctx.strokeStyle = hexA(i ? '#a88ae0' : '#ffe6c2', 0.5);
+      ctx.stroke();
+    }
+    ctx.restore();
+    shapePath('circle', h.x, h.y, 26 * sc, 0);
+    ctx.fillStyle = '#0c0918';
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#a88ae0';
+    ctx.stroke();
+  }
+}
+function drawEnemy(e) {
+  const sc = e.spawnT > 0 ? 0.25 + 0.75 * (1 - e.spawnT / 0.35) : 1;
+  const bv = breathOn ? breath.v : 0.5;
+  const fade = e.dying ? clamp(e.fadeT / 0.4, 0, 1) : 1;     // 消散：安静地缩小、渐隐
+  const r = e.r * sc * (1 + 0.08 * (bv - 0.5)) * (0.4 + 0.6 * fade);
+  // 呼吸光晕：与玩家同款，颜色随阶段金→白→紫；辉光收小让形体比光尘更"实"
+  const glowBase = 0.34 * (0.35 + 0.65 * bv) * fade;
+  if (breathOn) drawBreathGlow(e.x, e.y, r * (1.45 + 0.5 * bv), glowBase);
+  else drawGlow(e.x, e.y, r * 1.45, e.def.color, glowBase);
+  ctx.globalAlpha = fade;
+  drawShape(e.def.shape, e.x, e.y, r, e.angle,
+    hexA(e.def.color, 0.14), e.hitFlash > 0 ? '#ffffff' : e.def.color, e.type === 'boss' ? 4 : 2.5);
+  ctx.globalAlpha = 1;
+
+  // 巨核外环
+  if (e.type === 'boss') {
+    ctx.save();
+    ctx.translate(e.x, e.y);
+    ctx.rotate(e.angle * 0.7);
+    ctx.setLineDash([18, 12]);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = hexA('#a88ae0', 0.4);
+    ctx.beginPath();
+    ctx.arc(0, 0, r + 14, 0, TAU);
+    ctx.stroke();
+    ctx.restore();
+  }
+  // 血量条（巨核用更宽的一条）
+  if (e.hp < e.maxHp) {
+    const w = e.type === 'boss' ? r * 1.6 : Math.max(26, r * 1.7), pct = clamp(e.hp / e.maxHp, 0, 1);
+    ctx.fillStyle = 'rgba(0,0,0,0.45)';
+    ctx.fillRect(e.x - w / 2, e.y - r - 14, w, e.type === 'boss' ? 6 : 4.5);
+    ctx.fillStyle = e.def.color;
+    ctx.fillRect(e.x - w / 2, e.y - r - 14, w * pct, e.type === 'boss' ? 6 : 4.5);
+  }
+}
+function drawBullets() {
+  ctx.globalCompositeOperation = 'lighter';
+  for (const b of bullets) {
+    drawGlow(b.x, b.y, b.r * 2.1, b.color, 0.6);
+    ctx.strokeStyle = b.color;
+    ctx.lineWidth = b.r * 0.9;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(b.x - b.vx * 0.018, b.y - b.vy * 0.018);
+    ctx.lineTo(b.x, b.y);
+    ctx.stroke();
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r * 0.45, 0, TAU);
+    ctx.fill();
+  }
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.lineCap = 'butt';
+}
+function drawPlayer() {
+  const p = player;
+  // 冥想呼吸：吸气变大变亮、呼气收缩变暗（仅视觉缩放，碰撞半径不变）
+  const bv = breathOn ? breath.v : 0.5;
+  const rr = p.r * (1 + 0.16 * (bv - 0.5));
+  // 主辉光：颜色随阶段金→白→紫、明暗大小随呼吸值 —— 瞥一眼角色即可读出节律
+  if (breathOn) drawBreathGlow(p.x, p.y, rr * (2.0 + 1.1 * bv), 0.2 + 0.5 * bv);
+  else drawGlow(p.x, p.y, rr * (1.8 + 0.9 * bv), '#ffc98a', 0.15 + 0.45 * bv);
+  shapePath('circle', p.x, p.y, rr, 0);
+  ctx.fillStyle = 'rgba(255,217,168,0.14)';
+  ctx.fill();
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = '#ffd9a8';
+  ctx.stroke();
+  shapePath('circle', p.x, p.y, rr * 0.45, 0);
+  ctx.fillStyle = hexA('#fff2dc', 0.5 + 0.5 * bv);
+  ctx.fill();
+  // 止水力场圈
+  if (p.fieldT > 0) {
+    ctx.save();
+    ctx.setLineDash([14, 10]);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = hexA('#b39ae0', 0.3 + 0.25 * Math.sin(performance.now() / 180));
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 360, performance.now() / 900, performance.now() / 900 + TAU);
+    ctx.stroke();
+    ctx.restore();
+  }
+  // 呼吸光环：吸气外扩变亮、屏息最大最亮停住、呼气收拢淡出；颜色随阶段金→白→紫平滑过渡
+  if (breathOn) {
+    const col = haloRGB();
+    const a = 0.14 + 0.42 * bv;
+    const ringR = rr + 12 + 30 * bv;
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.strokeStyle = rgbaA(col, a);
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, ringR, 0, TAU);
+    ctx.stroke();
+    // 柔光外晕：余光也能扫到节律
+    ctx.strokeStyle = rgbaA(col, a * 0.4);
+    ctx.lineWidth = 10;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, ringR + 8 + 5 * bv, 0, TAU);
+    ctx.stroke();
+    ctx.globalCompositeOperation = 'source-over';
+  }
+}
+function drawParts() {
+  ctx.globalCompositeOperation = 'lighter';
+  for (const p of parts) {
+    const t = clamp(p.life / p.maxLife, 0, 1);
+    if (p.kind === 'dot') {
+      ctx.globalAlpha = t;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * (0.5 + t * 0.5), 0, TAU);
+      ctx.fill();
+    } else if (p.kind === 'shard') {
+      ctx.globalAlpha = t;
+      shapePath(p.shape, p.x, p.y, p.size, p.ang);
+      ctx.strokeStyle = p.color;
+      ctx.lineWidth = 1.6;
+      ctx.stroke();
+    } else if (p.kind === 'ring') {
+      ctx.globalAlpha = t * 0.9;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, TAU);
+      ctx.strokeStyle = p.color;
+      ctx.lineWidth = p.lw * t;
+      ctx.stroke();
+    } else if (p.kind === 'streak') {
+      ctx.globalAlpha = t;
+      const a = Math.atan2(p.vy, p.vx);
+      ctx.strokeStyle = p.color;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x - Math.cos(a) * p.size, p.y - Math.sin(a) * p.size);
+      ctx.stroke();
+    } else if (p.kind === 'flash') {
+      ctx.globalAlpha = t * 0.8;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * (1.4 - t * 0.4), 0, TAU);
+      ctx.fill();
+    } else if (p.kind === 'ghost') {
+      ctx.globalAlpha = t * 0.5;
+      shapePath(p.shape, p.x, p.y, p.r, p.ang);
+      ctx.strokeStyle = '#ffd9a8';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+  }
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = 'source-over';
+}
+function drawTexts() {
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  for (const t of texts) {
+    const a = clamp(t.life / t.maxLife, 0, 1);
+    ctx.globalAlpha = a;
+    ctx.font = `800 ${t.size}px "PingFang SC","Microsoft YaHei",sans-serif`;
+    ctx.fillStyle = t.color;
+    ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+    ctx.lineWidth = 3;
+    ctx.strokeText(t.txt, t.x, t.y);
+    ctx.fillText(t.txt, t.x, t.y);
+  }
+  ctx.globalAlpha = 1;
+}
+function drawIndicators() {
+  if (state !== 'playing') return;
+  for (const e of enemies) {
+    if (e.type !== 'elite' && e.type !== 'boss') continue;
+    const sx = e.x - cam.x + W / 2, sy = e.y - cam.y + H / 2;
+    if (sx > 40 && sx < W - 40 && sy > 40 && sy < H - 40) continue;
+    const cx = clamp(sx, 48, W - 48), cy = clamp(sy, 48, H - 48);
+    const a = Math.atan2(sy - cy, sx - cx);
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(a);
+    ctx.fillStyle = e.def.color;
+    ctx.globalAlpha = 0.75 + 0.25 * Math.sin(performance.now() / 150);
+    ctx.beginPath();
+    ctx.moveTo(12, 0); ctx.lineTo(-7, 7); ctx.lineTo(-7, -7);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  }
+}
+
+/* ---------------- HUD 同步 ---------------- */
+function setCool(el, skill) {
+  const el2 = el.querySelector('.cool');
+  const pct = skill.t > 0 ? (skill.t / skill.cd) * 100 : 0;
+  el2.style.background = `conic-gradient(rgba(5,8,16,.82) ${pct}%, transparent ${pct}%)`;
+  el.classList.toggle('ready', skill.t <= 0);
+}
+function syncHud() {
+  const t = Math.floor(playTime);
+  ui.timeNum.textContent = `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`;
+  ui.waveNum.textContent = generation;
+  setCool(ui.skDash, skills.dash);
+  setCool(ui.skNova, skills.nova);
+  setCool(ui.skField, skills.field);
+  setCool(ui.skHole, skills.hole);
+}
+
+/* ---------------- 主循环 ---------------- */
+let last = performance.now();
+function frame(now) {
+  requestAnimationFrame(frame);
+  const realDt = Math.min((now - last) / 1000, 1 / 30);
+  last = now;
+  breath = breathInfo();   // 冥想呼吸节拍（真实时钟）
+  updateHaloColor(realDt); // 角色光晕颜色平滑跟随呼吸阶段
+  if (freeze > 0) { freeze -= realDt; render(); return; }
+
+  if (state === 'playing') {
+    update(realDt, realDt);
+  }
+  Music.tick();            // 配乐调度（和弦轮换 / 呼吸涨落 / 风铃）
+  render();
+  if (state === 'playing' && !resting) syncHud();
+}
+requestAnimationFrame(frame);
+
+/* ---------------- 测试钩子 ---------------- */
+window.__game = {
+  start: startGame,
+  get state() { return state; },
+  get wave() { return generation; },          // 兼容旧钩子名：现返回演化世代
+  get generation() { return generation; },
+  get seed() { return lifeSeed; },
+  get kills() { return kills; },
+  player, enemies, bullets, holes, scars, texts, parts,
+  cam, mouse, keys: () => ({ ...keys }), Music, skills,
+  spawnEnemyAt: (type, lvl, x, y) => spawnEnemy(type, lvl, x, y),
+  lifeStepNow: () => lifeStep(),              // 手动演化一代（测试用）
+  setLifeTimer: (v) => { lifeTimer = v; },    // 冻结/推进自动演化（测试用）
+  setRescue: (n) => { LIFE.rescueMin = n; },  // 开关求生底线（测试用）
+  setRule: (b, s, name) => { LIFE.rule = { b, s, name: name || 'custom' }; },   // 换生命规则（测试用）
+  noiseAt: (gx, gy) => climate.fbm((gx - climate.dx) * LIFE.noise.scale, (gy - climate.dy) * LIFE.noise.scale),   // 采样气候场
+};
+
+/* ---------------- 棋盘 = 整个窗口 ---------------- */
+// 窗口多大，棋盘就多大：世界尺寸随视口刷新，细胞按格子重钉
+function syncWorld() {
+  WORLD.w = W; WORLD.h = H;
+  const cols = lifeCols(), rows = lifeRows();
+  for (const e of enemies) {
+    const gx = clamp(Math.floor(e.hx / LIFE.cell), 0, cols - 1);
+    const gy = clamp(Math.floor(e.hy / LIFE.cell), 0, rows - 1);
+    e.hx = (gx + 0.5) * LIFE.cell;
+    e.hy = (gy + 0.5) * LIFE.cell;
+    e.x = e.hx; e.y = e.hy;
+  }
+  player.x = clamp(player.x, player.r, WORLD.w - player.r);
+  player.y = clamp(player.y, player.r, WORLD.h - player.r);
+  cam.x = WORLD.w / 2; cam.y = WORLD.h / 2;
+  cam.trauma = 0;
+}
+window.addEventListener('resize', syncWorld);
+syncWorld();
+
+/* ---------------- 按钮绑定 ---------------- */
+ui.btnStart.addEventListener('click', () => { Sfx.ensure(); startGame(); });
+
+/* ---------------- 呼吸配乐音量滑杆 ---------------- */
+ui.musicVol.value = Math.round(Music.vol * 100);
+ui.musicVol.addEventListener('input', () => {
+  Music.vol = clamp(ui.musicVol.value / 100, 0, 1.5);
+  try { localStorage.setItem('circle-music-vol', String(Music.vol)); } catch (e) { /* 沙箱忽略 */ }
+});
