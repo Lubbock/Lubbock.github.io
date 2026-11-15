@@ -458,10 +458,7 @@ function updateEnemy(e, dt) {
   e.hitFlash = Math.max(0, e.hitFlash - dt);
   if (e.spawnT > 0) e.spawnT -= dt;
   if (e.dying) { e.fadeT -= dt; if (e.fadeT <= 0) e.dead = true; }
-  // 平滑滑向自己格子的中心：迁徙一格时呈现 ~0.3s 的顺滑滑步，而非瞬间跳跃
-  const k = clamp(dt * 10, 0, 1);
-  e.x += (e.hx - e.x) * k;
-  e.y += (e.hy - e.y) * k;
+  e.x = e.hx; e.y = e.hy;                    // 细胞钉在格心，只有生灭与呼吸
 }
 
 /* ---------------- 伤害 / 击杀 ---------------- */
@@ -842,29 +839,6 @@ function lifeStep() {
       spawnEnemy(LIFE.pool[randInt(0, LIFE.pool.length - 1)], 1,
         sx + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2), sy + rand(-LIFE.cell * 0.2, LIFE.cell * 0.2));
       climateBirths++; changes++;
-    }
-  }
-  // 单一细胞迁徙：完全孤立的细胞每代朝玩家方向挪一格（目标格必须为空）——
-  // 孤独的生命会缓缓向你聚拢；抵达你附近有了同伴，便不再迁徙
-  const pgx = clamp(Math.floor(player.x / LIFE.cell), 0, cols - 1);
-  const pgy = clamp(Math.floor(player.y / LIFE.cell), 0, rows - 1);
-  for (const e of enemies) {
-    if (e.dead || e.dying) continue;
-    const { gx, gy } = lifeCellOf(e, cols, rows);
-    const key = gy * cols + gx;
-    if (counts[key] !== 1 || n8(gx, gy) !== 0) continue;        // 只迁徙完全孤立的细胞
-    const dx = Math.sign(pgx - gx), dy = Math.sign(pgy - gy);
-    if (!dx && !dy) continue;                                   // 已与玩家同格
-    const tries = dx && dy ? [[dx, dy], [dx, 0], [0, dy]] : [[dx, dy]];
-    for (const [mx, my] of tries) {
-      const nx = gx + mx, ny = gy + my;
-      if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
-      const nk = ny * cols + nx;
-      if (counts[nk] > 0) continue;                             // 目标格必须为空
-      counts[key]--; counts[nk]++;
-      e.hx = (nx + 0.5) * LIFE.cell;
-      e.hy = (ny + 0.5) * LIFE.cell;
-      break;
     }
   }
   if (changes) generation++;
