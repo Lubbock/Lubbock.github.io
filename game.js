@@ -467,9 +467,7 @@ function damageEnemy(e, dmg, opts) {
   const crit = !(opts && opts.noCrit) && Math.random() < 0.1;
   const val = crit ? dmg * 2.1 : dmg;
   e.hp -= val;
-  e.hitFlash = 0.12;
-  addText(e.x + rand(-e.r, e.r) * 0.4, e.y - e.r - 4, Math.round(val), crit ? '#ffe6c2' : '#ffffff', crit ? 19 : 13);
-  sparks(opts && opts.sx != null ? opts.sx : e.x, opts && opts.sy != null ? opts.sy : e.y, '#ffffff', 3, 200);
+  e.hitFlash = 0.12;   // 唯一的受击提示：轻微白闪，无飘字无火星
   if (e.hp <= 0) killEnemy(e);
 }
 function killEnemy(e) {
