@@ -356,10 +356,10 @@ const player = {
 };
 
 const skills = {
-  dash:  { cd: 2.4, t: 0 },
-  nova:  { cd: 7,   t: 0 },
-  field: { cd: 14,  t: 0 },
-  hole:  { cd: 18,  t: 0 },
+  dash:  { cd: 0.8, t: 0 },
+  nova:  { cd: 2.3, t: 0 },
+  field: { cd: 4.7, t: 0 },
+  hole:  { cd: 6,   t: 0 },
 };
 
 /* ---------------- 粒子 / 飘字 ---------------- */
@@ -400,6 +400,7 @@ function updateParts(dt) {
     if (p.vx != null) {
       p.x += p.vx * dt; p.y += p.vy * dt;
       if (p.drag) { const k = Math.exp(-p.drag * dt); p.vx *= k; p.vy *= k; }
+    if (p.gr) p.vy += p.gr * dt;
     }
     if (p.vr) p.r += p.vr * dt;
     if (p.spin) p.ang += p.spin * dt;
@@ -541,23 +542,19 @@ function tryNova() {
   if (state !== 'playing' || skills.nova.t > 0) return;
   skills.nova.t = skills.nova.cd;
   const p = player;
-  // 温柔的波环（纯视觉，无伤害）：推开是唯一的"力"
-  const n = 18;
-  for (let i = 0; i < n; i++) {
-    const a = (i / n) * TAU;
-    bullets.push({ x: p.x + Math.cos(a) * (p.r + 8), y: p.y + Math.sin(a) * (p.r + 8), vx: Math.cos(a) * 420, vy: Math.sin(a) * 420, r: 6, life: 0.95, color: '#ffe6c2' });
+  // 烟花秀：三枚礼花弹从玩家升空，依次绽放出不同颜色的火星
+  for (let i = 0; i < 3; i++) {
+    const a = rand(0, TAU), r = rand(110, 260);
+    const bx = clamp(p.x + Math.cos(a) * r, 40, WORLD.w - 40);
+    const by = clamp(p.y + Math.sin(a) * r, 40, WORLD.h - 40);
+    const fuse = 0.3 + i * 0.22 + rand(0, 0.08);
+    const color = ['#ffe6c2', '#e89aa8', '#b39ae0', '#fff2dc'][i % 4];
+    fireworks.push({ t: fuse, x: bx, y: by, color });
+    // 礼花弹：带轨迹的升空光点，到达即炸
+    addPart({ kind: 'streak', x: p.x, y: p.y, vx: (bx - p.x) / fuse, vy: (by - p.y) / fuse, life: fuse, maxLife: fuse, size: 18, color });
   }
-  for (const e of enemies) {
-    if (e.dead) continue;
-    const d = dist(e.x, e.y, p.x, p.y);
-    if (d < 290) {
-      const a = Math.atan2(e.y - p.y, e.x - p.x);
-      e.vx += Math.cos(a) * 420; e.vy += Math.sin(a) * 420;
-    }
-  }
-  // 波缘播种：随机落下一枚拼块，命运各不相同 ——
-  //   O/L 落定为稳定子、T 化作"红绿灯"振荡、I/S 消散于虚空，
-  //   偶尔是一枚五格滑翔机（G），它会斜着飞过整张棋盘
+  // 波缘播种：烟花落点附近随机播下一枚拼块，命运各不相同 ——
+  //   O/L 稳定、T 红绿灯振荡、I/S 消散，偶尔是一枚滑翔机（G）
   {
     const names = ['O', 'I', 'T', 'L', 'S', 'G'];
     const name = names[randInt(0, names.length - 1)];
@@ -577,9 +574,6 @@ function tryNova() {
       pendingSeeds.push({ t: (r + rand(-20, 20)) / 420, gx: gx0 + dx, gy: gy0 + dy, type: cellType, level: randInt(1, 2) });
     }
   }
-  ringFx(p.x, p.y, '#ffd9a8', 780, 6, 0.55);
-  ringFx(p.x, p.y, '#ffffff', 560, 3, 0.4);
-  flashW = 0.14; addShake(0.22);
   Sfx.nova();
 }
 function tryField() {
@@ -876,8 +870,33 @@ function lifeStep() {
     }
     changes++;
   }
-  if (changes) generation++;
   for (let i = enemies.length - 1; i >= 0; i--) if (enemies[i].dead) enemies.splice(i, 1);
+}
+
+/* ---------------- 烟花 ---------------- */
+const fireworks = [];   // 礼花弹引信队列 {t, x, y, color}
+function updateFireworks(dt) {
+  for (let i = fireworks.length - 1; i >= 0; i--) {
+    const f = fireworks[i];
+    f.t -= dt;
+    if (f.t > 0) continue;
+    fireworks.splice(i, 1);
+    fireworkBurst(f.x, f.y, f.color);
+  }
+}
+function fireworkBurst(x, y, color) {
+  addPart({ kind: 'flash', x, y, life: 0.22, maxLife: 0.22, size: 26, color: '#fff2dc' });
+  ringFx(x, y, color, 190, 2, 0.4);
+  const n = 26;
+  for (let i = 0; i < n; i++) {                     // 主层：放射火星
+    const a = (i / n) * TAU + rand(-0.08, 0.08);
+    const spd = rand(110, 260);
+    addPart({ kind: 'dot', x, y, vx: Math.cos(a) * spd, vy: Math.sin(a) * spd, life: rand(0.55, 0.95), maxLife: 0.95, size: rand(1.5, 3), color, drag: 1.5 });
+  }
+  for (let i = 0; i < 9; i++) {                     // 金色余烬：缓缓飘落
+    const a = rand(0, TAU), spd = rand(30, 110);
+    addPart({ kind: 'dot', x, y, vx: Math.cos(a) * spd, vy: Math.sin(a) * spd, life: rand(0.9, 1.5), maxLife: 1.5, size: rand(1, 2), color: '#ffe6c2', drag: 0.6, gr: 130 });
+  }
 }
 
 /* ---------------- 播种落地 / 清理消散 ---------------- */
@@ -959,6 +978,7 @@ function update(dt, realDt) {
   }
   for (const e of enemies) if (!e.dead) updateEnemy(e, dt);
   updateBullets(dt);
+  updateFireworks(dt);
   updateSeeds(dt);
   // 地图黑洞：随机浮现的小型归心 —— 消灭过密处的一部分生命，过境留下沃土
   mapHoleTimer -= dt;
