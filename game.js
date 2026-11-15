@@ -350,6 +350,7 @@ const enemies = [], bullets = [], parts = [], texts = [], holes = [];
 const player = {
   x: WORLD.w / 2, y: WORLD.h / 2, vx: 0, vy: 0,
   r: 16,
+  ang: rand(0, TAU), targetAng: rand(0, TAU), wanderT: 1.5,
   dashT: 0, dashVx: 0, dashVy: 0, ghostT: 0, thrT: 0,
   fieldT: 0,
 };
@@ -485,20 +486,27 @@ function updatePlayer(dt) {
   const p = player;
   p.fieldT = Math.max(0, p.fieldT - dt);
 
-  // 缓慢游走
-  let ix = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
-  let iy = (keys.KeyS || keys.ArrowDown ? 1 : 0) - (keys.KeyW || keys.ArrowUp ? 1 : 0);
-  const il = Math.hypot(ix, iy);
-  if (il > 0) { ix /= il; iy /= il; }
-  const speed = 225;
+  // 自主游走：随机目标方向缓慢转向，连贯漫步；靠近棋盘边缘时缓缓回正
+  p.wanderT -= dt;
+  if (p.wanderT <= 0) {
+    p.wanderT = rand(2.5, 6);
+    p.targetAng = rand(0, TAU);
+  }
+  const margin = 120;
+  if (p.x < margin || p.x > WORLD.w - margin || p.y < margin || p.y > WORLD.h - margin) {
+    p.targetAng = Math.atan2(WORLD.h / 2 - p.y, WORLD.w / 2 - p.x);
+  }
+  const da = ((p.targetAng - p.ang + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
+  p.ang += da * clamp(dt * 1.2, 0, 1);
+  const speed = 130;
   if (p.dashT > 0) {
     p.dashT -= dt;
     p.vx = p.dashVx; p.vy = p.dashVy;
     if ((p.ghostT -= dt) <= 0) { p.ghostT = 0.028; ghostFx(p.x, p.y, p.r, Math.atan2(p.dashVy, p.dashVx)); }
   } else {
-    const k = 1 - Math.exp(-5 * dt);   // 更柔的加减速，像在水里
-    p.vx += (ix * speed - p.vx) * k;
-    p.vy += (iy * speed - p.vy) * k;
+    const k = 1 - Math.exp(-2.5 * dt);   // 加减速像在水里
+    p.vx += (Math.cos(p.ang) * speed - p.vx) * k;
+    p.vy += (Math.sin(p.ang) * speed - p.vy) * k;
   }
   p.x = clamp(p.x + p.vx * dt, p.r, WORLD.w - p.r);
   p.y = clamp(p.y + p.vy * dt, p.r, WORLD.h - p.r);
