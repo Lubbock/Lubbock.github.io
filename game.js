@@ -96,9 +96,36 @@ resize();
 /* ---------------- 世界常量 ---------------- */
 const WORLD = { w: 1280, h: 720 };    // 棋盘 = 整个窗口（syncWorld 随窗口尺寸刷新）
 
-/* ---------------- 音效（WebAudio 合成，无外部资源） ---------------- */
+/* ---------------- 音效（WebAudio 合成，无外部资源） ----------------
+   iOS Safari 的坑：① AudioContext 必须在用户手势里创建/恢复，否则永远 suspended；
+   ② 侧边静音键会把网页音频整条静音。这里两手都做：任何首次触摸都解锁，
+   并挂一个静音的 <audio> 循环占住 iOS 音频会话，同时在检测到手势后仍未运行时给出提示。 */
+const IS_IOS = /iP(hone|ad|od)/.test(navigator.platform || '') ||
+               (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent || ''));
+function silentWavUrl() {
+  const sr = 8000, n = sr, size = 44 + n * 2;
+  const b = new Uint8Array(size), dv = new DataView(b.buffer);
+  const put = (o, s) => { for (let i = 0; i < s.length; i++) b[o + i] = s.charCodeAt(i); };
+  put(0, 'RIFF'); dv.setUint32(4, size - 8, true); put(8, 'WAVEfmt ');
+  dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
+  dv.setUint32(24, sr, true); dv.setUint32(28, sr * 2, true);
+  dv.setUint16(32, 2, true); dv.setUint16(34, 16, true); put(36, 'data'); dv.setUint32(40, n * 2, true);
+  let s = ''; for (let i = 0; i < b.length; i++) s += String.fromCharCode(b[i]);
+  return 'data:audio/wav;base64,' + btoa(s);
+}
 const Sfx = {
-  ctx: null, gain: null, nbuf: null, muted: false,
+  ctx: null, gain: null, nbuf: null, muted: false, el: null, unlocked: false, hintShown: false,
+  // 静音循环：占住 iOS 的媒体会话，避免 WebAudio 被系统当作"未激活"而静音
+  holdSession() {
+    try {
+      if (!this.el) {
+        this.el = new Audio(silentWavUrl());
+        this.el.loop = true; this.el.volume = 1; this.el.preload = 'auto';
+        this.el.setAttribute('playsinline', '');
+      }
+      if (this.el.paused) { const p = this.el.play(); if (p && p.catch) p.catch(() => {}); }
+    } catch (e) { /* 忽略 */ }
+  },
   ensure() {
     if (!this.ctx) {
       try {
@@ -112,10 +139,25 @@ const Sfx = {
         for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
       } catch (e) { /* 忽略音频不可用 */ }
     }
-    if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+    if (!this.ctx) return;
+    this.holdSession();
+    if (this.ctx.state !== 'running') {
+      try { const p = this.ctx.resume(); if (p && p.then) p.then(() => this.check(), () => this.check()); } catch (e) { /* 忽略 */ }
+    }
+    if (this.ctx.state === 'running') this.unlocked = true;
+    else this.check();
+  },
+  // 手势后仍未 running：iOS 上基本只剩"侧边静音键"这一种解释，明确告诉用户
+  check() {
+    if (this.unlocked || this.hintShown || !this.ctx) return;
+    if (this.ctx.state === 'running') { this.unlocked = true; return; }
+    if (!IS_IOS) return;
+    this.hintShown = true;
+    showBanner('iPhone 侧边静音键会屏蔽网页声音，请关闭后点一下屏幕', '#e89aa8', true);
   },
   tone(o, dest) {
-    if (!this.ctx || this.muted) return;
+    // ctx 未 running 时不排程：否则这些音源会在恢复瞬间一起放出（iOS 上尤其明显）
+    if (!this.ctx || this.muted || this.ctx.state !== 'running') return;
     const t = this.ctx.currentTime + (o.delay || 0);
     const dur = o.dur || 0.2;
     const osc = this.ctx.createOscillator();
@@ -130,7 +172,8 @@ const Sfx = {
     osc.start(t); osc.stop(t + dur + 0.05);
   },
   noise(o) {
-    if (!this.ctx || this.muted) return;
+    // ctx 未 running 时不排程：否则这些音源会在恢复瞬间一起放出（iOS 上尤其明显）
+    if (!this.ctx || this.muted || this.ctx.state !== 'running') return;
     const t = this.ctx.currentTime + (o.delay || 0);
     const dur = o.dur || 0.2;
     const src = this.ctx.createBufferSource();
@@ -217,6 +260,7 @@ const Music = {
   },
   tick() {
     if (!this.started || !this.padGain) return;
+    if (Sfx.ctx && Sfx.ctx.state !== 'running') { Sfx.ensure(); return; }   // 被系统挂起：等下次手势恢复
     const x = (performance.now() / 1000) % 14;
     if (x < this.prevX) { this.playChord(); Sfx.bell(); }  // 新一轮吸气 → 换和弦 + 一声轻钟
     else if (this.prevX < 8 && x >= 8) this.chime();      // 呼气开始 → 风铃一声
@@ -270,6 +314,10 @@ if (typeof window.PointerEvent === 'function') {
     mutateCellAt(t.clientX, t.clientY);
   }, { passive: false });
 }
+// iOS 上「第一次触摸」是唯一的解锁时机：用捕获阶段的全局监听兜住任何入口（含菜单按钮之外的手势）
+['pointerdown', 'touchend'].forEach((t) => {
+  window.addEventListener(t, () => Sfx.ensure(), { capture: true, passive: true });
+});
 window.addEventListener('contextmenu', (e) => e.preventDefault());
 window.addEventListener('keydown', (e) => {
   Sfx.ensure();
@@ -404,7 +452,7 @@ function drawShape(t, x, y, r, ang, fill, stroke, lw, glowCol, glowA) {
 /* ---------------- 全局状态 ---------------- */
 let state = 'menu';           // menu | playing | paused
 let freeze = 0;
-let kills = 0, playTime = 0, seedsPlanted = 0, mapHolesSpawned = 0;
+let kills = 0, playTime = 0, seedsPlanted = 0, mapHolesSpawned = 0, lonelyDeathCount = 0;
 let resting = false;                                   // 小憩：只隐去界面，世界照常演变
 let boss = null;
 let flashW = 0;
@@ -726,8 +774,9 @@ function updateBullets(dt) {
   }
 }
 /* ---------------- 生命游戏 · 杂念的自然演变 ----------------
-   生命不灭 · 过挤消散规则：细网格 + 细胞钉死在格中生灭 ——
-   · 存活：单一、成对、小群落（8 邻域同伴数 ≤ 4）都不灭
+   孤独易散 · 过挤消散规则：细网格 + 细胞钉死在格中生灭 ——
+   · 存活：成对与小群落（8 邻域同伴数 1~4）不灭
+   · 孤独：0 邻居的孤细胞每代以 lonelyP（默认 0.3）的概率消散
    · 过挤：同伴数 ≥ 5 即消散
    · 诞生：空格的 8 邻域同伴数 ∈ {3,6,7,8}
    · 地图会随机浮现小型黑洞，消灭过密处的一部分生命；
@@ -751,9 +800,10 @@ const LIFE = {
     cap: 12,          // 每代宜居诞生不超过这么多（温和压力）
   },
   pool: ['chaser', 'dasher', 'shooter', 'elite'],
-  // 规则集：生命不灭 · 过挤消散 —— 单身、成对、小群落（≤4 邻）都不灭，
-  // 5 邻及以上即为过挤，全部消散；诞生仍看 B3678
-  rule: { name: '生命不灭 · 过挤消散', b: [3, 6, 7, 8], s: [0, 1, 2, 3, 4] },
+  // 规则集：孤独易散 · 过挤消散 —— 成对与小群落（1~4 邻）不灭，
+  // 5 邻及以上即为过挤全部消散，0 邻居的孤细胞按 lonelyP 概率散去；诞生仍看 B3678
+  rule: { name: '孤独易散 · 过挤消散', b: [3, 6, 7, 8], s: [0, 1, 2, 3, 4] },
+  lonelyP: 0.3,       // 孤细胞（0 邻）每代随机消散的概率；0 = 关闭（测试可改）
 };
 let lifeTimer = 0, generation = 0, lifeSeed = 0;
 const pendingSeeds = [];   // 绽放播下的种子（随波扩散到半径后落地）
@@ -861,6 +911,10 @@ function lifeStep() {
     if (e.dead || e.dying) continue;
     const { gx, gy } = lifeCellOf(e, cols, rows);
     const n = counts[gy * cols + gx] - 1 + n8(gx, gy);
+    // 孤细胞（0 邻居）每次演化按概率消散 —— 落单的杂念留不住；成对及以上仍不受此规则约束
+    if (n === 0 && LIFE.lonelyP > 0 && Math.random() < LIFE.lonelyP) {
+      e.dying = true; e.fadeT = 0.4; changes++; lonelyDeathCount++; continue;
+    }
     if (!sset.has(n)) { e.dying = true; e.fadeT = 0.4; changes++; }   // 安静渐隐，不闪光
   }
   // 气候不再直接杀生 —— 死亡只来自过挤（恰 5 邻）、黑洞与归心
@@ -1519,6 +1573,10 @@ window.__game = {
   setLifeTimer: (v) => { lifeTimer = v; },    // 冻结/推进自动演化（测试用）
   setRescue: (n) => { LIFE.rescueMin = n; },  // 开关求生底线（测试用）
   setRule: (b, s, name) => { LIFE.rule = { b, s, name: name || 'custom' }; },   // 换生命规则（测试用）
+  setLonelyDeath: (p) => { LIFE.lonelyP = clamp(p, 0, 1); },  // 孤细胞随机死亡率（测试用）
+  get lonelyP() { return LIFE.lonelyP; },
+  get LIFE() { return LIFE; },                                // 直读常量表（测试用）
+  get lonelyDeaths() { return lonelyDeathCount; },            // 累计孤独消散数
   noiseAt: (gx, gy) => climate.fbm((gx - climate.dx) * LIFE.noise.scale, (gy - climate.dy) * LIFE.noise.scale),   // 采样气候场
 };
 
