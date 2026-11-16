@@ -1260,10 +1260,7 @@ function drawEnemy(e) {
   const bv = breathOn ? breath.v : 0.5;
   const fade = e.dying ? clamp(e.fadeT / 0.4, 0, 1) : 1;     // 消散：安静地缩小、渐隐
   const r = e.r * sc * (1 + 0.08 * (bv - 0.5)) * (0.4 + 0.6 * fade);
-  // 呼吸光晕：与玩家同款，颜色随阶段金→白→紫；辉光收小让形体比光尘更"实"
-  const glowBase = 0.34 * (0.35 + 0.65 * bv) * fade;
-  if (breathOn) drawBreathGlow(e.x, e.y, r * (1.45 + 0.5 * bv), glowBase);
-  else drawGlow(e.x, e.y, r * 1.45, e.def.color, glowBase);
+  // 生物节点不加光晕：只靠形状描边与淡淡填充读形，棋盘更干净（呼吸仍体现在半径起伏上）
   ctx.globalAlpha = fade;
   drawShape(e.def.shape, e.x, e.y, r, e.angle,
     hexA(e.def.color, 0.14), e.hitFlash > 0 ? '#ffffff' : e.def.color, e.type === 'boss' ? 4 : 2.5);
