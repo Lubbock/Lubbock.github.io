@@ -39,13 +39,58 @@ const ui = {
   skDash: $('skill-dash'), skNova: $('skill-nova'), skField: $('skill-field'), skHole: $('skill-hole'),
   btnStart: $('btn-start'),
 };
-let W = 0, H = 0, DPR = 1;
-function resize() {
-  DPR = Math.min(window.devicePixelRatio || 1, 2);
-  W = window.innerWidth; H = window.innerHeight;
-  cvs.width = Math.round(W * DPR); cvs.height = Math.round(H * DPR);
+let W = 0, H = 0, DPR = 1, lastDPR = -1, worldDirty = true;
+// 触屏判定：决定网格密度、控件尺寸、是否需要触摸瞄准环与按钮操作
+const COARSE = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+document.documentElement.classList.toggle('coarse', COARSE);
+
+// 棋盘格边长随屏幕短边收小：窄屏（手机竖屏）也要有足够的格子演化出图案
+function pickCell() {
+  const m = Math.min(W, H);
+  return m <= 380 ? 18 : m <= 560 ? 20 : 24;
 }
-window.addEventListener('resize', resize);
+function resize() {
+  DPR = clamp(window.devicePixelRatio || 1, 0.75, 2);
+  // 以可视视口为准：iOS 地址栏 / 桌面浏览器缩放都反映在这里
+  const vv = window.visualViewport;
+  const w = Math.max(240, Math.round((vv && vv.width) || window.innerWidth));
+  const h = Math.max(240, Math.round((vv && vv.height) || window.innerHeight));
+  if (w === W && h === H && DPR === lastDPR) return false;   // 地址栏伸缩等无实质变化时不重建棋盘
+  const changed = w !== W || h !== H;
+  W = w; H = h; lastDPR = DPR;
+  cvs.width = Math.round(W * DPR); cvs.height = Math.round(H * DPR);
+  // CSS 尺寸必须显式等于逻辑尺寸：canvas 是替换元素，inset:0 不会拉伸它，
+  // 只按内在尺寸（= 位图像素）排版，高分屏上整幅画面会放大 DPR 倍。
+  cvs.style.width = W + 'px'; cvs.style.height = H + 'px';
+  // UI 层统一以「可视视口」为基准（body 高度 = --vh），绕开 iOS 地址栏遮挡 fixed 元素的问题
+  const rs = document.documentElement.style;
+  rs.setProperty('--vh', H + 'px');
+  rs.setProperty('--vw', W + 'px');
+  // 只标脏：syncWorld 依赖 LIFE / WORLD / enemies，脚本求值期间还不存在，
+  // 由 viewportChanged（事件路径）与 frame()（rAF 路径）各自接手
+  if (changed) worldDirty = true;
+  return changed;
+}
+// 视口变化：resize / 转向 / 全屏 / 浏览器缩放 / 分屏都会走到这里
+// 不依赖 rAF（页面隐藏或转向动画期间 rAF 可能被暂停），当场把画幅与棋盘对齐
+function viewportChanged() { if (resize() && typeof syncWorld === 'function') { worldDirty = false; syncWorld(); } }
+window.addEventListener('resize', viewportChanged);
+// 转向：安卓会改写 innerWidth/Height，iOS 需要等一帧动画落定
+window.addEventListener('orientationchange', () => { viewportChanged(); setTimeout(viewportChanged, 150); setTimeout(viewportChanged, 500); });
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', viewportChanged);
+  window.visualViewport.addEventListener('scroll', viewportChanged);
+}
+if (window.matchMedia) {
+  const mq = window.matchMedia('(orientation: portrait)');
+  if (mq.addEventListener) mq.addEventListener('change', () => setTimeout(viewportChanged, 200));
+  else if (mq.addListener) mq.addListener(() => setTimeout(viewportChanged, 200));
+}
+// 看门狗：rAF 在页面隐藏 / 后台 / 部分 webview 里会被暂停，resize 事件也可能不来；
+// 500ms 轮询一次，无变化时 resize() 直接返回 false，几乎零成本
+setInterval(viewportChanged, 500);
+document.addEventListener('fullscreenchange', () => { viewportChanged(); setTimeout(viewportChanged, 120); syncTools(); });
+document.addEventListener('webkitfullscreenchange', () => { viewportChanged(); setTimeout(viewportChanged, 120); });
 resize();
 
 /* ---------------- 世界常量 ---------------- */
@@ -180,17 +225,14 @@ const Music = {
   },
 };
 
-/* ---------------- 输入 ---------------- */
+/* ---------------- 输入（鼠标 / 触屏统一走 Pointer Events） ---------------- */
 const keys = {};
-const mouse = { x: innerWidth / 2, y: innerHeight / 2, wx: 0, wy: 0 };
-window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-window.addEventListener('mousedown', (ev) => { Sfx.ensure(); if (ev.target === cvs) mutateCellAtMouse(); });
-
-// 点按格子：其中的细胞随机变形成另一种形状（保证与当前不同），并续上 2.5s 生根期 ——
-// 规则与形状无关，稳定子变形后依旧稳定；你点过的细胞会被"护住"，不会转瞬即逝
-function mutateCellAtMouse() {
+const mouse = { x: W / 2, y: H / 2, wx: 0, wy: 0, aim: false };
+// 触屏没有悬停：aim 表示「已经明确指过位置」，作为归心落点与流步方向的依据
+function setAim(cx, cy) { mouse.x = cx; mouse.y = cy; mouse.aim = true; }
+function mutateCellAt(px, py) {
   if (state !== 'playing') return;
-  const wx = mouse.x - W / 2 + cam.x, wy = mouse.y - H / 2 + cam.y;
+  const wx = px - W / 2 + cam.x, wy = py - H / 2 + cam.y;
   const gx = clamp(Math.floor(wx / LIFE.cell), 0, lifeCols() - 1);
   const gy = clamp(Math.floor(wy / LIFE.cell), 0, lifeRows() - 1);
   const cx = (gx + 0.5) * LIFE.cell, cy = (gy + 0.5) * LIFE.cell;
@@ -204,6 +246,29 @@ function mutateCellAtMouse() {
     e.r = st.r; e.hp = e.maxHp = st.hp; e.xp = st.xp;
   }
   Sfx.flip();
+}
+// 兼容极老的 webview（无 PointerEvent）时退回 mouse/touch 事件
+if (typeof window.PointerEvent === 'function') {
+  window.addEventListener('pointermove', (e) => {
+    if (e.pointerType === 'mouse' || e.buttons) setAim(e.clientX, e.clientY);
+  }, { passive: true });
+  cvs.addEventListener('pointerdown', (e) => {
+    Sfx.ensure();                                   // 触摸手势里解锁 WebAudio
+    if (e.pointerType !== 'mouse') e.preventDefault();
+    setAim(e.clientX, e.clientY);                   // 点按 = 瞄准
+    if (e.isPrimary) mutateCellAt(e.clientX, e.clientY);   // 点中细胞则变形
+  }, { passive: false });
+} else {
+  window.addEventListener('mousemove', (e) => setAim(e.clientX, e.clientY));
+  cvs.addEventListener('mousedown', (e) => { Sfx.ensure(); setAim(e.clientX, e.clientY); mutateCellAt(e.clientX, e.clientY); });
+  cvs.addEventListener('touchstart', (e) => {
+    Sfx.ensure();
+    const t = e.changedTouches[0];
+    if (!t) return;
+    e.preventDefault();
+    setAim(t.clientX, t.clientY);
+    mutateCellAt(t.clientX, t.clientY);
+  }, { passive: false });
 }
 window.addEventListener('contextmenu', (e) => e.preventDefault());
 window.addEventListener('keydown', (e) => {
@@ -221,14 +286,8 @@ window.addEventListener('keydown', (e) => {
     case 'KeyO':
       if (state === 'playing') toggleSummary();
       break;
-    case 'KeyM':
-      Sfx.muted = !Sfx.muted;
-      showBanner(Sfx.muted ? '静音' : '声音开启', '#9db4d4', true);
-      break;
-    case 'KeyB':
-      breathOn = !breathOn;
-      showBanner(breathOn ? '呼吸引导 开' : '呼吸引导 关', '#ffd9a8', true);
-      break;
+    case 'KeyM': toggleMute(); break;
+    case 'KeyB': toggleBreath(); break;
     case 'KeyQ': case 'ShiftLeft': case 'ShiftRight': tryDash(); break;
     case 'KeyE': tryNova(); break;
     case 'Space': tryField(); break;
@@ -367,9 +426,9 @@ const skills = {
   field: { cd: 4.7, t: 0 },
   hole:  { cd: 6,   t: 0 },
 };
-
 /* ---------------- 粒子 / 飘字 ---------------- */
-function addPart(p) { if (parts.length < 650) parts.push(p); }
+let partCap = 650;                                  // syncWorld 按设备收紧（手机端粒子开销）
+function addPart(p) { if (parts.length < partCap) parts.push(p); }
 function addText(x, y, txt, color, size) {
   if (texts.length > 80) texts.shift();
   texts.push({ x, y, txt, color, size: size || 14, life: 0.78, maxLife: 0.78, vy: -54, vx: rand(-14, 14) });
@@ -499,7 +558,7 @@ function updatePlayer(dt) {
     p.wanderT = rand(2.5, 6);
     p.targetAng = rand(0, TAU);
   }
-  const margin = 120;
+  const margin = Math.min(120, WORLD.w / 3, WORLD.h / 3);   // 小窗口下边缘回正也要收小
   if (p.x < margin || p.x > WORLD.w - margin || p.y < margin || p.y > WORLD.h - margin) {
     p.targetAng = Math.atan2(WORLD.h / 2 - p.y, WORLD.w / 2 - p.x);
   }
@@ -528,13 +587,21 @@ function updatePlayer(dt) {
 }
 
 /* ---------------- 技能 ---------------- */
+// 瞄准点：触屏尚未点按时退化为「玩家正前方」，避免归心 / 流步落在无意义的屏幕中心
+// 现场换算世界坐标，不取上一帧缓存 —— 点按后立刻施法才拿得到最新落点
+function aimPoint() {
+  const p = player;
+  if (!mouse.aim) return { x: p.x + Math.cos(p.ang) * 200, y: p.y + Math.sin(p.ang) * 200 };
+  return { x: mouse.x - W / 2 + cam.x, y: mouse.y - H / 2 + cam.y };
+}
 function tryDash() {
   if (state !== 'playing' || skills.dash.t > 0) return;
   skills.dash.t = skills.dash.cd;
   const p = player;
   let dx = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
   let dy = (keys.KeyS || keys.ArrowDown ? 1 : 0) - (keys.KeyW || keys.ArrowUp ? 1 : 0);
-  let a = Math.hypot(dx, dy) > 0 ? Math.atan2(dy, dx) : Math.atan2(mouse.wy - p.y, mouse.wx - p.x);
+  const aim = aimPoint();
+  let a = Math.hypot(dx, dy) > 0 ? Math.atan2(dy, dx) : Math.atan2(aim.y - p.y, aim.x - p.x);
   p.dashT = 0.16;
   p.dashVx = Math.cos(a) * 1400; p.dashVy = Math.sin(a) * 1400;
   ringFx(p.x, p.y, '#ffe6c2', 380, 2, 0.35);
@@ -593,11 +660,11 @@ function tryField() {
 function tryHole() {
   if (state !== 'playing' || skills.hole.t > 0) return;
   skills.hole.t = skills.hole.cd;
+  const aim = aimPoint();
   holes.push({
-    x: clamp(mouse.wx, 60, WORLD.w - 60), y: clamp(mouse.wy, 60, WORLD.h - 60),
+    x: clamp(aim.x, 60, WORLD.w - 60), y: clamp(aim.y, 60, WORLD.h - 60),
     t: 2.6, tick: 0, spin: rand(0, TAU), dmg: 12,
   });
-  Sfx.hole();
 }
 function updateHoles(dt) {
   for (let i = holes.length - 1; i >= 0; i--) {
@@ -799,7 +866,9 @@ function lifeStep() {
   // 气候不再直接杀生 —— 死亡只来自过挤（恰 5 邻）、黑洞与归心
   // 诞生 —— 空格邻居数命中诞生集；形状随邻居多数，等级随邻居平均
   // 种群自稳：高于目标 → 气候诞生率降低；低于目标 → 风调雨顺
-  const pressure = clamp(liveTotal / LIFE.target, 0.4, 2.2);
+  // 目标种群随棋盘大小缩放：窄屏（手机）不会为凑够 300 个而把格子塞到满盘过挤
+  const popTarget = Math.min(LIFE.target, Math.max(24, Math.round(cols * rows * 0.19)));
+  const pressure = clamp(liveTotal / popTarget, 0.4, 2.2);
   let births = 0;
   for (let gy = 0; gy < rows && births < LIFE.birthsPerTick && enemies.length < LIFE.maxEnemies; gy++) {
     for (let gx = 0; gx < cols; gx++) {
@@ -951,6 +1020,7 @@ function startGame() {
   ui.hud.classList.remove('hidden');
   cam.x = p.x; cam.y = p.y; cam.trauma = 0;
   state = 'playing';
+  syncTools();                                   // 按钮层进入对局态（须在 state 之后）
   // 本局世界：随机种子长出初始种群，之后全交给生命规则
   lifeSeed = 10000 + Math.floor(Math.random() * 89999);
   initClimate(lifeSeed);
@@ -978,13 +1048,68 @@ function toggleRest() {
   resting = !resting;
   ui.hud.classList.toggle('hidden', resting);
   showBanner(resting ? '小憩 · 世界继续演变' : '回来 · 一切照常呼吸', '#9db4d0', true);
+  syncTools();
+}
+
+/* ---------------- 开关类操作（键盘与触屏按钮共用） ---------------- */
+function toggleMute() {
+  Sfx.muted = !Sfx.muted;
+  showBanner(Sfx.muted ? '静音' : '声音开启', '#9db4d4', true);
+  syncTools();
+}
+function toggleBreath() {
+  breathOn = !breathOn;
+  showBanner(breathOn ? '呼吸引导 开' : '呼吸引导 关', '#ffd9a8', true);
+  syncTools();
+}
+
+/* ---------------- 全屏（手机 / 桌面通用，失败时给出可读提示） ---------------- */
+function isFullscreen() {
+  return !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
+}
+function toggleFullscreen() {
+  const de = document.documentElement;
+  if (isFullscreen()) {
+    const exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+    if (exit) { try { exit.call(document); } catch (e) { /* 忽略 */ } }
+    return;
+  }
+  const req = de.requestFullscreen || de.webkitRequestFullscreen || de.msRequestFullscreen;
+  if (!req) {
+    // iOS Safari 不支持元素级全屏：引导用「添加到主屏幕」获得同样效果
+    showBanner('此浏览器不支持全屏 · 可在菜单里选「添加到主屏幕」', '#9db4d4', true);
+    return;
+  }
+  try {
+    const p = req.call(de, { navigationUI: 'hide' });
+    if (p && typeof p.catch === 'function') {
+      p.catch(() => showBanner('进入全屏被浏览器拒绝 · 请再点一次', '#9db4d4', true));
+    }
+  } catch (e) {
+    showBanner('进入全屏被浏览器拒绝 · 请再点一次', '#9db4d4', true);
+  }
+  viewportChanged();
+  setTimeout(viewportChanged, 150);
+}
+function syncTools() {
+  const playing = state === 'playing';
+  document.documentElement.classList.toggle('in-menu', !playing);   // 菜单态：工具按钮让开面板
+  document.querySelectorAll('.tool-play').forEach((el) => el.classList.toggle('hidden', !playing));
+  const fs = document.querySelector('[data-tool="fs"]');
+  if (fs) { const on = isFullscreen(); fs.classList.toggle('on', on); fs.textContent = on ? '退出全屏' : '全屏'; }
+  const br = document.querySelector('[data-tool="breath"]');
+  if (br) br.classList.toggle('on', breathOn);
+  const mu = document.querySelector('[data-tool="mute"]');
+  if (mu) mu.classList.toggle('on', !Sfx.muted);
+  const rt = document.querySelector('[data-tool="rest"]');
+  if (rt) rt.textContent = resting ? '回来' : '小憩';
 }
 
 /* ---------------- 横幅 ---------------- */
 function showBanner(txt, color, small) {
   ui.banner.textContent = txt;
   ui.banner.style.color = color || '#fff';
-  ui.banner.style.fontSize = small ? '30px' : '44px';
+  ui.banner.classList.toggle('small', !!small);   // 字号交给 CSS clamp，窄屏才不会溢出
   ui.banner.classList.remove('show');
   void ui.banner.offsetWidth;
   ui.banner.classList.add('show');
@@ -1022,10 +1147,11 @@ function update(dt, realDt) {
   updateHoles(dt);
   updateParts(dt);
 
-  // 摄像机跟随 + 朝鼠标偏移
+  // 摄像机跟随：触屏不做鼠标视差（没有悬停语义），桌面仍轻微朝瞄准点偏移
   const k = 1 - Math.exp(-6 * dt);
-  cam.x = lerp(cam.x, player.x + (mouse.x - W / 2) * 0.12, k);
-  cam.y = lerp(cam.y, player.y + (mouse.y - H / 2) * 0.12, k);
+  const par = (COARSE || !mouse.aim) ? 0 : 0.12;
+  cam.x = lerp(cam.x, player.x + (mouse.x - W / 2) * par, k);
+  cam.y = lerp(cam.y, player.y + (mouse.y - H / 2) * par, k);
   cam.x = WORLD.w < W ? WORLD.w / 2 : clamp(cam.x, W / 2, WORLD.w - W / 2);
   cam.y = WORLD.h < H ? WORLD.h / 2 : clamp(cam.y, H / 2, WORLD.h - H / 2);
 }
@@ -1064,6 +1190,8 @@ function render() {
   if (state === 'playing') drawPlayer();
   drawParts();
   drawTexts();
+  // 触屏瞄准标记：手机没有悬停，把归心 / 流步的落点亮出来，点按才更新
+  if (state === 'playing' && COARSE && mouse.aim) drawAim();
 
   ctx.restore();
 
@@ -1294,6 +1422,28 @@ function drawTexts() {
   }
   ctx.globalAlpha = 1;
 }
+// 触屏瞄准环：手机没有鼠标悬停，用这圈虚线告诉玩家归心 / 流步会落在哪儿
+function drawAim() {
+  const x = mouse.wx, y = mouse.wy;
+  const t = performance.now() / 600;
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.setLineDash([6, 10]);
+  ctx.lineDashOffset = -t * 24;
+  ctx.strokeStyle = 'rgba(255,217,168,0.34)';
+  ctx.lineWidth = 1.6;
+  ctx.beginPath();
+  ctx.arc(x, y, 26 + Math.sin(t) * 2, 0, TAU);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.strokeStyle = 'rgba(255,217,168,0.5)';
+  ctx.beginPath();
+  ctx.moveTo(x - 8, y); ctx.lineTo(x + 8, y);
+  ctx.moveTo(x, y - 8); ctx.lineTo(x, y + 8);
+  ctx.stroke();
+  ctx.restore();
+}
+
 function drawIndicators() {
   if (state !== 'playing') return;
   for (const e of enemies) {
@@ -1339,6 +1489,9 @@ function frame(now) {
   requestAnimationFrame(frame);
   const realDt = Math.min((now - last) / 1000, 1 / 30);
   last = now;
+  // 每帧校对视口尺寸：全屏、缩放、转向、手机地址栏收起都能立刻收敛到新画幅
+  resize();
+  if (worldDirty) { worldDirty = false; syncWorld(); }
   breath = breathInfo();   // 冥想呼吸节拍（真实时钟）
   updateHaloColor(realDt); // 角色光晕颜色平滑跟随呼吸阶段
   if (freeze > 0) { freeze -= realDt; render(); return; }
@@ -1372,11 +1525,14 @@ window.__game = {
   noiseAt: (gx, gy) => climate.fbm((gx - climate.dx) * LIFE.noise.scale, (gy - climate.dy) * LIFE.noise.scale),   // 采样气候场
 };
 
-/* ---------------- 棋盘 = 整个窗口 ---------------- */
-// 窗口多大，棋盘就多大：世界尺寸随视口刷新，细胞按格子重钉
 function syncWorld() {
-  WORLD.w = W; WORLD.h = H;
-  const cols = lifeCols(), rows = lifeRows();
+  LIFE.cell = pickCell();                          // 窄屏收小格子，手机竖屏也留够演化空间
+  // 世界尺寸对齐到整格且不超过视口：环面拓扑与 drawGrid 严格一致，
+  // 棋盘边框完整可见，最后一行细胞也不会被切在视口外
+  const cols = Math.max(8, Math.floor(W / LIFE.cell)), rows = Math.max(8, Math.floor(H / LIFE.cell));
+  WORLD.w = cols * LIFE.cell; WORLD.h = rows * LIFE.cell;
+  LIFE.maxEnemies = COARSE ? 420 : 800;            // 手机端算力有限，粒子上限收紧
+  partCap = COARSE ? 380 : 650;                    // 同上：移动端粒子上限收紧
   for (const e of enemies) {
     const gx = clamp(Math.floor(e.hx / LIFE.cell), 0, cols - 1);
     const gy = clamp(Math.floor(e.hy / LIFE.cell), 0, rows - 1);
@@ -1388,16 +1544,53 @@ function syncWorld() {
   player.y = clamp(player.y, player.r, WORLD.h - player.r);
   cam.x = WORLD.w / 2; cam.y = WORLD.h / 2;
   cam.trauma = 0;
+  mouse.x = clamp(mouse.x, 0, W); mouse.y = clamp(mouse.y, 0, H);
+  syncTools();
 }
-window.addEventListener('resize', syncWorld);
 syncWorld();
 
-/* ---------------- 按钮绑定 ---------------- */
-ui.btnStart.addEventListener('click', () => { Sfx.ensure(); startGame(); });
+/* ---------------- 按钮绑定（触屏 / 鼠标 / 键盘等价） ---------------- */
+ui.btnStart.addEventListener('click', (e) => { e.preventDefault(); Sfx.ensure(); startGame(); });
+
+const SKILL_ACT = { dash: tryDash, nova: tryNova, field: tryField, hole: tryHole };
+document.querySelectorAll('[data-skill]').forEach((el) => {
+  const act = SKILL_ACT[el.getAttribute('data-skill')];
+  if (!act) return;
+  el.addEventListener('pointerdown', (e) => { e.preventDefault(); Sfx.ensure(); act(); });
+  // 键盘可达：回车施放，空格仍交给全局（止水）避免重复施法
+  el.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); act(); } });
+});
+
+const TOOL_ACT = {
+  fs: toggleFullscreen,
+  breath: toggleBreath,
+  mute: toggleMute,
+  rest: () => { if (state === 'playing') toggleRest(); },
+  summary: () => { if (state === 'playing') toggleSummary(); },
+};
+document.querySelectorAll('[data-tool]').forEach((el) => {
+  const act = TOOL_ACT[el.getAttribute('data-tool')];
+  if (!act) return;
+  el.addEventListener('click', (e) => { e.preventDefault(); Sfx.ensure(); act(); });
+});
 
 /* ---------------- 呼吸配乐音量滑杆 ---------------- */
 ui.musicVol.value = Math.round(Music.vol * 100);
 ui.musicVol.addEventListener('input', () => {
   Music.vol = clamp(ui.musicVol.value / 100, 0, 1.5);
   try { localStorage.setItem('circle-music-vol', String(Music.vol)); } catch (e) { /* 沙箱忽略 */ }
+});
+
+/* ---------------- 移动端页面行为兜底 ---------------- */
+// 禁止 iOS 双指缩放页面 / 拖动橡皮筋，视口尺寸完全交给 viewportChanged 处理
+['gesturestart', 'gesturechange', 'gestureend'].forEach((t) => {
+  document.addEventListener(t, (e) => e.preventDefault(), { passive: false });
+});
+document.addEventListener('touchmove', (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+// 回到前台：恢复被系统挂起的音频上下文，避免配乐哑火
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden || !Sfx.ctx || Sfx.ctx.state !== 'suspended') return;
+  try {
+    Sfx.ctx.resume().then(() => { Music.prevX = (performance.now() / 1000) % 14; }, () => {});
+  } catch (e) { /* 忽略 */ }
 });

@@ -17,12 +17,29 @@ html, body {
   font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+/* 移动端地址栏 / 手势兜底：body 精确等于「可视视口」（--vh/--vw 由 resize() 写入），
+   所有 UI 层改为相对 body 定位，fixed 会被 iOS 地址栏压到底部控件之下 */
+body {
+  position: fixed; top: 0; left: 0;
+  width: var(--vw, 100%);
+  height: var(--vh, 100%);
+  overscroll-behavior: none;
+  touch-action: none;
 }
 
-canvas#game { position: fixed; inset: 0; display: block; cursor: crosshair; }
+canvas#game {
+  position: absolute; top: 0; left: 0; display: block; cursor: crosshair;
+  /* 关键：canvas 是替换元素，只写 inset:0 会按「内在尺寸」（位图像素）排版，
+     高分屏 / 手机上整幅画面被放大 DPR 倍并溢出。尺寸由 resize() 显式写入。 */
+  width: 100%; height: 100%;
+  touch-action: none;
+}
 
 #vignette {
-  position: fixed; inset: 0; pointer-events: none; z-index: 2;
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
   background: radial-gradient(ellipse at center, transparent 50%, rgba(24, 16, 40, .6) 100%);
 }
 
@@ -30,7 +47,7 @@ canvas#game { position: fixed; inset: 0; display: block; cursor: crosshair; }
 
 /* ================= HUD ================= */
 #hud {
-  position: fixed; inset: 0; z-index: 5; pointer-events: none;
+  position: absolute; inset: 0; z-index: 5; pointer-events: none;
   color: #efe6f8;
 }
 
@@ -176,8 +193,13 @@ canvas#game { position: fixed; inset: 0; display: block; cursor: crosshair; }
 
 /* ================= 覆盖层 ================= */
 .overlay {
-  position: fixed; inset: 0; z-index: 10;
+  position: absolute; inset: 0; z-index: 10;
   display: flex; align-items: center; justify-content: center;
+  /* 小屏 / 横屏矮窗口：面板超出时可滚动，且让开刘海与圆角安全区 */
+  overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
+           max(16px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
   background: radial-gradient(ellipse at center, rgba(28, 22, 48, .78), rgba(12, 9, 22, .94));
   backdrop-filter: blur(3px);
 }
@@ -186,10 +208,14 @@ canvas#game { position: fixed; inset: 0; display: block; cursor: crosshair; }
   background: var(--panel);
   border: 1px solid rgba(210, 190, 255, .2);
   border-radius: 20px;
-  padding: 42px 56px 38px;
+  padding: clamp(20px, 5vh, 42px) clamp(18px, 4.5vw, 56px) clamp(18px, 4vh, 38px);
   text-align: center;
   box-shadow: 0 0 80px rgba(120, 90, 200, .2), inset 0 0 60px rgba(90, 70, 160, .1);
   animation: panelIn .6s ease-out;
+  /* flex 子项用 margin:auto 居中，避免 overflow:auto 时顶部内容被裁掉 */
+  margin: auto;
+  width: min(100%, 560px);
+  max-height: none;
 }
 @keyframes panelIn {
   from { transform: scale(.92) translateY(10px); opacity: 0; }
@@ -233,7 +259,7 @@ canvas#game { position: fixed; inset: 0; display: block; cursor: crosshair; }
 
 .controls {
   display: flex; flex-direction: column; gap: 7px;
-  margin: 0 auto 28px; width: 340px;
+  margin: 0 auto 28px; width: min(340px, 100%);
 }
 .ctrl-row {
   display: flex; justify-content: space-between; align-items: center;
@@ -255,7 +281,9 @@ button {
   box-shadow: 0 0 30px var(--gold-dim), 0 6px 20px rgba(0, 0, 0, .45);
   transition: transform .12s, box-shadow .2s;
 }
-button:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 44px rgba(255, 217, 168, .5); }
+@media (hover: hover) and (pointer: fine) {
+  button:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 44px rgba(255, 217, 168, .5); }
+}
 button:active { transform: scale(.97); }
 
 .hint { margin-top: 18px; font-size: 12.5px; color: #8f7fae; letter-spacing: 1px; line-height: 1.9; }
@@ -263,3 +291,144 @@ button:active { transform: scale(.97); }
 .pause-panel h1 { color: #b0a2cc; letter-spacing: 12px; font-size: 36px; margin-bottom: 12px; }
 .pause-panel p { color: #8f7fae; font-size: 14px; }
 .pause-panel b { color: var(--gold); }
+
+/* ================= 通用按钮层（触屏 / 鼠标 / 键盘等价） ================= */
+#tools {
+  position: absolute; z-index: 12;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px;
+  max-width: 62vw; pointer-events: none;
+}
+.tool {
+  pointer-events: auto;
+  font-family: inherit;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  color: #cbbce8;
+  background: rgba(30, 25, 50, .78);
+  border: 1px solid rgba(200, 180, 255, .22);
+  border-radius: 16px;
+  padding: 6px 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .35);
+  transition: color .2s, border-color .2s, box-shadow .2s, transform .1s;
+  -webkit-appearance: none; appearance: none;
+  cursor: pointer; touch-action: manipulation;
+  min-height: 32px;
+}
+.tool:active { transform: scale(.94); }
+.tool.on {
+  color: #2a1c10; border-color: var(--gold);
+  background: linear-gradient(135deg, #ffe6c2, #ffd9a8 60%, #e8b28a);
+  box-shadow: 0 0 14px var(--gold-dim);
+}
+/* 技能卡可点按（桌面也通用） */
+.skill { pointer-events: auto; cursor: pointer; touch-action: manipulation; }
+.skill:active { transform: scale(.94); }
+
+/* ================= 移动端 / 小窗口 / 全屏适配 ================= */
+/* 排版随视口缩放，避免窄屏溢出、宽屏太空 */
+.title { font-size: clamp(30px, 9vw, 54px); letter-spacing: clamp(3px, 1.4vw, 8px); }
+.subtitle { font-size: clamp(12px, 3.2vw, 15px); letter-spacing: clamp(1px, .5vw, 2px); margin-bottom: clamp(14px, 3vh, 26px); }
+.hint { font-size: clamp(11px, 2.8vw, 12.5px); margin-top: clamp(10px, 2vh, 18px); }
+.controls { gap: clamp(4px, 1vh, 7px); margin-bottom: clamp(16px, 3vh, 28px); }
+.ctrl-row { font-size: clamp(12px, 3vw, 14px); padding-bottom: clamp(4px, 1vh, 6px); }
+.summary-panel { min-width: 0; }
+.sum-row { font-size: clamp(13px, 3.2vw, 15px); gap: 20px; }
+.sum-row b { font-size: clamp(15px, 3.8vw, 18px); }
+button { font-size: clamp(16px, 4.4vw, 19px); letter-spacing: clamp(3px, 1.2vw, 6px); padding: clamp(11px, 2.2vh, 14px) clamp(30px, 8vw, 52px); }
+
+#banner {
+  font-size: clamp(22px, 6.4vw, 42px);
+  letter-spacing: clamp(2px, 1.4vw, 10px);
+  white-space: normal;
+  max-width: 92vw;
+}
+
+/* HUD 让开刘海 / 圆角 */
+#music-ctrl { top: max(14px, env(safe-area-inset-top)); left: max(14px, env(safe-area-inset-left)); }
+#hud-right { top: max(14px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); }
+#skills {
+  bottom: max(20px, calc(env(safe-area-inset-bottom) + 14px));
+  gap: clamp(8px, 2.4vw, 14px);
+}
+#breath-cue { top: max(58px, calc(env(safe-area-inset-top) + 44px)); }
+
+/* 窄窗口 / 手机：HUD 收紧，工具按钮让到技能栏上方 */
+@media (max-width: 860px), (max-height: 640px) {
+  #skills { bottom: max(58px, calc(env(safe-area-inset-bottom) + 52px)); }
+  #tools { bottom: max(12px, calc(env(safe-area-inset-bottom) + 6px)); }
+  .skill { width: 56px; height: 56px; border-radius: 12px; }
+  .skill b.key { font-size: 12px; }
+  .skill span:last-child { font-size: 11px; margin-top: 2px; }
+  #hud-right { gap: 2px; }
+  .stat { font-size: 12px; }
+  .stat span:last-child { font-size: 15px; }
+  .stat-label { font-size: 11px; margin-right: 6px; letter-spacing: 1px; }
+  #music-ctrl input[type=range] { width: 84px; }
+  #banner { top: 30%; }
+}
+
+@media (max-width: 560px) {
+  #tools { max-width: none; width: 100%; justify-content: center; right: auto; left: 0; transform: none; padding: 0 max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)); }
+  #skills { left: 50%; }
+  .skill { width: 48px; height: 48px; border-radius: 11px; }
+  .skill b.key { font-size: 11px; }
+  .skill span:last-child { font-size: 10px; letter-spacing: 1px; }
+  #breath-cue { gap: 6px; }
+  #breath-text { font-size: 11px; letter-spacing: 4px; text-indent: 4px; }
+  .deco-shapes { display: none; }
+  .sum-rows { gap: 8px; margin: 14px 0 10px; }
+}
+
+/* 横屏手机：竖向空间紧张，压缩面板 + 说明改双列，保证「开始冥想」不用翻页 */
+@media (orientation: landscape) and (max-height: 520px) {
+  .panel { padding: 12px 24px 14px; }
+  .title { font-size: clamp(22px, 4.6vh, 34px); margin-bottom: 4px; }
+  .subtitle { display: none; }
+  .controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 22px; margin-bottom: 12px; }
+  .ctrl-row { padding-bottom: 2px; font-size: 11.5px; }
+  .hint { display: none; }
+  #skills { bottom: max(48px, calc(env(safe-area-inset-bottom) + 44px)); }
+  .skill { width: 46px; height: 46px; }
+}
+
+/* 默认（桌面）：隐藏触屏专属说明 */
+.touch-only { display: none; }
+
+/* 触屏：加大热区、说明切换为触摸版 */
+@media (pointer: coarse) {
+  .skill { width: 56px; height: 56px; }
+  .tool { min-height: 36px; padding: 8px 14px; }
+  #music-ctrl { font-size: 17px; }
+  #music-ctrl input[type=range] { width: 92px; height: 6px; }
+  #music-ctrl input[type=range]::-webkit-slider-thumb { width: 20px; height: 20px; }
+  .kb-only { display: none; }
+  .touch-only { display: flex; }
+}
+/* 兜底：不支持 pointer 媒体查询时用 JS 打上的 html.coarse 类 */
+html.coarse .kb-only { display: none; }
+html.coarse .touch-only { display: flex; }
+@media (hover: hover) and (pointer: fine) {
+  .skill:hover, .tool:hover { border-color: var(--gold); color: #ffe6c2; }
+}
+
+/* 横幅小字号变体（showBanner 用 class 而非内联字号，窄屏才不会溢出） */
+#banner.small { font-size: clamp(15px, 4.2vw, 30px); letter-spacing: clamp(1px, .8vw, 4px); }
+
+/* 窄屏：菜单面板底部要让开工具按钮一行，否则「开始冥想」会被压住 */
+@media (max-width: 860px), (max-height: 640px) {
+  .overlay { padding-bottom: 72px; }
+}
+/* 菜单打开时工具按钮挪到右上角：底部那行会压在面板上（尤其横屏矮窗口） */
+html.in-menu #tools { bottom: auto; top: max(10px, env(safe-area-inset-top)); }
+/* 覆盖层允许纵向拖动（body 是 touch-action:none，否则小屏面板滚不动，点不到「开始冥想」） */
+.overlay { touch-action: pan-y; -webkit-overflow-scrolling: touch; }
+
+/* 极矮窗口（手机横屏带浏览器工具栏）：技能栏只留按键名，并整体上移，避免与工具行重叠 */
+@media (max-height: 420px) {
+  .skill { width: 40px; height: 40px; border-radius: 10px; }
+  .skill span:last-child { display: none; }
+  #skills { bottom: max(58px, calc(env(safe-area-inset-bottom) + 54px)); }
+  #tools { bottom: max(6px, env(safe-area-inset-bottom)); }
+  #breath-cue { top: max(34px, calc(env(safe-area-inset-top) + 26px)); }
+}

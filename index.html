@@ -2,7 +2,12 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#131022">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="圈圈冥想">
 <title>圈圈冥想 · Circle Calm</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23ffd9a8' stroke-width='8'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
@@ -13,19 +18,28 @@
 
 <!-- 冥想 HUD -->
 <div id="hud" class="hidden">
-  <div id="music-ctrl" title="呼吸配乐音量"><span>♪</span><input id="music-vol" type="range" min="0" max="150" value="85"></div>
+  <div id="music-ctrl" title="呼吸配乐音量"><span>♪</span><input id="music-vol" type="range" min="0" max="150" value="85" aria-label="配乐音量"></div>
   <div id="hud-right">
     <div class="stat"><span class="stat-label">时间</span><span id="time-num">0:00</span></div>
     <div class="stat"><span class="stat-label">世代</span><span id="wave-num">0</span></div>
   </div>
   <div id="breath-cue" class="hidden"><i id="breath-dot"></i><span id="breath-text">吸气</span></div>
   <div id="skills">
-    <div class="skill" id="skill-dash"><div class="cool"></div><b class="key">Q</b><span>流步</span></div>
-    <div class="skill" id="skill-nova"><div class="cool"></div><b class="key">E</b><span>绽放</span></div>
-    <div class="skill" id="skill-field"><div class="cool"></div><b class="key">空格</b><span>止水</span></div>
-    <div class="skill" id="skill-hole"><div class="cool"></div><b class="key">F</b><span>归心</span></div>
+    <div class="skill" id="skill-dash" data-skill="dash" role="button" tabindex="0" aria-label="流步"><div class="cool"></div><b class="key">Q</b><span>流步</span></div>
+    <div class="skill" id="skill-nova" data-skill="nova" role="button" tabindex="0" aria-label="绽放"><div class="cool"></div><b class="key">E</b><span>绽放</span></div>
+    <div class="skill" id="skill-field" data-skill="field" role="button" tabindex="0" aria-label="止水"><div class="cool"></div><b class="key">空格</b><span>止水</span></div>
+    <div class="skill" id="skill-hole" data-skill="hole" role="button" tabindex="0" aria-label="归心"><div class="cool"></div><b class="key">F</b><span>归心</span></div>
   </div>
   <div id="banner"></div>
+</div>
+
+<!-- 通用按钮层：触屏 / 鼠标 / 键盘等价操作，小憩与菜单时仍在角落 -->
+<div id="tools">
+  <button class="tool" data-tool="fs" title="全屏 / 退出全屏" aria-label="全屏切换">全屏</button>
+  <button class="tool" data-tool="breath" title="呼吸提示开关（B）" aria-label="呼吸引导开关">呼吸</button>
+  <button class="tool" data-tool="mute" title="声音开关（M）" aria-label="静音开关">声音</button>
+  <button class="tool tool-play" data-tool="rest" title="小憩（P）" aria-label="小憩">小憩</button>
+  <button class="tool tool-play" data-tool="summary" title="静坐总结（O）" aria-label="静坐总结">总结</button>
 </div>
 
 <!-- 静心菜单 -->
@@ -38,14 +52,18 @@
     <p class="subtitle">几何呼吸冥想室 —— 跟着圆圈的节律：吸气 · 屏息 · 呼气</p>
     <div class="controls">
       <div class="ctrl-row"><b>玩家圆</b><span>自动随机游走，无需操作</span></div>
-      <div class="ctrl-row"><b>鼠标</b><span>环视 · 点按细胞随机变形</span></div>
-      <div class="ctrl-row"><b>Q</b><span>流步 · 身影划过</span></div>
-      <div class="ctrl-row"><b>E</b><span>绽放 · 烟花升空绽放，播下随机拼块</span></div>
-      <div class="ctrl-row"><b>空格</b><span>止水 · 让演化慢下来</span></div>
-      <div class="ctrl-row"><b>F</b><span>归心 · 消散一片区域的细胞</span></div>
-      <div class="ctrl-row dim"><b>O</b><span>静坐总结</span></div>
-      <div class="ctrl-row dim"><b>♪ 滑杆</b><span>呼吸配乐音量（左上角）</span></div>
-      <div class="ctrl-row dim"><b>B / P / M</b><span>呼吸提示 · 小憩 · 静音</span></div>
+      <div class="ctrl-row kb-only"><b>鼠标</b><span>环视 · 点按细胞随机变形</span></div>
+      <div class="ctrl-row touch-only"><b>点按</b><span>瞄准 · 点中细胞随机变形</span></div>
+      <div class="ctrl-row touch-only"><b>拖动</b><span>滑动改变瞄准位置</span></div>
+      <div class="ctrl-row kb-only"><b>Q</b><span>流步 · 身影划过</span></div>
+      <div class="ctrl-row kb-only"><b>E</b><span>绽放 · 烟花升空绽放，播下随机拼块</span></div>
+      <div class="ctrl-row kb-only"><b>空格</b><span>止水 · 让演化慢下来</span></div>
+      <div class="ctrl-row kb-only"><b>F</b><span>归心 · 消散一片区域的细胞</span></div>
+      <div class="ctrl-row touch-only"><b>底部按钮</b><span>流步 · 绽放 · 止水 · 归心</span></div>
+      <div class="ctrl-row dim kb-only"><b>O</b><span>静坐总结</span></div>
+      <div class="ctrl-row dim kb-only"><b>♪ 滑杆</b><span>呼吸配乐音量（左上角）</span></div>
+      <div class="ctrl-row dim kb-only"><b>B / P / M</b><span>呼吸提示 · 小憩 · 静音</span></div>
+      <div class="ctrl-row dim touch-only"><b>右下角</b><span>全屏 · 呼吸 · 声音 · 小憩 · 总结</span></div>
     </div>
     <button id="btn-start">开始冥想</button>
     <p class="hint">细胞不会孤独而亡，只有过挤（5 邻及以上）会消散 —— 地图上会随机浮现黑洞清出空地<br>E 播种、F 收拢、点按可变形，时间只是安静的痕迹</p>
@@ -63,7 +81,7 @@
       <div class="sum-row"><span>收割消散</span><b id="sum-kills">0</b></div>
       <div class="sum-row"><span>路过黑洞</span><b id="sum-holes">0</b></div>
     </div>
-    <p class="sum-hint">按 O 回到棋盘 —— 世界不会停下</p>
+    <p class="sum-hint">按 O 或点「总结」回到棋盘 —— 世界不会停下</p>
   </div>
 </div>
 
