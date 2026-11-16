@@ -40,6 +40,8 @@
   <button class="tool" data-tool="mute" title="声音开关（M）" aria-label="静音开关">声音</button>
   <button class="tool tool-play" data-tool="rest" title="小憩（P）" aria-label="小憩">小憩</button>
   <button class="tool tool-play" data-tool="summary" title="静坐总结（O）" aria-label="静坐总结">总结</button>
+  <button class="tool tool-play tool-focus hidden" data-tool="ring" title="呼吸环（R）" aria-label="呼吸环">呼吸环</button>
+  <button class="tool tool-focus hidden" data-tool="exit" title="退出专注（Esc）" aria-label="退出专注">退出</button>
 </div>
 
 <!-- 静心菜单 -->
@@ -64,8 +66,14 @@
       <div class="ctrl-row dim kb-only"><b>♪ 滑杆</b><span>呼吸配乐音量（左上角）</span></div>
       <div class="ctrl-row dim kb-only"><b>B / P / M</b><span>呼吸提示 · 小憩 · 静音</span></div>
       <div class="ctrl-row dim touch-only"><b>右下角</b><span>全屏 · 呼吸 · 声音 · 小憩 · 总结</span></div>
+      <div class="ctrl-row"><b>专注模式</b><span>整屏黑白灰明暗起伏 · 只有呼吸配乐 · Esc 退出</span></div>
       <div class="ctrl-row dim touch-only"><b>iPhone</b><span>请关闭侧边静音键，媒体音量调大</span></div>
     </div>
+    <div class="modes" role="group" aria-label="模式选择">
+      <button class="mode-btn on" data-mode="board" aria-pressed="true"><b>演化棋盘</b><span>几何生灭 · 技能播种</span></button>
+      <button class="mode-btn" data-mode="focus" aria-pressed="false"><b>专注 · 灰白呼吸</b><span>全屏纯色起伏 · 仅呼吸配乐</span></button>
+    </div>
+    <p class="mode-note" id="mode-note">黑 · 白 · 灰的整屏起伏，配呼吸节律的低音垫；没有细胞、没有技能、没有音效</p>
     <button id="btn-start">开始冥想</button>
     <p class="hint">落单的细胞每代有三成概率散去，过挤（5 邻及以上）必然消散 —— 地图上会随机浮现黑洞清出空地<br>E 播种、F 收拢、点按可变形，时间只是安静的痕迹</p>
   </div>

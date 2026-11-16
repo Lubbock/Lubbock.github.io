@@ -211,9 +211,10 @@ const Music = {
     [98.0, 196.0, 246.94, 293.66],    // G2 G3 B3 D4
     [130.81, 196.0, 261.63, 392.0],   // C3 G3 C4 G4
   ],
-  idx: 0, started: false, padGain: null, prevX: 0,
+  idx: 0, started: false, padGain: null, prevX: 0, bells: true,
   vol: (() => { try { return clamp(+(localStorage.getItem('circle-music-vol') || 0.85), 0, 1.5); } catch (e) { return 0.85; } })(),
-  start() {
+  start(soft) {
+    this.bells = !soft;                        // 专注模式：去掉风铃与轻钟，只留呼吸的 pad（每次进入都按模式重置）
     if (this.started) return;
     Sfx.ensure();
     if (!Sfx.ctx) return;
@@ -262,8 +263,8 @@ const Music = {
     if (!this.started || !this.padGain) return;
     if (Sfx.ctx && Sfx.ctx.state !== 'running') { Sfx.ensure(); return; }   // 被系统挂起：等下次手势恢复
     const x = (performance.now() / 1000) % 14;
-    if (x < this.prevX) { this.playChord(); Sfx.bell(); }  // 新一轮吸气 → 换和弦 + 一声轻钟
-    else if (this.prevX < 8 && x >= 8) this.chime();      // 呼气开始 → 风铃一声
+    if (x < this.prevX) { this.playChord(); if (this.bells) Sfx.bell(); }   // 新一轮吸气 → 换和弦（+ 一声轻钟）
+    else if (this.prevX < 8 && x >= 8 && this.bells) this.chime();          // 呼气开始 → 风铃一声
     this.prevX = x;
     this.update(breath.v);
   },
@@ -275,7 +276,7 @@ const mouse = { x: W / 2, y: H / 2, wx: 0, wy: 0, aim: false };
 // 触屏没有悬停：aim 表示「已经明确指过位置」，作为归心落点与流步方向的依据
 function setAim(cx, cy) { mouse.x = cx; mouse.y = cy; mouse.aim = true; }
 function mutateCellAt(px, py) {
-  if (state !== 'playing') return;
+  if (state !== 'playing' || focusBlocksPlay()) return;
   const wx = px - W / 2 + cam.x, wy = py - H / 2 + cam.y;
   const gx = clamp(Math.floor(wx / LIFE.cell), 0, lifeCols() - 1);
   const gy = clamp(Math.floor(wy / LIFE.cell), 0, lifeRows() - 1);
@@ -326,13 +327,22 @@ window.addEventListener('keydown', (e) => {
   if (e.repeat) return;
   switch (e.code) {
     case 'Enter':
-      if (state === 'menu') startGame();
+      if (state === 'menu') startGame(pendingMode);
       break;
-    case 'KeyP': case 'Escape':
+    case 'KeyP':
       if (state === 'playing') toggleRest();
       break;
+    case 'Escape':
+      if (state === 'playing') { if (mode === 'focus') exitFocus(); else toggleRest(); }
+      break;
+    case 'KeyR':
+      if (state === 'playing' && mode === 'focus') {
+        focusRing = !focusRing;
+        showBanner(focusRing ? '呼吸环 开' : '呼吸环 关', '#ffffff', true);
+      }
+      break;
     case 'KeyO':
-      if (state === 'playing') toggleSummary();
+      if (state === 'playing' && mode !== 'focus') toggleSummary();   // 专注模式没有可总结的痕迹，按钮已隐藏，快捷键同样挡住
       break;
     case 'KeyM': toggleMute(); break;
     case 'KeyB': toggleBreath(); break;
@@ -353,6 +363,12 @@ const addShake = (v) => { cam.trauma = Math.min(1, cam.trauma + v); };
    所有角色与星空按同一相位呼吸，用于引导玩家跟随节奏放松；
    走真实时钟，暂停 / 慢动作时呼吸也不停止。按 B 可开关。 */
 const BREATH = { inhale: 4, hold: 4, exhale: 6 };
+/* 专注模式的灰阶区间：呼气到最暗、屏息到最亮，中间只用明度变化引导呼吸 */
+const FOCUS_DARK = 16, FOCUS_LIGHT = 206;
+function focusGray(v, bias = 0) {
+  const L = Math.round(clamp(FOCUS_DARK + (FOCUS_LIGHT - FOCUS_DARK) * v + bias, 0, 255));
+  return { L, css: `rgb(${L},${L},${L})` };
+}
 let breathOn = true;
 let breath = { stage: '吸气', v: 0.5 };
 function breathInfo() {
@@ -370,6 +386,17 @@ function updateBreathDom() {
     return;
   }
   ui.breathCue.classList.remove('hidden');
+  if (mode === 'focus') {
+    // 专注模式：提示点与文字都用反色墨，不用阶段色（画面只允许黑/白/灰）
+    const s2 = 0.55 + 0.85 * breath.v;
+    ui.breathDot.style.transform = `scale(${s2.toFixed(3)})`;
+    ui.breathDot.style.background = 'var(--focus-ink)';
+    ui.breathDot.style.boxShadow = 'none';
+    if (ui.breathText.textContent !== breath.stage) ui.breathText.textContent = breath.stage;
+    ui.breathText.style.color = 'var(--focus-ink)';
+    ui.vignette.style.opacity = '0';            // 纯色底上不要暗角
+    return;
+  }
   const c = breath.stage === '吸气' ? '#ffd9a8' : breath.stage === '屏息' ? '#fff2dc' : '#8f8b96';
   const s = 0.55 + 0.85 * breath.v;
   ui.breathDot.style.transform = `scale(${s.toFixed(3)})`;
@@ -452,6 +479,9 @@ function drawShape(t, x, y, r, ang, fill, stroke, lw, glowCol, glowA) {
 
 /* ---------------- 全局状态 ---------------- */
 let state = 'menu';           // menu | playing | paused
+let mode = 'board';           // board 演化棋盘 | focus 纯灰阶呼吸（无玩法元素）
+let focusRing = false;        // 呼吸环开关
+let focusInk = '';        // 专注模式里是否叠一圈极淡的呼吸环（R 键 / 「呼吸环」按钮切换）
 let freeze = 0;
 let kills = 0, playTime = 0, seedsPlanted = 0, mapHolesSpawned = 0, lonelyDeathCount = 0;
 let resting = false;                                   // 小憩：只隐去界面，世界照常演变
@@ -640,13 +670,15 @@ function updatePlayer(dt) {
 /* ---------------- 技能 ---------------- */
 // 瞄准点：触屏尚未点按时退化为「玩家正前方」，避免归心 / 流步落在无意义的屏幕中心
 // 现场换算世界坐标，不取上一帧缓存 —— 点按后立刻施法才拿得到最新落点
+// 专注模式：只允许"退出/小憩/总结/声音"，玩法技能一律无响应
+function focusBlocksPlay() { return mode === 'focus'; }
 function aimPoint() {
   const p = player;
   if (!mouse.aim) return { x: p.x + Math.cos(p.ang) * 200, y: p.y + Math.sin(p.ang) * 200 };
   return { x: mouse.x - W / 2 + cam.x, y: mouse.y - H / 2 + cam.y };
 }
 function tryDash() {
-  if (state !== 'playing' || skills.dash.t > 0) return;
+  if (focusBlocksPlay() || state !== 'playing' || skills.dash.t > 0) return;
   skills.dash.t = skills.dash.cd;
   const p = player;
   let dx = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
@@ -663,7 +695,7 @@ function tryDash() {
   Sfx.dash();
 }
 function tryNova() {
-  if (state !== 'playing' || skills.nova.t > 0) return;
+  if (focusBlocksPlay() || state !== 'playing' || skills.nova.t > 0) return;
   skills.nova.t = skills.nova.cd;
   const p = player;
   // 烟花秀：三枚礼花弹从玩家升空，依次绽放出不同颜色的火星
@@ -701,7 +733,7 @@ function tryNova() {
   Sfx.nova();
 }
 function tryField() {
-  if (state !== 'playing' || skills.field.t > 0) return;
+  if (focusBlocksPlay() || state !== 'playing' || skills.field.t > 0) return;
   skills.field.t = skills.field.cd;
   player.fieldT = 4;
   ringFx(player.x, player.y, '#c2c2ca', 680, 5, 0.7);
@@ -709,7 +741,7 @@ function tryField() {
   Sfx.field();
 }
 function tryHole() {
-  if (state !== 'playing' || skills.hole.t > 0) return;
+  if (focusBlocksPlay() || state !== 'playing' || skills.hole.t > 0) return;
   skills.hole.t = skills.hole.cd;
   const aim = aimPoint();
   holes.push({
@@ -1061,7 +1093,9 @@ function updateSeeds(dt) {
 }
 
 /* ---------------- 开始 / 小憩 ---------------- */
-function startGame() {
+function startGame(nextMode) {
+  mode = nextMode === 'focus' ? 'focus' : 'board';
+  document.body.classList.toggle('mode-focus', mode === 'focus');
   enemies.length = 0; bullets.length = 0; parts.length = 0; texts.length = 0; holes.length = 0;
   pendingSeeds.length = 0; scars.length = 0; mapHoleTimer = 4;
   const p = player;
@@ -1078,12 +1112,30 @@ function startGame() {
   cam.x = p.x; cam.y = p.y; cam.trauma = 0;
   state = 'playing';
   syncTools();                                   // 按钮层进入对局态（须在 state 之后）
+  if (mode === 'focus') {
+    // 专注模式：没有棋盘、没有细胞、没有音效 —— 只有随呼吸涨落的灰阶底与配乐
+    breathOn = true;
+    showBanner('专注 · 跟着明暗呼吸', '#ffffff', true);
+    Music.start(true);
+    return;
+  }
   // 本局世界：随机种子长出初始种群，之后全交给生命规则
   lifeSeed = 10000 + Math.floor(Math.random() * 89999);
   initClimate(lifeSeed);
   seedWorld(mulberry32(lifeSeed));
   showBanner('世界 #' + lifeSeed, '#b2b2b8');
   Music.start();   // 冥想配乐随呼吸响起
+}
+// 专注 → 回菜单：清干净灰阶底与模式标记，回到棋盘或再选一次
+function exitFocus() {
+  mode = 'board';
+  document.body.classList.remove('mode-focus');
+  Music.bells = true;
+  ui.hud.classList.add('hidden');
+  ui.menu.classList.remove('hidden');
+  state = 'menu';
+  resting = false;
+  syncTools();
 }
 // 静坐总结：一张安静的卡片，痕迹一览（游戏不暂停）
 function toggleSummary() {
@@ -1151,6 +1203,9 @@ function toggleFullscreen() {
 function syncTools() {
   const playing = state === 'playing';
   document.documentElement.classList.toggle('in-menu', !playing);   // 菜单态：工具按钮让开面板
+  document.querySelectorAll('.tool-focus').forEach((el) => el.classList.toggle('hidden', !(playing && mode === 'focus')));
+  const sm = document.querySelector('[data-tool="summary"]');
+  if (sm) sm.classList.toggle('hidden', mode === 'focus');          // 专注模式没有可总结的痕迹
   document.querySelectorAll('.tool-play').forEach((el) => el.classList.toggle('hidden', !playing));
   const fs = document.querySelector('[data-tool="fs"]');
   if (fs) { const on = isFullscreen(); fs.classList.toggle('on', on); fs.textContent = on ? '退出全屏' : '全屏'; }
@@ -1159,13 +1214,16 @@ function syncTools() {
   const mu = document.querySelector('[data-tool="mute"]');
   if (mu) mu.classList.toggle('on', !Sfx.muted);
   const rt = document.querySelector('[data-tool="rest"]');
-  if (rt) rt.textContent = resting ? '回来' : '小憩';
+  if (rt) { rt.textContent = resting ? '回来' : '小憩'; rt.classList.toggle('hidden', mode === 'focus' && resting); }
+  const rg = document.querySelector('[data-tool="ring"]');
+  if (rg) rg.classList.toggle('on', focusRing);
 }
 
 /* ---------------- 横幅 ---------------- */
 function showBanner(txt, color, small) {
   ui.banner.textContent = txt;
-  ui.banner.style.color = color || '#fff';
+  // 专注模式底色会亮到浅灰，写死的白色字会直接看不见 —— 统一改用反色墨
+  ui.banner.style.color = (mode === 'focus' && state === 'playing') ? 'var(--focus-ink)' : (color || '#fff');
   ui.banner.classList.toggle('small', !!small);   // 字号交给 CSS clamp，窄屏才不会溢出
   ui.banner.classList.remove('show');
   void ui.banner.offsetWidth;
@@ -1185,10 +1243,14 @@ function update(dt, realDt) {
   mouse.wy = mouse.y - H / 2 + cam.y;
 
   if (state === 'playing') {
-    updatePlayer(dt);
-    // 生命演化：每代间隔走游戏时钟，小憩时世界照常运转；止水让演化变慢
-    lifeTimer -= dt * (player.fieldT > 0 ? 0.2 : 1);
-    if (lifeTimer <= 0) { lifeTimer += LIFE.tick; lifeStep(); }
+    if (focusBlocksPlay()) {
+      // 专注模式：世界静止，只走时间与呼吸（画面只有纯色在变）
+    } else {
+      updatePlayer(dt);
+      // 生命演化：每代间隔走游戏时钟，小憩时世界照常运转；止水让演化变慢
+      lifeTimer -= dt * (player.fieldT > 0 ? 0.2 : 1);
+      if (lifeTimer <= 0) { lifeTimer += LIFE.tick; lifeStep(); }
+    }
   }
   for (const e of enemies) if (!e.dead) updateEnemy(e, dt);
   updateBullets(dt);
@@ -1196,7 +1258,7 @@ function update(dt, realDt) {
   updateSeeds(dt);
   // 地图黑洞：随机浮现的小型归心 —— 消灭过密处的一部分生命，过境留下沃土
   mapHoleTimer -= dt;
-  if (mapHoleTimer <= 0) {
+  if (mapHoleTimer <= 0 && !focusBlocksPlay()) {
     mapHoleTimer = rand(6, 10);
     holes.push({ x: rand(80, WORLD.w - 80), y: rand(80, WORLD.h - 80), t: 2.0, tick: 0, spin: rand(0, TAU), dmg: 8, boomDmg: 60, scale: 0.6, map: true });
     mapHolesSpawned++;
@@ -1216,6 +1278,7 @@ function update(dt, realDt) {
 /* ---------------- 渲染 ---------------- */
 function render() {
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  if (mode === 'focus') { renderFocus(); return; }
   // 背景
   ctx.fillStyle = '#131316';   // 必须与 style.css 的 --bg 一致
   ctx.fillRect(0, 0, W, H);
@@ -1260,6 +1323,33 @@ function render() {
   if (flashW > 0) { ctx.fillStyle = `rgba(255,242,220,${(flashW * 0.55).toFixed(3)})`; ctx.fillRect(0, 0, W, H); }
   drawIndicators();
   updateBreathDom();
+}
+// 专注模式：全屏黑→白→灰的纯色呼吸。除了一层极淡的中心环（可选），不画任何玩法元素
+function renderFocus() {
+  const v = breathOn ? breath.v : 0.5;
+  const g = focusGray(v);
+  ctx.fillStyle = g.css;
+  ctx.fillRect(0, 0, W, H);
+  // 纯色会一路亮到浅灰，浅底上任何浅色 UI 都会消失：按底色明度给 HUD 换一个反色墨
+  const ink = g.L > 128 ? 'rgba(18,18,20,.62)' : 'rgba(242,242,246,.62)';
+  if (ink !== focusInk) {
+    focusInk = ink;
+    const rs = document.documentElement.style;
+    rs.setProperty('--focus-ink', ink);
+    rs.setProperty('--focus-bg', g.css);          // 工具按钮高亮态要用当前底色反填
+  }
+  // 呼吸标记：默认关闭；开 B 时只是一个同色相、极淡的圆，避免多出色彩与图形
+  if (focusRing) {
+    const R = Math.min(W, H) * (0.16 + 0.20 * v);
+    const t = g.L > 128 ? 0 : 255;                       // 亮底用暗环、暗底用亮环，保证看得见
+    ctx.strokeStyle = `rgba(${t},${t},${t},0.10)`;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(W / 2, H / 2, R, 0, TAU);
+    ctx.stroke();
+  }
+  updateBreathDom();
+  return;
 }
 function drawStars(f, spacing, size, alpha) {
   const ox = cam.x * f, oy = cam.y * f;
@@ -1571,6 +1661,9 @@ window.__game = {
   setRule: (b, s, name) => { LIFE.rule = { b, s, name: name || 'custom' }; },   // 换生命规则（测试用）
   setLonelyDeath: (p) => { LIFE.lonelyP = clamp(p, 0, 1); },  // 孤细胞随机死亡率（测试用）
   get lonelyP() { return LIFE.lonelyP; },
+  get mode() { return mode; },
+  setFocusRing: (v) => { focusRing = !!v; },
+  exitFocus,
   get LIFE() { return LIFE; },                                // 直读常量表（测试用）
   get lonelyDeaths() { return lonelyDeathCount; },            // 累计孤独消散数
   noiseAt: (gx, gy) => climate.fbm((gx - climate.dx) * LIFE.noise.scale, (gy - climate.dy) * LIFE.noise.scale),   // 采样气候场
@@ -1601,7 +1694,24 @@ function syncWorld() {
 syncWorld();
 
 /* ---------------- 按钮绑定（触屏 / 鼠标 / 键盘等价） ---------------- */
-ui.btnStart.addEventListener('click', (e) => { e.preventDefault(); Sfx.ensure(); startGame(); });
+let pendingMode = 'board';
+const MODE_LABEL = { board: '开始冥想', focus: '进入专注' };
+function setPendingMode(m) {
+  pendingMode = m === 'focus' ? 'focus' : 'board';
+  document.querySelectorAll('.mode-btn').forEach((el) => {
+    const on = el.getAttribute('data-mode') === pendingMode;
+    el.classList.toggle('on', on);
+    el.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  ui.btnStart.textContent = MODE_LABEL[pendingMode];
+  const note = $('mode-note');
+  if (note) note.classList.toggle('hidden', pendingMode !== 'focus');
+}
+document.querySelectorAll('.mode-btn').forEach((el) => {
+  el.addEventListener('click', (e) => { e.preventDefault(); Sfx.ensure(); setPendingMode(el.getAttribute('data-mode')); });
+});
+setPendingMode('board');
+ui.btnStart.addEventListener('click', (e) => { e.preventDefault(); Sfx.ensure(); startGame(pendingMode); });
 
 const SKILL_ACT = { dash: tryDash, nova: tryNova, field: tryField, hole: tryHole };
 document.querySelectorAll('[data-skill]').forEach((el) => {
@@ -1616,6 +1726,13 @@ const TOOL_ACT = {
   fs: toggleFullscreen,
   breath: toggleBreath,
   mute: toggleMute,
+  exit: () => { if (state === 'playing' && mode === 'focus') exitFocus(); },
+  ring: () => {
+    if (state !== 'playing' || mode !== 'focus') return;
+    focusRing = !focusRing;
+    showBanner(focusRing ? '呼吸环 开' : '呼吸环 关', 'var(--focus-ink)', true);
+    syncTools();
+  },
   rest: () => { if (state === 'playing') toggleRest(); },
   summary: () => { if (state === 'playing') toggleSummary(); },
 };

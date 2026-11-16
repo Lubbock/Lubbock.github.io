@@ -383,6 +383,7 @@ button { font-size: clamp(16px, 4.4vw, 19px); letter-spacing: clamp(3px, 1.2vw, 
 /* 横屏手机：竖向空间紧张，压缩面板 + 说明改双列，保证「开始冥想」不用翻页 */
 @media (orientation: landscape) and (max-height: 520px) {
   .panel { padding: 12px 24px 14px; }
+  .controls, .mode-note { display: none; }        // 矮屏优先保证「开始冥想」在视口内
   .title { font-size: clamp(22px, 4.6vh, 34px); margin-bottom: 4px; }
   .subtitle { display: none; }
   .controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 22px; margin-bottom: 12px; }
@@ -417,7 +418,7 @@ html.coarse .touch-only { display: flex; }
 
 /* 窄屏：菜单面板底部要让开工具按钮一行，否则「开始冥想」会被压住 */
 @media (max-width: 860px), (max-height: 640px) {
-  .overlay { padding-bottom: 72px; }
+  .overlay { padding-bottom: 84px; }
 }
 /* 菜单打开时工具按钮挪到右上角：底部那行会压在面板上（尤其横屏矮窗口） */
 html.in-menu #tools { bottom: auto; top: max(10px, env(safe-area-inset-top)); }
@@ -431,4 +432,75 @@ html.in-menu #tools { bottom: auto; top: max(10px, env(safe-area-inset-top)); }
   #skills { bottom: max(58px, calc(env(safe-area-inset-bottom) + 54px)); }
   #tools { bottom: max(6px, env(safe-area-inset-bottom)); }
   #breath-cue { top: max(34px, calc(env(safe-area-inset-top) + 26px)); }
+}
+
+/* ================= 专注模式：全屏灰阶呼吸 ================= */
+/* 玩法元素全部隐去，画面只允许纯色 + 呼吸提示 */
+body.mode-focus #skills,
+body.mode-focus #hud-right .stat:last-child,
+body.mode-focus #vignette { display: none !important; }
+/* 底色会从近黑走到浅灰，UI 一律用 --focus-ink（由 renderFocus 按明度反转） */
+body.mode-focus #hud { color: var(--focus-ink, rgba(242,242,246,.62)); }
+body.mode-focus .stat span:last-child,
+body.mode-focus .stat-label,
+body.mode-focus #banner,
+body.mode-focus .tool { color: var(--focus-ink, rgba(242,242,246,.62)); }
+body.mode-focus .tool { border-color: var(--focus-ink, rgba(242,242,246,.62)); background: transparent; box-shadow: none; }
+body.mode-focus .tool.on { background: var(--focus-ink, rgba(242,242,246,.62)); color: var(--focus-bg, #121214); }
+/* 呼吸提示移到正中、放大：它就是这个模式里唯一的"指针" */
+body.mode-focus #breath-cue {
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  flex-direction: column; gap: 14px;
+}
+body.mode-focus #breath-text { font-size: clamp(13px, 2.2vh, 17px); letter-spacing: 12px; text-indent: 12px; }
+body.mode-focus #music-ctrl { color: var(--focus-ink, rgba(242,242,246,.62)); text-shadow: none; }
+body.mode-focus #music-ctrl input[type=range] { background: var(--focus-ink, rgba(242,242,246,.62)); opacity: .35; }
+body.mode-focus #music-ctrl input[type=range]::-webkit-slider-thumb { background: var(--focus-ink, rgba(242,242,246,.62)); box-shadow: none; }
+
+/* 菜单里的模式选择器 */
+.modes { display: flex; gap: 10px; justify-content: center; margin: 0 0 12px; }
+.mode-btn {
+  pointer-events: auto; cursor: pointer; font-family: inherit;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 3px;
+  padding: 10px 14px; border-radius: 12px; text-align: left;
+  background: rgba(255,255,255,.04); border: 1px solid var(--line);
+  color: #a8a8b0; letter-spacing: 1px;
+  transition: border-color .2s, color .2s, background .2s, transform .1s;
+  -webkit-appearance: none; appearance: none; touch-action: manipulation;
+}
+.mode-btn b { font-size: 14px; font-weight: 800; letter-spacing: 2px; }
+.mode-btn span { font-size: 11.5px; opacity: .72; letter-spacing: .5px; }
+.mode-btn.on {
+  border-color: var(--gold); color: #ffe6c2; background: rgba(255,217,168,.09);
+  box-shadow: 0 0 16px rgba(255,217,168,.16), inset 0 0 18px rgba(255,217,168,.06);
+}
+.mode-btn:active { transform: scale(.98); }
+.mode-note { font-size: 12px; color: #8b8d96; letter-spacing: 1px; line-height: 1.7; margin: 0 0 20px; }
+/* 窄屏：模式选择器压扁成一行，说明文案让位，避免面板把「开始」按钮顶到工具行下面 */
+@media (max-width: 560px) {
+  .modes { flex-direction: column; gap: 6px; margin-bottom: 10px; }
+  .mode-btn { flex-direction: row; align-items: baseline; justify-content: space-between; gap: 8px; padding: 8px 12px; }
+  .mode-btn span { display: none; }
+  .mode-note { font-size: 11px; margin-bottom: 12px; }
+  .controls { display: none; }
+  .hint { display: none; }
+  .subtitle { margin-bottom: 12px; }
+}
+
+/* 极矮视口（横屏手机带浏览器工具栏，可见高度 ~300px）：
+   标题与装饰让位，模式选择横排，保证「开始冥想」不用滚动就能点到 */
+@media (max-height: 360px) {
+  .panel { padding: 10px 18px 12px; }
+  .title { display: none; }
+  .controls { display: none; }          // 必须写在宽断点之后：否则会被上一档的 display:grid 覆盖
+  .deco-shapes { display: none; }
+  .modes { flex-direction: row; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .mode-btn { padding: 6px 10px; }
+  .mode-btn b { font-size: 12.5px; letter-spacing: 1px; }
+  .mode-btn span { display: none; }
+  button { padding: 9px 30px; font-size: 16px; letter-spacing: 3px; }
+  .hint { display: none; }
+  .overlay { padding-bottom: 12px; }
+  /* 工具行改到右上，绝不与面板内容争底部那条窄空间 */
+  #tools { top: max(8px, env(safe-area-inset-top)); bottom: auto; }
 }
