@@ -4,7 +4,8 @@
 
 - 这是 GitHub Pages 站点根目录，也是「圈圈冥想 · Circle Calm」网页游戏的发布位置。
 - 站点是纯静态文件：`index.html`、`style.css`、`game.js`。没有构建步骤。
-- 推送到 `master` 会触发 `.github/workflows` 里的 Deploy to GitHub Pages，直接上线。
+- 推送到 `main` 会触发 `.github/workflows` 里的 Deploy to GitHub Pages，直接上线。
+- 上线只认 `main`：推送到 `master` 的工作流运行会失败（2026-11-16 实测同一个 commit 在 master 上 failure、在 main 上 success）。GitHub 仓库默认分支目前仍显示 `master`，但别再往 `master` 推。
 
 ## 改动完成后自动推送（用户已授权）
 
@@ -13,10 +14,11 @@
 1. 校验：`node --check game.js`；CSS 括号必须平衡；HTML 里引用的文件名保持 `style.css`、`game.js`。
 2. 检查改动范围：`git status --porcelain`。只允许出现本次任务相关的站点文件。
 3. 提交：`git add <改动的文件>` + `git commit -m "<一句话中文说明>"`。
-4. 推送：`git push origin master`。
+4. 推送：`git push origin main`。
 5. 回报结果：把 commit 短哈希与推送结论写进回复。
 
-## 边界
+5. 回报结果：把 commit 短哈希与推送结论写进回复。
+6. 确认上线：查最近一次 `Deploy to GitHub Pages` 运行的 conclusion，或比对线上文件大小（`curl -sI https://lubbock.github.io/game.js`）。运行失败要在回复里说明，不要只说「已推送」。
 
 - 不要 `git push --force`，不要改写历史，不要改分支名。
 - 不要提交临时文件、调试脚本、截图、`node_modules`、测试脚手架。
