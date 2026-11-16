@@ -8,6 +8,10 @@
   --bg: #131316;            /* 近中性石墨黑
   --panel: rgba(23, 24, 28, .92);
   --line: rgba(205, 208, 216, .15);
+  /* 专注模式的墨：暖白 α.90。底色全程压在 L*11→40（不会变浅灰），
+     实测整条明度坡最低对比 4.94:1（最亮帧），达 WCAG AA 正文，无需按帧翻转 */
+  --focus-ink: rgba(240, 238, 234, .9);
+  --focus-ink-ink: #211f1c;      /* 高亮态按钮上的反色文字 */
 }
 
 html, body {
@@ -439,23 +443,23 @@ html.in-menu #tools { bottom: auto; top: max(10px, env(safe-area-inset-top)); }
 body.mode-focus #skills,
 body.mode-focus #hud-right .stat:last-child,
 body.mode-focus #vignette { display: none !important; }
-/* 底色会从近黑走到浅灰，UI 一律用 --focus-ink（由 renderFocus 按明度反转） */
-body.mode-focus #hud { color: var(--focus-ink, rgba(242,242,246,.62)); }
+/* 底色是一条暖石墨明度坡，UI 一律用静态的 --focus-ink */
+body.mode-focus #hud { color: var(--focus-ink); }
 body.mode-focus .stat span:last-child,
 body.mode-focus .stat-label,
 body.mode-focus #banner,
-body.mode-focus .tool { color: var(--focus-ink, rgba(242,242,246,.62)); }
-body.mode-focus .tool { border-color: var(--focus-ink, rgba(242,242,246,.62)); background: transparent; box-shadow: none; }
-body.mode-focus .tool.on { background: var(--focus-ink, rgba(242,242,246,.62)); color: var(--focus-bg, #121214); }
+body.mode-focus .tool { color: var(--focus-ink); }
+body.mode-focus .tool { border-color: rgba(240, 238, 234, .38); background: transparent; box-shadow: none; }
+body.mode-focus .tool.on { background: var(--focus-ink); color: var(--focus-ink-ink); border-color: transparent; }
 /* 呼吸提示移到正中、放大：它就是这个模式里唯一的"指针" */
 body.mode-focus #breath-cue {
   top: 50%; left: 50%; transform: translate(-50%, -50%);
   flex-direction: column; gap: 14px;
 }
 body.mode-focus #breath-text { font-size: clamp(13px, 2.2vh, 17px); letter-spacing: 12px; text-indent: 12px; }
-body.mode-focus #music-ctrl { color: var(--focus-ink, rgba(242,242,246,.62)); text-shadow: none; }
-body.mode-focus #music-ctrl input[type=range] { background: var(--focus-ink, rgba(242,242,246,.62)); opacity: .35; }
-body.mode-focus #music-ctrl input[type=range]::-webkit-slider-thumb { background: var(--focus-ink, rgba(242,242,246,.62)); box-shadow: none; }
+body.mode-focus #music-ctrl { color: var(--focus-ink); text-shadow: none; }
+body.mode-focus #music-ctrl input[type=range] { background: rgba(240, 238, 234, .45); opacity: 1; }
+body.mode-focus #music-ctrl input[type=range]::-webkit-slider-thumb { background: var(--focus-ink); box-shadow: none; }
 
 /* 菜单里的模式选择器 */
 .modes { display: flex; gap: 10px; justify-content: center; margin: 0 0 12px; }

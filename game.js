@@ -364,10 +364,64 @@ const addShake = (v) => { cam.trauma = Math.min(1, cam.trauma + v); };
    走真实时钟，暂停 / 慢动作时呼吸也不停止。按 B 可开关。 */
 const BREATH = { inhale: 4, hold: 4, exhale: 6 };
 /* 专注模式的灰阶区间：呼气到最暗、屏息到最亮，中间只用明度变化引导呼吸 */
-const FOCUS_DARK = 16, FOCUS_LIGHT = 206;
-function focusGray(v, bias = 0) {
-  const L = Math.round(clamp(FOCUS_DARK + (FOCUS_LIGHT - FOCUS_DARK) * v + bias, 0, 255));
-  return { L, css: `rgb(${L},${L},${L})` };
+/* 专注模式的呼吸底色：一条「暖石墨」明度坡，不是彩色方案。
+   依据（均为可查证来源，见 AGENTS.md 同款说明）：
+   · Material 暗色规范里表面只靠很小幅度的提亮分层（最高约 16% 白色叠加），不铺纯白 —— 所以亮度峰值刻意压在 L*40 左右；
+   · 蓝光更抑制褪黑素、更提神（sleepfoundation.org 相关综述），所以坡向取低蓝的暖灰，而不是冷蓝；
+   · 暖灰与本项目唯一强调色（暖金 --gold）同族，不引入第二种色相。
+   端点用感知明度 L* 与 OKLab 彩度描述：L*≈11 / C≈0.007 → L*≈40 / C≈0.016，色相恒定（暖中性），
+   彩度上限 0.016 折成 HSL 饱和度只有 6~7%，肉眼读到的是"有温度的灰"而非彩色。 */
+const FOCUS_DARK_HEX = '#1f1d1a', FOCUS_LIGHT_HEX = '#635d54';
+const FOCUS_STEPS = 48;
+// OKLab ↔ sRGB（Björn Ottosson 系数）：只在启动时算一次查找表，逐帧只做一次数组读取
+function srgbToLinear(c) { return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+function linearToSrgb(c) { return c <= 0.0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - 0.055; }
+function rgbToOklab(rgb) {
+  const r = srgbToLinear(rgb[0] / 255), g = srgbToLinear(rgb[1] / 255), b = srgbToLinear(rgb[2] / 255);
+  const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+  const m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+  const s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+  return [0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s,
+          1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s,
+          0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s];
+}
+function oklabToRgb(L, A, B) {
+  const l = Math.pow(L + 0.3963377774 * A + 0.2158037573 * B, 3);
+  const m = Math.pow(L - 0.1055613458 * A - 0.0638541728 * B, 3);
+  const s = Math.pow(L - 0.0894841775 * A - 1.2914855480 * B, 3);
+  const cv = (x) => Math.round(clamp(linearToSrgb(clamp(x, 0, 1)) * 255, 0, 255));
+  return [cv(4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s),
+          cv(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s),
+          cv(-0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s)];
+}
+const hexRgb = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+function buildFocusRamp() {
+  const a = rgbToOklab(hexRgb(FOCUS_DARK_HEX)), b = rgbToOklab(hexRgb(FOCUS_LIGHT_HEX));
+  const css = [], rgb = [];
+  for (let i = 0; i < FOCUS_STEPS; i++) {
+    const t = i / (FOCUS_STEPS - 1);
+    const c = oklabToRgb(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t);
+    rgb.push(c); css.push(`rgb(${c[0]},${c[1]},${c[2]})`);
+  }
+  return { css, rgb };
+}
+const FOCUS_RAMP = buildFocusRamp();
+// 系统"减弱动态效果"时把幅度收到一半：仍能读出明暗，但整屏脉动更温和
+const REDUCE_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+function focusIndex(v) {
+  const t = REDUCE_MOTION ? 0.5 + (clamp(v, 0, 1) - 0.5) * 0.5 : clamp(v, 0, 1);
+  return Math.round(t * (FOCUS_STEPS - 1));
+}
+function focusColor(v, stepOffset) {
+  const i = clamp(focusIndex(v) + (stepOffset || 0), 0, FOCUS_STEPS - 1);
+  return { i, css: FOCUS_RAMP.css[i], rgb: FOCUS_RAMP.rgb[i] };
+}
+// 呼吸环取"坡上差 6 档"的同族色；到顶时没有更亮的一档可取，就改为差 6 档更暗 ——
+// 否则呼吸到最饱满的那一刻环会正好与底色相同而消失
+function focusRingColor(v) {
+  const i = focusIndex(v), room = FOCUS_STEPS - 1 - i;
+  const j = clamp(i + (room >= 6 ? 6 : -6), 0, FOCUS_STEPS - 1);
+  return FOCUS_RAMP.css[j];
 }
 let breathOn = true;
 let breath = { stage: '吸气', v: 0.5 };
@@ -480,8 +534,7 @@ function drawShape(t, x, y, r, ang, fill, stroke, lw, glowCol, glowA) {
 /* ---------------- 全局状态 ---------------- */
 let state = 'menu';           // menu | playing | paused
 let mode = 'board';           // board 演化棋盘 | focus 纯灰阶呼吸（无玩法元素）
-let focusRing = false;        // 呼吸环开关
-let focusInk = '';        // 专注模式里是否叠一圈极淡的呼吸环（R 键 / 「呼吸环」按钮切换）
+let focusRing = false;        // 呼吸环开关        // 专注模式里是否叠一圈极淡的呼吸环（R 键 / 「呼吸环」按钮切换）
 let freeze = 0;
 let kills = 0, playTime = 0, seedsPlanted = 0, mapHolesSpawned = 0, lonelyDeathCount = 0;
 let resting = false;                                   // 小憩：只隐去界面，世界照常演变
@@ -902,6 +955,7 @@ function initClimate(seed) {
   climate = { fbm: makeNoise(seed ^ 0x9E37), dx: rand(0, 100), dy: rand(0, 100), dir: rand(0, TAU), cycle: -1 };
 }
 function lifeStep() {
+  if (!climate) return;        // 专注模式不播种世界：气候场不存在时直接退出，避免演化被误调用时崩在这里
   const cols = lifeCols(), rows = lifeRows();
   // 气候：噪声场缓慢漂移；每个呼吸周期"换季"——随机改变漂移方向并跳进一步，图案随之重刷
   const cyc = Math.floor(playTime / 14);
@@ -1327,22 +1381,13 @@ function render() {
 // 专注模式：全屏黑→白→灰的纯色呼吸。除了一层极淡的中心环（可选），不画任何玩法元素
 function renderFocus() {
   const v = breathOn ? breath.v : 0.5;
-  const g = focusGray(v);
-  ctx.fillStyle = g.css;
+  const f = focusColor(v);
+  ctx.fillStyle = f.css;
   ctx.fillRect(0, 0, W, H);
-  // 纯色会一路亮到浅灰，浅底上任何浅色 UI 都会消失：按底色明度给 HUD 换一个反色墨
-  const ink = g.L > 128 ? 'rgba(18,18,20,.62)' : 'rgba(242,242,246,.62)';
-  if (ink !== focusInk) {
-    focusInk = ink;
-    const rs = document.documentElement.style;
-    rs.setProperty('--focus-ink', ink);
-    rs.setProperty('--focus-bg', g.css);          // 工具按钮高亮态要用当前底色反填
-  }
-  // 呼吸标记：默认关闭；开 B 时只是一个同色相、极淡的圆，避免多出色彩与图形
+  // 呼吸环：默认关闭。开启时不引入新颜色 —— 直接取明度坡上再亮一档的同一族色
   if (focusRing) {
     const R = Math.min(W, H) * (0.16 + 0.20 * v);
-    const t = g.L > 128 ? 0 : 255;                       // 亮底用暗环、暗底用亮环，保证看得见
-    ctx.strokeStyle = `rgba(${t},${t},${t},0.10)`;
+    ctx.strokeStyle = focusRingColor(v);
     ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.arc(W / 2, H / 2, R, 0, TAU);
