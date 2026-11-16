@@ -153,7 +153,7 @@ const Sfx = {
     if (this.ctx.state === 'running') { this.unlocked = true; return; }
     if (!IS_IOS) return;
     this.hintShown = true;
-    showBanner('iPhone 侧边静音键会屏蔽网页声音，请关闭后点一下屏幕', '#e89aa8', true);
+    showBanner('iPhone 侧边静音键会屏蔽网页声音，请关闭后点一下屏幕', '#ffd9a8', true);
   },
   tone(o, dest) {
     // ctx 未 running 时不排程：否则这些音源会在恢复瞬间一起放出（iOS 上尤其明显）
@@ -370,7 +370,7 @@ function updateBreathDom() {
     return;
   }
   ui.breathCue.classList.remove('hidden');
-  const c = breath.stage === '吸气' ? '#ffd9a8' : breath.stage === '屏息' ? '#fff2dc' : '#b39ae0';
+  const c = breath.stage === '吸气' ? '#ffd9a8' : breath.stage === '屏息' ? '#fff2dc' : '#8f8b96';
   const s = 0.55 + 0.85 * breath.v;
   ui.breathDot.style.transform = `scale(${s.toFixed(3)})`;
   ui.breathDot.style.background = c;
@@ -382,8 +382,9 @@ function updateBreathDom() {
 
 /* ---------------- 呼吸光晕颜色 ---------------- */
 // 角色光晕阶段色与顶部提示一致（吸气金 / 屏息白 / 呼气紫），阶段切换时 ~0.55s 交叉淡入
-const BREATH_HEX = { '吸气': '#ffd9a8', '屏息': '#fff2dc', '呼气': '#b39ae0' };
-const BREATH_RGB = { '吸气': [255, 217, 168], '屏息': [255, 242, 220], '呼气': [179, 154, 224] };
+// 三阶段只用明度与冷暖极轻的变化区分（吸金 → 屏息近白 → 呼冷灰）：HEX 与 RGB 必须同步改
+const BREATH_HEX = { '吸气': '#ffd9a8', '屏息': '#fff2dc', '呼气': '#8f8b96' };
+const BREATH_RGB = { '吸气': [255, 217, 168], '屏息': [255, 242, 220], '呼气': [143, 139, 150] };
 let haloFrom = '吸气', haloTo = '吸气', haloT = 1;
 function updateHaloColor(dt) {
   if (breath.stage !== haloTo) { haloFrom = haloTo; haloTo = breath.stage; haloT = 0; }
@@ -527,12 +528,14 @@ function updateParts(dt) {
 }
 
 /* ---------------- 漂浮杂念定义（低饱和禅意色） ---------------- */
+/* 配色：棋盘只用灰阶 —— 身份由「形状 + 明度」两件事承载，不再叠加色相。
+   唯一保留的彩色是玩家那一抹暖金（焦点色），以及菜单/按钮的品牌渐变。 */
 const ENEMY_DEFS = {
-  chaser:  { shape: 'circle',   color: '#e89aa8' },  // 淡玫瑰
-  dasher:  { shape: 'triangle', color: '#e8b28a' },  // 杏橙
-  shooter: { shape: 'square',   color: '#b39ae0' },  // 薰衣草
-  elite:   { shape: 'pentagon', color: '#e8d59a' },  // 淡金
-  boss:    { shape: 'hexagon',  color: '#a88ae0' },  // 紫罗兰
+  chaser:  { shape: 'circle',   color: '#a8a8ad' },  // 中灰 · 最常见
+  dasher:  { shape: 'triangle', color: '#d6d6da' },  // 亮灰
+  shooter: { shape: 'square',   color: '#8c8c93' },  // 暗灰
+  elite:   { shape: 'pentagon', color: '#f0f0f2' },  // 近白 · 稀有
+  boss:    { shape: 'hexagon',  color: '#ffffff' },  // 纯白 · 巨核
 };
 function enemyStats(type, level) {
   // 体型收小到"棋盘上的细胞"：一眼读整体图案，而非单个怪物
@@ -669,7 +672,7 @@ function tryNova() {
     const bx = clamp(p.x + Math.cos(a) * r, 40, WORLD.w - 40);
     const by = clamp(p.y + Math.sin(a) * r, 40, WORLD.h - 40);
     const fuse = 0.3 + i * 0.22 + rand(0, 0.08);
-    const color = ['#ffe6c2', '#e89aa8', '#b39ae0', '#fff2dc'][i % 4];
+    const color = ['#ffe6c2', '#ffffff', '#c9c9d0', '#8f8f98'][i % 4];   // 只留一枚暖金，其余走灰阶
     fireworks.push({ t: fuse, x: bx, y: by, color });
     // 礼花弹：带轨迹的升空光点，到达即炸
     addPart({ kind: 'streak', x: p.x, y: p.y, vx: (bx - p.x) / fuse, vy: (by - p.y) / fuse, life: fuse, maxLife: fuse, size: 18, color });
@@ -701,8 +704,8 @@ function tryField() {
   if (state !== 'playing' || skills.field.t > 0) return;
   skills.field.t = skills.field.cd;
   player.fieldT = 4;
-  ringFx(player.x, player.y, '#b39ae0', 680, 5, 0.7);
-  addText(player.x, player.y - player.r - 24, '止水', '#cbb8f0', 19);
+  ringFx(player.x, player.y, '#c2c2ca', 680, 5, 0.7);
+  addText(player.x, player.y - player.r - 24, '止水', '#dedee4', 19);
   Sfx.field();
 }
 function tryHole() {
@@ -740,7 +743,7 @@ function updateHoles(dt) {
     // 旋涡粒子
     for (let j = 0; j < 2; j++) {
       const a = rand(0, TAU), rr = rand(180, 300) * sc;
-      addPart({ kind: 'dot', x: h.x + Math.cos(a) * rr, y: h.y + Math.sin(a) * rr, vx: -Math.cos(a) * 260, vy: -Math.sin(a) * 260, life: rand(0.3, 0.6), maxLife: 0.6, size: rand(1.5, 3), color: j ? '#a88ae0' : '#ffe6c2', drag: 0 });
+      addPart({ kind: 'dot', x: h.x + Math.cos(a) * rr, y: h.y + Math.sin(a) * rr, vx: -Math.cos(a) * 260, vy: -Math.sin(a) * 260, life: rand(0.3, 0.6), maxLife: 0.6, size: rand(1.5, 3), color: j ? '#b9b9c2' : '#ffe6c2', drag: 0 });
     }
     if (h.t <= 0) {
       holes.splice(i, 1);
@@ -748,7 +751,7 @@ function updateHoles(dt) {
       for (const e of enemies) {
         if (!e.dead && dist(e.x, e.y, h.x, h.y) < boomR) damageEnemy(e, h.boomDmg || 118, { noCrit: true });
       }
-      ringFx(h.x, h.y, '#a88ae0', 1000 * sc, 6, 0.7);
+      ringFx(h.x, h.y, '#b9b9c2', 1000 * sc, 6, 0.7);
       ringFx(h.x, h.y, '#ffffff', 720 * sc, 3, 0.45);
       Sfx.holeBoom();
       // 疤痕：黑洞过境之地留下沃土（18s），生命总会再生
@@ -1079,7 +1082,7 @@ function startGame() {
   lifeSeed = 10000 + Math.floor(Math.random() * 89999);
   initClimate(lifeSeed);
   seedWorld(mulberry32(lifeSeed));
-  showBanner('世界 #' + lifeSeed, '#9db4d0');
+  showBanner('世界 #' + lifeSeed, '#b2b2b8');
   Music.start();   // 冥想配乐随呼吸响起
 }
 // 静坐总结：一张安静的卡片，痕迹一览（游戏不暂停）
@@ -1101,14 +1104,14 @@ function updateSummary() {
 function toggleRest() {
   resting = !resting;
   ui.hud.classList.toggle('hidden', resting);
-  showBanner(resting ? '小憩 · 世界继续演变' : '回来 · 一切照常呼吸', '#9db4d0', true);
+  showBanner(resting ? '小憩 · 世界继续演变' : '回来 · 一切照常呼吸', '#b2b2b8', true);
   syncTools();
 }
 
 /* ---------------- 开关类操作（键盘与触屏按钮共用） ---------------- */
 function toggleMute() {
   Sfx.muted = !Sfx.muted;
-  showBanner(Sfx.muted ? '静音' : '声音开启', '#9db4d4', true);
+  showBanner(Sfx.muted ? '静音' : '声音开启', '#b2b2b8', true);
   syncTools();
 }
 function toggleBreath() {
@@ -1131,16 +1134,16 @@ function toggleFullscreen() {
   const req = de.requestFullscreen || de.webkitRequestFullscreen || de.msRequestFullscreen;
   if (!req) {
     // iOS Safari 不支持元素级全屏：引导用「添加到主屏幕」获得同样效果
-    showBanner('此浏览器不支持全屏 · 可在菜单里选「添加到主屏幕」', '#9db4d4', true);
+    showBanner('此浏览器不支持全屏 · 可在菜单里选「添加到主屏幕」', '#b2b2b8', true);
     return;
   }
   try {
     const p = req.call(de, { navigationUI: 'hide' });
     if (p && typeof p.catch === 'function') {
-      p.catch(() => showBanner('进入全屏被浏览器拒绝 · 请再点一次', '#9db4d4', true));
+      p.catch(() => showBanner('进入全屏被浏览器拒绝 · 请再点一次', '#b2b2b8', true));
     }
   } catch (e) {
-    showBanner('进入全屏被浏览器拒绝 · 请再点一次', '#9db4d4', true);
+    showBanner('进入全屏被浏览器拒绝 · 请再点一次', '#b2b2b8', true);
   }
   viewportChanged();
   setTimeout(viewportChanged, 150);
@@ -1214,7 +1217,7 @@ function update(dt, realDt) {
 function render() {
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   // 背景
-  ctx.fillStyle = '#131022';
+  ctx.fillStyle = '#131316';   // 必须与 style.css 的 --bg 一致
   ctx.fillRect(0, 0, W, H);
 
   // 星空（两层视差，屏幕空间）—— 亮度随呼吸起伏
@@ -1251,7 +1254,7 @@ function render() {
 
   // 屏幕空间特效
   if (player.fieldT > 0 && state !== 'menu') {
-    ctx.fillStyle = 'rgba(70,150,255,0.06)';
+    ctx.fillStyle = 'rgba(220,224,232,0.045)';
     ctx.fillRect(0, 0, W, H);
   }
   if (flashW > 0) { ctx.fillStyle = `rgba(255,242,220,${(flashW * 0.55).toFixed(3)})`; ctx.fillRect(0, 0, W, H); }
@@ -1262,7 +1265,7 @@ function drawStars(f, spacing, size, alpha) {
   const ox = cam.x * f, oy = cam.y * f;
   const x0 = Math.floor((ox - W / 2) / spacing) - 1, x1 = Math.ceil((ox + W / 2) / spacing) + 1;
   const y0 = Math.floor((oy - H / 2) / spacing) - 1, y1 = Math.ceil((oy + H / 2) / spacing) + 1;
-  ctx.fillStyle = `rgba(235,220,255,${alpha})`;
+  ctx.fillStyle = `rgba(232,233,238,${alpha})`;
   for (let gx = x0; gx <= x1; gx++) {
     for (let gy = y0; gy <= y1; gy++) {
       const h = hash(gx * 374761 + gy * 668265);
@@ -1280,7 +1283,7 @@ function drawGrid() {
   const y0 = Math.max(0, Math.floor((cam.y - H / 2) / step) * step);
   const y1 = Math.min(WORLD.h, cam.y + H / 2);
   ctx.lineWidth = 1;
-  ctx.strokeStyle = 'rgba(180,160,230,0.075)';
+  ctx.strokeStyle = 'rgba(190,193,200,0.07)';
   ctx.beginPath();
   for (let x = x0; x <= x1; x += step) { ctx.moveTo(x, Math.max(0, cam.y - H / 2)); ctx.lineTo(x, Math.min(WORLD.h, cam.y + H / 2)); }
   for (let y = y0; y <= y1; y += step) { ctx.moveTo(Math.max(0, cam.x - W / 2), y); ctx.lineTo(Math.min(WORLD.w, cam.x + W / 2), y); }
@@ -1289,7 +1292,7 @@ function drawGrid() {
 function drawHoles() {
   for (const h of holes) {
     const sc = h.scale || 1;
-    drawGlow(h.x, h.y, 90 * sc * (1 + Math.sin(h.spin * 2) * 0.05), '#a88ae0', 0.4);
+    drawGlow(h.x, h.y, 90 * sc * (1 + Math.sin(h.spin * 2) * 0.05), '#b9b9c2', 0.4);
     ctx.save();
     ctx.translate(h.x, h.y);
     ctx.rotate(h.spin);
@@ -1297,15 +1300,15 @@ function drawHoles() {
       ctx.beginPath();
       ctx.arc(0, 0, (34 + i * 16) * sc, i * 2.1, i * 2.1 + 3.6);
       ctx.lineWidth = (2.5 - i * 0.5);
-      ctx.strokeStyle = hexA(i ? '#a88ae0' : '#ffe6c2', 0.5);
+      ctx.strokeStyle = hexA(i ? '#c2c2c8' : '#ffe6c2', 0.5);
       ctx.stroke();
     }
     ctx.restore();
     shapePath('circle', h.x, h.y, 26 * sc, 0);
-    ctx.fillStyle = '#0c0918';
+    ctx.fillStyle = '#0b0b0e';
     ctx.fill();
     ctx.lineWidth = 2;
-    ctx.strokeStyle = '#a88ae0';
+    ctx.strokeStyle = '#c9c9cf';
     ctx.stroke();
   }
 }
@@ -1327,7 +1330,7 @@ function drawEnemy(e) {
     ctx.rotate(e.angle * 0.7);
     ctx.setLineDash([18, 12]);
     ctx.lineWidth = 2;
-    ctx.strokeStyle = hexA('#a88ae0', 0.4);
+    ctx.strokeStyle = hexA('#c2c2c8', 0.4);
     ctx.beginPath();
     ctx.arc(0, 0, r + 14, 0, TAU);
     ctx.stroke();
@@ -1376,7 +1379,7 @@ function drawPlayer() {
     ctx.save();
     ctx.setLineDash([14, 10]);
     ctx.lineWidth = 2;
-    ctx.strokeStyle = hexA('#b39ae0', 0.3 + 0.25 * Math.sin(performance.now() / 180));
+    ctx.strokeStyle = hexA('#c2c2ca', 0.3 + 0.25 * Math.sin(performance.now() / 180));
     ctx.beginPath();
     ctx.arc(p.x, p.y, 360, performance.now() / 900, performance.now() / 900 + TAU);
     ctx.stroke();
