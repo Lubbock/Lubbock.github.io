@@ -1333,14 +1333,7 @@ function drawEnemy(e) {
     ctx.stroke();
     ctx.restore();
   }
-  // 血量条（巨核用更宽的一条）
-  if (e.hp < e.maxHp) {
-    const w = e.type === 'boss' ? r * 1.6 : Math.max(26, r * 1.7), pct = clamp(e.hp / e.maxHp, 0, 1);
-    ctx.fillStyle = 'rgba(0,0,0,0.45)';
-    ctx.fillRect(e.x - w / 2, e.y - r - 14, w, e.type === 'boss' ? 6 : 4.5);
-    ctx.fillStyle = e.def.color;
-    ctx.fillRect(e.x - w / 2, e.y - r - 14, w * pct, e.type === 'boss' ? 6 : 4.5);
-  }
+  // 细胞受伤不画血条：只保留 hitFlash 的轻微白闪 —— 棋盘上几百枚细胞挂条会毁掉整体图案
 }
 function drawBullets() {
   ctx.globalCompositeOperation = 'lighter';
